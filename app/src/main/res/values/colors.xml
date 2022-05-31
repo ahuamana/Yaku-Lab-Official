@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Colores principales de la app-->
+    <color name="colorPrimaryYaku">#ff0066</color>
+    <color name="colorSecondaryYaku">#fcc52d</color>
+    <color name="colorAcentYaku">#E2F4ED</color>
+
+    <color name="color_titulo_empty">#4d4f50</color>
+
+
+    <color name="icons">#A8A8A8</color>
+    <!-- Colores principales de botones, textos, etc-->
+    <color name="colorGray">#BABDBD</color>
+    <color name="colorGrayLight">#ECEBEB</color>
+    <color name="colorGrayImageCameraBackground">#9E9E9E</color>
+    <color name="background_icon_color">#eee6e9</color>
+    <color name="facebook_color_like">#0571ed</color>
+
+    <color name="color_input_box">#F5F5F5</color>
+    <color name="color_input_box_disable_curtain">#B3F5F5F5</color>
+    <color name="color_input_underline">#EBEBEB</color>
+    <color name="color_input_text">#898989</color>
+    <color name="color_input_hint">#626262</color>
+    <color name="color_transparent">#00FFFFFF</color>
+    <color name="color_line">#E7E7E7</color>
+    <color name="colorTransparent">#00FFFFFF</color>
+    <color name="color_text_web">#A0A0A0</color>
+    <color name="color_background_cardboard">#efefef</color>
+
+
+
+</resources>

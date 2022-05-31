@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".modulos.bienvenida.fragments.IntroFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/contenedor_intro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/intro_img"
+                android:layout_width="220dp"
+                android:layout_height="200dp"
+                android:layout_marginBottom="30dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:id="@+id/intro_title"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textAlignment="center"
+                android:textSize="18dp"
+                android:textColor="@color/color_titulo_empty"
+                android:fontFamily="@font/product_sans_regular"
+                />
+
+            <TextView
+                android:id="@+id/intro_desc"
+                android:layout_width="285dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center_horizontal"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:textSize="13dp"
+                android:textAlignment="center"
+                android:textColor="@color/color_text_web"
+                android:fontFamily="@font/product_sans_regular"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+</FrameLayout>
