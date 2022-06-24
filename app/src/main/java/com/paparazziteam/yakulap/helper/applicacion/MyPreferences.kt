@@ -1,5 +1,7 @@
 package com.paparazziteam.yakulap.helper.applicacion
 
+import android.graphics.Color
+
 class MyPreferences {
 
     val prefs = CacheData()
@@ -13,4 +15,9 @@ class MyPreferences {
     var isLogin: Boolean
         get()      = prefs.getBoolean("isLogin", false)
         set(value) = prefs.setBoolean("isLogin", value)
+
+    //PREFERENCES INTEGER
+    var color: Int
+        get() = prefs.getInt("color",  Color.parseColor("#ff0066"))
+        set(value) = prefs.setInt("color", value)
 }

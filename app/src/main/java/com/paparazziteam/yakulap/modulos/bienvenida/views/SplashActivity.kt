@@ -7,7 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivitySplashBinding
 import com.paparazziteam.yakulap.helper.applicacion.MyPreferences
-import com.paparazziteam.yakulap.modulos.login.LoginActivity
+import com.paparazziteam.yakulap.modulos.dashboard.DashboardActivity
+import com.paparazziteam.yakulap.modulos.login.views.LoginActivity
 import java.util.*
 
 class SplashActivity : AppCompatActivity() {
@@ -20,6 +21,7 @@ class SplashActivity : AppCompatActivity() {
         loadNextActivity()
         loadAnimationLogo()
 
+
     }
 
     private fun loadAnimationLogo() {
@@ -31,7 +33,7 @@ class SplashActivity : AppCompatActivity() {
         Timer().schedule(object : TimerTask() {
             override fun run() {
                 if (MyPreferences().isLogin) {
-                    goToLogin()
+                    isAlreadyLogin()
                 } else {
                     startActivity(Intent(applicationContext, WelcomeActivity::class.java).apply {
                         addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK) //Remove activities that have been created before
@@ -42,9 +44,16 @@ class SplashActivity : AppCompatActivity() {
         }, 4000)
     }
 
+    /*
     private fun goToLogin() {
         startActivity(Intent(applicationContext, LoginActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK) //Remove activities that have been created before
         })
+    }*/
+
+    private fun isAlreadyLogin() {
+            startActivity(Intent(this@SplashActivity, DashboardActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK) //Remove activities that have been created before
+            })
     }
 }

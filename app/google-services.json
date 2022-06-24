@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "152736778257",
+    "firebase_url": "https://agualimpiafinal.firebaseio.com",
+    "project_id": "agualimpiafinal",
+    "storage_bucket": "agualimpiafinal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152736778257:android:8091076b8666c9f97009b0",
+        "android_client_info": {
+          "package_name": "com.intercom.sample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "152736778257-slqnh64h0egijd2q1hhem00m661ss380.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhI6KWULKAl30nQZY52d41kCg8NzpWTJI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "152736778257-slqnh64h0egijd2q1hhem00m661ss380.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152736778257:android:0eea9f7081d88c2b7009b0",
+        "android_client_info": {
+          "package_name": "com.paparazziteam.yakulap"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "152736778257-slqnh64h0egijd2q1hhem00m661ss380.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhI6KWULKAl30nQZY52d41kCg8NzpWTJI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "152736778257-slqnh64h0egijd2q1hhem00m661ss380.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:152736778257:android:126e7146533d54837009b0",
+        "android_client_info": {
+          "package_name": "edu.aha.agualimpiafinal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "152736778257-4ooi9vk975j141rv7011lbfe78v3ots1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.aha.agualimpiafinal",
+            "certificate_hash": "5b4c245b93d00bc2a97a52b7099beb88dab80e78"
+          }
+        },
+        {
+          "client_id": "152736778257-slqnh64h0egijd2q1hhem00m661ss380.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhI6KWULKAl30nQZY52d41kCg8NzpWTJI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "152736778257-slqnh64h0egijd2q1hhem00m661ss380.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

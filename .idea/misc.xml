@@ -3,11 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/bubble.xml" value="0.261" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/buttom_normal.xml" value="0.1935" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/circle.xml" value="0.261" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/corner_boton_outline.xml" value="0.261" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/custom_progress_bar.xml" value="0.261" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ic_arrow_back_white.xml" value="0.245" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ic_person_white.xml" value="0.261" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/line.xml" value="0.1935" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/activity_login.xml" value="0.22" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/activity_register_user.xml" value="0.22" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/activity_splash.xml" value="0.36666666666666664" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/activity_welcome.xml" value="0.26979166666666665" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/content_dashboard.xml" value="0.55" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/fragment_intro.xml" value="0.26979166666666665" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/toolbar_child.xml" value="0.55" />
       </map>
     </option>
   </component>

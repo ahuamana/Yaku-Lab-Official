@@ -1,5 +1,6 @@
 package com.paparazziteam.yakulap.modulos.bienvenida.views
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
@@ -12,6 +13,7 @@ import com.paparazziteam.yakulap.databinding.ActivityWelcomeBinding
 import com.paparazziteam.yakulap.helper.design.FadePageTransfomer
 import com.paparazziteam.yakulap.modulos.bienvenida.MyPageAdapter
 import com.paparazziteam.yakulap.modulos.bienvenida.fragments.IntroFragment
+import com.paparazziteam.yakulap.modulos.login.views.LoginActivity
 
 class WelcomeActivity : AppCompatActivity() {
 
@@ -32,7 +34,6 @@ class WelcomeActivity : AppCompatActivity() {
         dotsLayout   = binding.layoutDots
 
 
-
         val fragments: List<Fragment> = getFragments()
         mPageAdapter = MyPageAdapter(supportFragmentManager, fragments)
 
@@ -47,6 +48,10 @@ class WelcomeActivity : AppCompatActivity() {
                 addBottomDots(position)
             }
         })
+
+        binding.btnIniciarSesion.setOnClickListener {
+            startActivity(Intent(applicationContext, LoginActivity::class.java))
+        }
 
     }
 

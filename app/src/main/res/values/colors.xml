@@ -35,6 +35,15 @@
     <color name="color_text_web">#A0A0A0</color>
     <color name="color_background_cardboard">#efefef</color>
 
+    <color name="colorPrimaryLightPix">#80075e54</color>
+    <color name="colorPrimaryPix">#075e54</color>
 
+
+    <color name="colorCortina">#E6FFFFFF</color>
+    <color name="colorSkeleton">#efefef</color>
+
+    <color name="com_facebook_blue">#3B5998</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="color_text_web_disable">#898989</color>
 
 </resources>
