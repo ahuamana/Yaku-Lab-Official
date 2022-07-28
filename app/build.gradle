@@ -38,6 +38,8 @@ android {
 
 dependencies {
 
+    def lottieVersion = "5.2.0"
+
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.6.0'
@@ -61,5 +63,21 @@ dependencies {
 
     //Crashlytics
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
+
+    //Libreria Imagenes Circulares
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //Lottie
+    implementation "com.airbnb.android:lottie:$lottieVersion"
+
+    //Avoid Leak memory
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
+
+    //facebook shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.13.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
 
 }

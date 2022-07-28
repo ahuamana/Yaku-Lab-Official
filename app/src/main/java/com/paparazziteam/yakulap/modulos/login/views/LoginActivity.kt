@@ -14,12 +14,11 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityLoginBinding
-import com.paparazziteam.yakulap.helper.applicacion.MyPreferences
 import com.paparazziteam.yakulap.helper.hideKeyboardActivity
 import com.paparazziteam.yakulap.helper.isConnected
 import com.paparazziteam.yakulap.helper.isValidEmail
 import com.paparazziteam.yakulap.helper.setColorToStatusBar
-import com.paparazziteam.yakulap.modulos.dashboard.DashboardActivity
+import com.paparazziteam.yakulap.modulos.dashboard.views.DashboardActivity
 import com.paparazziteam.yakulap.modulos.login.viewmodels.ViewModelLogin
 
 class LoginActivity : AppCompatActivity() {
@@ -55,8 +54,6 @@ class LoginActivity : AppCompatActivity() {
 
         //Login Firebase
         loginFirebase()
-
-
     }
 
     private fun showObservables() {
@@ -161,7 +158,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun openNewRegistro() {
         txtRegistroNuevo.apply {

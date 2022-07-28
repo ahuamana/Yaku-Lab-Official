@@ -15,15 +15,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Yakulap">
         <activity
-            android:name=".modulos.dashboard.DashboardActivity"
-            android:exported="false"
-            android:theme="@style/Theme.noActionBar"
-            android:windowSoftInputMode="stateHidden"
-            android:label="@string/title_activity_dashboard" />
-        <activity
-            android:name=".modulos.login.views.RegisterUserActivity"
+            android:name=".modulos.puntaje.views.PuntajeActivity"
             android:theme="@style/Theme.noActionBar"
             android:exported="false" />
+        <activity
+            android:name=".modulos.dashboard.views.DashboardActivity"
+            android:exported="false"
+            android:label="@string/title_activity_dashboard"
+            android:theme="@style/Theme.noActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".modulos.login.views.RegisterUserActivity"
+            android:exported="false"
+            android:theme="@style/Theme.noActionBar" />
         <activity
             android:name=".modulos.bienvenida.views.WelcomeActivity"
             android:exported="false"
@@ -31,7 +35,7 @@
         <activity
             android:name=".modulos.login.views.LoginActivity"
             android:exported="false"
-            android:theme="@style/Theme.noActionBar"/>
+            android:theme="@style/Theme.noActionBar" />
         <activity
             android:name=".modulos.bienvenida.views.SplashActivity"
             android:exported="true"
@@ -42,9 +46,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
     </application>
 
 </manifest>

@@ -10,7 +10,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
@@ -20,7 +19,7 @@ import com.paparazziteam.yakulap.databinding.ActivityRegisterUserBinding
 import com.paparazziteam.yakulap.helper.hideKeyboardActivity
 import com.paparazziteam.yakulap.helper.isValidEmail
 import com.paparazziteam.yakulap.helper.setColorToStatusBar
-import com.paparazziteam.yakulap.modulos.dashboard.DashboardActivity
+import com.paparazziteam.yakulap.modulos.dashboard.views.DashboardActivity
 import com.paparazziteam.yakulap.modulos.login.pojo.User
 import com.paparazziteam.yakulap.modulos.login.viewmodels.ViewModelRegistroUsuario
 

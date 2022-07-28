@@ -8,47 +8,23 @@ import com.paparazziteam.yakulap.modulos.login.providers.LoginProvider
 class ViewModelLogin private constructor() {
 
     private var mLoginProvider = LoginProvider()
-
     private val _message = MutableLiveData<String>()
-
     private val _isLoginEmail = MutableLiveData<Boolean>()
-
     private val _isLoginAnonymous = MutableLiveData<Boolean>()
-
     private val _isLoading = MutableLiveData<Boolean>()
 
-    fun getIsLoading(): LiveData<Boolean> {
-        return _isLoading
-    }
+    fun getIsLoading(): LiveData<Boolean> = _isLoading
+    fun showMessage(): LiveData<String> = _message
+    fun getIsLoginEmail(): LiveData<Boolean> = _isLoginEmail
+    fun getIsLoginAnonymous(): LiveData<Boolean> = _isLoginAnonymous
 
-    fun showMessage(): LiveData<String> {
-        return _message
-    }
-
-    fun getIsLoginEmail(): LiveData<Boolean> {
-        return _isLoginEmail
-    }
-
-    fun getIsLoginAnonymous(): LiveData<Boolean> {
-        return _isLoginAnonymous
-    }
-
-    fun logout() {
-        mLoginProvider.signout()
-    }
+    fun logout() = mLoginProvider.signout()
 
     fun isAlreadyLogging(): LiveData<String?> {
-
-        if(mLoginProvider.getIsLogin())
-        {
+        if(mLoginProvider.getIsLogin()) {
             _message.setValue("Ya tienes un inicio de session")
-        }else
-        {
-            _message.setValue("No haz ingresado")
-        }
-
+        }else _message.setValue("No haz ingresado")
         return _message
-
     }
 
     fun loginWithEmail(email: String?, pass: String?) {
@@ -59,13 +35,13 @@ class ViewModelLogin private constructor() {
                 if (it.isSuccessful) {
                     _message.value = "Bienvenido"
                     _isLoginEmail.value = true
-                    _isLoading.setValue(false)
+
                 } else {
                     _message.value = "Usuario y/o contraseña incorrectos"
                     _isLoginEmail.value = false
-                    _isLoading.setValue(false)
                 }
 
+                _isLoading.value =false
             }
 
         } catch (e: Exception) {
@@ -85,8 +61,8 @@ class ViewModelLogin private constructor() {
                         } catch (e: java.lang.Exception) {
                             Log.e("TAG", "Error esperando")
                         }
-                        _isLoginAnonymous.setValue(true)
-                        _isLoading.setValue(false)
+                        _isLoginAnonymous.value = true
+                        _isLoading.value = false
                     } else {
                         _message.setValue("No es posible ingresar. Porfavor contacta con soporte")
                         _isLoginAnonymous.setValue(false)

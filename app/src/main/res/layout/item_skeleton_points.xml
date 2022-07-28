@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
+    android:layout_marginTop="20dp"
+    android:orientation="vertical">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    app:cardCornerRadius="0dp"
+                    android:elevation="0dp"
+                    app:cardElevation="0dp"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="20dp"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <View
+                            android:id="@+id/imageViewMedalPoints"
+                            android:layout_width="155dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/corner_radius_style"
+                            android:layout_height="150dp"/>
+
+                        <View
+                            android:id="@+id/textViewPoints"
+                            android:layout_width="85dp"
+                            android:layout_height="45dp"
+                            android:text="501"
+                            android:textStyle="bold"
+                            android:background="@drawable/corner_radius_style"
+                            android:textColor="@color/white"
+                            android:textSize="40dp"
+                            android:contentDescription="Sube una foto"
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="center"/>
+
+                        <View
+                            android:layout_width="35dp"
+                            android:text="Puntos"
+                            android:textColor="@color/white"
+                            android:layout_marginTop="5dp"
+                            android:background="@drawable/corner_radius_style"
+                            android:layout_gravity="center"
+                            android:layout_height="35dp"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="1in"
+                android:layout_height="35dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/corner_radius_style"
+                android:layout_gravity="center"/>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp">
+
+                <LinearLayout
+                    android:id="@+id/contenerdor_one"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/contenerdor_two"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:orientation="vertical">
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/corner_radius_style"
+                        android:layout_marginBottom="5dp"
+                        android:textStyle="bold"/>
+                    <View
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/circle_skeleton"
+                        android:layout_height="80dp"/>
+                    <View
+                        android:layout_width="80dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/corner_radius_style"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/contenerdor_two"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/contenedor_three"
+                    app:layout_constraintLeft_toRightOf="@+id/contenerdor_one"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp">
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/corner_radius_style"
+                        android:layout_marginBottom="5dp"/>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:background="@drawable/circle_skeleton"
+                        android:layout_height="80dp"/>
+                    <View
+                        android:layout_width="80dp"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/corner_radius_style"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/contenedor_three"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/contenerdor_two"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <View
+                        android:layout_width="50dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/corner_radius_style" />
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="80dp"
+                        android:background="@drawable/circle_skeleton" />
+
+                    <View
+                        android:layout_width="100dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/corner_radius_style"/>
+
+
+                </LinearLayout>
+
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+
+
+</LinearLayout>

@@ -29,9 +29,19 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <string name="subtitle_experiencias">Descubre</string>
 
-    <string name="menu_home">Home</string>
+    <string name="menu_home">Desafíos</string>
+    <string name="menu_resources">Recursos de ayuda</string>
+    <string name="menu_sign_out">Cerrar sessión</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="resources_help">Recursos de ayuda</string>
+    <string name="resources_contact_whatsapp">Contacte por whatsapp</string>
+    <string name="resources_new_funtionality">Solicite una funcionalidad</string>
+    <string name="codigo_pais">+51</string>
+    <string name="telefono_empresa">930292619</string>
+    <string name="mensaje_default_soporte">Hola! 👋 Soy YakuBot el bot residente en YakuLab \n¿En que puedo ayudarte?</string>
+    <string name="text_share">Compartir</string>
+    <string name="text_comment">Comentar</string>
 </resources>

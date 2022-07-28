@@ -2,11 +2,7 @@ package com.paparazziteam.yakulap.helper
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.Application
-import android.app.Service
-import android.app.backup.BackupAgent
 import android.content.Context
-import android.content.ContextWrapper
 import android.graphics.Color
 import android.net.ConnectivityManager
 import android.os.Build
@@ -16,7 +12,8 @@ import android.util.Patterns
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
-import com.paparazziteam.yakulap.helper.applicacion.MyPreferences
+import com.paparazziteam.yakulap.helper.application.MyPreferences
+import java.util.*
 
 private var appContext: Context? = null
 
@@ -78,4 +75,24 @@ fun isConnected(context:Context):Boolean {
         Log.e("ERROR", "" + e.message)
     }
     return activeNetwork != null && activeNetwork.isConnected
+}
+
+
+fun replaceFirstCharInSequenceToUppercase(text: String): String {
+    if(text.contains(" ")){
+        val words = text.trim().split(" ").toTypedArray()
+        val wordsUppercase: MutableList<String?> =
+            ArrayList()
+        for (data in words) {
+            val upperString = data.substring(0, 1)
+                .uppercase(Locale.getDefault()) + data.substring(1)
+                .lowercase(Locale.getDefault())
+            //Log.e("REPLACE","DATA: "+ upperString);
+            wordsUppercase.add(upperString)
+        }
+        return TextUtils.join(" ", wordsUppercase)
+    }else{
+        return text.replaceFirstChar { it.uppercase() }
+    }
+    //Log.e("REPLACE","DATA: "+ datafinal);
 }

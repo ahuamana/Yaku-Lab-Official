@@ -5,41 +5,25 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseUser
 import com.paparazziteam.yakulap.modulos.login.providers.UserProvider
 import com.paparazziteam.yakulap.modulos.login.pojo.User
-import com.paparazziteam.yakulap.modulos.login.providers.RegisterProvider
+import com.paparazziteam.yakulap.modulos.login.providers.LoginProvider
 
 class ViewModelRegistroUsuario private constructor() {
 
     var user: FirebaseUser? = null
     var mUserProvider = UserProvider()
-    var mRegisterProvider = RegisterProvider()
-
+    var mRegisterProvider = LoginProvider()
     private val _message = MutableLiveData<String>()
-
     private val _user = MutableLiveData<FirebaseUser>()
-
     private val _isLoading = MutableLiveData<Boolean>()
-
     private val _isSavedFirebase = MutableLiveData<Boolean>()
 
-    fun getIsSavedFirebase(): LiveData<Boolean> {
-        return _isSavedFirebase
-    }
-
-    fun getIsLoading(): LiveData<Boolean> {
-        return _isLoading
-    }
-
-    fun showMessage(): LiveData<String> {
-        return _message
-    }
-
-    fun getUser(): LiveData<FirebaseUser> {
-        return _user
-    }
+    fun getIsSavedFirebase(): LiveData<Boolean> =  _isSavedFirebase
+    fun getIsLoading(): LiveData<Boolean> = _isLoading
+    fun showMessage(): LiveData<String>  = _message
+    fun getUser(): LiveData<FirebaseUser>  = _user
 
     fun createUser(email: String, pass: String) {
         _isLoading.value = true
-
         try {
             mRegisterProvider.createUser(email,pass).addOnCompleteListener{ task ->
                 if (task.isSuccessful) {
@@ -88,6 +72,7 @@ class ViewModelRegistroUsuario private constructor() {
     companion object Singleton{
         private var instance: ViewModelRegistroUsuario? = null
 
+        @JvmStatic
         fun getInstance(): ViewModelRegistroUsuario =
             instance ?: ViewModelRegistroUsuario(
                 //local y remoto
