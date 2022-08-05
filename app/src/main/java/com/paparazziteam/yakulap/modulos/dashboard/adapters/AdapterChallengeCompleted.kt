@@ -1,5 +1,6 @@
 package com.paparazziteam.yakulap.modulos.dashboard.adapters
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ItemChallengeCompletedBinding
 import com.paparazziteam.yakulap.helper.application.MyPreferences
+import com.paparazziteam.yakulap.helper.design.SlideImageFullScreenActivity
 import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
 
@@ -57,6 +59,15 @@ class AdapterChallengeCompleted(challenges:MutableList<MoldeChallengeCompleted>)
                     .centerCrop()
                     .placeholder(R.drawable.ic_galeria)
                     .into(imageChalleng)
+
+                imageChalleng.setOnClickListener {
+
+                    var list = listOf(item.url)
+                    val intent = Intent(this.context, SlideImageFullScreenActivity::class.java)
+                    intent.putExtra("lista_imagenes", list.toString())
+                    intent.putExtra("position"      , position)
+                    context.startActivity(intent)
+                }
 
                 nameChalleng.text = replaceFirstCharInSequenceToUppercase(item.name?:"")
                 authorAliasChallenge.text = "\uD83C\uDFD6 Estudiante"

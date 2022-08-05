@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="4dp"
+    android:background="@color/color_fondo_pantalla"
+    android:theme="@style/Theme.AppCompat.NoActionBar"
+    app:layout_collapseMode="pin">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/btn_atras"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:tint="@color/colorWhite"
+            android:backgroundTint="@color/colorTransparent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:srcCompat="@drawable/ic_arrow_back_white" />
+
+
+        <ImageButton
+            android:id="@+id/btn_descarga2"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:srcCompat="@drawable/ic_download"
+            android:backgroundTint="@color/colorTransparent"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="16dp"
+            app:tint="@color/colorWhite"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+        <ImageButton
+            android:id="@+id/btn_desplegar"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            app:srcCompat="@drawable/ic_more_vert"
+            android:backgroundTint="@color/colorTransparent"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="16dp"
+            app:tint="@color/colorWhite"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.Toolbar>

@@ -46,5 +46,6 @@
 
     //LightenColors
     <color name="colorSecondaryLightColor">#fff9dd</color>
+    <color name="color_fondo_pantalla">#F4F8F9</color>
 
 </resources>

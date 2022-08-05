@@ -44,4 +44,8 @@
     <string name="mensaje_default_soporte">Hola! 👋 Soy YakuBot el bot residente en YakuLab \n¿En que puedo ayudarte?</string>
     <string name="text_share">Compartir</string>
     <string name="text_comment">Comentar</string>
+    <string name="descargar_en_el_telefono">Descargar en el teléfono</string>
+    <string name="compatir_foto">Compatir foto</string>
+    <string name="error">Error</string>
+    <string name="error_new">Error</string>
 </resources>

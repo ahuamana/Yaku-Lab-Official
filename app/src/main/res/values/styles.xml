@@ -22,4 +22,9 @@
         <item name="cornerSizeBottomLeft">8dp</item>
     </style>
 
+    <style name="CustomBottomSheet">
+        <item name="android:background">@drawable/bottom_sheet_corner</item>
+        <item name="android:elevation">16dp</item>
+    </style>
+
 </resources>
