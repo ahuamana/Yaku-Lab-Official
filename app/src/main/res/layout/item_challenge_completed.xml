@@ -136,11 +136,11 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/imageViewLike"
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
-                            android:src="@drawable/ic_love"/>
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:id="@+id/likeImageView"
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            app:srcCompat="@drawable/ic_love"/>
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/textViewLike"
@@ -164,10 +164,10 @@
                         android:orientation="horizontal">
 
                         <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="15dp"
+                            android:layout_width="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginRight="2dp"
-                            android:layout_height="15dp"
+                            android:layout_height="wrap_content"
                             android:src="@drawable/ic_comment_"/>
 
                         <com.google.android.material.textview.MaterialTextView
@@ -187,14 +187,18 @@
                         android:id="@+id/linearCompartir"
                         android:layout_width="0dp"
                         android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="15dp"
+                            android:id="@+id/action_share"
+                            android:layout_width="wrap_content"
                             android:layout_gravity="center"
+                            app:tint="@color/black"
                             android:layout_marginRight="2dp"
-                            android:layout_height="15dp"
+                            android:layout_height="wrap_content"
                             app:srcCompat="@drawable/ic_share"/>
 
                         <com.google.android.material.textview.MaterialTextView

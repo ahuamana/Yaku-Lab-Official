@@ -14,13 +14,16 @@ fun View.beGone() {
     visibility = View.GONE
 }
 
-
 fun View.isVisible() = visibility == View.VISIBLE
 
 fun View.isInvisible() = visibility == View.INVISIBLE
 
 fun View.isGone() = visibility == View.GONE
 
+fun View.preventDoubleClick() {
+    this.isEnabled = false
+    this.postDelayed( { this.isEnabled = true }, 1000)
+}
 
 fun View.fadeIn() {
     animate().alpha(1f).setDuration(SHORT_ANIMATION_DURATION).withStartAction { beVisible() }.start()

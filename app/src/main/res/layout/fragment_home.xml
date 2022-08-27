@@ -86,8 +86,6 @@
 
 
                             </LinearLayout>
-
-
                             <LinearLayout
                                 android:id="@+id/linearLayoutFrutas"
                                 android:layout_width="0dp"
@@ -135,8 +133,6 @@
 
 
                             </LinearLayout>
-
-
                             <LinearLayout
                                 android:id="@+id/linearLayoutPlantas"
                                 android:layout_width="0dp"

@@ -14,6 +14,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityLoginBinding
+import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.hideKeyboardActivity
 import com.paparazziteam.yakulap.helper.isConnected
 import com.paparazziteam.yakulap.helper.isValidEmail
@@ -72,7 +73,8 @@ class LoginActivity : AppCompatActivity() {
         _viewModelLogin.getIsLoginEmail().observe(this) { isLoginEmail ->
             println("isLoginEmail: $isLoginEmail")
             if (isLoginEmail) {
-                Log.e(TAG, "EMAIL ENVIADO: " + binding.email.text.toString().lowercase())
+                //Log.e(TAG, "EMAIL ENVIADO: " + binding.email.text.toString().lowercase())
+                MyPreferences().email_login = binding.email.text.toString().trim().lowercase()
                 startActivity(
                     Intent(this, DashboardActivity::class.java)
                         .putExtra("email", binding.email.text.toString().lowercase())

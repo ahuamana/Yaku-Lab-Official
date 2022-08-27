@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".root.MyApp"
@@ -17,9 +17,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Yakulap">
         <activity
-            android:name=".modulos.puntaje.views.PuntajeActivity"
-            android:theme="@style/Theme.noActionBar"
+            android:name=".ChallengeActivity"
             android:exported="false" />
+        <activity
+            android:name=".modulos.laboratorio.views.ChallengeParentActivity"
+            android:exported="false"
+            android:theme="@style/Theme.noActionBar" />
+        <activity
+            android:name=".modulos.puntaje.views.PuntajeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.noActionBar" />
         <activity
             android:name=".modulos.dashboard.views.DashboardActivity"
             android:exported="false"
@@ -48,11 +55,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".helper.design.SlideImageFullScreenActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

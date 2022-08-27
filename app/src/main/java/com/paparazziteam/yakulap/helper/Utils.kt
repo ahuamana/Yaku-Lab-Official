@@ -4,7 +4,12 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DownloadManager
 import android.content.Context
+import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
@@ -19,9 +24,17 @@ import com.paparazziteam.yakulap.helper.Constants.EXT_JPG
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.application.toast
 import com.paparazziteam.yakulap.root.ctx
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import java.io.File
+import java.io.IOException
+import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 private var appContext: Context? = null
 
@@ -109,7 +122,6 @@ fun replaceFirstCharInSequenceToUppercase(text: String): String {
     //Log.e("REPLACE","DATA: "+ datafinal);
 }
 
-
 fun View.downloadData(
     url: String,
     carpetaDestino: String,
@@ -164,6 +176,35 @@ fun convertStringToList(text: String, unoMenos: Boolean = false): List<String> {
         newList.add(it.trim())
     }
     return newList
+}
+
+fun String.onlyOneSpace(): String {
+    val re = Regex("\\s+")
+    return re.replace(this, " ")
+}
+
+@Throws(IOException::class)
+fun drawableFromUrl(url: String?): Drawable? {
+    val x: Bitmap
+    val connection: HttpURLConnection = URL(url).openConnection() as HttpURLConnection
+    connection.connect()
+    val input: InputStream = connection.getInputStream()
+    x = BitmapFactory.decodeStream(input)
+    return BitmapDrawable(Resources.getSystem(), x)
+}
+
+
+inline fun <reified T> toJson(value : T) = Json{
+    encodeDefaults = true
+    ignoreUnknownKeys = true
+    isLenient = true
+}.encodeToString(value)
+
+inline fun <reified T> fromJson(json: String) : T {
+    return Json{
+        ignoreUnknownKeys = true
+        isLenient = true
+    }.decodeFromString(json)
 }
 
 

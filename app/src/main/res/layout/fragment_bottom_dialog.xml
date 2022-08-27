@@ -61,7 +61,6 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/opcion_contacte_soporte"
                 android:layout_width="0dp"
@@ -102,7 +101,6 @@
                     app:layout_constraintLeft_toRightOf="@+id/action_descarga"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/opcion_new_funtionality"
                 android:layout_width="0dp"
@@ -143,8 +141,6 @@
                     app:layout_constraintLeft_toRightOf="@+id/action_compartir"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-
             <View
                 android:id="@+id/curtain_resources_help"
                 android:layout_width="0dp"
@@ -157,8 +153,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/opcion_contacte_soporte"></View>
-
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

@@ -1,17 +1,19 @@
 package com.paparazziteam.yakulap.modulos.dashboard.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.paparazziteam.yakulap.databinding.FragmentHomeBinding
-import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
+import com.paparazziteam.yakulap.helper.preventDoubleClick
 import com.paparazziteam.yakulap.modulos.dashboard.adapters.AdapterChallengeCompleted
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
-import java.util.*
+import com.paparazziteam.yakulap.modulos.laboratorio.views.ChallengeParentActivity
 
 class HomeFragment : Fragment() {
 
@@ -26,6 +28,9 @@ class HomeFragment : Fragment() {
     var mLinearLayoutManager: LinearLayoutManager? = null
     private var recyclerView: RecyclerView? = null
 
+    //Content Animals
+    var mLinearLayoutAnimals: LinearLayout? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -36,12 +41,21 @@ class HomeFragment : Fragment() {
 
         binding.apply {
             recyclerView = recycler
+            mLinearLayoutAnimals = linearLayoutAnimales
         }
 
         observerComponents()
         getDataLaboratorio()
+        otherComponents()
 
         return root
+    }
+
+    private fun otherComponents() {
+        mLinearLayoutAnimals?.setOnClickListener {
+            it.preventDoubleClick()
+            startActivity(Intent(context, ChallengeParentActivity::class.java))
+        }
     }
 
     private fun observerComponents() {

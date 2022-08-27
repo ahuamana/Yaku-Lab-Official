@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginTop="15dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="15dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                app:backgroundTint="@color/colorSecondaryYaku"
+                app:fabCustomSize="45dp"
+                android:src="@drawable/ic_usuario"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_marginStart="5dp"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:background="@drawable/corner_radius_style"
+                android:backgroundTint="@color/colorGrayLight"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/title"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/product_sans_bold"
+                    android:layout_marginStart="5dp"
+                    android:text="Nombre Apellido paterno"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_message"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="4dp"
+                    android:text="Hola mundo como estas les deseo los mejores exitos en este proyecto innovador que va creciendo poco a poco"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/product_sans_regular"
+                    android:layout_margin="4dp"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+

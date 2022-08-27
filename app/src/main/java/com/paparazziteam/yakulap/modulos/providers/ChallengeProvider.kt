@@ -1,4 +1,4 @@
-package com.paparazziteam.yakulap.modulos.repositorio
+package com.paparazziteam.yakulap.modulos.providers
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.*
