@@ -49,4 +49,7 @@
     <string name="error">Error</string>
     <string name="error_new">Error</string>
     <string name="registrarChallengeText">Guardar Imagen</string>
+    <string name="congratulations">Felicidades!</string>
+    <string name="descripcion_result"><b>Las alas de las mariposas son transparentes pero percibimos sus llamativos y distintos colores gracias a que su estructura está protegida con escamas</b> muy finas que reflejan continuamente la luz.</string>
+    <string name="textChallengeCompleted">Reto Completado</string>
 </resources>

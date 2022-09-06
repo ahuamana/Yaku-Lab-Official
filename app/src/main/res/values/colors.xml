@@ -48,4 +48,11 @@
     <color name="colorSecondaryLightColor">#fff9dd</color>
     <color name="color_fondo_pantalla">#F4F8F9</color>
 
+    //Color Pixel
+    <color name="video_counter_color_pix">#E53935</color>
+    <color name="primary_color_pix">#075e54</color>
+    <color name="primary_light_color_pix">#80075e54</color>
+    <color name="surface_color_pix">#ffffff</color>
+    <color name="text_color_pix">#807f7f</color>
+
 </resources>

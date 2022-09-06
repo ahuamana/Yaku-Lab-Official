@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DownloadManager
 import android.content.Context
+import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.VectorDrawable
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
@@ -20,6 +22,9 @@ import android.util.Patterns
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.ColorInt
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import com.paparazziteam.yakulap.helper.Constants.EXT_JPG
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.application.toast
@@ -193,6 +198,22 @@ fun drawableFromUrl(url: String?): Drawable? {
     return BitmapDrawable(Resources.getSystem(), x)
 }
 
+fun tintDrawable(drawable: Drawable, @ColorInt color: Int = MyPreferences().colorSecundario): Drawable {
+    (drawable as? VectorDrawableCompat)
+        ?.apply { setTintList(ColorStateList.valueOf(color)) }
+        ?.let { return it }
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        (drawable as? VectorDrawable)
+            ?.apply { setTintList(ColorStateList.valueOf(color)) }
+            ?.let { return it }
+    }
+
+    val wrappedDrawable = DrawableCompat.wrap(drawable)
+    DrawableCompat.setTint(wrappedDrawable, color)
+    return DrawableCompat.unwrap(wrappedDrawable)
+}
+
 
 inline fun <reified T> toJson(value : T) = Json{
     encodeDefaults = true
@@ -206,5 +227,7 @@ inline fun <reified T> fromJson(json: String) : T {
         isLenient = true
     }.decodeFromString(json)
 }
+
+
 
 

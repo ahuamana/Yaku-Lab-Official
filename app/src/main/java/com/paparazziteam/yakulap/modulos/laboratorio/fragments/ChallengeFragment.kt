@@ -1,7 +1,11 @@
-package com.paparazziteam.yakulap.modulos.laboratorio.views
+package com.paparazziteam.yakulap.modulos.laboratorio.fragments
 
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.browser.trusted.ScreenOrientation
 import androidx.core.content.ContextCompat
@@ -10,12 +14,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityChallengeBinding
+import com.paparazziteam.yakulap.databinding.FragmentChallengeBinding
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.beGone
-import com.paparazziteam.yakulap.helper.design.toolbar.IToolbarActivity
-import com.paparazziteam.yakulap.helper.design.toolbar.ToolbarActivity
 import com.paparazziteam.yakulap.helper.fromJson
-import com.paparazziteam.yakulap.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
 import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataChallenge
 import com.paparazziteam.yakulap.modulos.laboratorio.viewmodels.ViewModelChallenge
@@ -27,9 +29,9 @@ import io.ak1.pix.models.Flash
 import io.ak1.pix.models.Mode
 import io.ak1.pix.models.Options
 
-class ChallengeActivity : ToolbarActivity() {
+class ChallengeFragment : Fragment() {
 
-    var binding: ActivityChallengeBinding?= null
+    var binding: FragmentChallengeBinding?= null
     val TAG = javaClass.name
     var ARG_JSON = "extra"
     var dataChallengeReceived = DataChallenge()
@@ -43,14 +45,19 @@ class ChallengeActivity : ToolbarActivity() {
     private lateinit var imgChallengeToComplete: CircleImageView
 
     //Upload Image
-    private lateinit var fabUploadImage:FloatingActionButton
-
+    private lateinit var fabUploadImage: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityChallengeBinding.inflate(layoutInflater)
-        setContentView(binding?.root)
-        setColorToStatusBar(this)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentChallengeBinding.inflate(layoutInflater)
+        val view = binding?.root
+        //
 
         binding?.apply {
             imgChallengeChild   = challengePhotoChild
@@ -60,8 +67,7 @@ class ChallengeActivity : ToolbarActivity() {
             txtImageNotUploaded = textViewImagenNosubida
             fabUploadImage      =fabSelectImage
         }
-        extras()
-        setupActionBar()
+
         setupChallengeData()
         setupCamera()
 
@@ -80,6 +86,10 @@ class ChallengeActivity : ToolbarActivity() {
                 Log.d(TAG,"is incorrect")
             }
         }
+
+
+
+        return view
     }
 
     private fun setupCamera() {
@@ -90,27 +100,26 @@ class ChallengeActivity : ToolbarActivity() {
 
     private fun openCamera(requescode: Int) {
         //ImagePicker
-       val mOptions = Options().apply {
-           count = 1 //Number of images to restict selection count
-           spanCount = 4 //Span count for gallery min 1 & max 5
-           mode = Mode.Picture //Option to select only pictures or videos or both
-           isFrontFacing = false
-           flash = Flash.Auto
-           requestedOrientation = ScreenOrientation.PORTRAIT
-           path = "Pix/Camera"
-       }
-
+        val mOptions = Options().apply {
+            count = 1 //Number of images to restict selection count
+            spanCount = 4 //Span count for gallery min 1 & max 5
+            mode = Mode.Picture //Option to select only pictures or videos or both
+            isFrontFacing = false
+            flash = Flash.Auto
+            path = "Pix/Camera"
+        }
+        /*
         addPixToActivity(R.id.contenedorChallenge, mOptions){
             when (it.status) {
-                    PixEventCallback.Status.SUCCESS -> {
+                PixEventCallback.Status.SUCCESS -> {
 
-                    }//use results as it.data
-                    PixEventCallback.Status.BACK_PRESSED -> {
+                }//use results as it.data
+                PixEventCallback.Status.BACK_PRESSED -> {
 
-                    } // back pressed called
-                }
+                } // back pressed called
             }
-        }
+        }*/
+    }
 
     override fun onDestroy() {
         super.onDestroy()
@@ -131,21 +140,9 @@ class ChallengeActivity : ToolbarActivity() {
             .into(imgChallengeParent)
     }
 
-    private fun setupActionBar() {
-        myToolbar?.apply {
-            setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryYaku))
-            setNavigationOnClickListener { onBackPressed() }
-            title = dataChallengeReceived.tittle
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        }
+    companion object {
+        @JvmStatic
+        fun newInstance() =
+            ChallengeFragment().apply {}
     }
-
-    private fun extras() {
-        if (intent.extras != null) {
-           var json_object =  intent.getStringExtra(ARG_JSON)
-            dataChallengeReceived = fromJson(json_object?:"")
-            Log.d(TAG, "Json received: $dataChallengeReceived")
-        }
-    }
-
 }

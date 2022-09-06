@@ -1,6 +1,7 @@
 package com.paparazziteam.yakulap.modulos.laboratorio.adapters
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -21,7 +22,9 @@ import com.paparazziteam.yakulap.databinding.DialogMoreInfoBinding
 import com.paparazziteam.yakulap.databinding.ItemChallengeOptionBinding
 import com.paparazziteam.yakulap.helper.preventDoubleClick
 import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
+import com.paparazziteam.yakulap.helper.toJson
 import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataChallenge
+import com.paparazziteam.yakulap.modulos.laboratorio.views.ChallengeActivity
 
 class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerView.Adapter<AdapterGridChallenge.ViewHolder>() {
 
@@ -74,9 +77,6 @@ class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerVi
                 dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
                 dialog.setContentView(customBinding.getRoot())
 
-
-                //customBinding.imageViewChallenge.setImageResource(drawable);
-                //customBinding.imageViewChallenge.setImageResource(drawable);
                 Glide.with(context)
                     .load(item.url)
                     .placeholder(R.drawable.galeria_imagenes)
@@ -95,7 +95,9 @@ class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerVi
                 customBinding.btnCancel.setOnClickListener(View.OnClickListener { dialog.dismiss() })
 
                 customBinding.btnOk.setOnClickListener(View.OnClickListener {
-                    //context.startActivity()
+                    context.startActivity(Intent(context,ChallengeActivity::class.java).apply {
+                        putExtra("extra", toJson(item))
+                    })
                 })
                 dialog.show()
             }

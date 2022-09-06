@@ -57,13 +57,12 @@ class ViewModelLab private constructor() {
                     listAnimalsOther = listAnimalesOthers,
                     listAnimalsDomestic = listAnimalesDomesticos
                 )
-                _observableListData.value = dataAll
 
-                //println("Categorias listCategoriaInsectos: $listCategoriaInsectos")
-                //println("Categorias categoryAnimalesDomesticos: $listAnimalesDomesticos")
+                _observableListData.value = dataAll
             }
         }
     }
+
 
     companion object Singleton{
         private var instance: ViewModelLab? = null

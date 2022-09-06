@@ -31,7 +31,16 @@ data class DataChallenge (
     var status: Boolean? = null,
 
     @SerialName("category")
-    var category: String? = null
+    var category: String? = null,
+
+    @SerialName("image_parent")
+    var image_parent: String? = null,
+
+    @SerialName("image_child")
+    var image_child: String? = null,
+
+    @SerialName("tittle")
+    var tittle: String? = null,
 )
 
 data class DataListChallenge (

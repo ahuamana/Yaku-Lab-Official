@@ -22,6 +22,10 @@ class MyPreferences {
         get() = prefs.getInt("color",  Color.parseColor("#ff0066"))
         set(value) = prefs.setInt("color", value)
 
+    var colorSecundario: Int
+        get() = prefs.getInt("colorSecundario",  Color.parseColor("#fcc52d"))
+        set(value) = prefs.setInt("colorSecundario", value)
+
     var points: Int
         get() = prefs.getInt("points",  0)
         set(value) = prefs.setInt("points", value)

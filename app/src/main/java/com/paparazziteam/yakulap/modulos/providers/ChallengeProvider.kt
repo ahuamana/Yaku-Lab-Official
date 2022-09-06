@@ -33,10 +33,11 @@ class ChallengeProvider {
         return mCollection.orderBy("timestamp", Query.Direction.DESCENDING)
     }
 
-    fun search(emailSuscriber: String?, nameSustantivo: String?): Query? {
+    fun search(emailSuscriber: String?, challengeId: String?): Query? {
         return mCollection
             .whereEqualTo("author_email", emailSuscriber)
-            .whereEqualTo("name", nameSustantivo)
+            //.whereEqualTo("name", nameSustantivo)
+            .whereEqualTo("challenge_id", challengeId)
             .orderBy("timestamp", Query.Direction.DESCENDING)
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".modulos.laboratorio.views.ChallengeActivity">
+    tools:context=".modulos.laboratorio.fragments.ChallengeFragment">
 
     <include
         android:id="@+id/include"
@@ -36,6 +36,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/challenge_photo_child"
                 android:layout_width="100dp"
@@ -45,6 +46,8 @@
                 android:layout_marginLeft="-70dp"
                 android:layout_gravity="center"
                 app:fabSize="auto"
+                app:borderWidth="0dp"
+                android:backgroundTint="@color/colorSecondaryYaku"
                 app:tint="@null"
 
                 app:maxImageSize="70dp"

@@ -17,8 +17,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Yakulap">
         <activity
-            android:name=".ChallengeActivity"
-            android:exported="false" />
+            android:name=".modulos.laboratorio.views.ResultCaptureImageActivity"
+            android:theme="@style/Theme.noActionBar"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".modulos.laboratorio.views.ChallengeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.noActionBar"/>
         <activity
             android:name=".modulos.laboratorio.views.ChallengeParentActivity"
             android:exported="false"
@@ -49,9 +55,9 @@
             android:name=".modulos.bienvenida.views.SplashActivity"
             android:exported="true"
             android:theme="@style/AppTheme.FullScreenPersonalize">
+            <!-- -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
