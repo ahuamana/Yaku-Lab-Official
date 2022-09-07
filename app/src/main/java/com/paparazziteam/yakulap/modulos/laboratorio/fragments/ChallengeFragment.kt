@@ -7,13 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
-import androidx.browser.trusted.ScreenOrientation
-import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulap.R
-import com.paparazziteam.yakulap.databinding.ActivityChallengeBinding
 import com.paparazziteam.yakulap.databinding.FragmentChallengeBinding
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.beGone
@@ -22,9 +19,11 @@ import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
 import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataChallenge
 import com.paparazziteam.yakulap.modulos.laboratorio.viewmodels.ViewModelChallenge
 import com.paparazziteam.yakulap.modulos.laboratorio.viewmodels.ViewModelLab
+import com.paparazziteam.yakulap.modulos.laboratorio.views.ChallengeActivity
 import de.hdodenhof.circleimageview.CircleImageView
 import io.ak1.pix.helpers.PixEventCallback
 import io.ak1.pix.helpers.addPixToActivity
+import io.ak1.pix.helpers.pixFragment
 import io.ak1.pix.models.Flash
 import io.ak1.pix.models.Mode
 import io.ak1.pix.models.Options
@@ -32,7 +31,7 @@ import io.ak1.pix.models.Options
 class ChallengeFragment : Fragment() {
 
     var binding: FragmentChallengeBinding?= null
-    val TAG = javaClass.name
+
     var ARG_JSON = "extra"
     var dataChallengeReceived = DataChallenge()
     var myToolbar: Toolbar?= null
@@ -49,6 +48,15 @@ class ChallengeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        extras()
+    }
+
+    private fun extras() {
+        if (activity?.intent?.extras != null) {
+            var json_object =  activity?.intent?.getStringExtra(ARG_JSON)
+            dataChallengeReceived = fromJson(json_object?:"")
+            Log.d(TAG_CHALLENGE_FRAGMENT, "Json received: $dataChallengeReceived")
+        }
     }
 
     override fun onCreateView(
@@ -63,7 +71,6 @@ class ChallengeFragment : Fragment() {
             imgChallengeChild   = challengePhotoChild
             imgChallengeParent  = challengePhotoParent
             imgChallengeToComplete = challengePhotoToComplete
-            myToolbar           = include.toolbar
             txtImageNotUploaded = textViewImagenNosubida
             fabUploadImage      =fabSelectImage
         }
@@ -75,7 +82,7 @@ class ChallengeFragment : Fragment() {
         viewModel.getChallengeInformation(dataChallengeReceived.id){
                 isCorrect:Boolean, challenge: MoldeChallengeCompleted?->
             if(isCorrect){
-                Log.d(TAG,"result reto: $challenge")
+                Log.d(TAG_CHALLENGE_FRAGMENT,"result reto: $challenge")
                 Glide.with(this)
                     .load(challenge?.url)
                     .error(R.drawable.ic_image_defect)
@@ -83,7 +90,7 @@ class ChallengeFragment : Fragment() {
                     .into(imgChallengeToComplete)
                 txtImageNotUploaded?.beGone()
             }else{
-                Log.d(TAG,"is incorrect")
+                Log.d(TAG_CHALLENGE_FRAGMENT,"is incorrect")
             }
         }
 
@@ -94,31 +101,12 @@ class ChallengeFragment : Fragment() {
 
     private fun setupCamera() {
         fabUploadImage.setOnClickListener {
-            openCamera(100)
+            openCameraActivity()
         }
     }
 
-    private fun openCamera(requescode: Int) {
-        //ImagePicker
-        val mOptions = Options().apply {
-            count = 1 //Number of images to restict selection count
-            spanCount = 4 //Span count for gallery min 1 & max 5
-            mode = Mode.Picture //Option to select only pictures or videos or both
-            isFrontFacing = false
-            flash = Flash.Auto
-            path = "Pix/Camera"
-        }
-        /*
-        addPixToActivity(R.id.contenedorChallenge, mOptions){
-            when (it.status) {
-                PixEventCallback.Status.SUCCESS -> {
-
-                }//use results as it.data
-                PixEventCallback.Status.BACK_PRESSED -> {
-
-                } // back pressed called
-            }
-        }*/
+    private fun openCameraActivity() {
+        (activity as ChallengeActivity).openCameraActivity()
     }
 
     override fun onDestroy() {
@@ -141,6 +129,8 @@ class ChallengeFragment : Fragment() {
     }
 
     companion object {
+        val TAG_CHALLENGE_FRAGMENT = javaClass.name
+
         @JvmStatic
         fun newInstance() =
             ChallengeFragment().apply {}

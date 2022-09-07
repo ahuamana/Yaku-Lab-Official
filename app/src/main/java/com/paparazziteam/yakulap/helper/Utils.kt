@@ -215,6 +215,7 @@ fun tintDrawable(drawable: Drawable, @ColorInt color: Int = MyPreferences().colo
 }
 
 
+
 inline fun <reified T> toJson(value : T) = Json{
     encodeDefaults = true
     ignoreUnknownKeys = true
