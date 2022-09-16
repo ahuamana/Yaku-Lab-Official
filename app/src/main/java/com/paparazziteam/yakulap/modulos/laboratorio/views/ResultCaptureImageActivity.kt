@@ -7,6 +7,12 @@ import android.os.Bundle
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityResultCaptureImageBinding
 import com.paparazziteam.yakulap.helper.setColorToStatusBar
@@ -19,19 +25,47 @@ class ResultCaptureImageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultCaptureImageBinding
 
     private lateinit var myToolbar: Toolbar
+    private lateinit var txtPoints: MaterialTextView
+    private lateinit var txtTittle: MaterialTextView
+    private lateinit var txtDescription: MaterialTextView
+    private lateinit var imageRounded: ShapeableImageView
+    val options: RequestOptions =
+        RequestOptions().override(300,200).transform(CenterCrop(), RoundedCorners(10))
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultCaptureImageBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setColorToStatusBar(this)
-
         binding.apply {
-            myToolbar   = included.toolbar
+            myToolbar       = included.toolbar
+            txtPoints       = textPoints
+            imageRounded    = roundedImageViewSustantivo
+            txtTittle       = title
+            txtDescription  = textViewDescriptionSustantivo
         }
-
+        getExtras()
         setupActionBar()
+    }
+
+    private fun getExtras() {
+        if(intent.extras!= null){
+           var title = intent.getStringExtra("title")
+           var description = intent.getStringExtra("description")
+           var image = intent.getStringExtra("image")
+           var pointsToGive = intent.getIntExtra("pointsToGive",0)
+
+            txtPoints.text = pointsToGive.toString()
+            txtTittle.text = title
+            txtDescription.text = description
+
+
+
+            Glide.with(this)
+                .load(image)
+                .apply(options)
+                .into(imageRounded)
+        }
     }
 
     private fun setupActionBar() {

@@ -12,6 +12,14 @@ class MyPreferences {
         get()      = prefs.getString("email_login", "")
         set(value) = prefs.setString("email_login", value)
 
+    var lastName: String
+        get()      = prefs.getString("lastName", "")
+        set(value) = prefs.setString("lastName", value)
+
+    var firstName: String
+        get()      = prefs.getString("firstName", "")
+        set(value) = prefs.setString("firstName", value)
+
     //PREFERENCES BOOLEAN
     var isLogin: Boolean
         get()      = prefs.getBoolean("isLogin", false)

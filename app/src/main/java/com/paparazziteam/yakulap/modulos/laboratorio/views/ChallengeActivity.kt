@@ -1,42 +1,86 @@
 package com.paparazziteam.yakulap.modulos.laboratorio.views
 
-import android.opengl.Visibility
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.core.net.toFile
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.replace
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityChallengeBinding
 import com.paparazziteam.yakulap.helper.design.toolbar.ToolbarActivity
 import com.paparazziteam.yakulap.helper.fromJson
+import com.paparazziteam.yakulap.helper.getFileName
+import com.paparazziteam.yakulap.helper.getRealPathFromURI
 import com.paparazziteam.yakulap.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.modulos.laboratorio.fragments.ChallengeFragment
-import com.paparazziteam.yakulap.modulos.laboratorio.fragments.ChallengeFragment.Companion.TAG_CHALLENGE_FRAGMENT
 import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataChallenge
 import com.paparazziteam.yakulap.modulos.laboratorio.viewmodels.ViewModelLab
+import com.paparazziteam.yakulap.root.ctx
 import io.ak1.pix.PixFragment
 import io.ak1.pix.helpers.PixBus
 import io.ak1.pix.helpers.PixEventCallback
 import io.ak1.pix.helpers.addPixToActivity
+import io.ak1.pix.helpers.showStatusBar
 import io.ak1.pix.models.Flash
 import io.ak1.pix.models.Mode
 import io.ak1.pix.models.Options
+import java.io.File
+
 
 class ChallengeActivity : ToolbarActivity() {
 
     var binding: ActivityChallengeBinding?= null
     val TAG = javaClass.name
+    var PHOTO_PATH = Uri.EMPTY
+    var PHOTO_FILE:File?= null
     var ARG_JSON = "extra"
     var dataChallengeReceived = DataChallenge()
     var myToolbar: Toolbar?= null
 
-    //Fragments
-    var TAG_CHALLENGE = "FRAGMENT_CHALLENGE"
-    var TAG_PIX = "FRAGMENT_PIX"
-    var fragmentActive: Fragment?= null
+    val mOptions = Options().apply {
+        count = 1 //Number of images to restict selection count
+        spanCount = 4 //Span count for gallery min 1 & max 5
+        mode = Mode.Picture //Option to select only pictures or videos or both
+        isFrontFacing = false
+        flash = Flash.Auto
+        path = "Pix/Camera"
+    }
+
+    private val resultsFragment = ChallengeFragment {
+        showCameraFragment()
+    }
+
+    fun showCameraFragment() {
+        addPixToActivity(R.id.container_parent_challenge, mOptions) {
+            when (it.status) {
+                PixEventCallback.Status.SUCCESS -> {
+                    showResultsFragment()
+                    it.data.forEach { image ->
+                        Log.e(TAG, "showCameraFragment: ${image}")
+                        PHOTO_FILE = File(getRealPathFromURI(ctx,image))
+                        PHOTO_PATH = image
+                    }
+                }
+                PixEventCallback.Status.BACK_PRESSED -> {
+                    supportFragmentManager.popBackStack()
+                }
+            }
+        }
+    }
+
+    fun getPathResultPhoto():Uri{
+        return PHOTO_PATH
+    }
+
+    fun getFileResultPhoto():File?{
+        return PHOTO_FILE
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +93,14 @@ class ChallengeActivity : ToolbarActivity() {
         }
         extras()
         setupActionBar()
-        addFragmentFirst()
+        //addFragmentFirst()
+        showResultsFragment()
+    }
+
+    private fun showResultsFragment() {
+        showStatusBarActivity()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container_parent_challenge, resultsFragment).commit()
     }
 
 
@@ -67,49 +118,6 @@ class ChallengeActivity : ToolbarActivity() {
         }
     }
 
-    private fun addFragmentFirst() {
-        replaceFragmentToActivity(ChallengeFragment(), TAG_CHALLENGE)
-    }
-
-    fun replaceFragmentToActivity(fragment: Fragment?, tag:String){
-        if (fragment == null) return
-        val manger = supportFragmentManager
-        val trasaccion = manger.beginTransaction()
-        trasaccion.replace(R.id.container_parent_challenge, fragment,tag)
-        trasaccion.addToBackStack(null)
-        trasaccion.commit()
-        fragmentActive = fragment
-        println("Trasaccion completed")
-    }
-
-    fun openCameraActivity(){
-        //ImagePicker
-        val mOptions = Options().apply {
-            count = 1 //Number of images to restict selection count
-            spanCount = 4 //Span count for gallery min 1 & max 5
-            mode = Mode.Picture //Option to select only pictures or videos or both
-            isFrontFacing = false
-            flash = Flash.Auto
-            path = "Pix/Camera"
-        }
-
-        addPixToActivity(R.id.container_parent_challenge, mOptions) {
-            when (it.status) {
-                PixEventCallback.Status.SUCCESS -> {
-                    it.data.forEach {
-                        Log.e(TAG, "showCameraFragment: ${it.path}")
-                    }
-                }
-                PixEventCallback.Status.BACK_PRESSED -> {
-                    //supportFragmentManager.popBackStack()
-                }
-            }
-
-        }
-        binding?.include?.root?.visibility = View.GONE
-        fragmentActive = PixFragment()
-    }
-
     private fun extras() {
         if (intent.extras != null) {
            var json_object =  intent.getStringExtra(ARG_JSON)
@@ -119,13 +127,21 @@ class ChallengeActivity : ToolbarActivity() {
     }
 
     override fun onBackPressed() {
-        println("onBackPressed: ${fragmentActive?.javaClass?.name}")
-        if (fragmentActive?.javaClass?.name.equals(PixFragment().javaClass.name)) {
-            binding?.include?.root?.visibility = View.VISIBLE
-            replaceFragmentToActivity(ChallengeFragment(),TAG_CHALLENGE)
-        }else finish()
-
+        val f = supportFragmentManager.findFragmentById(R.id.container_parent_challenge)
+        if (f is ChallengeFragment)
+            super.onBackPressed()
+        else
+            PixBus.onBackPressedEvent()
     }
 
-
+    fun showStatusBarActivity(){
+        if (Build.VERSION.SDK_INT < 16) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        } else {
+            val decorView = window.decorView
+            // Show Status Bar.
+            val uiOptions = View.SYSTEM_UI_FLAG_VISIBLE
+            decorView.systemUiVisibility = uiOptions
+        }
+    }
 }

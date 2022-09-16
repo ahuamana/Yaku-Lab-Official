@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivitySplashBinding
 import com.paparazziteam.yakulap.helper.application.MyPreferences
+import com.paparazziteam.yakulap.helper.getVersionName
 import com.paparazziteam.yakulap.modulos.dashboard.views.DashboardActivity
 import java.util.*
 
@@ -19,6 +20,8 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         println("isLogin -> ${preferences.isLogin}")
+        binding.versioncode.text = "${getString(R.string.app_version_code)} ${getVersionName()}"
+
         loadNextActivity()
         loadAnimationLogo()
     }

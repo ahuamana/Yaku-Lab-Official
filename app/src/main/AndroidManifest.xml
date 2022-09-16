@@ -5,26 +5,32 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
 
     <application
         android:name=".root.MyApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Yakulap">
+        android:theme="@style/Theme.Yakulap"
+        android:usesCleartextTraffic="true">
+
         <activity
             android:name=".modulos.laboratorio.views.ResultCaptureImageActivity"
-            android:theme="@style/Theme.noActionBar"
-            android:exported="true">
-        </activity>
+            android:exported="true"
+            android:theme="@style/Theme.noActionBar"></activity>
         <activity
             android:name=".modulos.laboratorio.views.ChallengeActivity"
             android:exported="false"
-            android:theme="@style/Theme.noActionBar"/>
+            android:theme="@style/Theme.noActionBar" />
         <activity
             android:name=".modulos.laboratorio.views.ChallengeParentActivity"
             android:exported="false"
@@ -55,9 +61,11 @@
             android:name=".modulos.bienvenida.views.SplashActivity"
             android:exported="true"
             android:theme="@style/AppTheme.FullScreenPersonalize">
-            <!-- -->
+
+            <!--  -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

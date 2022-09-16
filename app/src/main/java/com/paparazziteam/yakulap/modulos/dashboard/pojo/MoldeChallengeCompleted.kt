@@ -9,5 +9,5 @@ data class MoldeChallengeCompleted (
     var author_name:String?= null,
     var author_lastname:String?= null,
     var timestamp: Long? = null,
-    var challenge_id: String? = null,
+    var challenge_id: String? = null
 )

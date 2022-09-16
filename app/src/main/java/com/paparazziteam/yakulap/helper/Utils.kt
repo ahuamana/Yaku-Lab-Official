@@ -3,9 +3,12 @@ package com.paparazziteam.yakulap.helper
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DownloadManager
+import android.content.ContentUris
 import android.content.Context
+import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.content.res.Resources
+import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -16,18 +19,26 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.provider.DocumentsContract
+import android.provider.MediaStore
+import android.provider.OpenableColumns
 import android.text.TextUtils
 import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import com.paparazziteam.yakulap.helper.Constants.EXT_JPG
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.application.toast
+import com.paparazziteam.yakulap.helper.observer.getDataColumn
+import com.paparazziteam.yakulap.helper.observer.isDownloadsDocument
+import com.paparazziteam.yakulap.helper.observer.isExternalStorageDocument
+import com.paparazziteam.yakulap.helper.observer.isMediaDocument
 import com.paparazziteam.yakulap.root.ctx
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
@@ -230,5 +241,114 @@ inline fun <reified T> fromJson(json: String) : T {
 }
 
 
+fun getRealPathFromURI(context: Context, uri: Uri): String? {
+    val isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
 
+    // DocumentProvider
+    if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+        // ExternalStorageProvider
+        if (isExternalStorageDocument(uri)) {
+            val docId = DocumentsContract.getDocumentId(uri)
+            val split = docId.split(":".toRegex()).toTypedArray()
+            val type = split[0]
+            if ("primary".equals(type, ignoreCase = true)) {
+                return Environment.getExternalStorageDirectory().toString() + "/" + split[1]
+            }
+        } else if (isDownloadsDocument(uri)) {
+            val id = DocumentsContract.getDocumentId(uri)
+            val contentUri: Uri = ContentUris.withAppendedId(
+                Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id))
+            return getDataColumn(context, contentUri, null, null)
+        } else if (isMediaDocument(uri)) {
+            val docId = DocumentsContract.getDocumentId(uri)
+            val split = docId.split(":".toRegex()).toTypedArray()
+            val type = split[0]
+            var contentUri: Uri? = null
+            when (type) {
+                "image" -> {
+                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+                }
+                "video" -> {
+                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI
+                }
+                "audio" -> {
+                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+                }
+            }
+            val selection = "_id=?"
+            val selectionArgs = arrayOf(
+                split[1]
+            )
+            return getDataColumn(context, contentUri, selection, selectionArgs)
+        }
+    } else return if ("content".equals(uri.scheme, ignoreCase = true)) {
+        // Return the remote address
+        if (isGooglePhotosUri(uri)) uri.lastPathSegment else getDataColumn(context, uri, null, null)
+    } else if ("file".equals(uri.scheme, ignoreCase = true)) {
+        uri.path
+    } else getRealPathFromURIDB(uri, context)
+    return null
+}
+
+private fun isGooglePhotosUri(uri: Uri): Boolean {
+    return "com.google.android.apps.photos.content" == uri.getAuthority()
+}
+
+private fun getRealPathFromURIDB(contentUri: Uri, context: Context): String? {
+    val cursor: Cursor? = context.contentResolver.query(contentUri, null, null, null, null)
+    return run {
+        cursor?.moveToFirst()
+        val index = cursor?.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+        val realPath = index?.let { cursor.getString(it) }
+        cursor?.close()
+        realPath
+    }
+}
+
+fun getFileName(context: Context, uri: Uri): String? {
+    var result: String? = null
+    if (uri.scheme == "content") {
+        val cursor = context.contentResolver.query(uri, null, null, null, null)
+        try {
+            if (cursor != null && cursor.moveToFirst()) {
+                result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+            }
+        } finally {
+            cursor!!.close()
+        }
+    }
+    if (result == null) {
+        result = uri.path
+        val cut = result!!.lastIndexOf('/')
+        if (cut != -1) {
+            result = result.substring(cut + 1)
+        }
+    }
+    return result
+}
+
+inline fun Context.toast(message: CharSequence): Toast = Toast
+    .makeText(this, message, Toast.LENGTH_SHORT)
+    .apply {
+        show()
+    }
+
+inline fun Context.longToast(message: Int): Toast = Toast
+    .makeText(this, message, Toast.LENGTH_LONG)
+    .apply {
+        show()
+    }
+
+fun Context.getVersionName(): String {
+    var versionName = ""
+    try {
+        versionName = applicationContext.packageManager.getPackageInfo(
+            applicationContext.packageName,
+            0
+        ).versionName
+    } catch (e: PackageManager.NameNotFoundException) {
+        e.printStackTrace()
+    }
+    return versionName
+}
 

@@ -109,6 +109,8 @@ class DashboardActivity : AppCompatActivity() {
             if (user != null) {
                 println("Puntos Guardados: ${user.points}")
                 preferences.points = user.points?:0
+                preferences.firstName = user.nombres?:""
+                preferences.lastName = user.apellidos?:""
 
                 //Asignar Nombres y Primera letra del apellido del usuario
                 val names = replaceFirstCharInSequenceToUppercase(user.nombres?:"")
@@ -141,7 +143,7 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.dashboard, menu)
+        /*menuInflater.inflate(R.menu.dashboard, menu)
         val itemLogout = menu?.findItem(R.id.action_logout)
         val icon = ContextCompat.getDrawable(this, R.drawable.ic_logout)
         //icon?.alpha = 255
@@ -152,7 +154,7 @@ class DashboardActivity : AppCompatActivity() {
         val iconChallenge = ContextCompat.getDrawable(this, R.drawable.ic_target)
         //icon?.alpha = 255
         itemChallenge?.icon = iconChallenge
-        itemChallenge?.isVisible = true
+        itemChallenge?.isVisible = true*/
 
         return true
     }

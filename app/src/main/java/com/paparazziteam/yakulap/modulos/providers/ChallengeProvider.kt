@@ -28,7 +28,6 @@ class ChallengeProvider {
         return mCollection.document(id_photo!!).update("url", url)
     }
 
-
     fun getListChallengesOrderByTimeStamp(): Query? {
         return mCollection.orderBy("timestamp", Query.Direction.DESCENDING)
     }

@@ -41,6 +41,18 @@ data class DataChallenge (
 
     @SerialName("tittle")
     var tittle: String? = null,
+
+    @SerialName("pointsToGive")
+    var pointsToGive: Int? = null,
+
+    @SerialName("image_result")
+    var image_result: List<String>? = null,
+
+    @SerialName("text_result")
+    var text_result: List<String>? = null,
+
+    @SerialName("challenge_name")
+    var challenge_name: String? = null,
 )
 
 data class DataListChallenge (

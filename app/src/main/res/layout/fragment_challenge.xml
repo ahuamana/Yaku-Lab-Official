@@ -75,6 +75,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <ProgressBar
+                    android:id="@+id/progress_loadImage"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="30dp"
+                    android:indeterminateTint="@color/colorSecondaryYaku"
+                    app:layout_constraintBottom_toBottomOf="@+id/challenge_photo_to_complete"
+                    app:layout_constraintEnd_toEndOf="@+id/challenge_photo_to_complete"
+                    app:layout_constraintStart_toStartOf="@+id/challenge_photo_to_complete"
+                    app:layout_constraintTop_toTopOf="@+id/challenge_photo_to_complete" />
+
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewImagenNosubida"
                     android:layout_width="wrap_content"

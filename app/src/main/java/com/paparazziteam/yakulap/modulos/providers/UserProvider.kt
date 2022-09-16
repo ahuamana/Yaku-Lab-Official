@@ -26,4 +26,8 @@ class UserProvider {
     fun searchUserByEmail(email: String?): Task<DocumentSnapshot> {
         return mCollection.document(email?:"").get()
     }
+
+    fun updatePoints(token: String?, points: Int): Task<Void?>? {
+        return mCollection.document(token?:"").update("points", points)
+    }
 }
