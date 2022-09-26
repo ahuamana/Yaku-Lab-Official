@@ -2,6 +2,7 @@ package com.paparazziteam.yakulap.modulos.dashboard.views
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -16,11 +18,16 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textview.MaterialTextView
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityDashboardBinding
 import com.paparazziteam.yakulap.helper.application.MyPreferences
+import com.paparazziteam.yakulap.helper.application.showErrorToast
+import com.paparazziteam.yakulap.helper.application.toast
+import com.paparazziteam.yakulap.helper.fromJson
 import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
 import com.paparazziteam.yakulap.helper.setColorToStatusBar
+import com.paparazziteam.yakulap.helper.toJson
 import com.paparazziteam.yakulap.modulos.bienvenida.views.WelcomeActivity
 import com.paparazziteam.yakulap.modulos.dashboard.fragments.BottomDialogFragment
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
@@ -96,6 +103,7 @@ class DashboardActivity : AppCompatActivity() {
 
         menuSignOut.setOnClickListener {
             preferences.removeLoginData()
+            preferences.clearData()
             startActivity(Intent(applicationContext, WelcomeActivity::class.java).apply {
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK) //Remove activities that have been created before
             })
@@ -111,11 +119,25 @@ class DashboardActivity : AppCompatActivity() {
                 preferences.points = user.points?:0
                 preferences.firstName = user.nombres?:""
                 preferences.lastName = user.apellidos?:""
+                try {
+                    if(!user.post_blocked.isNullOrEmpty())
+                        preferences.postBlocked = toJson(user.post_blocked)
+                    else preferences.postBlocked = ""
+                }catch (e:Throwable){
+                    FirebaseCrashlytics.getInstance().recordException(e)
+                }
 
                 //Asignar Nombres y Primera letra del apellido del usuario
                 val names = replaceFirstCharInSequenceToUppercase(user.nombres?:"")
                 val apellidos = user.apellidos?.substring(0,1)
                 greetingsNameHeader.text =  "$names ${apellidos?.uppercase(Locale.getDefault())}."
+            }
+        }
+
+        _viewModel.snackbar.observe(this){
+            if(!it.isNullOrEmpty()){
+                Log.d("TAG","New Toast Post Reported")
+                this.toast(it)
             }
         }
 
@@ -162,5 +184,10 @@ class DashboardActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_dashboard)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    override fun onDestroy() {
+        ViewModelDashboard.destroyInstance()
+        super.onDestroy()
     }
 }

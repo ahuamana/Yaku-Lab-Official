@@ -27,7 +27,11 @@ class UserProvider {
         return mCollection.document(email?:"").get()
     }
 
-    fun updatePoints(token: String?, points: Int): Task<Void?>? {
-        return mCollection.document(token?:"").update("points", points)
+    fun updatePoints(email: String?, points: Int): Task<Void?>? {
+        return mCollection.document(email?:"").update("points", points)
+    }
+
+    fun updatePostBlocked(email: String?, list: MutableList<String>): Task<Void?>? {
+        return mCollection.document(email?:"").update("post_blocked", list)
     }
 }

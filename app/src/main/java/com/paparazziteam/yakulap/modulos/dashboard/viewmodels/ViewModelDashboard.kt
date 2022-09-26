@@ -6,35 +6,40 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.toObject
+import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.helper.application.MyPreferences
-import com.paparazziteam.yakulap.modulos.dashboard.pojo.Comment
-import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
+import com.paparazziteam.yakulap.helper.fromJson
+import com.paparazziteam.yakulap.helper.toJson
+import com.paparazziteam.yakulap.modulos.dashboard.pojo.*
 import com.paparazziteam.yakulap.modulos.login.pojo.User
 import com.paparazziteam.yakulap.modulos.login.providers.LoginProvider
 import com.paparazziteam.yakulap.modulos.login.providers.UserProvider
-import com.paparazziteam.yakulap.modulos.providers.ChallengeProvider
-import com.paparazziteam.yakulap.modulos.providers.CommentProvider
-import com.paparazziteam.yakulap.modulos.providers.ImageProvider
+import com.paparazziteam.yakulap.modulos.providers.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 
 class ViewModelDashboard private constructor(){
 
-    private var mUserProvider = UserProvider()
-    private var mLoginProvider = LoginProvider()
-    private var mCommentProvider = CommentProvider()
-    private var mImageProvider = ImageProvider()
-    private var mChallengeProvider = ChallengeProvider()
+    val mPreferences = MyPreferences()
+
+    private val mUserProvider = UserProvider()
+    private val mLoginProvider = LoginProvider()
+    private val mCommentProvider = CommentProvider()
+    private val mImageProvider = ImageProvider()
+    private val mChallengeProvider = ChallengeProvider()
+    private val mActionProvider = ReaccionProvider()
+    private val mReportProvider = ReportProvider()
+
+
+
     private var challengesCompleted = mutableListOf<MoldeChallengeCompleted>()
 
     private lateinit var mListener: ListenerRegistration
 
     private val preferences = MyPreferences()
-
-
-    private val _user = MutableLiveData<User>()
-    private val _challengesCompleted= MutableLiveData<MutableList<MoldeChallengeCompleted>>()
-    private val _commentsCompleted= MutableLiveData<MutableList<Comment>>()
-    private val _emptyComments = MutableLiveData<Boolean>()
 
     private val _errorUpload = MutableLiveData<String>()
     val errorUpload:LiveData<String> = _errorUpload
@@ -42,10 +47,23 @@ class ViewModelDashboard private constructor(){
     private val _completeUpload = MutableLiveData<Boolean>()
     val completeUpload:LiveData<Boolean> = _completeUpload
 
+    private val _snackbar = MutableLiveData<String>()
+    val snackbar:LiveData<String> = _snackbar
+
+    private val _emptyComments = MutableLiveData<Boolean>()
+    val emptyComments:LiveData<Boolean> = _emptyComments
+
+    private val _commentsCompleted= MutableLiveData<MutableList<Comment>>()
+    val commentsCompleted:LiveData<MutableList<Comment>> = _commentsCompleted
+
+    private val _user = MutableLiveData<User>()
     fun getUserData():LiveData<User> = _user
-    fun getChallengeCompletedData():LiveData<MutableList<MoldeChallengeCompleted>> = _challengesCompleted
-    fun getCommentsCompletedData():LiveData<MutableList<Comment>> = _commentsCompleted
-    fun getCommentsEmpty():LiveData<Boolean> = _emptyComments
+
+    private val _challengesCompleted= MutableLiveData<MutableList<MoldeChallengeCompleted>>()
+    val challengesCompletedObservable:LiveData<MutableList<MoldeChallengeCompleted>> = _challengesCompleted
+
+    private val _newPostBlocked= MutableLiveData<String>()
+    val newPostBlocked:LiveData<String> = _newPostBlocked
 
     fun showUserData(){
        var emailLogged = mLoginProvider.getEmail()
@@ -164,6 +182,104 @@ class ViewModelDashboard private constructor(){
             }
         }
     }
+
+    fun updateLikeStatusFirebase(item:MoldeChallengeCompleted){
+        mActionProvider.getUserLike(preferences.email_login, item.id)?.get()
+            ?.addOnSuccessListener {
+                if(it.isEmpty){
+                    println("Like is empty")
+                    createLike(item,true)
+                }else{
+                    //if already exist
+                    val status  = it.documents[0].get("status").toString().toBoolean()
+                    val idEmail = it.documents[0].get("id_email").toString()
+                    println("Update like: $status, $idEmail")
+                    updateLike(idEmail, status)
+                }
+            }
+    }
+
+    private fun updateLike(idEmail: String, status: Boolean) {
+        mActionProvider.updateStatus(idEmail, !status)?.addOnCompleteListener {
+            if(it.isSuccessful){
+                //likeAnimation(likeImg, R.raw.heart_love,!like)
+                //notified animation
+            }
+        }
+    }
+
+    private fun createLike(item: MoldeChallengeCompleted, like: Boolean) {
+        val idEmail= "${item.id.toString()}_${preferences.email_login}"
+        var mAction = Reaccion()
+        mAction.id_email = idEmail
+        mAction.status = like
+        mAction.email = preferences.email_login
+        mAction.id = item.id
+        mAction.type = "Like"
+
+        mActionProvider.create(mAction)?.addOnCompleteListener {
+            if (it.isSuccessful) {
+                //likeAnimation(likeImg, R.raw.heart_love,!like)
+                //notified animation
+            }
+        }
+    }
+
+    fun reportContent(item: MoldeChallengeCompleted, type:TypeReport){
+        CoroutineScope(Dispatchers.Unconfined).launch{
+            //Report Post Update
+            var reportPost = ReportPost(
+                idPostReported = item?.id,
+                idChallengeReported = item?.challenge_id,
+                typeReport = type.value
+            )
+
+            mReportProvider.create(reportPost)
+            withContext(Dispatchers.Main){
+                println("Notified: Publicación reportada.")
+                _snackbar.value = "Publicación reportada."
+            }
+        }
+    }
+
+    fun reportComment(item: Comment, type:TypeReport){
+        CoroutineScope(Dispatchers.Unconfined).launch{
+            //Report Post Update
+            var reportPost = ReportPost(
+                idCommentReported = item?.id,
+                reportedComentario = item?.message,
+                idPhotoReported = item?.id_photo,
+                typeReport = type.value
+            )
+
+            mReportProvider.create(reportPost)
+            withContext(Dispatchers.Main){
+                _snackbar.value = "Comentario reportado."
+            }
+        }
+    }
+
+
+    fun addPostBlocked(idChallenge:String){
+        CoroutineScope(Dispatchers.Unconfined).launch {
+            var posts = mutableListOf<String>()
+            try {
+                if(!mPreferences.postBlocked.isNullOrEmpty()) posts = fromJson(mPreferences.postBlocked)
+                posts.add(idChallenge)
+                mPreferences.postBlocked = toJson(posts)
+                mUserProvider.updatePostBlocked(mPreferences.email_login, posts)
+                withContext(Dispatchers.Main) {
+                    println("Notified: Post blocked.")
+                    _newPostBlocked.value = idChallenge
+                }
+            }catch (t:Throwable){
+                println("Error addPostBlocked: ${t.message}")
+            }
+
+        }
+    }
+
+
 
     companion object Singleton{
         private var instance: ViewModelDashboard? = null

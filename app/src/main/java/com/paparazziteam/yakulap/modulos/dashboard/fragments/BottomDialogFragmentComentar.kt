@@ -1,10 +1,12 @@
 package com.paparazziteam.yakulap.modulos.dashboard.fragments
 
+import android.app.Dialog
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.LinearLayout
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -53,6 +55,13 @@ class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
         }
     }
 
+    /*override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        var dialog = super.onCreateDialog(savedInstanceState)
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+        dialog.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        return dialog
+    }*/
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,14 +86,14 @@ class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
     }
 
     private fun setupObservers() {
-        _viewModel.getCommentsCompletedData().observe(viewLifecycleOwner){
+        _viewModel.commentsCompleted.observe(viewLifecycleOwner){
             mAdapterComment.setData(it)
             contenedorMessages?.beVisible()
             recyclerComments?.beVisible()
             lytWithoutComments?.beGone()
         }
 
-        _viewModel.getCommentsEmpty().observe(viewLifecycleOwner){
+        _viewModel.emptyComments.observe(viewLifecycleOwner){
             if(it){
                 println("Comentarios vacios")
                 recyclerComments?.beGone()
@@ -143,11 +152,10 @@ class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        //_viewModel.getCommentsCompletedData().removeObserver {}
-        //_viewModel.getCommentsEmpty().removeObserver {}
-        ViewModelDashboard.destroyInstance()
+    override fun onDestroyView() {
+        _viewModel.emptyComments.removeObservers(this)
+        _viewModel.commentsCompleted.removeObservers(this)
+        super.onDestroyView()
     }
 
     companion object {

@@ -4,11 +4,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ItemComentarioBinding
+import com.paparazziteam.yakulap.helper.getActivity
 import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
+import com.paparazziteam.yakulap.helper.toJson
+import com.paparazziteam.yakulap.modulos.dashboard.fragments.BottomDialogFragmentMoreOptions
+import com.paparazziteam.yakulap.modulos.dashboard.fragments.BottomDialogFragmentMoreOptionsComment
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.Comment
 import com.paparazziteam.yakulap.modulos.login.providers.UserProvider
 
@@ -33,21 +39,31 @@ class AdapterComment : RecyclerView.Adapter<AdapterComment.ViewHolder>(){
         val binding = ItemComentarioBinding.bind(itemview)
         var messageText:MaterialTextView?= null
         var txtTitle:MaterialTextView?= null
+        var containMensaje:LinearLayout?= null
 
         fun bind(item:Comment){
             binding.apply {
-                messageText     =  txtMessage
-                txtTitle        = title
+                messageText         =  txtMessage
+                txtTitle            = title
+                containMensaje      = containerMensaje
             }
-
             //Get Info comment User
             getUserInfo(item)
+
+            //MoreOptionsComment
+            moreOptionsComment(item)
+        }
+
+        private fun moreOptionsComment(item: Comment) {
+            containMensaje?.setOnLongClickListener {
+                val fragment = BottomDialogFragmentMoreOptionsComment.newInstance(toJson(item))
+                fragment.show((itemView.context.getActivity() as FragmentActivity).supportFragmentManager,"bottomSheetMoreOptionsComment")
+                return@setOnLongClickListener true
+            }
         }
 
         private fun getUserInfo(item: Comment) {
-
             messageText?.text = item.message
-
             //println("Email imprimido ${item.email}")
             UserProvider().searchUserByEmail(item.email).addOnCompleteListener {
                 if(it.isSuccessful){
@@ -58,7 +74,6 @@ class AdapterComment : RecyclerView.Adapter<AdapterComment.ViewHolder>(){
                 }else Log.e("ERROR", "Error al traer los datos de Firebase")
             }
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -1,10 +1,17 @@
 
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
     id 'org.jetbrains.kotlin.plugin.serialization'
+    id("dagger.hilt.android.plugin")
+    id 'kotlin-kapt'
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
 android {
@@ -14,7 +21,7 @@ android {
         applicationId "com.paparazziteam.yakulap"
         minSdk 22
         targetSdk 32
-        versionCode 2
+        versionCode 3
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -35,6 +42,9 @@ android {
     }
 
     buildFeatures.viewBinding = true
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
@@ -92,4 +102,9 @@ dependencies {
 
     //zelory compressor android
     implementation 'id.zelory:compressor:2.1.1'
+
+    //Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.38.1")
+
 }

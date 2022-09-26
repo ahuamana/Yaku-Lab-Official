@@ -8,5 +8,7 @@ data class User (
     var isBypass:String?= null,
     var isAdmin: Boolean = false,
     var isSuperAdmin: Boolean = false,
-    var points: Int? = null
+    var points: Int? = null,
+    //new version
+    var post_blocked: List<String>? = null
 )

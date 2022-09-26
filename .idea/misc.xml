@@ -17,18 +17,23 @@
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/corner_boton_outline.xml" value="0.261" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/custom_button_nocolor.xml" value="0.207" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/custom_progress_bar.xml" value="0.261" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ic_alert.xml" value="0.2405" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ic_arrow_back_white.xml" value="0.245" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ic_download.xml" value="0.318" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ic_galeria.xml" value="0.2005" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ic_hide.xml" value="0.248" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ic_home.xml" value="0.2515" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ic_image_defect.xml" value="0.251" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ic_logout.xml" value="0.2545" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ic_love.xml" value="0.1415" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ic_more_horiz.xml" value="0.2435" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ic_more_horizontal.xml" value="0.2435" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ic_more_vert.xml" value="0.318" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ic_person_white.xml" value="0.261" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ic_share.xml" value="0.318" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ic_target.xml" value="0.2545" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/line.xml" value="0.1935" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ripple_corner_radious.xml" value="0.2435" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/ripple_corner_radius.xml" value="0.3895" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/drawable/shape_bottom_sheet.xml" value="0.223" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/activity_challenge.xml" value="0.25" />
@@ -39,27 +44,30 @@
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/activity_puntaje.xml" value="0.5" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/activity_register_user.xml" value="0.4466666666666667" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/activity_result.xml" value="0.3671875" />
-        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/activity_result_capture_image.xml" value="0.25" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/activity_result_capture_image.xml" value="0.335" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/activity_slide_image_full_screen.xml" value="0.375" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/activity_splash.xml" value="0.335" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/activity_welcome.xml" value="0.26979166666666665" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/app_bar_dashboard.xml" value="0.3333333333333333" />
-        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/bottom_sheet_comentar.xml" value="0.335" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/bottom_sheet_comentar.xml" value="0.375" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/bottom_sheet_more_options.xml" value="0.25" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/bottom_sheet_opciones.xml" value="0.25" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/cardview_comentario.xml" value="0.3671875" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/content_dashboard.xml" value="0.335" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/dialog_more_info.xml" value="0.335" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/fragment_bottom_dialog.xml" value="0.3333333333333333" />
-        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/fragment_challenge.xml" value="0.125" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/fragment_challenge.xml" value="0.335" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/fragment_home.xml" value="0.3333333333333333" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/fragment_intro.xml" value="0.26979166666666665" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/fragment_list_challenge.xml" value="0.335" />
-        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/item_challenge_completed.xml" value="0.375" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/fragment_slideshow.xml" value="0.3671875" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/item_challenge_completed.xml" value="0.25" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/item_challenge_option.xml" value="0.3671875" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/item_comentario.xml" value="0.335" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/item_menu_guardar.xml" value="0.25" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/item_skeleton_points.xml" value="0.5546875" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/nav_header_dashboard.xml" value="0.4466666666666667" />
+        <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/ripple_corner_radious.xml" value="0.36614583333333334" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/toolbar_child.xml" value="0.22" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/toolbar_empty.xml" value="0.3671875" />
         <entry key="..\:/Antony/Desarrollo/Android/KotlinProjects/yakulap/app/src/main/res/layout/viewpager_image.xml" value="0.3671875" />

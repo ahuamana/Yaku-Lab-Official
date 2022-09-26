@@ -12,11 +12,11 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/container_mensaje"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="15dp"
             android:orientation="horizontal">
-
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="45dp"
                 android:layout_height="45dp"

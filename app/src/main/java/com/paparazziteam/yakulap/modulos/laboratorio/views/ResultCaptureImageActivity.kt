@@ -4,6 +4,8 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -19,10 +21,15 @@ import com.paparazziteam.yakulap.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.helper.tintDrawable
 import com.paparazziteam.yakulap.modulos.bienvenida.views.WelcomeActivity
 import com.paparazziteam.yakulap.modulos.dashboard.views.DashboardActivity
+import com.paparazziteam.yakulap.modulos.laboratorio.viewmodels.ViewModelResult
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ResultCaptureImageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityResultCaptureImageBinding
+
+    private val viewmodel:ViewModelResult by viewModels()
 
     private lateinit var myToolbar: Toolbar
     private lateinit var txtPoints: MaterialTextView
@@ -46,6 +53,18 @@ class ResultCaptureImageActivity : AppCompatActivity() {
         }
         getExtras()
         setupActionBar()
+        OtherComponents()
+        observers()
+    }
+
+    private fun observers() {
+
+    }
+
+    private fun OtherComponents() {
+        viewmodel.congratulations.observe(this){
+            Log.d("TAG","Congra: $it")
+        }
     }
 
     private fun getExtras() {
@@ -58,8 +77,6 @@ class ResultCaptureImageActivity : AppCompatActivity() {
             txtPoints.text = pointsToGive.toString()
             txtTittle.text = title
             txtDescription.text = description
-
-
 
             Glide.with(this)
                 .load(image)

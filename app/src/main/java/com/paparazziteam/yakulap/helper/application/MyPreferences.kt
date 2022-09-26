@@ -2,6 +2,8 @@ package com.paparazziteam.yakulap.helper.application
 
 import android.graphics.Color
 import com.paparazziteam.yakulap.helper.INT_DEFAULT
+import com.paparazziteam.yakulap.helper.toJson
+
 
 class MyPreferences {
 
@@ -19,6 +21,10 @@ class MyPreferences {
     var firstName: String
         get()      = prefs.getString("firstName", "")
         set(value) = prefs.setString("firstName", value)
+
+    var postBlocked:String
+        get()      = prefs.getString("postBlocked", "")
+        set(value) = prefs.setString("postBlocked", value)
 
     //PREFERENCES BOOLEAN
     var isLogin: Boolean
@@ -38,10 +44,21 @@ class MyPreferences {
         get() = prefs.getInt("points",  0)
         set(value) = prefs.setInt("points", value)
 
+
     fun removeLoginData(){
         prefs.remove("isLogin")
         prefs.remove("email_login")
         prefs.remove("points")
+        prefs.remove("postBlocked")
+    }
+
+    fun clearData(){
+        prefs.remove("isLogin")
+        prefs.remove("email_login")
+        prefs.remove("points")
+        prefs.remove("postBlocked")
+        prefs.remove("lastName")
+        prefs.remove("firstName")
     }
 
 

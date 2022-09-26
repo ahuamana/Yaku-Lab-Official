@@ -21,6 +21,8 @@ class ViewModelChallenge {
     val mChallengeProvider = ChallengeProvider()
     val myPreferences = MyPreferences()
 
+
+
     fun getChallengeInformation(nameChallenge: String?, onComplete:(isCorrect:Boolean, challenge:MoldeChallengeCompleted?)->Unit){
         CoroutineScope(Dispatchers.Unconfined).launch {
             try {

@@ -2,6 +2,7 @@ package com.paparazziteam.yakulap.modulos.dashboard.adapters
 
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ItemChallengeCompletedBinding
 import com.paparazziteam.yakulap.helper.application.MyPreferences
@@ -20,16 +22,33 @@ import com.paparazziteam.yakulap.helper.application.toast
 import com.paparazziteam.yakulap.helper.design.SlideImageFullScreenActivity
 import com.paparazziteam.yakulap.helper.preventDoubleClick
 import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
+import com.paparazziteam.yakulap.helper.toJson
 import com.paparazziteam.yakulap.modulos.dashboard.fragments.BottomDialogFragmentComentar
+import com.paparazziteam.yakulap.modulos.dashboard.fragments.BottomDialogFragmentMoreOptions
+import com.paparazziteam.yakulap.modulos.dashboard.interfaces.clickedItemCompleted
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
-import com.paparazziteam.yakulap.modulos.dashboard.pojo.Reaccion
 import com.paparazziteam.yakulap.modulos.providers.ReaccionProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 
 
-class AdapterChallengeCompleted(challenges:MutableList<MoldeChallengeCompleted>) : RecyclerView.Adapter<AdapterChallengeCompleted.ViewHolder>() {
+class AdapterChallengeCompleted(
+    challenges: MutableList<MoldeChallengeCompleted>,
+    val clickedItemCompleted: clickedItemCompleted?
+) : RecyclerView.Adapter<AdapterChallengeCompleted.ViewHolder>() {
 
     var challengesCompleted = challenges
 
+    fun removePost(idChallenge:String){
+        Log.d("TAG","Remove Post")
+        var index = challengesCompleted.indexOfFirst {
+            it.id == idChallenge
+        }
+        if(index<0) return
+        challengesCompleted.removeAt(index)
+        notifyItemRemoved(index)
+        notifyItemRangeChanged(index,itemCount)
+    }
 
     class ViewHolder(itemview : View): RecyclerView.ViewHolder(itemview) {
 
@@ -41,13 +60,14 @@ class AdapterChallengeCompleted(challenges:MutableList<MoldeChallengeCompleted>)
         private lateinit var linearLayoutShare: LinearLayout
         private lateinit var layoutComment: LinearLayout
         private lateinit var likeImg: LottieAnimationView
+        private lateinit var itemOptions: ShapeableImageView
 
         var mActionProvider = ReaccionProvider()
 
         val binding = ItemChallengeCompletedBinding.bind(itemview)
         var preferences = MyPreferences()
 
-        fun bind(item:MoldeChallengeCompleted) {
+        fun bind(item: MoldeChallengeCompleted, clickedItem: clickedItemCompleted?) {
 
             binding.apply {
                 imageChalleng   = imgChallenge
@@ -58,6 +78,7 @@ class AdapterChallengeCompleted(challenges:MutableList<MoldeChallengeCompleted>)
                 likeImg                 = likeImageView
                 linearLayoutShare       = linearCompartir
                 layoutComment     = linearLayoutComentar
+                itemOptions             = optionsChallenge
 
             }
             itemView.apply {
@@ -88,22 +109,31 @@ class AdapterChallengeCompleted(challenges:MutableList<MoldeChallengeCompleted>)
                 authorNameChallenge.text = replaceFirstCharInSequenceToUppercase(item.author_name?:"")
 
                 //Setup like
-                setupLike(item)
+                setupLike(item, clickedItem)
 
                 //Setup share
                 setupShare()
 
                 //SetupComment
                 setupComment(item)
+
+                //ReportPost
+                reportPostOption(item)
             }
 
+        }
+
+        private fun reportPostOption(item: MoldeChallengeCompleted) {
+            itemOptions.setOnClickListener{
+                val fragment = BottomDialogFragmentMoreOptions.newInstance(toJson(item))
+                fragment.show((itemView.context as FragmentActivity).supportFragmentManager,"bottomSheetMoreOptions")
+            }
         }
 
         private fun setupComment(item: MoldeChallengeCompleted) {
             layoutComment.setOnClickListener {
                     val bottomSheetDialogFragment = BottomDialogFragmentComentar.newInstance(item.id?:"")
                     bottomSheetDialogFragment.show((itemView.context as FragmentActivity).supportFragmentManager,"bottomSheetDialogFragment")
-
             }
         }
 
@@ -114,68 +144,41 @@ class AdapterChallengeCompleted(challenges:MutableList<MoldeChallengeCompleted>)
             }
         }
 
-        private fun setupLike(item: MoldeChallengeCompleted) {
-
+        private fun setupLike(item: MoldeChallengeCompleted, clickedItem: clickedItemCompleted?) {
             //First Time Like
-           getFirsTimeLike(item)
-
-            likeImg.setOnClickListener {
-                it.preventDoubleClick()
-                mActionProvider.getUserLike(preferences.email_login, item.id)?.get()
-                    ?.addOnSuccessListener {
-                        if(it.isEmpty){
-                            println("Like is empty")
-                            createLike(item,true)
-                        }else{
-                            //if already exist
-                            val status  = it.documents[0].get("status").toString().toBoolean()
-                            val idEmail = it.documents[0].get("id_email").toString()
-                            println("Update like: $status, $idEmail")
-                            updateLike(idEmail, status)
-                        }
-                    }
-
-            }
+            getFirsTimeLike(item,clickedItem)
         }
 
-        private fun getFirsTimeLike(item: MoldeChallengeCompleted) {
+        private fun getFirsTimeLike(
+            item: MoldeChallengeCompleted,
+            clickedItem: clickedItemCompleted?
+        ) {
+            var status = false
             mActionProvider.getUserLike(preferences.email_login, item.id)?.get()
                 ?.addOnSuccessListener {
                     if(it.isEmpty){
                         likeImg.setImageResource(R.drawable.ic_love)
                     }else{
                         //if already exist
-                        val status  = it.documents[0].get("status").toString().toBoolean()
+                        status  = it.documents[0].get("status").toString()?.toBoolean() == true
                         println("Status -> $status")
-                        if(status) likeImg.setImageResource(R.drawable.love_yaku) else likeImg.setImageResource(R.drawable.ic_love)
+                        setImageResource(status)
+                        //likeAnimation(likeImg, R.raw.heart_love, status)
                     }
+                }?.addOnFailureListener {
+                    FirebaseCrashlytics.getInstance().recordException(it)
+                    setImageResource(status)
                 }
-        }
 
-        private fun updateLike(idEmail: String, status: Boolean) {
-            mActionProvider.updateStatus(idEmail, !status)?.addOnCompleteListener {
-                if(it.isSuccessful){
-                    likeAnimation(likeImg, R.raw.heart_love, status)
-                }
+            likeImg.setOnClickListener {
+                //setupLike
+                status = likeAnimation(likeImg, R.raw.heart_love, status)
+                clickedItem?.clickOnUpdateLike(item)
             }
         }
 
-        private fun createLike(item: MoldeChallengeCompleted, like: Boolean) {
-
-            val idEmail= "${item.id.toString()}_${preferences.email_login}"
-
-            var mAction = Reaccion()
-            mAction.id_email = idEmail
-            mAction.status = like
-            mAction.email = preferences.email_login
-            mAction.id = item.id
-            mAction.type = "Like"
-
-            mActionProvider.create(mAction)?.addOnCompleteListener {
-                if (it.isSuccessful) {
-                    likeAnimation(likeImg, R.raw.heart_love,!like)
-                }
-            }
+        private fun setImageResource(status:Boolean){
+            if(status) likeImg.setImageResource(R.drawable.love_yaku) else likeImg.setImageResource(R.drawable.ic_love)
         }
 
         private fun likeAnimation(image: LottieAnimationView,
@@ -188,7 +191,6 @@ class AdapterChallengeCompleted(challenges:MutableList<MoldeChallengeCompleted>)
             }else{
                 image.setImageResource(R.drawable.ic_love)
             }
-
             return !like
         }
     }
@@ -199,7 +201,7 @@ class AdapterChallengeCompleted(challenges:MutableList<MoldeChallengeCompleted>)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(challengesCompleted[position])
+        holder.bind(challengesCompleted[position],clickedItemCompleted)
     }
 
     override fun getItemCount(): Int  = challengesCompleted.size

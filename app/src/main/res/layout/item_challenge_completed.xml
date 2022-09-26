@@ -2,6 +2,7 @@
     <androidx.cardview.widget.CardView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardElevation="5dp"
@@ -63,16 +64,30 @@
                         android:id="@+id/authorAlias"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:layout_marginStart="6dp"
+                        android:layout_weight="1"
                         android:fontFamily="@font/product_sans_regular"
-                        android:textColor="@color/colorGray"
                         android:text="🏖 sasuke"
+                        android:textColor="@color/colorGray"
                         android:textSize="10dp"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="@+id/imgIcon"
                         app:layout_constraintStart_toEndOf="@+id/imgIcon"
                         app:layout_constraintTop_toBottomOf="@+id/authorName" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/options_challenge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_more_horiz"
+                        android:layout_marginRight="5dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="@drawable/ripple_corner_radius"
+                        android:padding="5dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/authorAlias"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
