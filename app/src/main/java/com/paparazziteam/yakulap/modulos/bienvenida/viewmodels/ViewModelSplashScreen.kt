@@ -22,14 +22,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ViewModelSplashScreen @Inject public constructor(
    private val application: Application,
-   private val mLoginProvider: LoginProvider,
    private val myPreferences: MyPreferences
 ): ViewModel() {
-
-    private val _message = MutableLiveData<String>()
-    private val _isLoginEmail = MutableLiveData<Boolean>()
-    private val _isLoginAnonymous = MutableLiveData<Boolean>()
-    private val _isLoading = MutableLiveData<Boolean>()
 
     private val _versionApp = MutableLiveData<String>()
     val versionApp:LiveData<String> = _versionApp
@@ -46,7 +40,7 @@ class ViewModelSplashScreen @Inject public constructor(
     private fun loadNextActivity() {
         Timer().schedule(object : TimerTask() {
             override fun run() {
-                if (MyPreferences().isLogin) {
+                if (myPreferences.isLogin) {
                     isAlreadyLogin()
                 } else {
                     application.startActivity(Intent(application, WelcomeActivity::class.java).apply {

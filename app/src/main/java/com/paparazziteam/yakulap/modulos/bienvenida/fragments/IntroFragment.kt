@@ -8,10 +8,6 @@ import android.view.ViewGroup
 import com.paparazziteam.yakulap.databinding.FragmentIntroBinding
 
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-
 class IntroFragment : Fragment() {
     private var _binding: FragmentIntroBinding? = null
     private val binding get() = _binding!!
@@ -39,9 +35,9 @@ class IntroFragment : Fragment() {
         val view = binding.root
 
         arguments?.let { value ->
-            /*binding.introImg.setImageResource(value.getInt(EXTRA_IMG))
+            binding.introImg.setImageResource(value.getInt(EXTRA_IMG))
             binding.introTitle.text = value.getString(EXTRA_TITLE)
-            binding.introDesc.text = value.getString(EXTRA_DESC)*/
+            binding.introDesc.text = value.getString(EXTRA_DESC)
         }
 
         return view

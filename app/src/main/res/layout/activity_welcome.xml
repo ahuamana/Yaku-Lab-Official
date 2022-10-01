@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+            <variable
+                name="viewmodel"
+                type="com.paparazziteam.yakulap.modulos.bienvenida.viewmodels.ViewModelWelcome" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,16 +54,17 @@
                     android:layout_marginStart="30dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="30dp"
-                    android:text="@string/text_begining"
-                    android:textAllCaps="false"
-                    android:fontFamily="@font/product_sans_regular"
-                    android:textSize="16dp"
-                    android:textColor="@color/white"
                     android:layout_marginBottom="30dp"
-                    app:backgroundTint="@color/colorPrimaryYaku"
                     android:background="@drawable/buttom_normal"
                     android:elevation="4dp"
-                    android:orientation="vertical" />
+                    android:onClick="@{(v)-> viewmodel.onClickStart()}"
+                    android:fontFamily="@font/product_sans_regular"
+                    android:orientation="vertical"
+                    android:text="@string/text_begining"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"
+                    app:backgroundTint="@color/colorPrimaryYaku" />
 
 
             </RelativeLayout>
