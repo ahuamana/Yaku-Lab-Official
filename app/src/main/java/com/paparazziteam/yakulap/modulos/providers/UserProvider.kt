@@ -6,8 +6,9 @@ import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import com.paparazziteam.yakulap.modulos.login.pojo.User
+import javax.inject.Inject
 
-class UserProvider {
+class UserProvider @Inject constructor() {
 
     var mCollection: CollectionReference = FirebaseFirestore.getInstance().collection("Users")
 

@@ -18,8 +18,6 @@ import com.bumptech.glide.request.target.Target
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulap.R
-import com.paparazziteam.yakulap.databinding.DialogMoreInfoBinding
-import com.paparazziteam.yakulap.databinding.ItemChallengeOptionBinding
 import com.paparazziteam.yakulap.helper.preventDoubleClick
 import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
 import com.paparazziteam.yakulap.helper.toJson
@@ -38,13 +36,14 @@ class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerVi
         private lateinit var imageChalleng: ShapeableImageView
         private lateinit var textTitle: MaterialTextView
 
-        val binding = ItemChallengeOptionBinding.bind(itemview)
+        /*
+        val binding = ItemChallengeOptionBinding.bind(itemview)*/
 
         fun bind(item: DataChallenge) {
-            binding.apply {
+            /*binding.apply {
                 imageChalleng   = imgChallenge
                 textTitle       = tvTitulo
-            }
+            }*/
 
             itemView.apply {
                 Glide.with(context)
@@ -53,20 +52,19 @@ class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerVi
 
                 setOnClickListener {
                     it.preventDoubleClick()
-                    createDialog(item)
+                    //createDialog(item)
                 }
                 imageChalleng.setOnClickListener {
                     it.preventDoubleClick()
-                    createDialog(item)
+                    //createDialog(item)
                 }
             }
 
             textTitle.text = replaceFirstCharInSequenceToUppercase(item.name?:"")
 
         }
-
+/*
         private fun createDialog(item: DataChallenge) {
-
             itemView.apply {
 
                 var customBinding = DialogMoreInfoBinding.inflate(LayoutInflater.from(context))
@@ -101,8 +99,7 @@ class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerVi
                 })
                 dialog.show()
             }
-
-        }
+        }*/
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

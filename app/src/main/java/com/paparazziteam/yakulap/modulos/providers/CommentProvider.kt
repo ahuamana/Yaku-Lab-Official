@@ -5,8 +5,9 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.Comment
+import javax.inject.Inject
 
-class CommentProvider {
+class CommentProvider @Inject constructor() {
 
     var mCollection: CollectionReference = FirebaseFirestore.getInstance().collection("Comment")
 

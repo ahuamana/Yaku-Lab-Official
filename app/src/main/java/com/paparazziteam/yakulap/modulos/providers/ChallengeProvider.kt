@@ -1,10 +1,15 @@
 package com.paparazziteam.yakulap.modulos.providers
 
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
+import javax.inject.Inject
 
-class ChallengeProvider {
+
+class ChallengeProvider @Inject constructor(
+    private val authFirestore:FirebaseFirestore
+) {
 
     var mCollection: CollectionReference = FirebaseFirestore.getInstance().collection("LaboratorioDigital")
 
@@ -13,7 +18,7 @@ class ChallengeProvider {
             .setPersistenceEnabled(true)
             .build()
 
-        FirebaseFirestore.getInstance().firestoreSettings = settings
+        authFirestore.firestoreSettings = settings
     }
 
     fun createDocument(): DocumentReference? {

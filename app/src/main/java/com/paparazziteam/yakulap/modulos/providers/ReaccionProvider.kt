@@ -5,8 +5,9 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.Reaccion
+import javax.inject.Inject
 
-class ReaccionProvider {
+class ReaccionProvider @Inject constructor(){
 
     var mCollection: CollectionReference = FirebaseFirestore.getInstance().collection("Actions")
 

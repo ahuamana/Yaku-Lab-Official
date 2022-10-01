@@ -6,8 +6,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.Reaccion
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.ReportPost
+import javax.inject.Inject
 
-class ReportProvider {
+class ReportProvider @Inject constructor() {
 
     var mCollection: CollectionReference = FirebaseFirestore.getInstance().collection("Reports")
 

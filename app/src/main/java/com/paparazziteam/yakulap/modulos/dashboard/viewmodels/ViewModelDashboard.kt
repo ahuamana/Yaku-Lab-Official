@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.toObject
 import com.paparazziteam.yakulap.R
@@ -15,25 +16,28 @@ import com.paparazziteam.yakulap.modulos.login.pojo.User
 import com.paparazziteam.yakulap.modulos.login.providers.LoginProvider
 import com.paparazziteam.yakulap.modulos.login.providers.UserProvider
 import com.paparazziteam.yakulap.modulos.providers.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class ViewModelDashboard private constructor(){
+
+@HiltViewModel
+class ViewModelDashboard @Inject constructor(
+    private val mUserProvider:UserProvider,
+    private val mLoginProvider:LoginProvider,
+    private val mCommentProvider:CommentProvider,
+    private val mImageProvider:ImageProvider,
+    private val mChallengeProvider:ChallengeProvider,
+    private val mActionProvider:ReaccionProvider,
+    private val mReportProvider:ReportProvider
+): ViewModel(){
 
     val mPreferences = MyPreferences()
-
-    private val mUserProvider = UserProvider()
-    private val mLoginProvider = LoginProvider()
-    private val mCommentProvider = CommentProvider()
-    private val mImageProvider = ImageProvider()
-    private val mChallengeProvider = ChallengeProvider()
-    private val mActionProvider = ReaccionProvider()
-    private val mReportProvider = ReportProvider()
-
-
 
     private var challengesCompleted = mutableListOf<MoldeChallengeCompleted>()
 
@@ -280,12 +284,13 @@ class ViewModelDashboard private constructor(){
     }
 
 
-
+    /*
     companion object Singleton{
         private var instance: ViewModelDashboard? = null
 
         fun getInstance(): ViewModelDashboard =
             instance ?: ViewModelDashboard(
+
                 //local y remoto
             ).also {
                 instance = it
@@ -294,5 +299,5 @@ class ViewModelDashboard private constructor(){
         fun destroyInstance(){
             instance = null
         }
-    }
+    }*/
 }

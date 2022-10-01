@@ -1,37 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/layout_full_screen"
-    android:background="#000000">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-           <include
-               android:id="@+id/toolbar_slide"
-               android:elevation="3dp"
-               layout="@layout/toolbar_empty"/>
+    <data>
 
-           <androidx.viewpager.widget.ViewPager
-               android:id="@+id/viewpager_image"
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               />
-    <ImageView
-        android:id="@+id/foto_prueba"
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"/>
+        android:id="@+id/layout_full_screen"
+        android:background="#000000">
 
-    <RelativeLayout
-        android:id="@+id/cortina_bottomsheet_cortinas_img"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorCortina"
-        android:visibility="gone"
-        android:clickable="true"
-        android:focusable="true"
-        android:elevation="10dp"/>
+        <include
+            android:id="@+id/toolbar_slide"
+            android:elevation="3dp"
+            layout="@layout/toolbar_empty" />
 
-    <include layout="@layout/bottom_sheet_opciones"/>
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <ImageView
+            android:id="@+id/foto_prueba"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/cortina_bottomsheet_cortinas_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorCortina"
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true"
+            android:elevation="10dp" />
+
+        <include layout="@layout/bottom_sheet_opciones" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

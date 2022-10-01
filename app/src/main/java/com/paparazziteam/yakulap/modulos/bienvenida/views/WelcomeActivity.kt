@@ -22,7 +22,7 @@ class WelcomeActivity : AppCompatActivity() {
     private lateinit var dotsLayout: LinearLayout
     private lateinit var dots: MutableList<ImageView>
 
-    private lateinit var binding:ActivityWelcomeBinding
+    private lateinit var binding: ActivityWelcomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

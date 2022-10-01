@@ -45,7 +45,7 @@ class ResultCaptureImageActivity : AppCompatActivity() {
         setContentView(binding.root)
         setColorToStatusBar(this)
         binding.apply {
-            myToolbar       = included.toolbar
+            //myToolbar       = included.toolbar
             txtPoints       = textPoints
             imageRounded    = roundedImageViewSustantivo
             txtTittle       = title

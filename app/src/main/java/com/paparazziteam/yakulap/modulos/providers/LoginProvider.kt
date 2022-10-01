@@ -3,8 +3,9 @@ package com.paparazziteam.yakulap.modulos.login.providers
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import javax.inject.Inject
 
-class LoginProvider {
+class LoginProvider @Inject constructor() {
 
     private var mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 

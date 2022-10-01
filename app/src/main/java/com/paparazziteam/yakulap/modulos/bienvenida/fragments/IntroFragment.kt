@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.FragmentIntroBinding
 
 
@@ -36,13 +35,13 @@ class IntroFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentIntroBinding.inflate(inflater, container, false)
+       _binding = FragmentIntroBinding.inflate(inflater, container, false)
         val view = binding.root
 
         arguments?.let { value ->
-            binding.introImg.setImageResource(value.getInt(EXTRA_IMG))
+            /*binding.introImg.setImageResource(value.getInt(EXTRA_IMG))
             binding.introTitle.text = value.getString(EXTRA_TITLE)
-            binding.introDesc.text = value.getString(EXTRA_DESC)
+            binding.introDesc.text = value.getString(EXTRA_DESC)*/
         }
 
         return view

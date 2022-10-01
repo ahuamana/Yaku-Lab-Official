@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.LinearLayout
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -25,9 +26,10 @@ import com.paparazziteam.yakulap.modulos.dashboard.pojo.Comment
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.TypeComment
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
 import com.paparazziteam.yakulap.modulos.providers.CommentProvider
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
-
+@AndroidEntryPoint
 class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
 
     private val ARG_ID_PHOTO = "idPhoto"
@@ -36,7 +38,7 @@ class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
     private val binding get() = _binding!!
     private val mCommentProvider = CommentProvider()
 
-    private var _viewModel = ViewModelDashboard.getInstance()
+    private val _viewModel:ViewModelDashboard by viewModels()
 
     var mLinearLayoutManager: LinearLayoutManager? = null
     var recyclerComments: RecyclerView? = null

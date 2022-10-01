@@ -45,7 +45,7 @@ class ChallengeParentActivity : AppCompatActivity() {
         binding?.apply {
             mTabLayout  = tabLayout
             mViewPager  = viewPager
-            myToolbar   = include.toolbar
+            //myToolbar   = include.toolbar
         }
 
         setupActionBar()

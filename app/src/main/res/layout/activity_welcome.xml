@@ -1,67 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".modulos.bienvenida.views.WelcomeActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".modulos.bienvenida.views.WelcomeActivity">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3">
+            android:orientation="vertical"
+            android:layout_height="match_parent">
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/view_pager_intro"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:overScrollMode="never" />
+                android:layout_height="0dp"
+                android:layout_weight="3">
 
-            <LinearLayout
-                android:id="@+id/layoutDots"
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/view_pager_intro"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:overScrollMode="never" />
+
+                <LinearLayout
+                    android:id="@+id/layoutDots"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="horizontal"></LinearLayout>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical|center_horizontal"
-                android:layout_alignParentBottom="true"
-                android:orientation="horizontal">
-            </LinearLayout>
-
-        </RelativeLayout>
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_iniciar_sesion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="30dp"
+                    android:text="@string/text_begining"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/product_sans_regular"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
+                    android:layout_marginBottom="30dp"
+                    app:backgroundTint="@color/colorPrimaryYaku"
+                    android:background="@drawable/buttom_normal"
+                    android:elevation="4dp"
+                    android:orientation="vertical" />
 
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_iniciar_sesion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="30dp"
-                android:text="@string/text_begining"
-                android:textAllCaps="false"
-                android:fontFamily="@font/product_sans_regular"
-                android:textSize="16dp"
-                android:textColor="@color/white"
-                android:layout_marginBottom="30dp"
-                app:backgroundTint="@color/colorPrimaryYaku"
-                android:background="@drawable/buttom_normal"
-                android:elevation="4dp"
-                android:orientation="vertical"/>
+            </RelativeLayout>
 
 
-        </RelativeLayout>
+        </LinearLayout>
 
-
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

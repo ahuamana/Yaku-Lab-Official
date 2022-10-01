@@ -10,8 +10,9 @@ import com.paparazziteam.yakulap.helper.observer.CompressorBitmapImage
 import com.paparazziteam.yakulap.root.ctx
 import java.io.File
 import java.util.*
+import javax.inject.Inject
 
-class ImageProvider {
+class ImageProvider @Inject constructor() {
 
     private var mFirebaseStorage = FirebaseStorage.getInstance()
     var mStorage = mFirebaseStorage?.reference

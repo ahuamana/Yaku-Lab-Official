@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -31,11 +32,15 @@ import com.paparazziteam.yakulap.modulos.laboratorio.viewmodels.ViewModelChallen
 import com.paparazziteam.yakulap.modulos.laboratorio.viewmodels.ViewModelLab
 import com.paparazziteam.yakulap.modulos.laboratorio.views.ChallengeActivity
 import com.paparazziteam.yakulap.modulos.laboratorio.views.ResultCaptureImageActivity
+import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
 import java.io.File
 import java.util.*
 
+@AndroidEntryPoint
 class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragment() {
+
+    private val viewModelDashboard:ViewModelDashboard by viewModels()
 
     var binding: FragmentChallengeBinding?= null
 
@@ -46,8 +51,7 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
 
     var idChallengeDocument = ""
 
-    var viewModel = ViewModelChallenge.getInstance()
-    var viewModelDashboard = ViewModelDashboard.getInstance()
+    private val viewModel:ViewModelChallenge by viewModels()
     var txtImageNotUploaded: MaterialTextView?= null
 
     private lateinit var imgChallengeChild: FloatingActionButton
@@ -295,7 +299,8 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
     override fun onDestroy() {
         super.onDestroy()
         ViewModelLab.destroyInstance()
-        ViewModelDashboard.destroyInstance()
+        viewModelDashboard.errorUpload.removeObservers(this)
+        viewModelDashboard.completeUpload.removeObservers(this)
     }
 
     private fun setupChallengeData() {

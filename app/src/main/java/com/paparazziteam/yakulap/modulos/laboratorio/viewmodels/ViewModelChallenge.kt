@@ -3,25 +3,29 @@ package com.paparazziteam.yakulap.modulos.laboratorio.viewmodels
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
 import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataListChallenge
 import com.paparazziteam.yakulap.modulos.providers.ChallengeProvider
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class ViewModelChallenge {
+
+class ViewModelChallenge : ViewModel() {
+
+    @Inject lateinit var mChallengeProvider:ChallengeProvider
 
     private val _observableChallenge = MutableLiveData<MoldeChallengeCompleted>()
     val observableListData: LiveData< MoldeChallengeCompleted> get() = _observableChallenge
-    val mChallengeProvider = ChallengeProvider()
+
     val myPreferences = MyPreferences()
-
-
 
     fun getChallengeInformation(nameChallenge: String?, onComplete:(isCorrect:Boolean, challenge:MoldeChallengeCompleted?)->Unit){
         CoroutineScope(Dispatchers.Unconfined).launch {
@@ -53,6 +57,7 @@ class ViewModelChallenge {
 
     }
 
+    /*
     companion object Singleton{
         private var instance: ViewModelChallenge? = null
 
@@ -66,5 +71,5 @@ class ViewModelChallenge {
         fun destroyInstance(){
             instance = null
         }
-    }
+    }*/
 }

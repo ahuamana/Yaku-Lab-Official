@@ -1,5 +1,6 @@
 package com.paparazziteam.yakulap.modulos.dashboard.adapters
 
+
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.util.Log
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
@@ -16,25 +18,19 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.paparazziteam.yakulap.R
-import com.paparazziteam.yakulap.databinding.ItemChallengeCompletedBinding
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.application.toast
 import com.paparazziteam.yakulap.helper.design.SlideImageFullScreenActivity
 import com.paparazziteam.yakulap.helper.preventDoubleClick
 import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
-import com.paparazziteam.yakulap.helper.toJson
-import com.paparazziteam.yakulap.modulos.dashboard.fragments.BottomDialogFragmentComentar
-import com.paparazziteam.yakulap.modulos.dashboard.fragments.BottomDialogFragmentMoreOptions
-import com.paparazziteam.yakulap.modulos.dashboard.interfaces.clickedItemCompleted
+import com.paparazziteam.yakulap.modulos.dashboard.interfaces.onClickThread
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
 import com.paparazziteam.yakulap.modulos.providers.ReaccionProvider
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 
 
 class AdapterChallengeCompleted(
     challenges: MutableList<MoldeChallengeCompleted>,
-    val clickedItemCompleted: clickedItemCompleted?
+    val clickedItemCompleted: onClickThread?
 ) : RecyclerView.Adapter<AdapterChallengeCompleted.ViewHolder>() {
 
     var challengesCompleted = challenges
@@ -64,11 +60,14 @@ class AdapterChallengeCompleted(
 
         var mActionProvider = ReaccionProvider()
 
-        val binding = ItemChallengeCompletedBinding.bind(itemview)
+        //val binding = ItemChallengeCompletedBinding.bind(itemview)
         var preferences = MyPreferences()
 
-        fun bind(item: MoldeChallengeCompleted, clickedItem: clickedItemCompleted?) {
-
+        fun bind(
+            item: MoldeChallengeCompleted,
+            clickedItem: onClickThread?
+        ) {
+/*
             binding.apply {
                 imageChalleng   = imgChallenge
                 contentImage    = roundedImageView
@@ -83,7 +82,7 @@ class AdapterChallengeCompleted(
             }
             itemView.apply {
 
-                var color = ColorStateList.valueOf(context.getColor(R.color.colorSecondaryLightColor))
+                var color = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.colorSecondaryLightColor))
                 contentImage.backgroundTintList = color
                 imageChalleng.setImageResource(R.drawable.ic_galeria)
 
@@ -115,25 +114,23 @@ class AdapterChallengeCompleted(
                 setupShare()
 
                 //SetupComment
-                setupComment(item)
+                setupComment(item, clickedItem)
 
                 //ReportPost
-                reportPostOption(item)
+                reportPostOption(item, clickedItem)
             }
-
+*/
         }
 
-        private fun reportPostOption(item: MoldeChallengeCompleted) {
+        private fun reportPostOption(item: MoldeChallengeCompleted,onClickThread: onClickThread?) {
             itemOptions.setOnClickListener{
-                val fragment = BottomDialogFragmentMoreOptions.newInstance(toJson(item))
-                fragment.show((itemView.context as FragmentActivity).supportFragmentManager,"bottomSheetMoreOptions")
+                onClickThread?.clickedReportThread(item)
             }
         }
 
-        private fun setupComment(item: MoldeChallengeCompleted) {
+        private fun setupComment(item: MoldeChallengeCompleted,onClickThread: onClickThread?) {
             layoutComment.setOnClickListener {
-                    val bottomSheetDialogFragment = BottomDialogFragmentComentar.newInstance(item.id?:"")
-                    bottomSheetDialogFragment.show((itemView.context as FragmentActivity).supportFragmentManager,"bottomSheetDialogFragment")
+                onClickThread?.clickedComentThread(item)
             }
         }
 
@@ -144,14 +141,14 @@ class AdapterChallengeCompleted(
             }
         }
 
-        private fun setupLike(item: MoldeChallengeCompleted, clickedItem: clickedItemCompleted?) {
+        private fun setupLike(item: MoldeChallengeCompleted, clickedItem: onClickThread?) {
             //First Time Like
             getFirsTimeLike(item,clickedItem)
         }
 
         private fun getFirsTimeLike(
             item: MoldeChallengeCompleted,
-            clickedItem: clickedItemCompleted?
+            clickedItem: onClickThread?
         ) {
             var status = false
             mActionProvider.getUserLike(preferences.email_login, item.id)?.get()
