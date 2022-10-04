@@ -5,7 +5,7 @@
 
     <data>
             <variable
-                name="viewmodel"
+                name="model"
                 type="com.paparazziteam.yakulap.modulos.bienvenida.viewmodels.ViewModelWelcome" />
     </data>
 
@@ -57,7 +57,7 @@
                     android:layout_marginBottom="30dp"
                     android:background="@drawable/buttom_normal"
                     android:elevation="4dp"
-                    android:onClick="@{(v)-> viewmodel.onClickStart()}"
+                    android:onClick="@{(v)-> model.onClickStart()}"
                     android:fontFamily="@font/product_sans_regular"
                     android:orientation="vertical"
                     android:text="@string/text_begining"

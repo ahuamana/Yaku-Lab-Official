@@ -13,7 +13,7 @@ import androidx.viewpager.widget.ViewPager
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityWelcomeBinding
 import com.paparazziteam.yakulap.helper.design.FadePageTransfomer
-import com.paparazziteam.yakulap.modulos.bienvenida.MyPageAdapter
+import com.paparazziteam.yakulap.modulos.bienvenida.adaters.MyPageAdapter
 import com.paparazziteam.yakulap.modulos.bienvenida.viewmodels.ViewModelWelcome
 import com.paparazziteam.yakulap.modulos.login.views.LoginActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,33 +34,31 @@ class WelcomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView<ActivityWelcomeBinding?>(this,R.layout.activity_welcome).apply {
           lifecycleOwner = this.lifecycleOwner
-          viewmodel = _viewmodel
+          model = _viewmodel
         }
 
         //Join views xml
         mViewpager   = binding.viewPagerIntro
         dotsLayout   = binding.layoutDots
 
+        instanceAdapters()
         observers()
-        _viewmodel.getFragments()
     }
 
     private fun observers() {
-        _viewmodel.fragments.observe(this){
-            instanceFragments(it)
+        _viewmodel.showFragments().observe(this){
+            mPageAdapter.setFragments(it)
+            addBottomDots(0)
         }
         _viewmodel.nextActivity.observe(this){
             if(it) startActivity(Intent(application, LoginActivity::class.java))
         }
     }
 
-    private fun instanceFragments(list: List<Fragment>) {
-        val fragments: List<Fragment> = list
-        mPageAdapter = MyPageAdapter(supportFragmentManager, fragments)
-
+    private fun instanceAdapters() {
+        mPageAdapter = MyPageAdapter(supportFragmentManager)
         mViewpager.setPageTransformer(false, FadePageTransfomer())
         mViewpager.adapter = mPageAdapter
-        addBottomDots(0)
 
         mViewpager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {

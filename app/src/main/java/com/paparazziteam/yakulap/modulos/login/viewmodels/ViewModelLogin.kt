@@ -20,6 +20,10 @@ class ViewModelLogin private constructor() {
 
     fun logout() = mLoginProvider.signout()
 
+    init {
+        isAlreadyLogging()
+    }
+
     fun isAlreadyLogging(): LiveData<String?> {
         if(mLoginProvider.getIsLogin()) {
             _message.setValue("Ya tienes un inicio de session")

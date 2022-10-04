@@ -26,6 +26,7 @@ object FirebaseModule {
         return FirebaseFirestore.getInstance()
     }
 
+    //Collections
     @UsersCollection
     @Provides
     @Singleton
@@ -38,4 +39,6 @@ object FirebaseModule {
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
     annotation class UsersCollection
+
+
 }

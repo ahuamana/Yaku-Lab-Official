@@ -21,7 +21,9 @@ import com.paparazziteam.yakulap.helper.isValidEmail
 import com.paparazziteam.yakulap.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.modulos.dashboard.views.DashboardActivity
 import com.paparazziteam.yakulap.modulos.login.viewmodels.ViewModelLogin
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding

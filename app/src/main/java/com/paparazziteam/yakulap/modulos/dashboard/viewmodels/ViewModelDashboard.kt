@@ -1,16 +1,17 @@
 package com.paparazziteam.yakulap.modulos.dashboard.viewmodels
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.toObject
-import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.fromJson
 import com.paparazziteam.yakulap.helper.toJson
+import com.paparazziteam.yakulap.modulos.dashboard.model.ChallengeRepository
+import com.paparazziteam.yakulap.modulos.dashboard.model.CommentRepository
+import com.paparazziteam.yakulap.modulos.dashboard.model.CommentRepositoryImpl
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.*
 import com.paparazziteam.yakulap.modulos.login.pojo.User
 import com.paparazziteam.yakulap.modulos.login.providers.LoginProvider
@@ -23,21 +24,19 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
 import javax.inject.Inject
-import javax.inject.Singleton
 
 
 @HiltViewModel
 class ViewModelDashboard @Inject constructor(
     private val mUserProvider:UserProvider,
     private val mLoginProvider:LoginProvider,
-    private val mCommentProvider:CommentProvider,
+    val mCommentRepositoryImpl: CommentRepository,
     private val mImageProvider:ImageProvider,
-    private val mChallengeProvider:ChallengeProvider,
+    private val mChallengeProvider: ChallengeRepository,
     private val mActionProvider:ReaccionProvider,
-    private val mReportProvider:ReportProvider
+    private val mReportProvider:ReportProvider,
+    private val mPreferences:MyPreferences
 ): ViewModel(){
-
-    val mPreferences = MyPreferences()
 
     private var challengesCompleted = mutableListOf<MoldeChallengeCompleted>()
 
@@ -167,7 +166,7 @@ class ViewModelDashboard @Inject constructor(
     }
 
     fun getCommentsFromThread(idPhoto:String){
-        mCommentProvider.getCommentsByIdPhoto(idPhoto)?.addSnapshotListener { value, error ->
+        mCommentRepositoryImpl.getCommentsByIdPhoto(idPhoto)?.addSnapshotListener { value, error ->
             Log.e("SIZE BOTTOM", "SIZE: " + value!!.size())
             var commentsList = mutableListOf<Comment>()
 
