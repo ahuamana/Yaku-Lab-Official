@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,7 @@ import com.paparazziteam.yakulap.helper.preventDoubleClick
 import com.paparazziteam.yakulap.modulos.dashboard.adapters.AdapterChallengeCompleted
 import com.paparazziteam.yakulap.modulos.dashboard.interfaces.clickedItemCompleted
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
+import com.paparazziteam.yakulap.modulos.dashboard.pojo.TypeGroup
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
 import com.paparazziteam.yakulap.modulos.laboratorio.views.ChallengeParentActivity
 
@@ -41,6 +43,8 @@ class HomeFragment : Fragment(), clickedItemCompleted {
 
     //Content Animals
     var mLinearLayoutAnimals: LinearLayout? = null
+    var mCardFruits: CardView? = null
+    var mCardPlants: CardView? = null
 
     //Adapter
     var mAdapter: AdapterChallengeCompleted? = null
@@ -58,6 +62,8 @@ class HomeFragment : Fragment(), clickedItemCompleted {
         binding.apply {
             recyclerView = recycler
             mLinearLayoutAnimals = linearLayoutAnimales
+            mCardFruits         = cardFruits
+            mCardPlants         = cardPlants
         }
 
         observerComponents()
@@ -70,7 +76,23 @@ class HomeFragment : Fragment(), clickedItemCompleted {
     private fun otherComponents() {
         mLinearLayoutAnimals?.setOnClickListener {
             it.preventDoubleClick()
-            startActivity(Intent(context, ChallengeParentActivity::class.java))
+            startActivity(Intent(context, ChallengeParentActivity::class.java).apply {
+                putExtra("typeGroup",TypeGroup.ANIMALS.value)
+            })
+        }
+
+        mCardFruits?.setOnClickListener {
+            it.preventDoubleClick()
+            startActivity(Intent(context, ChallengeParentActivity::class.java).apply {
+                putExtra("typeGroup",TypeGroup.FRUITS.value)
+            })
+        }
+
+        mCardPlants?.setOnClickListener {
+            it.preventDoubleClick()
+            startActivity(Intent(context, ChallengeParentActivity::class.java).apply {
+                putExtra("typeGroup",TypeGroup.PLANTS.value)
+            })
         }
     }
 

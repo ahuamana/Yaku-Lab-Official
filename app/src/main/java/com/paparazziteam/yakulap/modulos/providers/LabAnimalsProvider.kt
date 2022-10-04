@@ -3,6 +3,7 @@ package com.paparazziteam.yakulap.modulos.providers
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.*
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
+import com.paparazziteam.yakulap.modulos.dashboard.pojo.TypeGroup
 
 class LabAnimalsProvider {
 
@@ -17,7 +18,24 @@ class LabAnimalsProvider {
     }
 
 
-    fun geDataProvider(): Task<DocumentSnapshot> {
-        return mCollection.document("Data").get()
+    fun geDataProvider(type: String?): Task<DocumentSnapshot> {
+        when(type){
+            TypeGroup.FRUITS.value->{
+                return mCollection.document("FRUITS").get()
+            }
+
+            TypeGroup.PLANTS.value->{
+                return mCollection.document("PLANTS").get()
+            }
+
+            TypeGroup.ANIMALS.value->{
+                return mCollection.document("Data").get()
+            }
+
+            else->{
+                return mCollection.document("Data").get()
+            }
+        }
+
     }
 }

@@ -76,11 +76,11 @@ class ListChallengeFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(data: String, typeCategory: TypeCategoria) =
+        fun newInstance(data: String, category: String) =
             ListChallengeFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_DATA, data)
-                    putString(ARG_TYPE_CATEGORY, typeCategory.value)
+                    putString(ARG_TYPE_CATEGORY, category)
                 }
             }
     }

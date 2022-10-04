@@ -94,6 +94,9 @@
                                 android:orientation="vertical">
 
                                 <androidx.cardview.widget.CardView
+                                    android:id="@+id/card_fruits"
+                                    android:clickable="true"
+                                    android:focusable="true"
                                     android:layout_width="match_parent"
                                     android:backgroundTint="@color/background_icon_color"
                                     app:cardCornerRadius="8dp"
@@ -141,10 +144,13 @@
                                 android:orientation="vertical">
 
                                 <androidx.cardview.widget.CardView
+                                    android:id="@+id/card_plants"
                                     android:layout_width="match_parent"
                                     android:backgroundTint="@color/background_icon_color"
                                     app:cardCornerRadius="8dp"
                                     android:elevation="6dp"
+                                    android:clickable="true"
+                                    android:focusable="true"
                                     android:layout_margin="16dp"
                                     android:layout_height="wrap_content">
 

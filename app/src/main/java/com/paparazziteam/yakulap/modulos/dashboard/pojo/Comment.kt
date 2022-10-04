@@ -31,3 +31,4 @@ data class Comment (
 enum class TypeComment(val value:String) {
     Comentario("comment")
 }
+

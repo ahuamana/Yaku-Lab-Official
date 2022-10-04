@@ -35,3 +35,9 @@ data class MoldeChallengeCompleted (
     @SerialName("post_blocked")
     var post_blocked: List<String>? = null
 )
+
+enum class TypeGroup(val value:String) {
+    ANIMALS("ANIMALS"),
+    PLANTS("PLANTS"),
+    FRUITS("FRUITS")
+}

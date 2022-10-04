@@ -31,10 +31,12 @@ class ChallengeParentActivity : AppCompatActivity() {
     var myToolbar:Toolbar?= null
 
     var titles = mutableListOf<String>()
+    var mAdapterViewPager:ViewPagerAdapter?= null
 
-    private var listInsectos: MutableList<DataChallenge>? = mutableListOf()
-    private var listAnimalesDomesticos: MutableList<DataChallenge>? = mutableListOf()
-    private var listAnimalesOthers: MutableList<DataChallenge>? = mutableListOf()
+    private var listCategoriOne: MutableList<DataChallenge> = mutableListOf()
+    private var listCategoriTwo: MutableList<DataChallenge> = mutableListOf()
+    private var listCategoriThree: MutableList<DataChallenge> = mutableListOf()
+    private var listCategoriFour: MutableList<DataChallenge> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,15 +44,20 @@ class ChallengeParentActivity : AppCompatActivity() {
         setContentView(binding?.root)
         setColorToStatusBar(this)
 
+        var type = intent.getStringExtra("typeGroup")
+
         binding?.apply {
             mTabLayout  = tabLayout
             mViewPager  = viewPager
             myToolbar   = include.toolbar
         }
 
+        mTabLayout?.setupWithViewPager(mViewPager)
+        mAdapterViewPager = ViewPagerAdapter(supportFragmentManager)
+
         setupActionBar()
         observers()
-        viewModelLab.getData()
+        viewModelLab.getData(type)
     }
 
     private fun setupActionBar() {
@@ -63,25 +70,56 @@ class ChallengeParentActivity : AppCompatActivity() {
     }
 
     private fun observers() {
-        viewModelLab.observableListData.observe(this){
-            it.listAnimalsDomestic?.let { data -> listAnimalesDomesticos?.addAll(data) }
-            it.listInsectos?.let { data -> listInsectos?.addAll(data) }
-            it.listAnimalsOther?.let { data -> listAnimalesOthers?.addAll(data) }
-            setupViewPager()
+        viewModelLab.observableListData.observe(this){ itemList ->
+            if(!itemList.isNullOrEmpty()){
+                itemList.forEach {
+                    when (it.Challenge?.get(0)?.category){
+                        titles[0] ->{
+                            listCategoriOne.add(it.Challenge!![0])
+                        }
+                        titles[1] -> {
+                            listCategoriTwo.add(it.Challenge!![0])
+                        }
+                        else -> {
+                            listCategoriThree.add(it.Challenge!![0])
+                        }
+                    }
+                }
+                setupViewPager()
+            }else{
+                println("Empty List items")
+            }
+        }
+
+        viewModelLab.observableCategorias.observe(this){ list ->
+            if(!list.isNullOrEmpty()){
+                titles.clear()
+                titles = list.distinct().toMutableList()
+                println("Title size setted: ${titles.count()}")
+            }else{
+                println("Titles empty")
+            }
+
         }
     }
 
     private fun setupViewPager() {
-        titles.add(CATEGORY_DOMESTIC_ANIMALS)
-        titles.add(CATEGORY_INSECTS)
-        titles.add(CATEGORY_OTHERS_ANIMALS)
-        mTabLayout?.setupWithViewPager(mViewPager)
+        println("Title size: ${titles.size}")
+        when(titles.count()){
+            1->{
+                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriOne),titles[0]),titles[0])
+            }
+            2->{
+                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriOne),titles[0]),titles[0])
+                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriTwo),titles[1]),titles[1])
+            }
 
-        var mAdapterViewPager = ViewPagerAdapter(supportFragmentManager)
-
-        mAdapterViewPager.addFragment(ListChallengeFragment.newInstance(toJson(listAnimalesDomesticos),TypeCategoria.AnimalesDomesticos),titles[0])
-        mAdapterViewPager.addFragment(ListChallengeFragment.newInstance(toJson(listInsectos),TypeCategoria.Insectos),titles[1])
-        mAdapterViewPager.addFragment(ListChallengeFragment.newInstance(toJson(listAnimalesOthers),TypeCategoria.AnimalesOthers),titles[2])
+            else->{
+                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriOne),titles[0]),titles[0])
+                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriTwo),titles[1]),titles[1])
+                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriThree),titles[2]),titles[2])
+            }
+        }
 
         mViewPager?.adapter = mAdapterViewPager
     }
