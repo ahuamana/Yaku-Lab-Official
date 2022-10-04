@@ -16,10 +16,6 @@ class ViewModelLab private constructor() {
 
     private var mLabProvider = LabAnimalsProvider()
 
-    private var listCategoriaInsectos: MutableList<DataChallenge>? = mutableListOf()
-    private var listAnimalesDomesticos: MutableList<DataChallenge>? = mutableListOf()
-    private var listAnimalesOthers: MutableList<DataChallenge>? = mutableListOf()
-
     private val _observableListData = MutableLiveData<List<DataItems>>()
     val observableListData:LiveData<List<DataItems>> get() = _observableListData
 
