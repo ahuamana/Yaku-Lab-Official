@@ -1,4 +1,4 @@
-package com.paparazziteam.yakulap.modulos.providers
+package com.paparazziteam.yakulap.modulos.repositorio
 
 import android.content.Context
 import androidx.annotation.StringRes

@@ -27,9 +27,7 @@ import com.paparazziteam.yakulap.modulos.dashboard.fragments.BottomDialogFragmen
 import com.paparazziteam.yakulap.modulos.dashboard.fragments.BottomDialogFragmentMoreOptions
 import com.paparazziteam.yakulap.modulos.dashboard.interfaces.clickedItemCompleted
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
-import com.paparazziteam.yakulap.modulos.providers.ReaccionProvider
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import com.paparazziteam.yakulap.modulos.repositorio.ReaccionProvider
 
 
 class AdapterChallengeCompleted(

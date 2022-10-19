@@ -10,8 +10,6 @@ import com.paparazziteam.yakulap.databinding.BottomSheetMoreOptionsBinding
 import com.paparazziteam.yakulap.helper.fromJson
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.*
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
-import com.paparazziteam.yakulap.modulos.providers.CommentProvider
-import java.util.*
 
 
 class BottomDialogFragmentMoreOptions : BottomSheetDialogFragment() {

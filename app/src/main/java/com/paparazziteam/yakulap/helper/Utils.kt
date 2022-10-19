@@ -36,10 +36,6 @@ import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
 import com.paparazziteam.yakulap.helper.Constants.EXT_JPG
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.application.toast
-import com.paparazziteam.yakulap.helper.observer.getDataColumn
-import com.paparazziteam.yakulap.helper.observer.isDownloadsDocument
-import com.paparazziteam.yakulap.helper.observer.isExternalStorageDocument
-import com.paparazziteam.yakulap.helper.observer.isMediaDocument
 import com.paparazziteam.yakulap.root.ctx
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString

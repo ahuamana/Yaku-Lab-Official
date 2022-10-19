@@ -1,14 +1,11 @@
 package com.paparazziteam.yakulap.modulos.laboratorio.viewmodels
 
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.bumptech.glide.Glide
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
-import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataListChallenge
-import com.paparazziteam.yakulap.modulos.providers.ChallengeProvider
+import com.paparazziteam.yakulap.modulos.repositorio.ChallengeProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

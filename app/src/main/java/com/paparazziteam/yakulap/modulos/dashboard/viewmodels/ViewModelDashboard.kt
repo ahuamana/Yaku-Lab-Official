@@ -1,12 +1,10 @@
 package com.paparazziteam.yakulap.modulos.dashboard.viewmodels
 
-import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.toObject
-import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.fromJson
 import com.paparazziteam.yakulap.helper.toJson
@@ -14,7 +12,7 @@ import com.paparazziteam.yakulap.modulos.dashboard.pojo.*
 import com.paparazziteam.yakulap.modulos.login.pojo.User
 import com.paparazziteam.yakulap.modulos.login.providers.LoginProvider
 import com.paparazziteam.yakulap.modulos.login.providers.UserProvider
-import com.paparazziteam.yakulap.modulos.providers.*
+import com.paparazziteam.yakulap.modulos.repositorio.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

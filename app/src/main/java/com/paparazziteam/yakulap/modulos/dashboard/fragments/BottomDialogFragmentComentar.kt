@@ -1,12 +1,10 @@
 package com.paparazziteam.yakulap.modulos.dashboard.fragments
 
-import android.app.Dialog
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.LinearLayout
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,7 +22,7 @@ import com.paparazziteam.yakulap.modulos.dashboard.adapters.AdapterComment
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.Comment
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.TypeComment
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
-import com.paparazziteam.yakulap.modulos.providers.CommentProvider
+import com.paparazziteam.yakulap.modulos.repositorio.CommentProvider
 import java.util.*
 
 

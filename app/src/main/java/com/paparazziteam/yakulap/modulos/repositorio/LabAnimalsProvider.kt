@@ -1,8 +1,7 @@
-package com.paparazziteam.yakulap.modulos.providers
+package com.paparazziteam.yakulap.modulos.repositorio
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.*
-import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.TypeGroup
 
 class LabAnimalsProvider {

@@ -3,14 +3,9 @@ package com.paparazziteam.yakulap.modulos.laboratorio.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.ktx.toObject
-import com.paparazziteam.yakulap.helper.Constants.CATEGORY_DOMESTIC_ANIMALS
-import com.paparazziteam.yakulap.helper.Constants.CATEGORY_INSECTS
-import com.paparazziteam.yakulap.helper.Constants.CATEGORY_OTHERS_ANIMALS
 import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataCategory
-import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataChallenge
 import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataItems
-import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataListChallenge
-import com.paparazziteam.yakulap.modulos.providers.LabAnimalsProvider
+import com.paparazziteam.yakulap.modulos.repositorio.LabAnimalsProvider
 
 class ViewModelLab private constructor() {
 
