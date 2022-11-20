@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -87,7 +88,6 @@
         android:background="@color/divider"
         app:layout_constraintTop_toBottomOf="@+id/contenedor_header_top"
         tools:layout_editor_absoluteX="16dp" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contenedor_body_home"
         android:layout_width="match_parent"
@@ -136,7 +136,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contenedor_body_recursos_de_ayuda"
         android:layout_width="match_parent"
@@ -186,8 +185,6 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     <View
         android:id="@+id/divisor_body"
         android:layout_width="match_parent"
@@ -195,7 +192,6 @@
         android:background="@color/divider"
         app:layout_constraintTop_toBottomOf="@+id/contenedor_body_recursos_de_ayuda"
         tools:layout_editor_absoluteX="16dp" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contenedor_footer"
         android:layout_width="match_parent"
@@ -244,5 +240,4 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

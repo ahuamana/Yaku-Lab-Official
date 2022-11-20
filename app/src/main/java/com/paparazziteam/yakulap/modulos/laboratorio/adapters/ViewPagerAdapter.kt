@@ -23,7 +23,6 @@ class ViewPagerAdapter(supportFragmentPagerAdapter: FragmentManager): FragmentPa
     override fun getPageTitle(position: Int): CharSequence? {
         //var spannable = SpannableString("       ${titlesFragments[position]}")
         var spannable = SpannableString("${titlesFragments[position]}")
-
         return spannable
     }
 

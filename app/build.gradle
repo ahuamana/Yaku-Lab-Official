@@ -1,5 +1,3 @@
-
-
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
@@ -86,9 +84,6 @@ dependencies {
     //Lottie
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
-    //Avoid Leak memory
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
-
     //facebook shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
@@ -110,5 +105,7 @@ dependencies {
     //Dagger Hilt
     implementation("com.google.dagger:hilt-android:2.38.1")
     kapt("com.google.dagger:hilt-android-compiler:2.38.1")
+
+    implementation 'com.testfairy:testfairy-android-sdk:1.+@aar'
 
 }
