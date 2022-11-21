@@ -26,7 +26,6 @@ import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.application.toast
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
-import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataCategory
 import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataChallenge
 import com.paparazziteam.yakulap.modulos.laboratorio.viewmodels.ViewModelChallenge
 import com.paparazziteam.yakulap.modulos.laboratorio.viewmodels.ViewModelLab
@@ -36,6 +35,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
 import java.io.File
 import java.util.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragment() {
@@ -47,7 +47,9 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
     val ARG_JSON        = "extra"
     val ARG_EXTRA_PATH  = "ARG_EXTRA_PATH"
     var data_extra = DataChallenge()
-    var preferences = MyPreferences()
+
+    @Inject
+    lateinit var mPreferences :MyPreferences
 
     var idChallengeDocument = ""
 
@@ -160,9 +162,9 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
 
     private fun prepareImageToUploadRemote() {
         var completed  = MoldeChallengeCompleted(
-            author_email = preferences.email_login,
-            author_lastname =  preferences.lastName,
-            author_name = preferences.firstName,
+            author_email = mPreferences.email_login,
+            author_lastname =  mPreferences.lastName,
+            author_name = mPreferences.firstName,
             timestamp = Date().time,
             tipo = data_extra.category,
             challenge_id = data_extra.id,
@@ -188,7 +190,7 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
     }
 
     fun getInfoChallengeCompleted(){
-        println("MySharedPreferences email: ${MyPreferences().email_login}")
+        println("MySharedPreferences email: ${mPreferences.email_login}")
         println("DataExtra id: ${data_extra.id}")
         viewModel.getChallengeInformation(data_extra.id){
                 isCorrect:Boolean, challenge: MoldeChallengeCompleted?->
@@ -206,16 +208,16 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
 
     private fun getImageActivity():Uri{
         //Log.d("TAG","Variable ARGUMENTO PATH: ${image}")
-        return (context as ChallengeActivity).getPathResultPhoto()
+        return (requireActivity() as ChallengeActivity).getPathResultPhoto()
     }
 
     private fun getImageFileActivity(): File?{
         //Log.d("TAG","Variable ARGUMENTO PATH: ${image}")
-        return (context as ChallengeActivity).getFileResultPhoto()
+        return (requireActivity() as ChallengeActivity).getFileResultPhoto()
     }
 
     private fun loadImageFromRemotoOrLocal(challenge: MoldeChallengeCompleted?) {
-        var image  = (context as ChallengeActivity).getPathResultPhoto()
+        var image  = (requireActivity() as ChallengeActivity).getPathResultPhoto()
         idChallengeDocument = challenge?.id?:""
         println("image activity: ${image}")
         if(!image.toString().isNullOrEmpty()){

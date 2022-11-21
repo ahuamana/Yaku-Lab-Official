@@ -91,7 +91,7 @@ class ChallengeActivity : ToolbarActivity() {
         setColorToStatusBar(this)
 
         binding?.apply {
-            //myToolbar           = include.toolbar
+            myToolbar           = include.toolbar
         }
         extras()
         setupActionBar()

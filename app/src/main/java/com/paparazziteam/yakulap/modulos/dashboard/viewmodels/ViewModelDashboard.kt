@@ -42,8 +42,6 @@ class ViewModelDashboard @Inject constructor(
 
     private lateinit var mListener: ListenerRegistration
 
-    private val preferences = MyPreferences()
-
     private val _errorUpload = MutableLiveData<String>()
     val errorUpload:LiveData<String> = _errorUpload
 
@@ -135,10 +133,9 @@ class ViewModelDashboard @Inject constructor(
     }
 
     private fun updatePoints(pointsToGive: Int) {
-        mUserProvider.updatePoints(MyPreferences().email_login, MyPreferences().
-        points.plus(pointsToGive))?.
+        mUserProvider.updatePoints(mPreferences.email_login,mPreferences.points.plus(pointsToGive))?.
         addOnSuccessListener {
-                MyPreferences().points+=pointsToGive
+            mPreferences.points+=pointsToGive
         }
     }
 
@@ -187,7 +184,7 @@ class ViewModelDashboard @Inject constructor(
     }
 
     fun updateLikeStatusFirebase(item:MoldeChallengeCompleted){
-        mActionProvider.getUserLike(preferences.email_login, item.id)?.get()
+        mActionProvider.getUserLike(mPreferences.email_login, item.id)?.get()
             ?.addOnSuccessListener {
                 if(it.isEmpty){
                     println("Like is empty")
@@ -212,11 +209,11 @@ class ViewModelDashboard @Inject constructor(
     }
 
     private fun createLike(item: MoldeChallengeCompleted, like: Boolean) {
-        val idEmail= "${item.id.toString()}_${preferences.email_login}"
+        val idEmail= "${item.id.toString()}_${mPreferences.email_login}"
         var mAction = Reaccion()
         mAction.id_email = idEmail
         mAction.status = like
-        mAction.email = preferences.email_login
+        mAction.email = mPreferences.email_login
         mAction.id = item.id
         mAction.type = "Like"
 

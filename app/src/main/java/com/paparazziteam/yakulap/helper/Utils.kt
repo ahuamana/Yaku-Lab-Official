@@ -51,6 +51,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 
 private var appContext: Context? = null
@@ -61,6 +62,7 @@ val FOLD_PRINC     = "/Yakulap"
 
 val application: Context
     get() = appContext ?: initAndGetAppCtxWithReflection()
+
 
 @SuppressLint("PrivateApi")
 private fun initAndGetAppCtxWithReflection(): Context {

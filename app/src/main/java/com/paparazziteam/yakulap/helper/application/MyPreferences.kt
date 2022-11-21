@@ -1,13 +1,10 @@
 package com.paparazziteam.yakulap.helper.application
 
 import android.graphics.Color
-import com.paparazziteam.yakulap.helper.INT_DEFAULT
-import com.paparazziteam.yakulap.helper.toJson
-import dagger.hilt.EntryPoint
-import dagger.hilt.android.migration.CustomInject
 import javax.inject.Inject
+import javax.inject.Singleton
 
-
+@Singleton
 class MyPreferences @Inject constructor() {
 
     val prefs = CacheData()

@@ -7,6 +7,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
 import com.paparazziteam.yakulap.modulos.dashboard.model.ChallengeRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,14 +15,17 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
-class ViewModelChallenge : ViewModel() {
+@HiltViewModel
+class ViewModelChallenge @Inject constructor() : ViewModel() {
 
-    @Inject lateinit var mChallengeProvider: ChallengeRepository
+    @Inject
+    lateinit var mChallengeProvider: ChallengeRepository
 
     private val _observableChallenge = MutableLiveData<MoldeChallengeCompleted>()
     val observableListData: LiveData< MoldeChallengeCompleted> get() = _observableChallenge
 
-    val myPreferences = MyPreferences()
+    @Inject
+    lateinit var myPreferences:MyPreferences
 
     fun getChallengeInformation(nameChallenge: String?, onComplete:(isCorrect:Boolean, challenge:MoldeChallengeCompleted?)->Unit){
         CoroutineScope(Dispatchers.Unconfined).launch {

@@ -34,18 +34,22 @@ import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
 import com.paparazziteam.yakulap.modulos.puntaje.views.PuntajeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityDashboardBinding
-    private var preferences = MyPreferences()
+
     private lateinit var mainToolbar: Toolbar
     lateinit var drawer:DrawerLayout
     lateinit var navView:NavigationView
     lateinit var headerLayout: View
     lateinit var greetingsNameHeader: MaterialTextView
+
+    @Inject
+    lateinit var preferences:MyPreferences
 
     private val _viewModel:ViewModelDashboard by viewModels ()
 
@@ -54,7 +58,7 @@ class DashboardActivity : AppCompatActivity() {
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /*binding.apply {
+        binding.apply {
             mainToolbar = appBarDashboard.toolbar
         }
 
@@ -89,7 +93,7 @@ class DashboardActivity : AppCompatActivity() {
         _viewModel.showUserData()
 
         //setupDrawerItems
-        setupDrawerMenuLeft()*/
+        setupDrawerMenuLeft()
     }
 
     private fun setupDrawerMenuLeft() {

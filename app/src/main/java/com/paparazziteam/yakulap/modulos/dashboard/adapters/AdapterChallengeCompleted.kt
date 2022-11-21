@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
@@ -18,6 +17,7 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.paparazziteam.yakulap.R
+import com.paparazziteam.yakulap.databinding.ItemChallengeCompletedBinding
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.application.toast
 import com.paparazziteam.yakulap.helper.design.SlideImageFullScreenActivity
@@ -26,11 +26,15 @@ import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
 import com.paparazziteam.yakulap.modulos.dashboard.interfaces.onClickThread
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
 import com.paparazziteam.yakulap.modulos.providers.ReaccionProvider
+import javax.inject.Inject
+import javax.inject.Singleton
 
 
-class AdapterChallengeCompleted(
+@Singleton
+class AdapterChallengeCompleted @Inject constructor(
     challenges: MutableList<MoldeChallengeCompleted>,
-    val clickedItemCompleted: onClickThread?
+    val clickedItemCompleted: onClickThread?,
+    private val mPreferences: MyPreferences
 ) : RecyclerView.Adapter<AdapterChallengeCompleted.ViewHolder>() {
 
     var challengesCompleted = challenges
@@ -46,7 +50,21 @@ class AdapterChallengeCompleted(
         notifyItemRangeChanged(index,itemCount)
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val itemview = LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.item_challenge_completed,parent,false)
+        return  ViewHolder(itemview)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(challengesCompleted[position],clickedItemCompleted, mPreferences)
+    }
+
     class ViewHolder(itemview : View): RecyclerView.ViewHolder(itemview) {
+
+        var mActionProvider = ReaccionProvider()
+        val binding = ItemChallengeCompletedBinding.bind(itemView)
 
         private lateinit var imageChalleng: ShapeableImageView
         private lateinit var contentImage: CardView
@@ -58,16 +76,12 @@ class AdapterChallengeCompleted(
         private lateinit var likeImg: LottieAnimationView
         private lateinit var itemOptions: ShapeableImageView
 
-        var mActionProvider = ReaccionProvider()
-
-        //val binding = ItemChallengeCompletedBinding.bind(itemview)
-        var preferences = MyPreferences()
-
         fun bind(
             item: MoldeChallengeCompleted,
-            clickedItem: onClickThread?
+            clickedItem: onClickThread?,
+            mPreferences: MyPreferences
         ) {
-/*
+
             binding.apply {
                 imageChalleng   = imgChallenge
                 contentImage    = roundedImageView
@@ -108,7 +122,7 @@ class AdapterChallengeCompleted(
                 authorNameChallenge.text = replaceFirstCharInSequenceToUppercase(item.author_name?:"")
 
                 //Setup like
-                setupLike(item, clickedItem)
+                setupLike(item, clickedItem, mPreferences)
 
                 //Setup share
                 setupShare()
@@ -119,7 +133,7 @@ class AdapterChallengeCompleted(
                 //ReportPost
                 reportPostOption(item, clickedItem)
             }
-*/
+
         }
 
         private fun reportPostOption(item: MoldeChallengeCompleted,onClickThread: onClickThread?) {
@@ -141,17 +155,22 @@ class AdapterChallengeCompleted(
             }
         }
 
-        private fun setupLike(item: MoldeChallengeCompleted, clickedItem: onClickThread?) {
+        private fun setupLike(
+            item: MoldeChallengeCompleted,
+            clickedItem: onClickThread?,
+            mPreferences: MyPreferences
+        ) {
             //First Time Like
-            getFirsTimeLike(item,clickedItem)
+            getFirsTimeLike(item,clickedItem, mPreferences)
         }
 
         private fun getFirsTimeLike(
             item: MoldeChallengeCompleted,
-            clickedItem: onClickThread?
+            clickedItem: onClickThread?,
+            mPreferences: MyPreferences
         ) {
             var status = false
-            mActionProvider.getUserLike(preferences.email_login, item.id)?.get()
+            mActionProvider.getUserLike(mPreferences.email_login, item.id)?.get()
                 ?.addOnSuccessListener {
                     if(it.isEmpty){
                         likeImg.setImageResource(R.drawable.ic_love)
@@ -192,14 +211,9 @@ class AdapterChallengeCompleted(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemview = LayoutInflater.from(parent.context).inflate(R.layout.item_challenge_completed,parent,false)
-        return  ViewHolder(itemview)
-    }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(challengesCompleted[position],clickedItemCompleted)
-    }
+
+
 
     override fun getItemCount(): Int  = challengesCompleted.size
 }

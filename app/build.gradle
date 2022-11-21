@@ -42,6 +42,7 @@ android {
     }
 
     buildFeatures {
+        viewBinding true
         dataBinding true
     }
 }
@@ -82,7 +83,7 @@ dependencies {
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
     //Avoid Leak memory
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
+    //debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
 
     //facebook shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'

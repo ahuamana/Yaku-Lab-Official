@@ -3,9 +3,11 @@ package com.paparazziteam.yakulap.helper.application
 import android.content.Context
 import android.content.SharedPreferences
 import com.paparazziteam.yakulap.helper.application
+import javax.inject.Inject
 
-class CacheData constructor(name: String? = "Yaku_lab_preferences_common") {
+class CacheData @Inject constructor() {
 
+    private val name: String? = "Yaku_lab_preferences_common"
     private val sharedPreferences: SharedPreferences = application.getSharedPreferences(name, Context.MODE_PRIVATE)
 
     fun hasKey(key: String): Boolean = sharedPreferences.contains(key)

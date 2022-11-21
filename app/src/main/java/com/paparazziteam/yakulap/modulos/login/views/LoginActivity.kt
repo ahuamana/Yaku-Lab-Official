@@ -22,11 +22,15 @@ import com.paparazziteam.yakulap.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.modulos.dashboard.views.DashboardActivity
 import com.paparazziteam.yakulap.modulos.login.viewmodels.ViewModelLogin
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+
+    @Inject
+    lateinit var mPreferences:MyPreferences
 
     lateinit var txtRegistroNuevo: MaterialTextView
     var btnLoginEmail: MaterialButton? = null
@@ -76,7 +80,7 @@ class LoginActivity : AppCompatActivity() {
             println("isLoginEmail: $isLoginEmail")
             if (isLoginEmail) {
                 //Log.e(TAG, "EMAIL ENVIADO: " + binding.email.text.toString().lowercase())
-                MyPreferences().email_login = binding.email.text.toString().trim().lowercase()
+                mPreferences.email_login = binding.email.text.toString().trim().lowercase()
                 startActivity(
                     Intent(this, DashboardActivity::class.java)
                         .putExtra("email", binding.email.text.toString().lowercase())

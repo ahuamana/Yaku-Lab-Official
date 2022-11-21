@@ -24,11 +24,13 @@ import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
 import com.paparazziteam.yakulap.modulos.laboratorio.views.ChallengeParentActivity
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), onClickThread {
 
-    var mPreferences = MyPreferences()
+    @Inject
+    lateinit var mPreferences:MyPreferences
 
     private var _binding: FragmentHomeBinding? = null
     private val _viewModel by viewModels<ViewModelDashboard>()
@@ -103,7 +105,7 @@ class HomeFragment : Fragment(), onClickThread {
                     }
 
                 }
-                mAdapter = AdapterChallengeCompleted(challenges, clickedItemCompleted)
+                mAdapter = AdapterChallengeCompleted(challenges, clickedItemCompleted, mPreferences)
                 recyclerView?.adapter = mAdapter
             }
         }

@@ -6,7 +6,6 @@ import android.os.Handler
 import android.os.Looper
 import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.isVisible
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
@@ -17,11 +16,16 @@ import com.paparazziteam.yakulap.helper.beGone
 import com.paparazziteam.yakulap.helper.beVisible
 import com.paparazziteam.yakulap.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.modulos.puntaje.viewmodels.ViewModelPuntaje
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class PuntajeActivity : AppCompatActivity() {
 
     private var _viewModel = ViewModelPuntaje.getInstance()
-    private var preferences = MyPreferences()
+
+    @Inject
+    lateinit var mPreferences:MyPreferences
 
     private lateinit var imgMedal:ShapeableImageView
     private lateinit var skeleton: ShimmerFrameLayout
@@ -67,7 +71,7 @@ class PuntajeActivity : AppCompatActivity() {
             _viewModel.showMedal()
         }, 3000)
 
-        puntajeTxt.text = preferences.points.toString()
+        puntajeTxt.text = mPreferences.points.toString()
 
     }
 
