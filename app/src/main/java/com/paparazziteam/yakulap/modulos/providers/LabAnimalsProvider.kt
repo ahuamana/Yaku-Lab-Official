@@ -2,7 +2,6 @@ package com.paparazziteam.yakulap.modulos.providers
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.*
-import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
 
 class LabAnimalsProvider {
 

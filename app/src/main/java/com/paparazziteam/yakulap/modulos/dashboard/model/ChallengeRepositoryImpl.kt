@@ -2,9 +2,8 @@ package com.paparazziteam.yakulap.modulos.dashboard.model
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.*
-import com.paparazziteam.yakulap.di.FirebaseModule
 import com.paparazziteam.yakulap.modulos.dashboard.di.DashboardModule
-import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
+import com.paparazziteam.yakulap.modulos.dashboard.pojo.ChallengeCompleted
 import javax.inject.Inject
 
 
@@ -18,7 +17,7 @@ class ChallengeRepositoryImpl @Inject constructor(
             .build()
         authFirestore.firestoreSettings = settings
     }*/
-    override fun create(sustantivo: MoldeChallengeCompleted): Task<Void?>? {
+    override fun create(sustantivo: ChallengeCompleted): Task<Void?>? {
         return mCollection.document(sustantivo.id?:"").set(sustantivo)
     }
 

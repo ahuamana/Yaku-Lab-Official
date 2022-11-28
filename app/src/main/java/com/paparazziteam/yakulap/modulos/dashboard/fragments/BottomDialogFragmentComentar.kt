@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,7 +41,7 @@ class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
 
     @Inject lateinit var mCommentRepository:CommentRepository
 
-    private val _viewModel:ViewModelDashboard by viewModels()
+    private val _viewModel:ViewModelDashboard by activityViewModels()
 
     var mLinearLayoutManager: LinearLayoutManager? = null
     var recyclerComments: RecyclerView? = null

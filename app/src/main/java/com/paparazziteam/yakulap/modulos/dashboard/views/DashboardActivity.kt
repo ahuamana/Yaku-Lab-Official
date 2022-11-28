@@ -1,13 +1,11 @@
 package com.paparazziteam.yakulap.modulos.dashboard.views
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.View
 import androidx.activity.viewModels
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -51,7 +49,7 @@ class DashboardActivity : AppCompatActivity() {
     @Inject
     lateinit var preferences:MyPreferences
 
-    private val _viewModel:ViewModelDashboard by viewModels ()
+    private val _viewModel:ViewModelDashboard by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -146,7 +144,6 @@ class DashboardActivity : AppCompatActivity() {
                 this.toast(it)
             }
         }
-
     }
 
     private fun saveLogin() {

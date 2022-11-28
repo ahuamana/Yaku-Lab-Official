@@ -23,6 +23,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+
                 <com.google.android.material.appbar.AppBarLayout
                     android:id="@+id/appbar_layout"
                     android:layout_width="match_parent"
@@ -99,6 +100,7 @@
                                 android:orientation="vertical">
 
                                 <androidx.cardview.widget.CardView
+                                    android:id="@+id/cardFruits"
                                     android:layout_width="match_parent"
                                     android:backgroundTint="@color/background_icon_color"
                                     app:cardCornerRadius="8dp"
@@ -146,6 +148,7 @@
                                 android:orientation="vertical">
 
                                 <androidx.cardview.widget.CardView
+                                    android:id="@+id/cardPlants"
                                     android:layout_width="match_parent"
                                     android:backgroundTint="@color/background_icon_color"
                                     app:cardCornerRadius="8dp"
@@ -344,52 +347,87 @@
 
                 </com.google.android.material.appbar.AppBarLayout>
 
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/titleDiscover"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="20dp"
-                    android:fontFamily="@font/product_sans_bold"
-                    android:text="@string/subtitle_experiencias"
-                    android:textColor="@color/black"
-                    android:textSize="20dp"
-                    app:layout_constraintTop_toBottomOf="@+id/appbar_layout"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:id="@+id/contentChallenges"
+                <!--Container Body-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/containerLayoutBodyChallenges"
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    app:layout_constraintTop_toBottomOf="@+id/titleDiscover"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/appbar_layout">
 
-                    <com.google.android.material.button.MaterialButton
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/titleDiscover"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/buttom_normal"
-                        app:backgroundTint="@color/colorSecondaryYaku"
-                        android:padding="8dp"
-                        android:fontFamily="@font/product_sans_regular"
-                        android:paddingStart="30dp"
-                        android:paddingEnd="30dp"
-                        android:textAllCaps="false"
-                        android:text="Retos Completados"
-                        android:textSize="15dp"
-                        android:textColor="@color/white" />
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/product_sans_bold"
+                        android:text="@string/subtitle_experiencias"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recycler"
+                    <LinearLayout
+                        android:id="@+id/contentChallenges"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:orientation="horizontal" />
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toBottomOf="@+id/titleDiscover">
 
-                </LinearLayout>
+                        <com.google.android.material.button.MaterialButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/buttom_normal"
+                            android:fontFamily="@font/product_sans_regular"
+                            android:padding="8dp"
+                            android:paddingStart="30dp"
+                            android:paddingEnd="30dp"
+                            android:text="Retos Completados"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="15dp"
+                            app:backgroundTint="@color/colorSecondaryYaku" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!--Container Skeleton-->
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:id="@+id/shimmerLoading"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/appbar_layout">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <include layout="@layout/item_shimmer_challenge_completed" />
+
+                        <include layout="@layout/item_shimmer_challenge_completed" />
+                    </LinearLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

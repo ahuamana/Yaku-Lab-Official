@@ -1,9 +1,9 @@
 package com.paparazziteam.yakulap.modulos.dashboard.interfaces
 
-import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
+import com.paparazziteam.yakulap.modulos.dashboard.pojo.ChallengeCompleted
 
 interface onClickThread {
-    fun clickOnUpdateLike(item:MoldeChallengeCompleted)
-    fun clickedComentThread(item:MoldeChallengeCompleted)
-    fun clickedReportThread(item:MoldeChallengeCompleted)
+    fun clickOnUpdateLike(item:ChallengeCompleted)
+    fun clickedComentThread(item:ChallengeCompleted)
+    fun clickedReportThread(item:ChallengeCompleted)
 }

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
@@ -24,7 +25,7 @@ import com.paparazziteam.yakulap.helper.design.SlideImageFullScreenActivity
 import com.paparazziteam.yakulap.helper.preventDoubleClick
 import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
 import com.paparazziteam.yakulap.modulos.dashboard.interfaces.onClickThread
-import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
+import com.paparazziteam.yakulap.modulos.dashboard.pojo.ChallengeCompleted
 import com.paparazziteam.yakulap.modulos.providers.ReaccionProvider
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -32,25 +33,32 @@ import javax.inject.Singleton
 
 @Singleton
 class AdapterChallengeCompleted @Inject constructor(
-    challenges: MutableList<MoldeChallengeCompleted>,
     val clickedItemCompleted: onClickThread?,
     private val mPreferences: MyPreferences
 ) : RecyclerView.Adapter<AdapterChallengeCompleted.ViewHolder>() {
 
-    var challengesCompleted = challenges
+    private var oldListChallenges = mutableListOf<ChallengeCompleted>()
 
-    fun removePost(idChallenge:String){
-        Log.d("TAG","Remove Post")
-        var index = challengesCompleted.indexOfFirst {
-            it.id == idChallenge
-        }
-        if(index<0) return
-        challengesCompleted.removeAt(index)
-        notifyItemRemoved(index)
-        notifyItemRangeChanged(index,itemCount)
+    fun setUserList(newList: List<ChallengeCompleted>) {
+        val diffResult = DiffUtil.calculateDiff(ChallengeCompletedDiffCallback(oldListChallenges, newList))
+        oldListChallenges.clear()
+        oldListChallenges.addAll(newList)
+        diffResult.dispatchUpdatesTo(this)
     }
 
+    private var onItemClickListener: ((ChallengeCompleted) -> Unit)? = null
+    fun onClickUpdateLikeListener(listener:(ChallengeCompleted)-> Unit){
+        onItemClickListener = listener
+    }
+
+    private var onItemRemovePostListener: ((ChallengeCompleted) -> Unit)? = null
+    fun onItemRemovePostListener(listener:(ChallengeCompleted)-> Unit){
+        onItemRemovePostListener = listener
+    }
+
+    var count = 0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        println("OnCreateView ${count++}")
         val itemview = LayoutInflater
             .from(parent.context)
             .inflate(R.layout.item_challenge_completed,parent,false)
@@ -58,10 +66,10 @@ class AdapterChallengeCompleted @Inject constructor(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(challengesCompleted[position],clickedItemCompleted, mPreferences)
+        holder.bind(oldListChallenges[position],clickedItemCompleted, mPreferences)
     }
 
-    class ViewHolder(itemview : View): RecyclerView.ViewHolder(itemview) {
+    inner class ViewHolder(itemview : View): RecyclerView.ViewHolder(itemview) {
 
         var mActionProvider = ReaccionProvider()
         val binding = ItemChallengeCompletedBinding.bind(itemView)
@@ -77,7 +85,7 @@ class AdapterChallengeCompleted @Inject constructor(
         private lateinit var itemOptions: ShapeableImageView
 
         fun bind(
-            item: MoldeChallengeCompleted,
+            item: ChallengeCompleted,
             clickedItem: onClickThread?,
             mPreferences: MyPreferences
         ) {
@@ -136,13 +144,13 @@ class AdapterChallengeCompleted @Inject constructor(
 
         }
 
-        private fun reportPostOption(item: MoldeChallengeCompleted,onClickThread: onClickThread?) {
+        private fun reportPostOption(item: ChallengeCompleted, onClickThread: onClickThread?) {
             itemOptions.setOnClickListener{
                 onClickThread?.clickedReportThread(item)
             }
         }
 
-        private fun setupComment(item: MoldeChallengeCompleted,onClickThread: onClickThread?) {
+        private fun setupComment(item: ChallengeCompleted, onClickThread: onClickThread?) {
             layoutComment.setOnClickListener {
                 onClickThread?.clickedComentThread(item)
             }
@@ -156,7 +164,7 @@ class AdapterChallengeCompleted @Inject constructor(
         }
 
         private fun setupLike(
-            item: MoldeChallengeCompleted,
+            item: ChallengeCompleted,
             clickedItem: onClickThread?,
             mPreferences: MyPreferences
         ) {
@@ -165,7 +173,7 @@ class AdapterChallengeCompleted @Inject constructor(
         }
 
         private fun getFirsTimeLike(
-            item: MoldeChallengeCompleted,
+            item: ChallengeCompleted,
             clickedItem: onClickThread?,
             mPreferences: MyPreferences
         ) {
@@ -189,7 +197,10 @@ class AdapterChallengeCompleted @Inject constructor(
             likeImg.setOnClickListener {
                 //setupLike
                 status = likeAnimation(likeImg, R.raw.heart_love, status)
-                clickedItem?.clickOnUpdateLike(item)
+                onItemClickListener?.let {
+                    it(item)
+                }
+                //clickedItem?.clickOnUpdateLike(item)
             }
         }
 
@@ -211,9 +222,5 @@ class AdapterChallengeCompleted @Inject constructor(
         }
     }
 
-
-
-
-
-    override fun getItemCount(): Int  = challengesCompleted.size
+    override fun getItemCount(): Int  = oldListChallenges.size
 }

@@ -24,7 +24,7 @@ import com.paparazziteam.yakulap.databinding.FragmentChallengeBinding
 import com.paparazziteam.yakulap.helper.*
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.application.toast
-import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
+import com.paparazziteam.yakulap.modulos.dashboard.pojo.ChallengeCompleted
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
 import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataChallenge
 import com.paparazziteam.yakulap.modulos.laboratorio.viewmodels.ViewModelChallenge
@@ -161,7 +161,7 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
     }
 
     private fun prepareImageToUploadRemote() {
-        var completed  = MoldeChallengeCompleted(
+        var completed  = ChallengeCompleted(
             author_email = mPreferences.email_login,
             author_lastname =  mPreferences.lastName,
             author_name = mPreferences.firstName,
@@ -173,7 +173,7 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
         UploadedPhoto(completed)
     }
 
-    private fun UploadedPhoto(completed: MoldeChallengeCompleted) {
+    private fun UploadedPhoto(completed: ChallengeCompleted) {
         mDialog = ProgressDialog(requireContext())
         mDialog?.setTitle("Espere un momento")
         mDialog?.setMessage("Guardando Información")
@@ -193,7 +193,7 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
         println("MySharedPreferences email: ${mPreferences.email_login}")
         println("DataExtra id: ${data_extra.id}")
         viewModel.getChallengeInformation(data_extra.id){
-                isCorrect:Boolean, challenge: MoldeChallengeCompleted?->
+                isCorrect:Boolean, challenge: ChallengeCompleted?->
             if(isCorrect){
                 Log.d(TAG_CHALLENGE_FRAGMENT,"result reto: $challenge")
                 isChallengeCompleted = true
@@ -216,7 +216,7 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
         return (requireActivity() as ChallengeActivity).getFileResultPhoto()
     }
 
-    private fun loadImageFromRemotoOrLocal(challenge: MoldeChallengeCompleted?) {
+    private fun loadImageFromRemotoOrLocal(challenge: ChallengeCompleted?) {
         var image  = (requireActivity() as ChallengeActivity).getPathResultPhoto()
         idChallengeDocument = challenge?.id?:""
         println("image activity: ${image}")
@@ -257,7 +257,7 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
 
     }
 
-    fun loadImageNotUpload(challenge: MoldeChallengeCompleted?) {
+    fun loadImageNotUpload(challenge: ChallengeCompleted?) {
 
         Glide.with(this)
             .load(challenge?.url)
