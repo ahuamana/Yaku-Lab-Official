@@ -14,15 +14,16 @@ import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.DialogMoreInfoBinding
 import com.paparazziteam.yakulap.databinding.ItemChallengeOptionBinding
-import com.paparazziteam.yakulap.helper.preventDoubleClick
-import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
-import com.paparazziteam.yakulap.helper.toJson
+import com.paparazziteam.yakulap.helper.*
 import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataChallenge
 import com.paparazziteam.yakulap.modulos.laboratorio.views.ChallengeActivity
 
@@ -30,13 +31,13 @@ class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerVi
 
     var list = challengesList
 
-
     class ViewHolder(itemview : View): RecyclerView.ViewHolder(itemview) {
 
         val TAG = javaClass.name
 
         private lateinit var imageChalleng: ShapeableImageView
         private lateinit var textTitle: MaterialTextView
+
 
         val binding = ItemChallengeOptionBinding.bind(itemview)
 
@@ -46,9 +47,35 @@ class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerVi
                 textTitle       = tvTitulo
             }
 
+            //UI loading
+            binding.progressLoading.beVisible()
+
             itemView.apply {
                 Glide.with(context)
                     .load(item.url)
+                    .listener(object:RequestListener<Drawable>{
+                        override fun onResourceReady(
+                            resource: Drawable?,
+                            model: Any?,
+                            target: Target<Drawable>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            binding.progressLoading.beGone()
+                            return false
+                        }
+
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<Drawable>?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            binding.progressLoading.beGone()
+                            return false
+                        }
+                    })
+                    .error(R.drawable.galeria_imagenes)
                     .into(imageChalleng)
 
                 setOnClickListener {
@@ -66,7 +93,6 @@ class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerVi
         }
 
         private fun createDialog(item: DataChallenge) {
-
             itemView.apply {
 
                 var customBinding = DialogMoreInfoBinding.inflate(LayoutInflater.from(context))
@@ -75,7 +101,7 @@ class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerVi
                 dialog.setCancelable(true)
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
                 dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                dialog.setContentView(customBinding.getRoot())
+                dialog.setContentView(customBinding.root)
 
                 Glide.with(context)
                     .load(item.url)
@@ -101,7 +127,6 @@ class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerVi
                 })
                 dialog.show()
             }
-
         }
     }
 

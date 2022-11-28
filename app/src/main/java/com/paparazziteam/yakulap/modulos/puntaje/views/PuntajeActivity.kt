@@ -5,8 +5,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.widget.LinearLayout
+import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.isVisible
+import androidx.core.content.ContextCompat
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
@@ -17,11 +18,16 @@ import com.paparazziteam.yakulap.helper.beGone
 import com.paparazziteam.yakulap.helper.beVisible
 import com.paparazziteam.yakulap.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.modulos.puntaje.viewmodels.ViewModelPuntaje
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class PuntajeActivity : AppCompatActivity() {
 
-    private var _viewModel = ViewModelPuntaje.getInstance()
-    private var preferences = MyPreferences()
+    private val _viewModel:ViewModelPuntaje by viewModels()
+
+    @Inject
+    lateinit var mPreferences:MyPreferences
 
     private lateinit var imgMedal:ShapeableImageView
     private lateinit var skeleton: ShimmerFrameLayout
@@ -53,7 +59,7 @@ class PuntajeActivity : AppCompatActivity() {
     private fun toolbar() {
         myToolbar.apply {
             navigationIcon = getDrawable(R.drawable.ic_arrow_back_white)
-            setTitleTextColor(getColor(R.color.white));
+            setTitleTextColor(ContextCompat.getColor(context,R.color.white));
             title = "Puntaje"
             setNavigationOnClickListener {
                 finish()
@@ -65,29 +71,33 @@ class PuntajeActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             //Do something after 2000mms
             _viewModel.showMedal()
-        }, 3000)
+        }, 1000)
 
-        puntajeTxt.text = preferences.points.toString()
+        puntajeTxt.text = mPreferences.points.toString()
 
     }
 
 
     private fun observers() {
         _viewModel.getMedal().observe(this){ medal->
-                //close skeleton
-            skeleton.stopShimmer()
-            skeleton.hideShimmer()
-            imgMedal.setImageDrawable(medal)
             skeleton.beGone()
+            imgMedal.setImageDrawable(medal)
             contenidoPrincipal.beVisible()
+        }
 
-
+        _viewModel.loading.observe(this){
+            if(it){
+                skeleton.beVisible()
+                skeleton.startShimmer()
+            }else{
+                skeleton.beGone()
+                skeleton.stopShimmer()
+            }
         }
 
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        ViewModelPuntaje.destroyInstance()
     }
 }

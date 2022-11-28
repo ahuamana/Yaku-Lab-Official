@@ -4,12 +4,15 @@ import com.paparazziteam.yakulap.helper.Constants
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
+@Serializable
 data class DataCategory (
+    @SerialName("Categorias")
     var Categorias: List<DataItems>? = null,
 )
 
+@Serializable
 data class DataItems (
+    @SerialName("Challenge")
     var Challenge: List<DataChallenge>? = null,
 )
 

@@ -5,12 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -22,9 +22,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityDashboardBinding
 import com.paparazziteam.yakulap.helper.application.MyPreferences
-import com.paparazziteam.yakulap.helper.application.showErrorToast
 import com.paparazziteam.yakulap.helper.application.toast
-import com.paparazziteam.yakulap.helper.fromJson
 import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
 import com.paparazziteam.yakulap.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.helper.toJson
@@ -32,20 +30,26 @@ import com.paparazziteam.yakulap.modulos.bienvenida.views.WelcomeActivity
 import com.paparazziteam.yakulap.modulos.dashboard.fragments.BottomDialogFragment
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
 import com.paparazziteam.yakulap.modulos.puntaje.views.PuntajeActivity
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class DashboardActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityDashboardBinding
-    private var preferences = MyPreferences()
+
     private lateinit var mainToolbar: Toolbar
     lateinit var drawer:DrawerLayout
     lateinit var navView:NavigationView
     lateinit var headerLayout: View
     lateinit var greetingsNameHeader: MaterialTextView
 
-    private var _viewModel = ViewModelDashboard.getInstance()
+    @Inject
+    lateinit var preferences:MyPreferences
+
+    private val _viewModel:ViewModelDashboard by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +74,7 @@ class DashboardActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_dashboard)
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow
+                R.id.nav_home
             ), drawer
         )
 
@@ -140,17 +144,17 @@ class DashboardActivity : AppCompatActivity() {
                 this.toast(it)
             }
         }
-
     }
 
     private fun saveLogin() {
         preferences.isLogin = true
     }
 
+
     private fun setToolbarConfig() {
         mainToolbar.apply {
             title = "Desafíos"
-            setTitleTextColor(getColor(R.color.colorWhite))
+            setTitleTextColor(ContextCompat.getColor(context, R.color.colorWhite))
             navigationIcon = getDrawable(R.drawable.ic_menu)
         }
     }
@@ -164,30 +168,14 @@ class DashboardActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        /*menuInflater.inflate(R.menu.dashboard, menu)
-        val itemLogout = menu?.findItem(R.id.action_logout)
-        val icon = ContextCompat.getDrawable(this, R.drawable.ic_logout)
-        //icon?.alpha = 255
-        itemLogout?.icon = icon
-        itemLogout?.isVisible = true
-
-        val itemChallenge = menu?.findItem(R.id.action_challenges)
-        val iconChallenge = ContextCompat.getDrawable(this, R.drawable.ic_target)
-        //icon?.alpha = 255
-        itemChallenge?.icon = iconChallenge
-        itemChallenge?.isVisible = true*/
-
-        return true
-    }
-
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_dashboard)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
     override fun onDestroy() {
-        ViewModelDashboard.destroyInstance()
+        _viewModel.getUserData().removeObservers(this)
+        _viewModel.snackbar.removeObservers(this)
         super.onDestroy()
     }
 }

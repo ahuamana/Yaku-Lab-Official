@@ -52,6 +52,7 @@
     <!-- Thema de Dashboard Principal. -->
     <style name="Theme.noActionBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
+        <item name="android:statusBarColor">#A60043</item>
         <item name="colorPrimary">@color/colorPrimaryYaku</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryYaku</item>
         <item name="colorOnPrimary">@color/white</item>

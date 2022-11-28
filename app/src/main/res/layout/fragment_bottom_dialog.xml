@@ -1,159 +1,168 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:fitsSystemWindows="true"
-    android:background="@color/colorTransparent"
-    android:paddingTop="4dp"
-    android:elevation="16dp"
-    android:clickable="false"
-    android:focusable="false"
-    app:behavior_peekHeight="0dp"
-    android:touchscreenBlocksFocus="false"
-    android:filterTouchesWhenObscured="false"
-    android:focusableInTouchMode="false"
-    android:orientation="vertical"
-    app:layout_behavior="@string/bottom_sheet_behavior"
-    app:behavior_hideable="true">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:fitsSystemWindows="true"
+        android:background="@color/colorTransparent"
+        android:paddingTop="4dp"
+        android:elevation="16dp"
+        android:clickable="false"
+        android:focusable="false"
+        app:behavior_peekHeight="0dp"
+        android:touchscreenBlocksFocus="false"
+        android:filterTouchesWhenObscured="false"
+        android:focusableInTouchMode="false"
+        android:orientation="vertical"
+        app:layout_behavior="@string/bottom_sheet_behavior"
+        app:behavior_hideable="true">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clickable="true"
-            android:elevation="24dp"
-            android:focusable="true">
-
-            <ImageView
-                android:id="@+id/linea_desple"
-                android:layout_width="48dp"
-                android:layout_height="4dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/button_login_disabled"
-                app:tint="@color/linea_bottomsheet" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_title"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/linea_desple">
-
-                <TextView
-                    style="@style/CustomTextViewStyleOne"
-                    android:layout_marginLeft="24dp"
-                    android:text="@string/resources_help"
-                    android:textSize="18dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/opcion_contacte_soporte"
-                android:layout_width="0dp"
-                android:paddingStart="35dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clickable="true"
-                android:background="@drawable/ripple_corner_radius"
-                android:focusable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:padding="16dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layout_title">
+                android:elevation="24dp"
+                android:focusable="true">
 
                 <ImageView
-                    android:id="@+id/action_descarga"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:backgroundTint="@color/colorTransparent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:id="@+id/linea_desple"
+                    android:layout_width="48dp"
+                    android:layout_height="4dp"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/hr"
-                    app:tint="@color/black" />
+                    app:srcCompat="@drawable/button_login_disabled"
+                    app:tint="@color/linea_bottomsheet" />
 
-                <TextView
-                    android:id="@+id/lbl_descargar_imagen"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="16dp"
-                    android:fontFamily="@font/product_sans_regular"
-                    android:text="@string/resources_contact_whatsapp"
-                    android:textColor="@color/color_text_web"
-                    android:textSize="14dp"
-                    android:tint="@color/black"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@+id/action_descarga"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/opcion_new_funtionality"
-                android:layout_width="0dp"
-                android:paddingStart="35dp"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="@drawable/ripple_corner_radius"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:padding="16dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/opcion_contacte_soporte">
-
-                <ImageView
-                    android:id="@+id/action_compartir"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:backgroundTint="@color/colorTransparent"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layout_title"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/new_funtionality"
-                    app:tint="@color/black" />
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/linea_desple">
 
-                <TextView
-                    android:id="@+id/lbl_compartir_imagen"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        style="@style/CustomTextViewStyleOne"
+                        android:layout_marginLeft="24dp"
+                        android:text="@string/resources_help"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/opcion_contacte_soporte"
+                    android:layout_width="0dp"
+                    android:paddingStart="35dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="16dp"
-                    android:fontFamily="@font/product_sans_regular"
-                    android:text="@string/resources_new_funtionality"
-                    android:textColor="@color/color_text_web"
-                    android:textSize="14dp"
-                    android:tint="@color/color_input_text"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@+id/action_compartir"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <View
-                android:id="@+id/curtain_resources_help"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="@drawable/background_input_disable"
-                android:clickable="true"
-                android:focusable="true"
-                android:visibility="visible"
-                app:layout_constraintBottom_toBottomOf="@+id/opcion_new_funtionality"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/opcion_contacte_soporte"></View>
+                    android:clickable="true"
+                    android:background="@drawable/ripple_corner_radius"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layout_title">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    <ImageView
+                        android:id="@+id/action_descarga"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:backgroundTint="@color/colorTransparent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/hr"
+                        app:tint="@color/black" />
+
+                    <TextView
+                        android:id="@+id/lbl_descargar_imagen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:text="@string/resources_contact_whatsapp"
+                        android:textColor="@color/color_text_web"
+                        android:textSize="14dp"
+                        android:tint="@color/black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toRightOf="@+id/action_descarga"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/opcion_new_funtionality"
+                    android:layout_width="0dp"
+                    android:paddingStart="35dp"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="@drawable/ripple_corner_radius"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/opcion_contacte_soporte">
+
+                    <ImageView
+                        android:id="@+id/action_compartir"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:backgroundTint="@color/colorTransparent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/new_funtionality"
+                        app:tint="@color/black" />
+
+                    <TextView
+                        android:id="@+id/lbl_compartir_imagen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:text="@string/resources_new_funtionality"
+                        android:textColor="@color/color_text_web"
+                        android:textSize="14dp"
+                        android:tint="@color/color_input_text"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toRightOf="@+id/action_compartir"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/curtain_resources_help"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/background_input_disable"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@+id/opcion_new_funtionality"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/opcion_contacte_soporte"></View>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -8,38 +8,44 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.paparazziteam.yakulap.databinding.FragmentHomeBinding
-import com.paparazziteam.yakulap.helper.TAG
+import com.paparazziteam.yakulap.helper.*
 import com.paparazziteam.yakulap.helper.application.MyPreferences
-import com.paparazziteam.yakulap.helper.fromJson
-import com.paparazziteam.yakulap.helper.preventDoubleClick
 import com.paparazziteam.yakulap.modulos.dashboard.adapters.AdapterChallengeCompleted
-import com.paparazziteam.yakulap.modulos.dashboard.interfaces.clickedItemCompleted
-import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
+import com.paparazziteam.yakulap.modulos.dashboard.interfaces.onClickThread
+import com.paparazziteam.yakulap.modulos.dashboard.pojo.ChallengeCompleted
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.TypeGroup
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
 import com.paparazziteam.yakulap.modulos.laboratorio.views.ChallengeParentActivity
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class HomeFragment : Fragment(), clickedItemCompleted {
+@AndroidEntryPoint
+class HomeFragment : Fragment(), onClickThread {
 
-    var mPreferences = MyPreferences()
+    @Inject
+    lateinit var mPreferences:MyPreferences
 
-    private var _binding: FragmentHomeBinding? = null
-    private var _viewModel = ViewModelDashboard.getInstance()
+    private var binding: FragmentHomeBinding by autoCleared()
+    private val _viewModel:ViewModelDashboard by activityViewModels()
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    private var clickedItemCompleted:clickedItemCompleted?=null
+    private var clickedItemCompleted:onClickThread?=null
 
     //Laboratorio
     var mLinearLayoutManager: LinearLayoutManager? = null
-    private var recyclerView: RecyclerView? = null
+    private var mRecyclerChallengesCompleted: RecyclerView? = null
+
+    //UI shimmer
+    private var shimmerSkeleton: ShimmerFrameLayout? = null
+    //UI body
+    private var bodyLayout: ConstraintLayout? = null
 
     //Content Animals
     var mLinearLayoutAnimals: LinearLayout? = null
@@ -54,23 +60,40 @@ class HomeFragment : Fragment(), clickedItemCompleted {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        clickedItemCompleted = this
+        ui()
+        setUpRecycler()
+        observerComponents()
+        otherComponents()
+        getChallengesCompleted()
 
+        return binding.root
+    }
+
+    private fun ui() {
         binding.apply {
-            recyclerView = recycler
+            mRecyclerChallengesCompleted = recycler
             mLinearLayoutAnimals = linearLayoutAnimales
             mCardFruits         = cardFruits
             mCardPlants         = cardPlants
+            shimmerSkeleton              = shimmerLoading
+            bodyLayout                   = containerLayoutBodyChallenges
+        }
+        clickedItemCompleted = this
+    }
+
+    private fun setUpRecycler() {
+        mLinearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
+        mAdapter = AdapterChallengeCompleted(clickedItemCompleted, mPreferences)
+        mRecyclerChallengesCompleted?.apply {
+            layoutManager = mLinearLayoutManager
+            adapter =  mAdapter
         }
 
-        observerComponents()
-        getDataLaboratorio()
-        otherComponents()
-
-        return root
+        mAdapter?.onClickUpdateLikeListener {
+            _viewModel.updateLikeStatusFirebase(it)
+        }
     }
 
     private fun otherComponents() {
@@ -98,38 +121,34 @@ class HomeFragment : Fragment(), clickedItemCompleted {
 
     private fun observerComponents() {
 
-        _viewModel.challengesCompletedObservable.observe(viewLifecycleOwner) { challenges ->
-            if (challenges.isNotEmpty()) {
-                println("challenges total: ${challenges.count()}")
-                var posts: MutableList<String>
-                if(!mPreferences.postBlocked.isNullOrEmpty()){
-                    try {
-                        posts = fromJson(mPreferences.postBlocked)
-                        println("challenges total: $posts")
-                        posts.forEach { _post->
-                            challenges.removeIf{
-                                it.id == _post
-                            }
-                        }
-                    }catch (t:Throwable){
-                        FirebaseCrashlytics.getInstance().recordException(t)
-                    }
-
-                }
-                mAdapter = AdapterChallengeCompleted(challenges, clickedItemCompleted)
-                recyclerView?.adapter = mAdapter
-            }
+        _viewModel.challengesCompleted.observe(viewLifecycleOwner) { challenges ->
+            hideSkeleton()
+            mAdapter?.setUserList(challenges)
         }
 
-        _viewModel.newPostBlocked.observe(viewLifecycleOwner){
-            mAdapter?.removePost(it)
+        _viewModel.challengesEmpty.observe(viewLifecycleOwner, Observer {
+            //Show Skeleton empty
+            hideSkeleton()
+        })
+
+        _viewModel.loading.observe(viewLifecycleOwner){
+            if(it) showSkeleton()
+            else hideSkeleton()
         }
     }
 
-    private fun getDataLaboratorio() {
-        mLinearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-        recyclerView?.layoutManager = mLinearLayoutManager
-        getChallengesCompleted()
+    private fun hideSkeleton() {
+        Log.d("TAG","hideSkeleton")
+        shimmerSkeleton?.beGone()
+        bodyLayout?.beVisible()
+
+    }
+
+    private fun showSkeleton() {
+        Log.d("TAG","ShowSkeleton")
+        bodyLayout?.beGone()
+        shimmerSkeleton?.beVisible()
+
     }
 
     private fun getChallengesCompleted() {
@@ -137,13 +156,25 @@ class HomeFragment : Fragment(), clickedItemCompleted {
     }
 
     override fun onDestroyView() {
+        _viewModel.challengesCompleted.removeObservers(this)
+        _viewModel.newPostHided.removeObservers(this)
+        _viewModel.removeListener()
         super.onDestroyView()
-        _binding = null
-        _viewModel.challengesCompletedObservable.removeObservers(this)
     }
 
-    override fun clickOnUpdateLike(item: MoldeChallengeCompleted) {
+    override fun clickOnUpdateLike(item: ChallengeCompleted) {
         _viewModel.updateLikeStatusFirebase(item)
+    }
+
+    override fun clickedComentThread(item: ChallengeCompleted) {
+        val bottomSheetDialogFragment = BottomDialogFragmentComentar.newInstance(item.id?:"")
+        bottomSheetDialogFragment.show(parentFragmentManager,"bottomSheetDialogFragment")
+    }
+
+    override fun clickedReportThread(item: ChallengeCompleted) {
+        val fragment = BottomDialogFragmentMoreOptions.newInstance(toJson(item))
+        fragment.show(parentFragmentManager,"bottomSheetMoreOptions")
+
     }
 
 

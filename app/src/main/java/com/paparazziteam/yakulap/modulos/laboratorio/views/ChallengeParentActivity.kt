@@ -5,12 +5,15 @@ import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.tabs.TabLayout
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityChallengeParentBinding
 import com.paparazziteam.yakulap.helper.Constants.CATEGORY_DOMESTIC_ANIMALS
 import com.paparazziteam.yakulap.helper.Constants.CATEGORY_INSECTS
 import com.paparazziteam.yakulap.helper.Constants.CATEGORY_OTHERS_ANIMALS
+import com.paparazziteam.yakulap.helper.beGone
+import com.paparazziteam.yakulap.helper.beVisible
 import com.paparazziteam.yakulap.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.helper.toJson
 import com.paparazziteam.yakulap.modulos.laboratorio.adapters.ViewPagerAdapter
@@ -18,7 +21,9 @@ import com.paparazziteam.yakulap.modulos.laboratorio.fragments.ListChallengeFrag
 import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataChallenge
 import com.paparazziteam.yakulap.modulos.laboratorio.pojo.TypeCategoria
 import com.paparazziteam.yakulap.modulos.laboratorio.viewmodels.ViewModelLab
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChallengeParentActivity : AppCompatActivity() {
 
     var binding:ActivityChallengeParentBinding?= null
@@ -33,6 +38,9 @@ class ChallengeParentActivity : AppCompatActivity() {
     var titles = mutableListOf<String>()
     var mAdapterViewPager:ViewPagerAdapter?= null
 
+    //Ui Shimmer Loading
+    var mShimmerLayout: ShimmerFrameLayout?= null
+
     private var listCategoriOne: MutableList<DataChallenge> = mutableListOf()
     private var listCategoriTwo: MutableList<DataChallenge> = mutableListOf()
     private var listCategoriThree: MutableList<DataChallenge> = mutableListOf()
@@ -46,18 +54,26 @@ class ChallengeParentActivity : AppCompatActivity() {
 
         var type = intent.getStringExtra("typeGroup")
 
+
+        ui()
+        otherComponents()
+        setupActionBar()
+        observers()
+        viewModelLab.getData(type)
+    }
+
+    private fun otherComponents() {
+        mTabLayout?.setupWithViewPager(mViewPager)
+        mAdapterViewPager = ViewPagerAdapter(supportFragmentManager)
+    }
+
+    private fun ui() {
         binding?.apply {
             mTabLayout  = tabLayout
             mViewPager  = viewPager
             myToolbar   = include.toolbar
+            mShimmerLayout = shimmerLoading
         }
-
-        mTabLayout?.setupWithViewPager(mViewPager)
-        mAdapterViewPager = ViewPagerAdapter(supportFragmentManager)
-
-        setupActionBar()
-        observers()
-        viewModelLab.getData(type)
     }
 
     private fun setupActionBar() {
@@ -100,6 +116,20 @@ class ChallengeParentActivity : AppCompatActivity() {
                 println("Titles empty")
             }
 
+        }
+
+        viewModelLab.loading.observe(this){
+            if(it){
+                mShimmerLayout?.apply {
+                    beVisible()
+                    startShimmer()
+                }
+            }else{
+                mShimmerLayout?.apply {
+                    beGone()
+                    stopShimmer()
+                }
+            }
         }
     }
 
