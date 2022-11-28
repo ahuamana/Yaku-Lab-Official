@@ -12,3 +12,7 @@ YAKU LAB es una app que sirve como herramienta de apoyo en el reforzamiento del 
 "#¿Cuál es el problema que buscas solucionar?"
 
 Los resultados de los exámenes PISA 2018 de la Organización para la Cooperación y el Desarrollo Económico (OCDE), en donde se anali-zaron las competencias cognitivas en el área de Ciencia de 342 colegios peruanos y más de 8000 estudiantes de colegios privados y estatales en donde el Perú ocupa el puesto 64, de 79 países evaluados. A partir de allí podemos afirmar que nivel de aprendizaje de los estudiantes peruanos es aún deficiente
+
+"#Encuentranós en la Playstore & AppGallery"
+
+https://play.google.com/store/apps/details?id=com.paparazziteam.yakulap
