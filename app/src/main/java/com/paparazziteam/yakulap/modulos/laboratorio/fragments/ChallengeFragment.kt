@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -23,31 +24,36 @@ import com.paparazziteam.yakulap.databinding.FragmentChallengeBinding
 import com.paparazziteam.yakulap.helper.*
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.application.toast
-import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
+import com.paparazziteam.yakulap.modulos.dashboard.pojo.ChallengeCompleted
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
-import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataCategory
 import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataChallenge
 import com.paparazziteam.yakulap.modulos.laboratorio.viewmodels.ViewModelChallenge
 import com.paparazziteam.yakulap.modulos.laboratorio.viewmodels.ViewModelLab
 import com.paparazziteam.yakulap.modulos.laboratorio.views.ChallengeActivity
 import com.paparazziteam.yakulap.modulos.laboratorio.views.ResultCaptureImageActivity
+import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
 import java.io.File
 import java.util.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragment() {
+
+    private val viewModelDashboard:ViewModelDashboard by viewModels()
 
     var binding: FragmentChallengeBinding?= null
 
     val ARG_JSON        = "extra"
     val ARG_EXTRA_PATH  = "ARG_EXTRA_PATH"
     var data_extra = DataChallenge()
-    var preferences = MyPreferences()
+
+    @Inject
+    lateinit var mPreferences :MyPreferences
 
     var idChallengeDocument = ""
 
-    var viewModel = ViewModelChallenge.getInstance()
-    var viewModelDashboard = ViewModelDashboard.getInstance()
+    private val viewModel:ViewModelChallenge by viewModels()
     var txtImageNotUploaded: MaterialTextView?= null
 
     private lateinit var imgChallengeChild: FloatingActionButton
@@ -155,10 +161,10 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
     }
 
     private fun prepareImageToUploadRemote() {
-        var completed  = MoldeChallengeCompleted(
-            author_email = preferences.email_login,
-            author_lastname =  preferences.lastName,
-            author_name = preferences.firstName,
+        var completed  = ChallengeCompleted(
+            author_email = mPreferences.email_login,
+            author_lastname =  mPreferences.lastName,
+            author_name = mPreferences.firstName,
             timestamp = Date().time,
             tipo = data_extra.category,
             challenge_id = data_extra.id,
@@ -167,7 +173,7 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
         UploadedPhoto(completed)
     }
 
-    private fun UploadedPhoto(completed: MoldeChallengeCompleted) {
+    private fun UploadedPhoto(completed: ChallengeCompleted) {
         mDialog = ProgressDialog(requireContext())
         mDialog?.setTitle("Espere un momento")
         mDialog?.setMessage("Guardando Información")
@@ -184,10 +190,10 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
     }
 
     fun getInfoChallengeCompleted(){
-        println("MySharedPreferences email: ${MyPreferences().email_login}")
+        println("MySharedPreferences email: ${mPreferences.email_login}")
         println("DataExtra id: ${data_extra.id}")
         viewModel.getChallengeInformation(data_extra.id){
-                isCorrect:Boolean, challenge: MoldeChallengeCompleted?->
+                isCorrect:Boolean, challenge: ChallengeCompleted?->
             if(isCorrect){
                 Log.d(TAG_CHALLENGE_FRAGMENT,"result reto: $challenge")
                 isChallengeCompleted = true
@@ -202,16 +208,16 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
 
     private fun getImageActivity():Uri{
         //Log.d("TAG","Variable ARGUMENTO PATH: ${image}")
-        return (context as ChallengeActivity).getPathResultPhoto()
+        return (requireActivity() as ChallengeActivity).getPathResultPhoto()
     }
 
     private fun getImageFileActivity(): File?{
         //Log.d("TAG","Variable ARGUMENTO PATH: ${image}")
-        return (context as ChallengeActivity).getFileResultPhoto()
+        return (requireActivity() as ChallengeActivity).getFileResultPhoto()
     }
 
-    private fun loadImageFromRemotoOrLocal(challenge: MoldeChallengeCompleted?) {
-        var image  = (context as ChallengeActivity).getPathResultPhoto()
+    private fun loadImageFromRemotoOrLocal(challenge: ChallengeCompleted?) {
+        var image  = (requireActivity() as ChallengeActivity).getPathResultPhoto()
         idChallengeDocument = challenge?.id?:""
         println("image activity: ${image}")
         if(!image.toString().isNullOrEmpty()){
@@ -251,7 +257,7 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
 
     }
 
-    fun loadImageNotUpload(challenge: MoldeChallengeCompleted?) {
+    fun loadImageNotUpload(challenge: ChallengeCompleted?) {
 
         Glide.with(this)
             .load(challenge?.url)
@@ -295,7 +301,8 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
     override fun onDestroy() {
         super.onDestroy()
         ViewModelLab.destroyInstance()
-        ViewModelDashboard.destroyInstance()
+        viewModelDashboard.errorUpload.removeObservers(this)
+        viewModelDashboard.completeUpload.removeObservers(this)
     }
 
     private fun setupChallengeData() {

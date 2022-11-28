@@ -1,233 +1,245 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context=".modulos.puntaje.views.PuntajeActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-<androidx.appcompat.widget.Toolbar
-    android:id="@+id/toolbar_activity"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/colorPrimaryYaku"
-    app:navigationIcon="@drawable/ic_arrow_back_white"
-    app:titleTextColor="@color/white"/>
+    <data>
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_marginTop="?attr/actionBarSize"
-    android:layout_height="wrap_content">
+    </data>
 
-    <FrameLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:id="@+id/content_main"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:visibility="gone"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="30dp"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:orientation="vertical">
+        android:layout_height="match_parent"
+        tools:context=".modulos.puntaje.views.PuntajeActivity">
 
-                <androidx.cardview.widget.CardView
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryYaku"
+            app:navigationIcon="@drawable/ic_arrow_back_white"
+            app:titleTextColor="@color/white" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/content_main"
                     android:layout_width="match_parent"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    app:cardCornerRadius="5dp"
-                    app:cardElevation="0dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="20dp"
+                    android:visibility="gone"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="30dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginEnd="5dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="0dp"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingBottom="20dp"
+                                android:layout_gravity="center"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:id="@+id/imageViewMedalPoints"
+                                    android:layout_width="wrap_content"
+                                    android:layout_marginTop="20dp"
+                                    android:src="@drawable/bronze_medal"
+                                    android:layout_height="150dp" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/textViewPoints"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="0"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/colorPrimaryYaku"
+                                    android:textSize="40dp"
+                                    android:fontFamily="@font/product_sans_bold"
+                                    android:contentDescription="Sube una foto"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_gravity="center" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:text="Puntos"
+                                    android:fontFamily="@font/product_sans_regular"
+                                    android:textColor="@color/colorPrimaryYaku"
+                                    android:layout_gravity="center"
+                                    android:layout_height="wrap_content" />
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="Medallas"
+                        android:fontFamily="@font/product_sans_bold"
+                        android:textSize="20dp"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="20dp"
-                        android:layout_gravity="center"
-                        android:orientation="vertical">
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal">
 
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:id="@+id/imageViewMedalPoints"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:src="@drawable/bronze_medal"
-                            android:layout_height="150dp"/>
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/textViewPoints"
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textStyle="bold"
-                            android:textColor="@color/colorPrimaryYaku"
-                            android:textSize="40dp"
-                            android:fontFamily="@font/product_sans_bold"
-                            android:contentDescription="Sube una foto"
-                            android:layout_marginTop="10dp"
-                            android:layout_gravity="center"/>
+                            android:layout_weight="1"
+                            android:orientation="vertical">
 
-                        <com.google.android.material.textview.MaterialTextView
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:textSize="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/product_sans_bold"
+                                android:textColor="@color/colorPrimaryLightPix"
+                                android:gravity="center"
+                                android:text="0 a 10 \nPuntos" />
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="wrap_content"
+                                android:src="@drawable/bronze_medal"
+                                android:layout_height="80dp" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="@font/product_sans_bold"
+                                android:textColor="@color/colorSecondaryYaku"
+                                android:text="Bronce" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
-                            android:text="Puntos"
-                            android:fontFamily="@font/product_sans_regular"
-                            android:textColor="@color/colorPrimaryYaku"
-                            android:layout_gravity="center"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:textSize="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/product_sans_bold"
+                                android:textColor="@color/colorPrimaryLightPix"
+                                android:gravity="center"
+                                android:text="11 a 50 \nPuntos" />
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="wrap_content"
+                                android:src="@drawable/silver_medal"
+                                android:layout_height="80dp" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="@font/product_sans_bold"
+                                android:textColor="@color/colorSecondaryYaku"
+                                android:text="Plata" />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:textSize="10dp"
+                                android:layout_marginBottom="5dp"
+                                android:textStyle="bold"
+                                android:fontFamily="@font/product_sans_bold"
+                                android:textColor="@color/colorPrimaryLightPix"
+                                android:gravity="center"
+                                android:text="Más de 50 \nPuntos" />
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="wrap_content"
+                                android:src="@drawable/gold_medal"
+                                android:layout_height="80dp" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+
+                                android:layout_marginTop="10dp"
+                                android:fontFamily="@font/product_sans_bold"
+                                android:textColor="@color/colorSecondaryYaku"
+                                android:text="Oro" />
+
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Medallas"
-                android:fontFamily="@font/product_sans_bold"
-                android:textSize="20dp"
-                android:textColor="@color/black"
-                android:layout_gravity="center"/>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textSize="10dp"
-                        android:layout_marginBottom="5dp"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/product_sans_bold"
-                        android:textColor="@color/colorPrimaryLightPix"
-                        android:gravity="center"
-                        android:text="0 a 10 \nPuntos"/>
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="wrap_content"
-                        android:src="@drawable/bronze_medal"
-                        android:layout_height="80dp"/>
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/product_sans_bold"
-                        android:textColor="@color/colorSecondaryYaku"
-                        android:text="Bronce"/>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textSize="10dp"
-                        android:layout_marginBottom="5dp"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/product_sans_bold"
-                        android:textColor="@color/colorPrimaryLightPix"
-                        android:gravity="center"
-                        android:text="11 a 50 \nPuntos"/>
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="wrap_content"
-                        android:src="@drawable/silver_medal"
-                        android:layout_height="80dp"/>
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/product_sans_bold"
-                        android:textColor="@color/colorSecondaryYaku"
-                        android:text="Plata"/>
-
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textSize="10dp"
-                        android:layout_marginBottom="5dp"
-                        android:textStyle="bold"
-                        android:fontFamily="@font/product_sans_bold"
-                        android:textColor="@color/colorPrimaryLightPix"
-                        android:gravity="center"
-                        android:text="Más de 50 \nPuntos"/>
-
-                    <com.google.android.material.imageview.ShapeableImageView
-                        android:layout_width="wrap_content"
-                        android:src="@drawable/gold_medal"
-                        android:layout_height="80dp"/>
-
-                    <com.google.android.material.textview.MaterialTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-
-                        android:layout_marginTop="10dp"
-                        android:fontFamily="@font/product_sans_bold"
-                        android:textColor="@color/colorSecondaryYaku"
-                        android:text="Oro"/>
-
-
                 </LinearLayout>
 
-            </LinearLayout>
+                <!--Content Skeleton-->
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/content_skeletom"
+                    android:visibility="visible"
+                    app:shimmer_auto_start="true"
+                    android:layout_height="wrap_content">
 
-        </LinearLayout>
+                    <include
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        layout="@layout/item_skeleton_points" />
 
-        <!--Content Skeleton-->
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:layout_width="match_parent"
-            android:id="@+id/content_skeletom"
-            android:visibility="visible"
-            app:shimmer_auto_start="true"
-            android:layout_height="wrap_content">
-
-            <include
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                layout="@layout/item_skeleton_points"/>
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
-    </FrameLayout>
+                </com.facebook.shimmer.ShimmerFrameLayout>
+            </FrameLayout>
 
 
+        </ScrollView>
 
-</ScrollView>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -22,6 +22,7 @@ import com.paparazziteam.yakulap.modulos.laboratorio.fragments.ChallengeFragment
 import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataChallenge
 import com.paparazziteam.yakulap.modulos.laboratorio.viewmodels.ViewModelLab
 import com.paparazziteam.yakulap.root.ctx
+import dagger.hilt.android.AndroidEntryPoint
 import io.ak1.pix.PixFragment
 import io.ak1.pix.helpers.PixBus
 import io.ak1.pix.helpers.PixEventCallback
@@ -33,6 +34,7 @@ import io.ak1.pix.models.Options
 import java.io.File
 
 
+@AndroidEntryPoint
 class ChallengeActivity : ToolbarActivity() {
 
     var binding: ActivityChallengeBinding?= null

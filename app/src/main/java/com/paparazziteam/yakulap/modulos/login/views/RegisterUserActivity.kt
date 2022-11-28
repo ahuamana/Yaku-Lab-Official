@@ -60,7 +60,7 @@ class RegisterUserActivity : AppCompatActivity() {
         setColorToStatusBar(this)
 
         binding.apply {
-            toolbar = tool.toolbar
+            //toolbar = tool.toolbar
             termsConditions.text = getString(R.string.terms_conditions_app_register, getString(R.string.app_name))
             edtFullname          = fullname
             edtLastname         = lastname

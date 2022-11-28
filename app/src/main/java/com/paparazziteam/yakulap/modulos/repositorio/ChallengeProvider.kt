@@ -2,7 +2,7 @@ package com.paparazziteam.yakulap.modulos.repositorio
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.*
-import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
+import com.paparazziteam.yakulap.modulos.dashboard.pojo.ChallengeCompleted
 
 class ChallengeProvider {
 
@@ -20,7 +20,7 @@ class ChallengeProvider {
         return mCollection.document()
     }
 
-    fun create(sustantivo: MoldeChallengeCompleted): Task<Void?>? {
+    fun create(sustantivo: ChallengeCompleted): Task<Void?>? {
         return mCollection.document(sustantivo.id?:"").set(sustantivo)
     }
 

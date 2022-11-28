@@ -1,153 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/bottomsheet_opciones"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:background="@color/color_transparent"
-    android:paddingTop="4dp"
-    android:elevation="16dp"
-    android:clickable="false"
-    android:focusable="false"
-    app:behavior_peekHeight="0dp"
-    android:touchscreenBlocksFocus="false"
-    android:filterTouchesWhenObscured="false"
-    android:focusableInTouchMode="false"
-    android:orientation="vertical"
-    tools:context=".modulos.dashboard.fragments.BottomDialogFragmentMoreOptions"
-    app:behavior_hideable="true"
     xmlns:tools="http://schemas.android.com/tools">
-    <LinearLayout
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomsheet_opciones"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorWhite"
-        app:layout_constraintBottom_toBottomOf="parent"
-        style="@style/CustomBottomSheet">
-        <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:background="@color/color_transparent"
+        android:paddingTop="4dp"
+        android:elevation="16dp"
+        android:clickable="false"
+        android:focusable="false"
+        app:behavior_peekHeight="0dp"
+        android:touchscreenBlocksFocus="false"
+        android:filterTouchesWhenObscured="false"
+        android:focusableInTouchMode="false"
+        android:orientation="vertical"
+        tools:context=".modulos.dashboard.fragments.BottomDialogFragmentMoreOptions"
+        app:behavior_hideable="true">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="24dp"
-            android:focusable="true"
-            android:clickable="true">
-            <ImageView
-                android:id="@+id/linea_desple"
-                android:layout_width="48dp"
-                android:layout_height="4dp"
-                app:tint="@color/linea_bottomsheet"
-                android:layout_marginTop="16dp"
-                app:srcCompat="@drawable/button_login_disabled"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"/>
+            android:backgroundTint="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/CustomBottomSheet">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/opcion_report_post"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:foreground="@drawable/ripple_corner_radius"
-                android:padding="16dp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linea_desple">
+                android:elevation="24dp"
+                android:focusable="true"
+                android:clickable="true">
 
-                <ImageButton
-                    android:id="@+id/action_report"
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:id="@+id/linea_desple"
+                    android:layout_width="48dp"
+                    android:layout_height="4dp"
+                    app:tint="@color/linea_bottomsheet"
+                    android:layout_marginTop="16dp"
+                    app:srcCompat="@drawable/button_login_disabled"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/opcion_report_post"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorTransparent"
+                    android:layout_marginTop="8dp"
+                    android:foreground="@drawable/ripple_corner_radius"
+                    android:padding="16dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linea_desple">
+
+                    <ImageButton
+                        android:id="@+id/action_report"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorTransparent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_alert"
+                        app:tint="@color/black" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_report"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:text="@string/report_post"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:tint="@color/black"
+                        app:layout_constraintLeft_toRightOf="@+id/action_report"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/subtitle_report"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:text="@string/concerned_post"
+                        android:textColor="@color/icons"
+                        android:textSize="12dp"
+                        android:tint="@color/icons"
+                        app:layout_constraintBottom_toBottomOf="@+id/action_report"
+                        app:layout_constraintLeft_toRightOf="@+id/action_report"
+                        app:layout_constraintStart_toStartOf="@+id/title_report"
+                        app:layout_constraintTop_toBottomOf="@+id/title_report" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/opcion_hide"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:visibility="visible"
+                    android:foreground="@drawable/ripple_corner_radius"
+                    android:padding="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_alert"
-                    app:tint="@color/black" />
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/opcion_report_post">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/title_report"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="16dp"
-                    android:fontFamily="@font/product_sans_regular"
-                    android:text="@string/report_post"
-                    android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:tint="@color/black"
-                    app:layout_constraintLeft_toRightOf="@+id/action_report"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    <ImageButton
+                        android:id="@+id/action_hide"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorTransparent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_hide"
+                        app:tint="@color/black" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/subtitle_report"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/product_sans_regular"
-                    android:text="@string/concerned_post"
-                    android:textColor="@color/icons"
-                    android:textSize="12dp"
-                    android:tint="@color/icons"
-                    app:layout_constraintBottom_toBottomOf="@+id/action_report"
-                    app:layout_constraintLeft_toRightOf="@+id/action_report"
-                    app:layout_constraintStart_toStartOf="@+id/title_report"
-                    app:layout_constraintTop_toBottomOf="@+id/title_report" />
+                    <TextView
+                        android:id="@+id/icon_hide"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="16dp"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:text="@string/hide_post"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        android:tint="@color/black"
+                        app:layout_constraintLeft_toRightOf="@+id/action_hide"
+                        app:layout_constraintTop_toTopOf="parent" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:text="@string/hide_fewer_post"
+                        android:textColor="@color/icons"
+                        android:textSize="12dp"
+                        android:tint="@color/icons"
+                        app:layout_constraintBottom_toBottomOf="@+id/action_hide"
+                        app:layout_constraintLeft_toRightOf="@+id/action_hide"
+                        app:layout_constraintStart_toStartOf="@+id/icon_hide"
+                        app:layout_constraintTop_toBottomOf="@+id/icon_hide" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/opcion_hide"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:visibility="visible"
-                android:foreground="@drawable/ripple_corner_radius"
-                android:padding="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/opcion_report_post">
-
-                <ImageButton
-                    android:id="@+id/action_hide"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorTransparent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ic_hide"
-                    app:tint="@color/black" />
-
-                <TextView
-                    android:id="@+id/icon_hide"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="16dp"
-                    android:fontFamily="@font/product_sans_regular"
-                    android:text="@string/hide_post"
-                    android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:tint="@color/black"
-                    app:layout_constraintLeft_toRightOf="@+id/action_hide"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/product_sans_regular"
-                    android:text="@string/hide_fewer_post"
-                    android:textColor="@color/icons"
-                    android:textSize="12dp"
-                    android:tint="@color/icons"
-                    app:layout_constraintBottom_toBottomOf="@+id/action_hide"
-                    app:layout_constraintLeft_toRightOf="@+id/action_hide"
-                    app:layout_constraintStart_toStartOf="@+id/icon_hide"
-                    app:layout_constraintTop_toBottomOf="@+id/icon_hide" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

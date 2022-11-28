@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulap.R
@@ -13,8 +15,9 @@ import com.paparazziteam.yakulap.helper.beGone
 import com.paparazziteam.yakulap.helper.fromJson
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.*
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class BottomDialogFragmentMoreOptionsComment : BottomSheetDialogFragment() {
 
     private val ARG_DATA = "DATA"
@@ -22,7 +25,7 @@ class BottomDialogFragmentMoreOptionsComment : BottomSheetDialogFragment() {
     private var _binding: BottomSheetMoreOptionsBinding? = null
     private val binding get() = _binding!!
 
-    private var _viewModel = ViewModelDashboard.getInstance()
+    private val _viewModel: ViewModelDashboard by activityViewModels()
 
 
     var contenedorOptionReport: ConstraintLayout? = null

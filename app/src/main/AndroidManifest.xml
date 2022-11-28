@@ -29,11 +29,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Yakulap"
         android:usesCleartextTraffic="true">
-
         <activity
             android:name=".modulos.laboratorio.views.ResultCaptureImageActivity"
             android:exported="true"
-            android:theme="@style/Theme.noActionBar"></activity>
+            android:theme="@style/Theme.noActionBar" />
         <activity
             android:name=".modulos.laboratorio.views.ChallengeActivity"
             android:exported="false"

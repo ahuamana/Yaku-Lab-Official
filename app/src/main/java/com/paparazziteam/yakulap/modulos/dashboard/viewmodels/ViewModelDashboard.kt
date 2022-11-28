@@ -1,43 +1,50 @@
 package com.paparazziteam.yakulap.modulos.dashboard.viewmodels
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.toObject
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.fromJson
 import com.paparazziteam.yakulap.helper.toJson
+import com.paparazziteam.yakulap.modulos.dashboard.model.ChallengeRepository
+import com.paparazziteam.yakulap.modulos.dashboard.model.CommentRepository
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.*
 import com.paparazziteam.yakulap.modulos.login.pojo.User
 import com.paparazziteam.yakulap.modulos.login.providers.LoginProvider
 import com.paparazziteam.yakulap.modulos.login.providers.UserProvider
 import com.paparazziteam.yakulap.modulos.repositorio.*
+import com.paparazziteam.yakulap.modulos.providers.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.File
-
-class ViewModelDashboard private constructor(){
-
-    val mPreferences = MyPreferences()
-
-    private val mUserProvider = UserProvider()
-    private val mLoginProvider = LoginProvider()
-    private val mCommentProvider = CommentProvider()
-    private val mImageProvider = ImageProvider()
-    private val mChallengeProvider = ChallengeProvider()
-    private val mActionProvider = ReaccionProvider()
-    private val mReportProvider = ReportProvider()
+import javax.inject.Inject
 
 
+@HiltViewModel
+class ViewModelDashboard @Inject constructor(
+    private val mUserProvider:UserProvider,
+    private val mLoginProvider:LoginProvider,
+    private val mCommentRepositoryImpl: CommentRepository,
+    private val mImageProvider:ImageProvider,
+    private val mChallengeProvider: ChallengeRepository,
+    private val mActionProvider:ReaccionProvider,
+    private val mReportProvider:ReportProvider,
+    private val mPreferences:MyPreferences
+): ViewModel(){
 
-    private var challengesCompleted = mutableListOf<MoldeChallengeCompleted>()
+    private var listChallenges = mutableListOf<ChallengeCompleted>()
 
-    private lateinit var mListener: ListenerRegistration
-
-    private val preferences = MyPreferences()
+    private var mListener: ListenerRegistration?= null
 
     private val _errorUpload = MutableLiveData<String>()
     val errorUpload:LiveData<String> = _errorUpload
@@ -57,11 +64,17 @@ class ViewModelDashboard private constructor(){
     private val _user = MutableLiveData<User>()
     fun getUserData():LiveData<User> = _user
 
-    private val _challengesCompleted= MutableLiveData<MutableList<MoldeChallengeCompleted>>()
-    val challengesCompletedObservable:LiveData<MutableList<MoldeChallengeCompleted>> = _challengesCompleted
+    private val _challengesCompleted = MutableLiveData<MutableList<ChallengeCompleted>>()
+    val challengesCompleted:LiveData<MutableList<ChallengeCompleted>> = _challengesCompleted
 
-    private val _newPostBlocked= MutableLiveData<String>()
-    val newPostBlocked:LiveData<String> = _newPostBlocked
+    private val _challengesEmpty = MutableLiveData<MutableList<ChallengeCompleted>>()
+    val challengesEmpty:LiveData<MutableList<ChallengeCompleted>> = _challengesEmpty
+
+    private val _newPostHided= MutableLiveData<String>()
+    val newPostHided:LiveData<String> = _newPostHided
+
+    private val _loading = MutableLiveData<Boolean>()
+    val loading:LiveData<Boolean> = _loading
 
     fun showUserData(){
        var emailLogged = mLoginProvider.getEmail()
@@ -70,13 +83,12 @@ class ViewModelDashboard private constructor(){
                 _user.value = it.result.toObject(User::class.java)
             }else{
                 //error al consultar los puntos
-
             }
         }
     }
 
     fun uploadPhotoRemote(
-        molde: MoldeChallengeCompleted,
+        molde: ChallengeCompleted,
         fileImage: File?,
         pointsToGive: Int,
         isCompleted: Boolean,
@@ -110,7 +122,7 @@ class ViewModelDashboard private constructor(){
     }
 
     private fun updatePhoto(
-        molde: MoldeChallengeCompleted,
+        molde: ChallengeCompleted,
         idChallengeDocument: String
     ) {
             mChallengeProvider.update(idChallengeDocument,molde.url)?.addOnCompleteListener { task->
@@ -122,7 +134,7 @@ class ViewModelDashboard private constructor(){
             }
     }
 
-    private fun saveDataOnFirebase(molde: MoldeChallengeCompleted, pointsToGive: Int) {
+    private fun saveDataOnFirebase(molde: ChallengeCompleted, pointsToGive: Int) {
         mChallengeProvider.create(molde)?.addOnCompleteListener {
             _completeUpload.value = true
             updatePoints(pointsToGive)
@@ -130,38 +142,100 @@ class ViewModelDashboard private constructor(){
     }
 
     private fun updatePoints(pointsToGive: Int) {
-        mUserProvider.updatePoints(MyPreferences().email_login, MyPreferences().
-        points.plus(pointsToGive))?.
+        mUserProvider.updatePoints(mPreferences.email_login,mPreferences.points.plus(pointsToGive))?.
         addOnSuccessListener {
-                MyPreferences().points+=pointsToGive
+            mPreferences.points+=pointsToGive
         }
     }
 
 
     fun showChallengesCompleted(){
+        _loading.value = true
+        CoroutineScope(Dispatchers.Unconfined).launch {
             mListener = mChallengeProvider.getListChallengesOrderByTimeStamp()!!.addSnapshotListener { value, error ->
-
                 if(value?.isEmpty == true) {
-                    android.util.Log.e("TAG","QUERY VACIO")
-                }else
-                {
-                    for (productsnaptshot in  value!!.documents)
-                    {
-                        val challenge = productsnaptshot.toObject<MoldeChallengeCompleted>()
-                        if (challenge != null) {
-                            challengesCompleted.add(challenge)
-                        }
+                    showListEmpty()
+                }else {
+                    //getItems
+                    value?.let {
+                        filterChallengesFromFirebase(it.documents)
+                        filterPostHidden()
                     }
-                    //fill Recycler view
-                    _challengesCompleted.value = challengesCompleted
                 }
 
             }
+        }
+    }
 
+    private fun filterPostHidden(){
+        var posts: MutableList<String>
+        if(!mPreferences.postBlocked.isNullOrEmpty()){
+            try {
+                posts = fromJson(mPreferences.postBlocked)
+                for(_post in posts){
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) removeAboveAndroid7ToMore(listChallenges, _post)
+                    else removePostOnAndroid5To7(listChallenges, _post)
+                }
+                //Notified Challenges completed
+                _loading.value = false
+                _challengesCompleted.value = listChallenges
+            }catch (t:Throwable){
+                FirebaseCrashlytics.getInstance().recordException(t)
+                //Notified error filtering Hidden post
+                _loading.value = false
+                _challengesEmpty.value = mutableListOf()
+            }
+        }else{
+            _loading.value = false
+            _challengesCompleted.value = listChallenges
+        }
+    }
+
+    private fun removePostOnAndroid5To7(
+        challenges: MutableList<ChallengeCompleted>,
+        _post: String) {
+        //Init removing
+        for(_challenge in challenges){
+            if(_challenge.id == _post) challenges.remove(_challenge)
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    private fun removeAboveAndroid7ToMore(
+        challenges: MutableList<ChallengeCompleted>,
+        _post: String
+    ) {
+        challenges.removeIf{ it.id == _post }
+    }
+
+
+
+    private fun filterChallengesFromFirebase(documents: MutableList<DocumentSnapshot>) {
+        for (productsnaptshot in  documents) {
+            val challenge = productsnaptshot.toObject<ChallengeCompleted>()
+            if (challenge != null) {
+                listChallenges.add(challenge)
+            }
+        }
+        //fill Recycler view
+        val challengesUnique = listChallenges.distinctBy {
+            it.id
+        }
+        if(listChallenges.isNotEmpty())  listChallenges.clear()
+        listChallenges.addAll(challengesUnique)
+    }
+
+    private fun showListEmpty() {
+        Log.e("TAG","QUERY VACIO")
+        _challengesCompleted.value = mutableListOf()
+    }
+
+    fun removeListener(){
+        mListener?.remove()
     }
 
     fun getCommentsFromThread(idPhoto:String){
-        mCommentProvider.getCommentsByIdPhoto(idPhoto)?.addSnapshotListener { value, error ->
+        mCommentRepositoryImpl.getCommentsByIdPhoto(idPhoto)?.addSnapshotListener { value, error ->
             Log.e("SIZE BOTTOM", "SIZE: " + value!!.size())
             var commentsList = mutableListOf<Comment>()
 
@@ -181,8 +255,8 @@ class ViewModelDashboard private constructor(){
         }
     }
 
-    fun updateLikeStatusFirebase(item:MoldeChallengeCompleted){
-        mActionProvider.getUserLike(preferences.email_login, item.id)?.get()
+    fun updateLikeStatusFirebase(item:ChallengeCompleted){
+        mActionProvider.getUserLike(mPreferences.email_login, item.id)?.get()
             ?.addOnSuccessListener {
                 if(it.isEmpty){
                     println("Like is empty")
@@ -206,12 +280,12 @@ class ViewModelDashboard private constructor(){
         }
     }
 
-    private fun createLike(item: MoldeChallengeCompleted, like: Boolean) {
-        val idEmail= "${item.id.toString()}_${preferences.email_login}"
+    private fun createLike(item: ChallengeCompleted, like: Boolean) {
+        val idEmail= "${item.id.toString()}_${mPreferences.email_login}"
         var mAction = Reaccion()
         mAction.id_email = idEmail
         mAction.status = like
-        mAction.email = preferences.email_login
+        mAction.email = mPreferences.email_login
         mAction.id = item.id
         mAction.type = "Like"
 
@@ -223,7 +297,7 @@ class ViewModelDashboard private constructor(){
         }
     }
 
-    fun reportContent(item: MoldeChallengeCompleted, type:TypeReport){
+    fun reportContent(item: ChallengeCompleted, type:TypeReport){
         CoroutineScope(Dispatchers.Unconfined).launch{
             //Report Post Update
             var reportPost = ReportPost(
@@ -266,10 +340,8 @@ class ViewModelDashboard private constructor(){
                 posts.add(idChallenge)
                 mPreferences.postBlocked = toJson(posts)
                 mUserProvider.updatePostBlocked(mPreferences.email_login, posts)
-                withContext(Dispatchers.Main) {
-                    println("Notified: Post blocked.")
-                    _newPostBlocked.value = idChallenge
-                }
+                removePostFromList(idChallenge)
+                //_newPostHided.value = idChallenge
             }catch (t:Throwable){
                 println("Error addPostBlocked: ${t.message}")
             }
@@ -277,20 +349,16 @@ class ViewModelDashboard private constructor(){
         }
     }
 
-
-
-    companion object Singleton{
-        private var instance: ViewModelDashboard? = null
-
-        fun getInstance(): ViewModelDashboard =
-            instance ?: ViewModelDashboard(
-                //local y remoto
-            ).also {
-                instance = it
-            }
-
-        fun destroyInstance(){
-            instance = null
+    private fun removePostFromList(idChallenge:String){
+        var index = listChallenges.indexOfFirst {
+            it.id == idChallenge
         }
+        if(index<0) return
+        listChallenges.removeAt(index)
+        _challengesCompleted.value = listChallenges
+    }
+
+    override fun onCleared() {
+        super.onCleared()
     }
 }

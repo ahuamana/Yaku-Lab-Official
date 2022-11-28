@@ -5,16 +5,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityWelcomeBinding
 import com.paparazziteam.yakulap.helper.design.FadePageTransfomer
-import com.paparazziteam.yakulap.modulos.bienvenida.MyPageAdapter
-import com.paparazziteam.yakulap.modulos.bienvenida.fragments.IntroFragment
+import com.paparazziteam.yakulap.modulos.bienvenida.adaters.MyPageAdapter
+import com.paparazziteam.yakulap.modulos.bienvenida.viewmodels.ViewModelWelcome
 import com.paparazziteam.yakulap.modulos.login.views.LoginActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class WelcomeActivity : AppCompatActivity() {
 
     private lateinit var mViewpager: ViewPager
@@ -22,25 +26,39 @@ class WelcomeActivity : AppCompatActivity() {
     private lateinit var dotsLayout: LinearLayout
     private lateinit var dots: MutableList<ImageView>
 
-    private lateinit var binding:ActivityWelcomeBinding
+
+    private val _viewmodel: ViewModelWelcome by viewModels()
+    private lateinit var binding: ActivityWelcomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityWelcomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        binding = DataBindingUtil.setContentView<ActivityWelcomeBinding?>(this,R.layout.activity_welcome).apply {
+          lifecycleOwner = this.lifecycleOwner
+          model = _viewmodel
+        }
 
         //Join views xml
         mViewpager   = binding.viewPagerIntro
         dotsLayout   = binding.layoutDots
 
+        instanceAdapters()
+        observers()
+    }
 
-        val fragments: List<Fragment> = getFragments()
-        mPageAdapter = MyPageAdapter(supportFragmentManager, fragments)
+    private fun observers() {
+        _viewmodel.showFragments().observe(this){
+            mPageAdapter.setFragments(it)
+            addBottomDots(0)
+        }
+        _viewmodel.nextActivity.observe(this){
+            if(it) startActivity(Intent(application, LoginActivity::class.java))
+        }
+    }
 
+    private fun instanceAdapters() {
+        mPageAdapter = MyPageAdapter(supportFragmentManager)
         mViewpager.setPageTransformer(false, FadePageTransfomer())
         mViewpager.adapter = mPageAdapter
-
-        addBottomDots(0)
 
         mViewpager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
@@ -48,29 +66,6 @@ class WelcomeActivity : AppCompatActivity() {
                 addBottomDots(position)
             }
         })
-
-        binding.btnIniciarSesion.setOnClickListener {
-            startActivity(Intent(applicationContext, LoginActivity::class.java))
-        }
-
-    }
-
-    private fun getFragments() : List<Fragment> {
-        val fList = arrayListOf<Fragment>()
-
-        fList.add(IntroFragment().newInstance(R.drawable.intro_primera,
-            getString(R.string.intro_primera),
-            getString(R.string.intro_desc_primera)))
-
-        fList.add(IntroFragment().newInstance(R.drawable.intro_segunda,
-            getString(R.string.intro_segunda),
-            getString(R.string.intro_desc_segunda)))
-
-        fList.add(IntroFragment().newInstance(R.drawable.intro_tercera,
-            getString(R.string.intro_tercera),
-            getString(R.string.intro_desc_tercera)))
-
-        return fList
     }
 
     private fun addBottomDots(currentPage: Int) {

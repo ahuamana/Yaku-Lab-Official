@@ -5,12 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.FragmentIntroBinding
-
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 
 class IntroFragment : Fragment() {
@@ -36,7 +31,7 @@ class IntroFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentIntroBinding.inflate(inflater, container, false)
+       _binding = FragmentIntroBinding.inflate(inflater, container, false)
         val view = binding.root
 
         arguments?.let { value ->

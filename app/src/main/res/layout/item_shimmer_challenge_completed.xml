@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="5dp"
+        app:cardCornerRadius="5dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="15dp"
+        app:contentPaddingTop="13dp"
+        app:contentPaddingRight="10dp"
+        app:contentPaddingLeft="10dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/imgIcon"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:src="@drawable/circle_skeleton"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/authorName"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/corner_radius_style"
+                        app:layout_constraintBottom_toTopOf="@+id/authorAlias"
+                        app:layout_constraintStart_toEndOf="@+id/imgIcon"
+                        app:layout_constraintTop_toTopOf="@+id/imgIcon" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/authorAlias"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/product_sans_regular"
+                        android:background="@drawable/corner_radius_style"
+                        android:textColor="@color/colorGray"
+                        android:textSize="10dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/imgIcon"
+                        app:layout_constraintStart_toEndOf="@+id/imgIcon"
+                        app:layout_constraintTop_toBottomOf="@+id/authorName" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/options_challenge"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/circle_skeleton"
+                        android:layout_marginRight="5dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="@drawable/ripple_corner_radius"
+                        app:layout_constraintBottom_toBottomOf="@+id/authorAlias"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/roundedImageView"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="6dp"
+                    app:cardCornerRadius="5dp"
+                    android:elevation="0dp"
+                    app:cardElevation="0dp"
+                    android:backgroundTint="@color/colorSkeleton"
+                    android:layout_height="170dp">
+
+                </androidx.cardview.widget.CardView>
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/name_challenge"
+                    android:layout_width="120dp"
+                    android:layout_marginTop="5dp"
+                    android:textSize="12dp"
+                    android:background="@drawable/corner_radius_style"
+                    android:fontFamily="@font/product_sans_bold"
+                    android:layout_height="wrap_content"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/colorSkeleton"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutLike"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity=""
+                        android:background="@drawable/corner_radius_style"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_height="25dp"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutComentar"
+                        android:layout_width="0dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/corner_radius_style"
+                        android:layout_height="25dp"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/linearCompartir"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:background="@drawable/corner_radius_style"
+                        android:focusable="true"
+                        android:layout_height="25dp"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+

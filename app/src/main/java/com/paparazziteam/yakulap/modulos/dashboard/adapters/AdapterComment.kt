@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulap.R
-import com.paparazziteam.yakulap.databinding.ItemComentarioBinding
 import com.paparazziteam.yakulap.helper.getActivity
 import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
 import com.paparazziteam.yakulap.helper.toJson
@@ -36,17 +35,17 @@ class AdapterComment : RecyclerView.Adapter<AdapterComment.ViewHolder>(){
 
     class ViewHolder(itemview:View):RecyclerView.ViewHolder(itemview){
 
-        val binding = ItemComentarioBinding.bind(itemview)
+        /*val binding = ItemComentarioBinding.bind(itemview)*/
         var messageText:MaterialTextView?= null
         var txtTitle:MaterialTextView?= null
         var containMensaje:LinearLayout?= null
 
         fun bind(item:Comment){
-            binding.apply {
+            /*binding.apply {
                 messageText         =  txtMessage
                 txtTitle            = title
                 containMensaje      = containerMensaje
-            }
+            }*/
             //Get Info comment User
             getUserInfo(item)
 

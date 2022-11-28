@@ -1,72 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="15dp"
-    tools:context=".modulos.bienvenida.views.SplashActivity">
-    <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.paparazziteam.yakulap.modulos.bienvenida.viewmodels.ViewModelSplashScreen" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:padding="15dp"
+        tools:context=".modulos.bienvenida.views.SplashActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginStart="50dp"
-            android:layout_marginEnd="50dp"
-            app:layout_constraintBottom_toTopOf="@+id/poweredby"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="50dp">
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imglogo"
-                android:layout_width="150dp"
-                android:layout_marginBottom="8dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:src="@drawable/yakulogo" />
-            <ProgressBar
-                android:id="@+id/p_Bar2"
-                style="?android:attr/progressBarStyleHorizontal"
+            android:layout_height="match_parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:orientation="vertical"
                 android:layout_marginStart="50dp"
-                android:indeterminate="true"
-                android:indeterminateTint="@color/colorPrimaryYaku"
                 android:layout_marginEnd="50dp"
-                android:max="00"
-                android:minHeight="25dp"
-                android:progress="0"
-                tools:ignore="MissingConstraints" />
+                app:layout_constraintBottom_toTopOf="@+id/poweredby"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="50dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imglogo"
+                    android:layout_width="150dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_height="150dp"
+                    animation="@{viewmodel.animationLogo}"
+                    android:layout_gravity="center"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/yakulogo" />
+
+                <ProgressBar
+                    android:id="@+id/p_Bar2"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="50dp"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/colorPrimaryYaku"
+                    android:layout_marginEnd="50dp"
+                    android:max="00"
+                    android:minHeight="25dp"
+                    android:progress="0"
+                    tools:ignore="MissingConstraints" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/app_welcome_message" />
+            </LinearLayout>
+
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/poweredby"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/app_welcome_message" />
-        </LinearLayout>
+                android:layout_gravity="center|bottom"
+                android:text="@string/app_powered_by"
+                android:textColor="@color/color_input_text"
+                app:layout_constraintBottom_toTopOf="@+id/versioncode"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/poweredby"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom"
-            android:text="@string/app_powered_by"
-            android:textColor="@color/color_input_text"
-            app:layout_constraintBottom_toTopOf="@+id/versioncode"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/versioncode"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12dp"
-            android:textColor="@color/color_input_text"
-            android:layout_gravity="center|bottom"
-            android:text="@string/app_version_code"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/versioncode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textColor="@color/color_input_text"
+                android:layout_gravity="center|bottom"
+                android:text="@{viewmodel.versionApp}"
+                tools:text="Versión"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

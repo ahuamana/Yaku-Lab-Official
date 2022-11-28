@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -19,22 +22,27 @@ import com.paparazziteam.yakulap.helper.beGone
 import com.paparazziteam.yakulap.helper.beVisible
 import com.paparazziteam.yakulap.helper.onlyOneSpace
 import com.paparazziteam.yakulap.modulos.dashboard.adapters.AdapterComment
+import com.paparazziteam.yakulap.modulos.dashboard.model.CommentRepository
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.Comment
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.TypeComment
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
 import com.paparazziteam.yakulap.modulos.repositorio.CommentProvider
+import com.paparazziteam.yakulap.modulos.dashboard.model.CommentRepositoryImpl
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
 
     private val ARG_ID_PHOTO = "idPhoto"
     private var idPhotoReceived:String?= null
     private var _binding: BottomSheetComentarBinding? = null
     private val binding get() = _binding!!
-    private val mCommentProvider = CommentProvider()
 
-    private var _viewModel = ViewModelDashboard.getInstance()
+    @Inject lateinit var mCommentRepository:CommentRepository
+
+    private val _viewModel:ViewModelDashboard by activityViewModels()
 
     var mLinearLayoutManager: LinearLayoutManager? = null
     var recyclerComments: RecyclerView? = null
@@ -118,13 +126,15 @@ class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
                     fabSendMessage?.apply {
                         isEnabled = true
                         //setBackgroundColor(context.getColor(R.color.colorPrimaryYaku))
-                        backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.colorPrimaryYaku))
+                        var color =ContextCompat.getColor(context, R.color.colorPrimaryYaku)
+                        backgroundTintList = ColorStateList.valueOf(color)
                     }
 
                 }else{
                     fabSendMessage?.apply {
                         isEnabled = false
-                        backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.colorGrayLight))
+                        var color =ContextCompat.getColor(context, R.color.colorGrayLight)
+                        backgroundTintList = ColorStateList.valueOf(color)
                         //setBackgroundColor(context.getColor(R.color.colorGrayLight))
                     }
                 }
@@ -142,7 +152,7 @@ class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
             message = editTextMessage?.text?.trim().toString().onlyOneSpace()
         )
 
-        mCommentProvider.create(comment)?.addOnCompleteListener {
+        mCommentRepository.create(comment)?.addOnCompleteListener {
             editTextMessage?.text?.clear()
         }?.addOnFailureListener {
 

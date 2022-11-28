@@ -30,13 +30,13 @@ class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerVi
 
     var list = challengesList
 
-
     class ViewHolder(itemview : View): RecyclerView.ViewHolder(itemview) {
 
         val TAG = javaClass.name
 
         private lateinit var imageChalleng: ShapeableImageView
         private lateinit var textTitle: MaterialTextView
+
 
         val binding = ItemChallengeOptionBinding.bind(itemview)
 
@@ -66,7 +66,6 @@ class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerVi
         }
 
         private fun createDialog(item: DataChallenge) {
-
             itemView.apply {
 
                 var customBinding = DialogMoreInfoBinding.inflate(LayoutInflater.from(context))
@@ -75,7 +74,7 @@ class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerVi
                 dialog.setCancelable(true)
                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
                 dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                dialog.setContentView(customBinding.getRoot())
+                dialog.setContentView(customBinding.root)
 
                 Glide.with(context)
                     .load(item.url)
@@ -101,7 +100,6 @@ class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerVi
                 })
                 dialog.show()
             }
-
         }
     }
 

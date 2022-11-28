@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.paparazziteam.yakulap.helper.design.TouchImageView
-        android:id="@+id/imageview_slide"
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="matrix"
-        android:elevation="4dp"/>
-    <ImageView
-        android:id="@+id/img_prueba"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="0dp"/>
+        android:layout_height="match_parent">
+
+        <com.paparazziteam.yakulap.helper.design.TouchImageView
+            android:id="@+id/imageview_slide"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="matrix"
+            android:elevation="4dp" />
+
+        <ImageView
+            android:id="@+id/img_prueba"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="0dp" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

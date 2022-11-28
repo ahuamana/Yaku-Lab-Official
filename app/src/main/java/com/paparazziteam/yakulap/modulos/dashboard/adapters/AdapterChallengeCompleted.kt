@@ -1,5 +1,6 @@
 package com.paparazziteam.yakulap.modulos.dashboard.adapters
 
+
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.util.Log
@@ -8,7 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.cardview.widget.CardView
-import androidx.fragment.app.FragmentActivity
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
@@ -22,33 +24,55 @@ import com.paparazziteam.yakulap.helper.application.toast
 import com.paparazziteam.yakulap.helper.design.SlideImageFullScreenActivity
 import com.paparazziteam.yakulap.helper.preventDoubleClick
 import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
-import com.paparazziteam.yakulap.helper.toJson
-import com.paparazziteam.yakulap.modulos.dashboard.fragments.BottomDialogFragmentComentar
-import com.paparazziteam.yakulap.modulos.dashboard.fragments.BottomDialogFragmentMoreOptions
-import com.paparazziteam.yakulap.modulos.dashboard.interfaces.clickedItemCompleted
-import com.paparazziteam.yakulap.modulos.dashboard.pojo.MoldeChallengeCompleted
 import com.paparazziteam.yakulap.modulos.repositorio.ReaccionProvider
+import com.paparazziteam.yakulap.modulos.dashboard.interfaces.onClickThread
+import com.paparazziteam.yakulap.modulos.dashboard.pojo.ChallengeCompleted
+import javax.inject.Inject
+import javax.inject.Singleton
 
 
-class AdapterChallengeCompleted(
-    challenges: MutableList<MoldeChallengeCompleted>,
-    val clickedItemCompleted: clickedItemCompleted?
+@Singleton
+class AdapterChallengeCompleted @Inject constructor(
+    val clickedItemCompleted: onClickThread?,
+    private val mPreferences: MyPreferences
 ) : RecyclerView.Adapter<AdapterChallengeCompleted.ViewHolder>() {
 
-    var challengesCompleted = challenges
+    private var oldListChallenges = mutableListOf<ChallengeCompleted>()
 
-    fun removePost(idChallenge:String){
-        Log.d("TAG","Remove Post")
-        var index = challengesCompleted.indexOfFirst {
-            it.id == idChallenge
-        }
-        if(index<0) return
-        challengesCompleted.removeAt(index)
-        notifyItemRemoved(index)
-        notifyItemRangeChanged(index,itemCount)
+    fun setUserList(newList: List<ChallengeCompleted>) {
+        val diffResult = DiffUtil.calculateDiff(ChallengeCompletedDiffCallback(oldListChallenges, newList))
+        oldListChallenges.clear()
+        oldListChallenges.addAll(newList)
+        diffResult.dispatchUpdatesTo(this)
     }
 
-    class ViewHolder(itemview : View): RecyclerView.ViewHolder(itemview) {
+    private var onItemClickListener: ((ChallengeCompleted) -> Unit)? = null
+    fun onClickUpdateLikeListener(listener:(ChallengeCompleted)-> Unit){
+        onItemClickListener = listener
+    }
+
+    private var onItemRemovePostListener: ((ChallengeCompleted) -> Unit)? = null
+    fun onItemRemovePostListener(listener:(ChallengeCompleted)-> Unit){
+        onItemRemovePostListener = listener
+    }
+
+    var count = 0
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        println("OnCreateView ${count++}")
+        val itemview = LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.item_challenge_completed,parent,false)
+        return  ViewHolder(itemview)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(oldListChallenges[position],clickedItemCompleted, mPreferences)
+    }
+
+    inner class ViewHolder(itemview : View): RecyclerView.ViewHolder(itemview) {
+
+        var mActionProvider = ReaccionProvider()
+        val binding = ItemChallengeCompletedBinding.bind(itemView)
 
         private lateinit var imageChalleng: ShapeableImageView
         private lateinit var contentImage: CardView
@@ -60,12 +84,11 @@ class AdapterChallengeCompleted(
         private lateinit var likeImg: LottieAnimationView
         private lateinit var itemOptions: ShapeableImageView
 
-        var mActionProvider = ReaccionProvider()
-
-        val binding = ItemChallengeCompletedBinding.bind(itemview)
-        var preferences = MyPreferences()
-
-        fun bind(item: MoldeChallengeCompleted, clickedItem: clickedItemCompleted?) {
+        fun bind(
+            item: ChallengeCompleted,
+            clickedItem: onClickThread?,
+            mPreferences: MyPreferences
+        ) {
 
             binding.apply {
                 imageChalleng   = imgChallenge
@@ -81,7 +104,7 @@ class AdapterChallengeCompleted(
             }
             itemView.apply {
 
-                var color = ColorStateList.valueOf(context.getColor(R.color.colorSecondaryLightColor))
+                var color = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.colorSecondaryLightColor))
                 contentImage.backgroundTintList = color
                 imageChalleng.setImageResource(R.drawable.ic_galeria)
 
@@ -107,31 +130,29 @@ class AdapterChallengeCompleted(
                 authorNameChallenge.text = replaceFirstCharInSequenceToUppercase(item.author_name?:"")
 
                 //Setup like
-                setupLike(item, clickedItem)
+                setupLike(item, clickedItem, mPreferences)
 
                 //Setup share
                 setupShare()
 
                 //SetupComment
-                setupComment(item)
+                setupComment(item, clickedItem)
 
                 //ReportPost
-                reportPostOption(item)
+                reportPostOption(item, clickedItem)
             }
 
         }
 
-        private fun reportPostOption(item: MoldeChallengeCompleted) {
+        private fun reportPostOption(item: ChallengeCompleted, onClickThread: onClickThread?) {
             itemOptions.setOnClickListener{
-                val fragment = BottomDialogFragmentMoreOptions.newInstance(toJson(item))
-                fragment.show((itemView.context as FragmentActivity).supportFragmentManager,"bottomSheetMoreOptions")
+                onClickThread?.clickedReportThread(item)
             }
         }
 
-        private fun setupComment(item: MoldeChallengeCompleted) {
+        private fun setupComment(item: ChallengeCompleted, onClickThread: onClickThread?) {
             layoutComment.setOnClickListener {
-                    val bottomSheetDialogFragment = BottomDialogFragmentComentar.newInstance(item.id?:"")
-                    bottomSheetDialogFragment.show((itemView.context as FragmentActivity).supportFragmentManager,"bottomSheetDialogFragment")
+                onClickThread?.clickedComentThread(item)
             }
         }
 
@@ -142,17 +163,22 @@ class AdapterChallengeCompleted(
             }
         }
 
-        private fun setupLike(item: MoldeChallengeCompleted, clickedItem: clickedItemCompleted?) {
+        private fun setupLike(
+            item: ChallengeCompleted,
+            clickedItem: onClickThread?,
+            mPreferences: MyPreferences
+        ) {
             //First Time Like
-            getFirsTimeLike(item,clickedItem)
+            getFirsTimeLike(item,clickedItem, mPreferences)
         }
 
         private fun getFirsTimeLike(
-            item: MoldeChallengeCompleted,
-            clickedItem: clickedItemCompleted?
+            item: ChallengeCompleted,
+            clickedItem: onClickThread?,
+            mPreferences: MyPreferences
         ) {
             var status = false
-            mActionProvider.getUserLike(preferences.email_login, item.id)?.get()
+            mActionProvider.getUserLike(mPreferences.email_login, item.id)?.get()
                 ?.addOnSuccessListener {
                     if(it.isEmpty){
                         likeImg.setImageResource(R.drawable.ic_love)
@@ -171,7 +197,10 @@ class AdapterChallengeCompleted(
             likeImg.setOnClickListener {
                 //setupLike
                 status = likeAnimation(likeImg, R.raw.heart_love, status)
-                clickedItem?.clickOnUpdateLike(item)
+                onItemClickListener?.let {
+                    it(item)
+                }
+                //clickedItem?.clickOnUpdateLike(item)
             }
         }
 
@@ -193,14 +222,5 @@ class AdapterChallengeCompleted(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemview = LayoutInflater.from(parent.context).inflate(R.layout.item_challenge_completed,parent,false)
-        return  ViewHolder(itemview)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(challengesCompleted[position],clickedItemCompleted)
-    }
-
-    override fun getItemCount(): Int  = challengesCompleted.size
+    override fun getItemCount(): Int  = oldListChallenges.size
 }

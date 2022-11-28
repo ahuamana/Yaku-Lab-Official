@@ -1,54 +1,38 @@
 package com.paparazziteam.yakulap.modulos.puntaje.viewmodels
 
+import android.content.Context
 import android.graphics.drawable.Drawable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.firebase.auth.FirebaseUser
+import androidx.lifecycle.ViewModel
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.helper.application.MyPreferences
-import com.paparazziteam.yakulap.modulos.login.providers.UserProvider
-import com.paparazziteam.yakulap.modulos.puntaje.pojo.TypeMedal
-import com.paparazziteam.yakulap.root.ctx
-import java.lang.reflect.Type
+import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
-class ViewModelPuntaje {
-    var preferences = MyPreferences()
+@HiltViewModel
+class ViewModelPuntaje @Inject constructor(
+    val preferences:MyPreferences,
+    @ApplicationContext val context: Context
+):ViewModel() {
 
     private val _medal = MutableLiveData<Drawable>()
     fun getMedal(): LiveData<Drawable> = _medal
 
+    private val _loading = MutableLiveData<Boolean>()
+    val loading:LiveData<Boolean> = _loading
+
     fun showMedal(points:Int = preferences.points){
-        //Asignar Medalla
-        if (points < 10) {
-
-            _medal.value = ctx.getDrawable(R.drawable.bronze_medal)
-        } else {
-            if (points in 11..50) {
-                _medal.value = ctx.getDrawable(R.drawable.silver_medal)
-            } else {
-                if (points > 50) {
-                    _medal.value = ctx.getDrawable(R.drawable.gold_medal)
-                }else{
-                    _medal.value = ctx.getDrawable(R.drawable.bronze_medal)
-                }
-            }
-        }
-
+        _loading.value = true
+        getMedalla(points)?.let { _medal.value = it  }
+        _loading.value = false
     }
 
-
-    companion object Singleton{
-        private var instance: ViewModelPuntaje? = null
-
-        fun getInstance(): ViewModelPuntaje =
-            instance ?: ViewModelPuntaje(
-                //local y remoto
-            ).also {
-                instance = it
-            }
-
-        fun destroyInstance(){
-            instance = null
-        }
+    fun getMedalla(points: Int):Drawable? = when {
+        points < 10 ->  context.getDrawable(R.drawable.bronze_medal)
+        points in 11..50 -> context.getDrawable(R.drawable.silver_medal)
+        points > 50 -> context.getDrawable(R.drawable.gold_medal)
+        else -> context.getDrawable(R.drawable.bronze_medal)
     }
 }
