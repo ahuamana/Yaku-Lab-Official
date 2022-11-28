@@ -47,6 +47,117 @@
                     app:srcCompat="@drawable/button_login_disabled"
                     app:tint="@color/linea_bottomsheet" />
 
+                <!--All contents-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/allContents"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linea_desple">
+
+                    <!--Content Body-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/contentComments"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_margin="10dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.core.widget.NestedScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="2in"
+                            android:overScrollMode="never"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/recyclerViewComentarios"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+                        </androidx.core.widget.NestedScrollView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!--Content Empty-->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/content_withoutComments"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/imgChatEmpty"
+                            android:layout_width="wrap_content"
+                            android:layout_height="200dp"
+                            android:layout_marginTop="30dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/chat_comment_icon"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/textEmpty"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="15dp"
+                            android:fontFamily="@font/product_sans_regular"
+                            android:text="Sin comentarios aún"
+                            android:textSize="15dp"
+                            app:layout_constraintEnd_toEndOf="@+id/imgChatEmpty"
+                            app:layout_constraintStart_toStartOf="@+id/imgChatEmpty"
+                            app:layout_constraintTop_toBottomOf="@+id/imgChatEmpty" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/product_sans_regular"
+                            android:text="Se el primero en comentar."
+                            android:textSize="11dp"
+                            android:paddingBottom="30dp"
+                            app:layout_constraintEnd_toEndOf="@+id/textEmpty"
+                            app:layout_constraintStart_toStartOf="@+id/textEmpty"
+                            app:layout_constraintTop_toBottomOf="@+id/textEmpty" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <!--Content Loading-->
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/contentLoadingComments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="vertical"
+                            android:layout_height="wrap_content">
+                            <include
+                                layout="@layout/item_comentario_shimmer"/>
+                            <include
+                                layout="@layout/item_comentario_shimmer"/>
+                            <include
+                                layout="@layout/item_comentario_shimmer"/>
+                        </LinearLayout>
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <LinearLayout
                     android:id="@+id/middle"
                     android:layout_width="match_parent"
@@ -54,7 +165,7 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linea_desple">
+                    app:layout_constraintTop_toBottomOf="@+id/allContents">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -79,70 +190,16 @@
                             android:visibility="gone" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/linearLayoutSinComentarios"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="50dp"
-                        android:orientation="vertical"
-                        android:paddingHorizontal="16dp">
-
-                        <com.google.android.material.imageview.ShapeableImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="200dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/chat_comment_icon" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="15dp"
-                            android:fontFamily="@font/product_sans_regular"
-                            android:text="Sin comentarios aún"
-                            android:textSize="15dp" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:fontFamily="@font/product_sans_regular"
-                            android:text="Se el primero en comentar."
-                            android:textSize="11dp" />
-
-                    </LinearLayout>
-
-
-                    <LinearLayout
-                        android:id="@+id/contentMensajes"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:visibility="gone"
-                        android:orientation="vertical">
-
-                        <androidx.core.widget.NestedScrollView
-                            android:layout_width="match_parent"
-                            android:overScrollMode="never"
-                            android:layout_height="2in">
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/recyclerViewComentarios"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-                        </androidx.core.widget.NestedScrollView>
-                    </LinearLayout>
-
 
                 </LinearLayout>
 
+                <!--Content send message-->
                 <LinearLayout
                     android:id="@+id/content_send_message"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/middle">
@@ -179,15 +236,15 @@
                             android:textSize="15dp" />
 
                         <com.google.android.material.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/fab_send"
+                            android:id="@+id/fabSend"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="top"
-                            app:elevation="0dp"
                             android:layout_marginStart="5dp"
                             android:layout_marginTop="4dp"
                             android:src="@drawable/ic_enviar"
                             app:backgroundTint="@color/colorGrayLight"
+                            app:elevation="0dp"
                             app:fabCustomSize="40dp" />
 
                     </LinearLayout>

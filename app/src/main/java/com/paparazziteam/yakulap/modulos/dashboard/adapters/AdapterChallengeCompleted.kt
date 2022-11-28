@@ -51,11 +51,6 @@ class AdapterChallengeCompleted @Inject constructor(
         onItemClickListener = listener
     }
 
-    private var onItemRemovePostListener: ((ChallengeCompleted) -> Unit)? = null
-    fun onItemRemovePostListener(listener:(ChallengeCompleted)-> Unit){
-        onItemRemovePostListener = listener
-    }
-
     var count = 0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         println("OnCreateView ${count++}")

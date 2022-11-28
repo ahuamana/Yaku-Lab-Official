@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginTop="15dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/container_mensaje"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="15dp"
+            android:orientation="horizontal">
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:elevation="0dp"
+                app:elevation="0dp"
+                app:backgroundTint="@color/colorSkeleton"
+                app:fabCustomSize="45dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginStart="5dp"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:backgroundTint="@color/colorGrayLight"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/title"
+                    android:layout_weight="1"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/product_sans_bold"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/corner_radius_style"
+                    android:textStyle="bold"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txt_message"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:padding="4dp"
+                    android:background="@drawable/corner_radius_style"
+                    android:fontFamily="@font/product_sans_regular"
+                    android:layout_margin="4dp"
+                    android:layout_height="55dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+
+

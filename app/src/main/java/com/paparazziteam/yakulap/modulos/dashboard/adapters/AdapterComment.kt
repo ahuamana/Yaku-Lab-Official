@@ -6,21 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulap.R
+import com.paparazziteam.yakulap.databinding.ItemComentarioBinding
 import com.paparazziteam.yakulap.helper.getActivity
 import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
 import com.paparazziteam.yakulap.helper.toJson
-import com.paparazziteam.yakulap.modulos.dashboard.fragments.BottomDialogFragmentMoreOptions
 import com.paparazziteam.yakulap.modulos.dashboard.fragments.BottomDialogFragmentMoreOptionsComment
+import com.paparazziteam.yakulap.modulos.dashboard.pojo.ChallengeCompleted
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.Comment
+import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
 import com.paparazziteam.yakulap.modulos.login.providers.UserProvider
+import javax.inject.Singleton
 
-class AdapterComment : RecyclerView.Adapter<AdapterComment.ViewHolder>(){
+@Singleton
+class AdapterComment(private val viewModel: ViewModelDashboard) : RecyclerView.Adapter<AdapterComment.ViewHolder>(){
+
 
     val coments = mutableListOf<Comment>()
-
     fun setData(newComments:MutableList<Comment>){
         println("NewCommets: ${newComments.count()}")
         coments.clear()
@@ -35,17 +40,17 @@ class AdapterComment : RecyclerView.Adapter<AdapterComment.ViewHolder>(){
 
     class ViewHolder(itemview:View):RecyclerView.ViewHolder(itemview){
 
-        /*val binding = ItemComentarioBinding.bind(itemview)*/
+        val binding = ItemComentarioBinding.bind(itemview)
         var messageText:MaterialTextView?= null
         var txtTitle:MaterialTextView?= null
         var containMensaje:LinearLayout?= null
 
-        fun bind(item:Comment){
-            /*binding.apply {
+        fun bind(item: Comment, _viewModel: ViewModelDashboard){
+            binding.apply {
                 messageText         =  txtMessage
                 txtTitle            = title
                 containMensaje      = containerMensaje
-            }*/
+            }
             //Get Info comment User
             getUserInfo(item)
 
@@ -53,17 +58,23 @@ class AdapterComment : RecyclerView.Adapter<AdapterComment.ViewHolder>(){
             moreOptionsComment(item)
         }
 
+
+
         private fun moreOptionsComment(item: Comment) {
             containMensaje?.setOnLongClickListener {
-                val fragment = BottomDialogFragmentMoreOptionsComment.newInstance(toJson(item))
-                fragment.show((itemView.context.getActivity() as FragmentActivity).supportFragmentManager,"bottomSheetMoreOptionsComment")
+                openDialogMoreOptionsComment(item)
                 return@setOnLongClickListener true
             }
         }
 
+        fun openDialogMoreOptionsComment(item:Comment){
+            val fragment = BottomDialogFragmentMoreOptionsComment.newInstance(toJson(item))
+            fragment.show((itemView.context.getActivity() as FragmentActivity).supportFragmentManager,"bottomSheetMoreOptionsComment")
+        }
+
         private fun getUserInfo(item: Comment) {
             messageText?.text = item.message
-            //println("Email imprimido ${item.email}")
+
             UserProvider().searchUserByEmail(item.email).addOnCompleteListener {
                 if(it.isSuccessful){
                     val first = it.result.get("nombres").toString()
@@ -81,7 +92,7 @@ class AdapterComment : RecyclerView.Adapter<AdapterComment.ViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(coments[position])
+        holder.bind(coments[position], viewModel)
     }
 
     override fun getItemCount(): Int  = coments.size

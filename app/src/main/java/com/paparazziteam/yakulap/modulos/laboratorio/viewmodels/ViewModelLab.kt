@@ -6,6 +6,9 @@ import com.google.firebase.firestore.ktx.toObject
 import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataCategory
 import com.paparazziteam.yakulap.modulos.laboratorio.pojo.DataItems
 import com.paparazziteam.yakulap.modulos.repositorio.LabAnimalsProvider
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class ViewModelLab private constructor() {
 
@@ -19,21 +22,29 @@ class ViewModelLab private constructor() {
 
     private var listCategoriasUnique = mutableListOf<String>()
 
+    private val _loading = MutableLiveData<Boolean>()
+    val loading:LiveData<Boolean> = _loading
+
     fun getData(type: String?) {
-        mLabProvider.geDataProvider(type).addOnCompleteListener { snapshot ->
-            if(snapshot.isSuccessful){
-                var res = snapshot.result.toObject<DataCategory>()
-                res?.Categorias?.forEach { dataItems ->
-                    dataItems.Challenge?.distinctBy {
-                        it.category
-                    }?.map {
-                        it.category?.let { catego -> listCategoriasUnique.add(catego) }
+        _loading.value = true
+        CoroutineScope(Dispatchers.Unconfined).launch {
+            mLabProvider.geDataProvider(type).addOnCompleteListener { snapshot ->
+                if(snapshot.isSuccessful){
+                    var res = snapshot.result.toObject<DataCategory>()
+                    res?.Categorias?.forEach { dataItems ->
+                        dataItems.Challenge?.distinctBy {
+                            it.category
+                        }?.map {
+                            it.category?.let { catego -> listCategoriasUnique.add(catego) }
+                        }
                     }
+                    _observableCategorias.value = listCategoriasUnique
+                    _loading.value = false
+                    res?.Categorias.let { _observableListData.value = it }
                 }
-                _observableCategorias.value = listCategoriasUnique
-                _observableListData.value = res?.Categorias
             }
         }
+
     }
 
 

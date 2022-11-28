@@ -6,21 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.BottomSheetComentarBinding
+import com.paparazziteam.yakulap.helper.*
 import com.paparazziteam.yakulap.helper.application.MyPreferences
-import com.paparazziteam.yakulap.helper.beGone
-import com.paparazziteam.yakulap.helper.beVisible
-import com.paparazziteam.yakulap.helper.onlyOneSpace
 import com.paparazziteam.yakulap.modulos.dashboard.adapters.AdapterComment
 import com.paparazziteam.yakulap.modulos.dashboard.model.CommentRepository
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.Comment
@@ -46,13 +47,16 @@ class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
 
     var mLinearLayoutManager: LinearLayoutManager? = null
     var recyclerComments: RecyclerView? = null
-    var lytWithoutComments: LinearLayout? = null
-    var mAdapterComment = AdapterComment()
+    var lytWithoutComments: ConstraintLayout? = null
+    var mAdapterComment:AdapterComment?=null
 
     //send message
     var editTextMessage: TextInputEditText? = null
     var fabSendMessage: FloatingActionButton? = null
-    var contenedorMessages: LinearLayout? = null
+    var contenedorMessages: ConstraintLayout? = null
+
+    //Ui loading
+    var contentLoadingCommentsLyt: ShimmerFrameLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,23 +81,48 @@ class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
 
         binding.apply {
             recyclerComments    = recyclerViewComentarios
-            lytWithoutComments  = linearLayoutSinComentarios
+            lytWithoutComments  = contentWithoutComments
             editTextMessage     = txtMessage
             fabSendMessage      = fabSend
-            contenedorMessages  = contentMensajes
+            contenedorMessages  = contentComments
+            contentLoadingCommentsLyt  = contentLoadingComments
         }
 
         setupComponentes()
         setupObservers()
-        _viewModel.getCommentsFromThread(idPhotoReceived?:"")
+        getInfocommets()
+        setOnclickListeners()
 
 
         return view
     }
 
+    private fun setOnclickListeners() {
+
+    }
+
+    private fun getInfocommets() {
+        lytWithoutComments?.beGone()
+        contenedorMessages?.beGone()
+        contentLoadingCommentsLyt?.apply {
+            beVisible()
+            startShimmer()
+        }
+        _viewModel.getCommentsFromThread(idPhotoReceived?:"")
+    }
+
+    fun openDialogMoreOptionsComment(item:Comment){
+        val fragment = BottomDialogFragmentMoreOptionsComment.newInstance(toJson(item))
+        fragment.show(parentFragmentManager,"bottomSheetMoreOptionsComment")
+    }
+
     private fun setupObservers() {
         _viewModel.commentsCompleted.observe(viewLifecycleOwner){
-            mAdapterComment.setData(it)
+            mAdapterComment?.setData(it)
+            contentLoadingCommentsLyt?.apply {
+                beGone()
+                stopShimmer()
+            }
             contenedorMessages?.beVisible()
             recyclerComments?.beVisible()
             lytWithoutComments?.beGone()
@@ -102,6 +131,10 @@ class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
         _viewModel.emptyComments.observe(viewLifecycleOwner){
             if(it){
                 println("Comentarios vacios")
+                contentLoadingCommentsLyt?.apply {
+                    beGone()
+                    stopShimmer()
+                }
                 recyclerComments?.beGone()
                 lytWithoutComments?.beVisible()
             }
@@ -110,6 +143,7 @@ class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
 
     private fun setupComponentes() {
         //SetUp Recycler Comments
+        mAdapterComment = AdapterComment(_viewModel)
         mLinearLayoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
         recyclerComments?.apply {
             layoutManager = mLinearLayoutManager

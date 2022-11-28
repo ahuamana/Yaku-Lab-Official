@@ -331,6 +331,13 @@ class ViewModelDashboard @Inject constructor(
         }
     }
 
+    fun searchUserByEmail(email:String){
+         CoroutineScope(Dispatchers.Unconfined).launch {
+             mUserProvider.searchUserByEmail(email).addOnCompleteListener {
+
+             }
+         }
+    }
 
     fun addPostBlocked(idChallenge:String){
         CoroutineScope(Dispatchers.Unconfined).launch {
