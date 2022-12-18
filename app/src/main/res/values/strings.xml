@@ -58,4 +58,15 @@
     <string name="concerned_comment">Estoy preocupado por este comentario</string>
     <string name="hide_post">Ocultar publicación</string>
     <string name="hide_fewer_post">Ver menos publicaciónes como este</string>
+    <string name="block_user">Bloquear usuario</string>
+    <string name="title_reportar">Porfavor seleccione un problema</string>
+    <string name="subtitle_report">Si alguien está en peligro inmediato, obtenga ayuda antes de informar a YAKU LAB. No esperes.</string>
+    <string name="report_post_naked">Desnudez</string>
+    <string name="report_post_violence">Violencia</string>
+    <string name="report_post_terrorism">Terrorismo</string>
+    <string name="report_post_harassment">Acoso</string>
+    <string name="report_post_suicide">Suicidio o Autolesión</string>
+    <string name="dont_see_post">No ver publicaciones de este usuario</string>
+    <string name="report_user">Reportar usuario</string>
+    <string name="concerned_about_user">Estoy preocupado por este usuario</string>
 </resources>

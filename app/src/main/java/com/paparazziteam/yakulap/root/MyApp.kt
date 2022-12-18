@@ -12,10 +12,8 @@ lateinit var ctx      : Context
 open class MyApp: Application() {
     override fun onCreate() {
         super.onCreate()
-
+        FirebaseApp.initializeApp(this)
         TestFairy.begin(this,"SDK-nQlmn0dn")
-
-        FirebaseApp.initializeApp(this);
         ctx   = this
     }
 }
