@@ -87,7 +87,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/opcion_report_post"
+                    android:id="@+id/opcion_naked"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -98,7 +98,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/constraintTitle">
 
                     <ImageButton
-                        android:id="@+id/action_report"
+                        android:id="@+id/action_naked"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/colorTransparent"
@@ -109,7 +109,7 @@
                         app:tint="@color/black" />
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/title_report"
+                        android:id="@+id/title_naked"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -119,11 +119,11 @@
                         android:textColor="@color/black"
                         android:textSize="16dp"
                         android:tint="@color/black"
-                        app:layout_constraintLeft_toRightOf="@+id/action_report"
+                        app:layout_constraintLeft_toRightOf="@+id/action_naked"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/subtitle_report"
+                        android:id="@+id/subtitle_naked"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -132,10 +132,10 @@
                         android:textColor="@color/icons"
                         android:textSize="12dp"
                         android:tint="@color/icons"
-                        app:layout_constraintBottom_toBottomOf="@+id/action_report"
-                        app:layout_constraintLeft_toRightOf="@+id/action_report"
-                        app:layout_constraintStart_toStartOf="@+id/title_report"
-                        app:layout_constraintTop_toBottomOf="@+id/title_report" />
+                        app:layout_constraintBottom_toBottomOf="@+id/action_naked"
+                        app:layout_constraintLeft_toRightOf="@+id/action_naked"
+                        app:layout_constraintStart_toStartOf="@+id/title_naked"
+                        app:layout_constraintTop_toBottomOf="@+id/title_naked" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -150,7 +150,7 @@
                     android:padding="16dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/opcion_report_post">
+                    app:layout_constraintTop_toBottomOf="@+id/opcion_naked">
 
                     <ImageButton
                         android:id="@+id/action_report_violence"
