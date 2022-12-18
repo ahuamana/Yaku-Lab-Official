@@ -31,7 +31,7 @@ class ViewModelChallenge @Inject constructor() : ViewModel() {
         CoroutineScope(Dispatchers.Unconfined).launch {
             try {
                 withContext(Dispatchers.Main){
-                    mChallengeProvider.search(myPreferences.email_login,nameChallenge)?.get()?.addOnCompleteListener { task->
+                    mChallengeProvider.search(myPreferences.email,nameChallenge)?.get()?.addOnCompleteListener { task->
                         if (task.isSuccessful) {
                             if (task.result.size() > 0) {
                                 var result = task.result.documents[0].toObject(ChallengeCompleted::class.java)

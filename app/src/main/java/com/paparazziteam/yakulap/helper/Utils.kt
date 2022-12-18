@@ -23,6 +23,9 @@ import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.provider.OpenableColumns
+import android.provider.Settings
+import android.text.Html
+import android.text.Spanned
 import android.text.TextUtils
 import android.util.Log
 import android.util.Patterns
@@ -359,3 +362,31 @@ fun Context.getActivity(): Activity? {
     }
 }
 
+fun String?.fromHtml(): Spanned {
+    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        Html.fromHtml(this, Html.FROM_HTML_MODE_LEGACY)
+    } else {
+        Html.fromHtml(this)
+    }
+}
+
+fun String?.convertFirstLetterToUpperCase(): String {
+    return this?.substring(0, 1)?.toUpperCase(Locale.getDefault()) + this?.substring(1)
+}
+
+fun String?.convertFirstLetterToUpperCaseAndRestToLowerCase(): String {
+    return this?.substring(0, 1)?.toUpperCase(Locale.getDefault()) + this?.substring(1)
+        ?.toLowerCase(Locale.getDefault())
+}
+
+fun getDeviceId(context: Context): String {
+    return Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+}
+
+fun getTimestamp(): String {
+    return SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault()).format(Date())
+}
+
+fun getTimestampUnix(): Long {
+    return System.currentTimeMillis() / 1000
+}

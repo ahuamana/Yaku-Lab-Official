@@ -14,6 +14,13 @@ fun View.beGone() {
     visibility = View.GONE
 }
 
+fun View.beVisibleIf(beVisible: Boolean) = if (beVisible) beVisible() else beGone()
+
+fun View.beGoneIf(beGone: Boolean) = beVisibleIf(!beGone)
+
+fun View.beInvisibleIf(beInvisible: Boolean) = if (beInvisible) beInvisible() else beVisible()
+
+
 fun View.isVisible() = visibility == View.VISIBLE
 
 fun View.isInvisible() = visibility == View.INVISIBLE

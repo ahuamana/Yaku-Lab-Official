@@ -162,7 +162,7 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
 
     private fun prepareImageToUploadRemote() {
         var completed  = ChallengeCompleted(
-            author_email = mPreferences.email_login,
+            author_email = mPreferences.email,
             author_lastname =  mPreferences.lastName,
             author_name = mPreferences.firstName,
             timestamp = Date().time,
@@ -190,7 +190,7 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
     }
 
     fun getInfoChallengeCompleted(){
-        println("MySharedPreferences email: ${mPreferences.email_login}")
+        println("MySharedPreferences email: ${mPreferences.email}")
         println("DataExtra id: ${data_extra.id}")
         viewModel.getChallengeInformation(data_extra.id){
                 isCorrect:Boolean, challenge: ChallengeCompleted?->

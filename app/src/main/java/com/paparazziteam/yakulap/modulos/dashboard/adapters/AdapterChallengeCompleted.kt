@@ -3,7 +3,6 @@ package com.paparazziteam.yakulap.modulos.dashboard.adapters
 
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -173,7 +172,7 @@ class AdapterChallengeCompleted @Inject constructor(
             mPreferences: MyPreferences
         ) {
             var status = false
-            mActionProvider.getUserLike(mPreferences.email_login, item.id)?.get()
+            mActionProvider.getUserLike(mPreferences.email, item.id)?.get()
                 ?.addOnSuccessListener {
                     if(it.isEmpty){
                         likeImg.setImageResource(R.drawable.ic_love)

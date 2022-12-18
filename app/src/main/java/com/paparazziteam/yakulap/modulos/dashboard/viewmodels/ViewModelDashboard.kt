@@ -12,6 +12,8 @@ import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.toObject
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.fromJson
+import com.paparazziteam.yakulap.helper.getTimestamp
+import com.paparazziteam.yakulap.helper.getTimestampUnix
 import com.paparazziteam.yakulap.helper.toJson
 import com.paparazziteam.yakulap.modulos.dashboard.model.ChallengeRepository
 import com.paparazziteam.yakulap.modulos.dashboard.model.CommentRepository
@@ -64,8 +66,8 @@ class ViewModelDashboard @Inject constructor(
     private val _user = MutableLiveData<User>()
     fun getUserData():LiveData<User> = _user
 
-    private val _challengesCompleted = MutableLiveData<MutableList<ChallengeCompleted>>()
-    val challengesCompleted:LiveData<MutableList<ChallengeCompleted>> = _challengesCompleted
+    private val _postsCompleted = MutableLiveData<MutableList<ChallengeCompleted>>()
+    val challengesCompleted:LiveData<MutableList<ChallengeCompleted>> = _postsCompleted
 
     private val _challengesEmpty = MutableLiveData<MutableList<ChallengeCompleted>>()
     val challengesEmpty:LiveData<MutableList<ChallengeCompleted>> = _challengesEmpty
@@ -80,11 +82,35 @@ class ViewModelDashboard @Inject constructor(
        var emailLogged = mLoginProvider.getEmail()
         mUserProvider.searchUserByEmail(emailLogged).addOnCompleteListener {
             if(it.isSuccessful){
-                _user.value = it.result.toObject(User::class.java)
+                try {
+                    var user = it.result?.toObject<User>()
+                    user?.let {
+                        saveUsersBlockedInCache(it)
+                        savePostsBlockedInCache(it)
+                        _user.value = it
+                    }
+                }catch (e:Throwable){
+                    FirebaseCrashlytics.getInstance().recordException(e)
+                }
             }else{
-                //error al consultar los puntos
+               //TODO: show error user not found
             }
         }
+    }
+
+    private fun savePostsBlockedInCache(user: User) {
+        var postsBlocked = user.post_blocked
+        if(postsBlocked != null){
+            var json = toJson(postsBlocked)
+            mPreferences.savePostsBlocked = json
+        }else  mPreferences.savePostsBlocked = ""
+    }
+
+    private fun saveUsersBlockedInCache(user:User) {
+        var usersBlocked = user.users_blocked
+        if(!usersBlocked.isNullOrEmpty()){
+            mPreferences.saveUsersBlocked = toJson(usersBlocked)
+        }else mPreferences.saveUsersBlocked = ""
     }
 
     fun uploadPhotoRemote(
@@ -142,7 +168,7 @@ class ViewModelDashboard @Inject constructor(
     }
 
     private fun updatePoints(pointsToGive: Int) {
-        mUserProvider.updatePoints(mPreferences.email_login,mPreferences.points.plus(pointsToGive))?.
+        mUserProvider.updatePoints(mPreferences.email,mPreferences.points.plus(pointsToGive))?.
         addOnSuccessListener {
             mPreferences.points+=pointsToGive
         }
@@ -159,7 +185,8 @@ class ViewModelDashboard @Inject constructor(
                     //getItems
                     value?.let {
                         filterChallengesFromFirebase(it.documents)
-                        filterPostHidden()
+                        removePostsFromUsers()
+                        removePostsHidden()
                     }
                 }
 
@@ -167,18 +194,28 @@ class ViewModelDashboard @Inject constructor(
         }
     }
 
-    private fun filterPostHidden(){
+    private fun removePostsFromUsers() {
+        var usersBlocked = mPreferences.saveUsersBlocked
+        if(!usersBlocked.isNullOrEmpty()){
+            var listUsersBlocked: MutableList<String> = fromJson(usersBlocked)
+            listUsersBlocked.forEach { userBlocked ->
+                    listChallenges.removeAll { it.author_email == userBlocked }
+            }
+        }
+    }
+
+    private fun removePostsHidden(){
         var posts: MutableList<String>
-        if(!mPreferences.postBlocked.isNullOrEmpty()){
+        if(!mPreferences.savePostsBlocked.isNullOrEmpty()){
             try {
-                posts = fromJson(mPreferences.postBlocked)
+                posts = fromJson(mPreferences.savePostsBlocked)
                 for(_post in posts){
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) removeAboveAndroid7ToMore(listChallenges, _post)
                     else removePostOnAndroid5To7(listChallenges, _post)
                 }
                 //Notified Challenges completed
                 _loading.value = false
-                _challengesCompleted.value = listChallenges
+                _postsCompleted.value = listChallenges
             }catch (t:Throwable){
                 FirebaseCrashlytics.getInstance().recordException(t)
                 //Notified error filtering Hidden post
@@ -187,7 +224,7 @@ class ViewModelDashboard @Inject constructor(
             }
         }else{
             _loading.value = false
-            _challengesCompleted.value = listChallenges
+            _postsCompleted.value = listChallenges
         }
     }
 
@@ -227,7 +264,7 @@ class ViewModelDashboard @Inject constructor(
 
     private fun showListEmpty() {
         Log.e("TAG","QUERY VACIO")
-        _challengesCompleted.value = mutableListOf()
+        _postsCompleted.value = mutableListOf()
     }
 
     fun removeListener(){
@@ -256,7 +293,7 @@ class ViewModelDashboard @Inject constructor(
     }
 
     fun updateLikeStatusFirebase(item:ChallengeCompleted){
-        mActionProvider.getUserLike(mPreferences.email_login, item.id)?.get()
+        mActionProvider.getUserLike(mPreferences.email, item.id)?.get()
             ?.addOnSuccessListener {
                 if(it.isEmpty){
                     println("Like is empty")
@@ -281,11 +318,11 @@ class ViewModelDashboard @Inject constructor(
     }
 
     private fun createLike(item: ChallengeCompleted, like: Boolean) {
-        val idEmail= "${item.id.toString()}_${mPreferences.email_login}"
+        val idEmail= "${item.id.toString()}_${mPreferences.email}"
         var mAction = Reaccion()
         mAction.id_email = idEmail
         mAction.status = like
-        mAction.email = mPreferences.email_login
+        mAction.email = mPreferences.email
         mAction.id = item.id
         mAction.type = "Like"
 
@@ -297,27 +334,56 @@ class ViewModelDashboard @Inject constructor(
         }
     }
 
-    fun reportContent(item: ChallengeCompleted, type:TypeReport){
+    fun reportPost(item: ChallengeCompleted, type:TypeReported, typeReportedPost: TypeReportedPost?= null){
         CoroutineScope(Dispatchers.Unconfined).launch{
             //Report Post Update
-            var reportPost = ReportPost(
+            var reportPost = Report(
                 idPostReported = item?.id,
                 idChallengeReported = item?.challenge_id,
                 typeReport = type.value
             )
 
+            if(typeReportedPost!=null){
+                reportPost.typeReportedPost = typeReportedPost.value
+            }
+
             mReportProvider.create(reportPost)
             withContext(Dispatchers.Main){
                 println("Notified: Publicación reportada.")
-                _snackbar.value = "Publicación reportada."
+                //_snackbar.value = "Publicación reportada."
             }
         }
     }
 
-    fun reportComment(item: Comment, type:TypeReport){
+    fun reportUser(type:TypeReported, userReported:String){
+        CoroutineScope(Dispatchers.Unconfined).launch{
+            //Report User Update
+            var reportUser = Report(
+                typeReport = type.value,
+                emailWhoReport = mPreferences.email,
+                datetime = getTimestamp(),
+                datetimeUnixTime = getTimestampUnix()
+            )
+
+            if (userReported == mPreferences.email) {
+                return@launch
+            }
+            if(!userReported.isNullOrEmpty()){
+                reportUser.userReported = userReported
+
+            mReportProvider.create(reportUser)
+            withContext(Dispatchers.Main){
+                println("Notified: Usuario reportado.")
+                _snackbar.value = "Usuario reportado."
+            }
+        }
+    }
+    }
+
+    fun reportComment(item: Comment, type:TypeReported){
         CoroutineScope(Dispatchers.Unconfined).launch{
             //Report Post Update
-            var reportPost = ReportPost(
+            var reportPost = Report(
                 idCommentReported = item?.id,
                 reportedComentario = item?.message,
                 idPhotoReported = item?.id_photo,
@@ -343,16 +409,44 @@ class ViewModelDashboard @Inject constructor(
         CoroutineScope(Dispatchers.Unconfined).launch {
             var posts = mutableListOf<String>()
             try {
-                if(!mPreferences.postBlocked.isNullOrEmpty()) posts = fromJson(mPreferences.postBlocked)
+                if(!mPreferences.savePostsBlocked.isNullOrEmpty()) posts = fromJson(mPreferences.savePostsBlocked)
                 posts.add(idChallenge)
-                mPreferences.postBlocked = toJson(posts)
-                mUserProvider.updatePostBlocked(mPreferences.email_login, posts)
+                mPreferences.savePostsBlocked = toJson(posts)
+                mUserProvider.updatePostBlocked(mPreferences.email, posts)
                 removePostFromList(idChallenge)
                 //_newPostHided.value = idChallenge
             }catch (t:Throwable){
                 println("Error addPostBlocked: ${t.message}")
             }
+        }
+    }
 
+    fun blockUser(email:String){
+        CoroutineScope(Dispatchers.Unconfined).launch {
+            var users = mutableListOf<String>()
+            try {
+                if(!mPreferences.saveUsersBlocked.isNullOrEmpty()) users = fromJson(mPreferences.saveUsersBlocked)
+                users.add(email)
+                mPreferences.saveUsersBlocked = toJson(users)
+                mUserProvider.updateUsersBlocked(mPreferences.email, users)
+                removePostByUser(email)
+            }catch (t:Throwable){
+                println("Error addUserBlocked: ${t.message}")
+            }
+        }
+    }
+
+    private fun removePostByUser(email: String) {
+        CoroutineScope(Dispatchers.Unconfined).launch {
+            try {
+                if(listChallenges.isEmpty()) return@launch
+                listChallenges.removeAll{
+                    it.author_email == email
+                }
+                _postsCompleted.value = listChallenges
+            }catch (t:Throwable){
+                println("Error removePostByUser: ${t.message}")
+            }
         }
     }
 
@@ -362,10 +456,12 @@ class ViewModelDashboard @Inject constructor(
         }
         if(index<0) return
         listChallenges.removeAt(index)
-        _challengesCompleted.value = listChallenges
+        _postsCompleted.value = listChallenges
     }
 
     override fun onCleared() {
         super.onCleared()
     }
+
+
 }

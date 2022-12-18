@@ -81,7 +81,7 @@ class LoginActivity : AppCompatActivity() {
             println("isLoginEmail: $isLoginEmail")
             if (isLoginEmail) {
                 //Log.e(TAG, "EMAIL ENVIADO: " + binding.email.text.toString().lowercase())
-                mPreferences.email_login = binding.email.text.toString().trim().lowercase()
+                mPreferences.email = binding.email.text.toString().trim().lowercase()
                 startActivity(
                     Intent(this, DashboardActivity::class.java)
                         .putExtra("email", binding.email.text.toString().lowercase())

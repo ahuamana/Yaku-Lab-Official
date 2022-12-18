@@ -35,4 +35,8 @@ class UserProvider @Inject constructor() {
     fun updatePostBlocked(email: String?, list: MutableList<String>): Task<Void?>? {
         return mCollection.document(email?:"").update("post_blocked", list)
     }
+
+    fun updateUsersBlocked(email: String?, list: MutableList<String>): Task<Void?>? {
+        return mCollection.document(email?:"").update("users_blocked", list)
+    }
 }

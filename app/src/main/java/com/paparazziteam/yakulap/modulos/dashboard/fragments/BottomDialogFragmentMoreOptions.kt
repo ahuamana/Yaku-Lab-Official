@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.paparazziteam.yakulap.databinding.BottomSheetMoreOptionsBinding
-import com.paparazziteam.yakulap.helper.fromJson
+import com.paparazziteam.yakulap.helper.*
+import com.paparazziteam.yakulap.helper.Constants.ARG_DATA
+import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.*
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
 
@@ -18,13 +19,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class BottomDialogFragmentMoreOptions : BottomSheetDialogFragment() {
 
-    private val ARG_DATA = "DATA"
     private var item:ChallengeCompleted?=null
-    private var _binding: BottomSheetMoreOptionsBinding? = null
-    private val binding get() = _binding!!
-
+    private var _binding: BottomSheetMoreOptionsBinding by autoCleared()
     private val _viewModel: ViewModelDashboard by activityViewModels()
-
 
     var contenedorOptionReport: ConstraintLayout? = null
     var contenedorOptionHidePost: ConstraintLayout? = null
@@ -48,26 +45,62 @@ class BottomDialogFragmentMoreOptions : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = BottomSheetMoreOptionsBinding.inflate(layoutInflater,container, false)
-        val view = binding.root
 
-        binding.apply {
+        ui()
+        setupComponentes()
+        listeners()
+        return _binding.root
+    }
+
+    private fun listeners() {
+        _binding.apply {
+            opcionBlockUser.setOnClickListener {
+                item?.author_email?.let { email -> _viewModel.blockUser(email) }
+                dismiss()
+            }
+            opcionReportUser.setOnClickListener {
+                item?.author_email?.let { email ->
+                    _viewModel.reportUser(TypeReported.USER, email)
+                }
+                dismiss()
+            }
+        }
+    }
+
+    private fun ui() {
+        _binding.apply {
             contenedorOptionReport  = opcionReportPost
             contenedorOptionHidePost = opcionHide
+            println("item?.author_email: ${item?.author_email}")
+            println("MyPreferences().email_login: ${MyPreferences().email}")
+            if(item?.author_email == MyPreferences().email) {
+                opcionBlockUser.visibility = View.GONE
+                opcionReportUser.visibility = View.GONE
+                opcionReportPost.visibility = View.GONE
+            }
         }
-        setupComponentes()
-        return view
+
+
     }
 
     private fun setupComponentes() {
         contenedorOptionReport?.setOnClickListener {
-            item?.let { it -> _viewModel.reportContent(it,TypeReport.THREAD) }
-            dismiss()
+            openBottomDialogReport()
         }
 
         contenedorOptionHidePost?.setOnClickListener {
             item?.let { it-> _viewModel.addPostBlocked(it.id?:"") }
             dismiss()
         }
+    }
+
+    private fun openBottomDialogReport() {
+        val bottomDialogFragmentReport = BottomDialogFragmentReport()
+        val bundle = Bundle()
+        bundle.putString(ARG_DATA, toJson(item))
+        bottomDialogFragmentReport.arguments = bundle
+        bottomDialogFragmentReport.show(parentFragmentManager, bottomDialogFragmentReport.tag)
+        dismiss()
     }
 
     companion object {
