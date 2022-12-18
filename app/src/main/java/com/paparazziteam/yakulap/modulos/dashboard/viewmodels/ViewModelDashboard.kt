@@ -313,7 +313,7 @@ class ViewModelDashboard @Inject constructor(
             mReportProvider.create(reportPost)
             withContext(Dispatchers.Main){
                 println("Notified: Publicación reportada.")
-                _snackbar.value = "Publicación reportada."
+                //_snackbar.value = "Publicación reportada."
             }
         }
     }
