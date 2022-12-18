@@ -165,8 +165,6 @@
                         app:layout_constraintTop_toBottomOf="@+id/lineaTop"
                         app:tint="@color/colorPrimaryYaku" />
 
-
-
                     <View
                         android:id="@+id/lineaMiddle"
                         android:layout_width="1dp"
@@ -176,7 +174,7 @@
                         android:backgroundTint="@color/colorSecondaryYaku"
                         app:layout_constraintEnd_toEndOf="@+id/circleMiddle"
                         app:layout_constraintStart_toStartOf="@+id/circleMiddle"
-                        app:layout_constraintTop_toBottomOf="@+id/circleMiddle" />
+                        app:layout_constraintTop_toBottomOf="@+id/circleMiddleRounded" />
 
 
                     <com.google.android.material.imageview.ShapeableImageView

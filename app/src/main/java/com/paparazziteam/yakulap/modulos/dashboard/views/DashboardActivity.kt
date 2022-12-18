@@ -18,14 +18,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.textview.MaterialTextView
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityDashboardBinding
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.application.toast
 import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
 import com.paparazziteam.yakulap.helper.setColorToStatusBar
-import com.paparazziteam.yakulap.helper.toJson
 import com.paparazziteam.yakulap.modulos.bienvenida.views.WelcomeActivity
 import com.paparazziteam.yakulap.modulos.dashboard.fragments.BottomDialogFragment
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
@@ -123,13 +121,7 @@ class DashboardActivity : AppCompatActivity() {
                 preferences.points = user.points?:0
                 preferences.firstName = user.nombres?:""
                 preferences.lastName = user.apellidos?:""
-                try {
-                    if(!user.post_blocked.isNullOrEmpty())
-                        preferences.postBlocked = toJson(user.post_blocked)
-                    else preferences.postBlocked = ""
-                }catch (e:Throwable){
-                    FirebaseCrashlytics.getInstance().recordException(e)
-                }
+                preferences.email = user.email?:""
 
                 //Asignar Nombres y Primera letra del apellido del usuario
                 val names = replaceFirstCharInSequenceToUppercase(user.nombres?:"")

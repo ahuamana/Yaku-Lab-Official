@@ -10,7 +10,7 @@ class MyPreferences @Inject constructor() {
     val prefs = CacheData()
 
     //PREFERENCES STRING
-    var email_login: String
+    var email: String
         get()      = prefs.getString("email_login", "")
         set(value) = prefs.setString("email_login", value)
 
@@ -22,9 +22,13 @@ class MyPreferences @Inject constructor() {
         get()      = prefs.getString("firstName", "")
         set(value) = prefs.setString("firstName", value)
 
-    var postBlocked:String
+    var savePostsBlocked:String
         get()      = prefs.getString("postBlocked", "")
         set(value) = prefs.setString("postBlocked", value)
+
+    var saveUsersBlocked:String
+        get()      = prefs.getString("usersBlocked", "")
+        set(value) = prefs.setString("usersBlocked", value)
 
     //PREFERENCES BOOLEAN
     var isLogin: Boolean

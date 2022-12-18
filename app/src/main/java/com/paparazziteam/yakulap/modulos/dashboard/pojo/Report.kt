@@ -2,7 +2,7 @@ package com.paparazziteam.yakulap.modulos.dashboard.pojo
 
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 
-data class ReportPost (
+data class Report (
     var idPostReported: String? = null,
     var idChallengeReported: String? = null,
     var typeReport:String?=null,
@@ -10,14 +10,18 @@ data class ReportPost (
     var idCommentReported:String?=null,
     var idPhotoReported:String?=null,
     var reportedComentario:String?=null,
-    var emailWhoReport: String? = MyPreferences().email_login,
+    var userReported:String?=null,
+    var emailWhoReport: String? = MyPreferences().email,
     var lastNameWhoReport: String? = MyPreferences().lastName,
     var firstNameWhoReport: String? = MyPreferences().firstName,
+    var datetimeUnixTime: Long? = null,
+    var datetime: String? = null,
 )
 
 enum class TypeReported(val value:String) {
     POST("POST"),
-    COMMENT("COMMENT")
+    COMMENT("COMMENT"),
+    USER("USER")
 }
 
 enum class TypeReportedPost(val value:String) {

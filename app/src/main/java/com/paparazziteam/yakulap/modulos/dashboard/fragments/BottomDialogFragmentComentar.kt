@@ -5,13 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.ShimmerFrameLayout
@@ -27,8 +24,6 @@ import com.paparazziteam.yakulap.modulos.dashboard.model.CommentRepository
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.Comment
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.TypeComment
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
-import com.paparazziteam.yakulap.modulos.repositorio.CommentProvider
-import com.paparazziteam.yakulap.modulos.dashboard.model.CommentRepositoryImpl
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import javax.inject.Inject
@@ -180,7 +175,7 @@ class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
         var comment = Comment(
             id_photo = idPhotoReceived,
             status = true,
-            email = MyPreferences().email_login,
+            email = MyPreferences().email,
             type = TypeComment.Comentario.value,
             timestamp = Date().time,
             message = editTextMessage?.text?.trim().toString().onlyOneSpace()

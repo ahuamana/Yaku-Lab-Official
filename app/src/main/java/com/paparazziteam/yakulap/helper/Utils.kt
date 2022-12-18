@@ -23,6 +23,7 @@ import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.provider.OpenableColumns
+import android.provider.Settings
 import android.text.Html
 import android.text.Spanned
 import android.text.TextUtils
@@ -378,3 +379,14 @@ fun String?.convertFirstLetterToUpperCaseAndRestToLowerCase(): String {
         ?.toLowerCase(Locale.getDefault())
 }
 
+fun getDeviceId(context: Context): String {
+    return Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
+}
+
+fun getTimestamp(): String {
+    return SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault()).format(Date())
+}
+
+fun getTimestampUnix(): Long {
+    return System.currentTimeMillis() / 1000
+}
