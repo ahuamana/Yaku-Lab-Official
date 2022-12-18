@@ -9,4 +9,10 @@ object Constants {
     val CATEGORY_INSECTS = "Insectos"
     val CATEGORY_DOMESTIC_ANIMALS = "Animales Domesticos"
     val CATEGORY_OTHERS_ANIMALS = "Otros"
+
+    //EXTRAS
+
+    val ARG_DATA = "DATA"
+    val REPORT_TYPE = "REPORT_TYPE"
+    val REPORT_TYPE_POST = "REPORT_TYPE_POST"
 }

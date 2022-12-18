@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.paparazziteam.yakulap.databinding.BottomSheetMoreOptionsBinding
 import com.paparazziteam.yakulap.helper.fromJson
+import com.paparazziteam.yakulap.helper.toJson
 import com.paparazziteam.yakulap.modulos.dashboard.pojo.*
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
 
@@ -60,14 +60,24 @@ class BottomDialogFragmentMoreOptions : BottomSheetDialogFragment() {
 
     private fun setupComponentes() {
         contenedorOptionReport?.setOnClickListener {
-            item?.let { it -> _viewModel.reportContent(it,TypeReport.THREAD) }
-            dismiss()
+            openBottomDialogReport()
+            /*item?.let { it -> _viewModel.reportPost(it,TypeReported.POST) }
+            dismiss()*/
         }
 
         contenedorOptionHidePost?.setOnClickListener {
             item?.let { it-> _viewModel.addPostBlocked(it.id?:"") }
             dismiss()
         }
+    }
+
+    private fun openBottomDialogReport() {
+        val bottomDialogFragmentReport = BottomDialogFragmentReport()
+        val bundle = Bundle()
+        bundle.putString(ARG_DATA, toJson(item))
+        bottomDialogFragmentReport.arguments = bundle
+        bottomDialogFragmentReport.show(parentFragmentManager, bottomDialogFragmentReport.tag)
+        dismiss()
     }
 
     companion object {

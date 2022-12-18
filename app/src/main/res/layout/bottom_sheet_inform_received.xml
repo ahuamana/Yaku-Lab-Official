@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomsheet_opciones"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:background="@color/color_transparent"
+        android:paddingTop="4dp"
+        android:elevation="16dp"
+        android:clickable="false"
+        android:focusable="false"
+        app:behavior_peekHeight="0dp"
+        android:touchscreenBlocksFocus="false"
+        android:filterTouchesWhenObscured="false"
+        android:focusableInTouchMode="false"
+        android:orientation="vertical"
+        tools:context=".modulos.dashboard.fragments.BottomDialogFragmentMoreOptions"
+        app:behavior_hideable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="parent"
+            style="@style/CustomBottomSheet">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="24dp"
+                android:focusable="true"
+                android:clickable="true">
+
+                <ImageView
+                    android:id="@+id/linea_desple"
+                    android:layout_width="48dp"
+                    android:layout_height="4dp"
+                    app:tint="@color/linea_bottomsheet"
+                    android:layout_marginTop="16dp"
+                    app:srcCompat="@drawable/button_login_disabled"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_margin="16dp"
+                    app:layout_constraintTop_toBottomOf="@+id/linea_desple"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivLogo"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_circle_green_check"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/inform_received"
+                        android:gravity="center"
+                        android:textSize="16dp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/uni_neue_bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/tvSubTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/buttom_normal"
+                        android:backgroundTint="@color/colorSecondaryYaku"
+                        android:drawableStart="@drawable/ic_check"
+                        android:drawablePadding="5dp"
+                        android:fontFamily="@font/uni_neue_regular"
+                        android:gravity="center"
+                        android:minHeight="35dp"
+                        android:paddingHorizontal="10dp"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                        tools:text="@string/report_post_violence" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/opcion_comunity"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:foreground="@drawable/ripple_corner_radius"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintTitle">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/circleTop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@drawable/circle"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/colorPrimaryYaku" />
+
+                    <View
+                        android:id="@+id/lineaTop"
+                        android:layout_width="1dp"
+                        android:layout_height="65dp"
+                        android:background="@drawable/line_vertical"
+                        app:tint="@color/colorPrimaryYaku"
+                        android:backgroundTint="@color/colorSecondaryYaku"
+                        app:layout_constraintEnd_toEndOf="@+id/circleTop"
+                        app:layout_constraintStart_toStartOf="@+id/circleTop"
+                        app:layout_constraintTop_toBottomOf="@+id/circleTop" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/circleMiddleRounded"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:alpha="0.5"
+                        android:src="@drawable/circle"
+                        app:layout_constraintBottom_toBottomOf="@id/circleMiddle"
+                        app:layout_constraintEnd_toEndOf="@+id/circleMiddle"
+                        app:layout_constraintRight_toRightOf="@+id/circleMiddle"
+                        app:layout_constraintStart_toStartOf="@+id/circleMiddle"
+                        app:layout_constraintTop_toTopOf="@+id/circleMiddle"
+                        app:tint="@color/colorPrimaryYaku" />
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/circleMiddle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/circle"
+                        app:layout_constraintEnd_toEndOf="@+id/lineaTop"
+                        app:layout_constraintStart_toStartOf="@+id/lineaTop"
+                        app:layout_constraintTop_toBottomOf="@+id/lineaTop"
+                        app:tint="@color/colorPrimaryYaku" />
+
+
+
+                    <View
+                        android:id="@+id/lineaMiddle"
+                        android:layout_width="1dp"
+                        android:layout_height="69dp"
+                        android:background="@drawable/line_vertical"
+                        app:tint="@color/colorPrimaryYaku"
+                        android:backgroundTint="@color/colorSecondaryYaku"
+                        app:layout_constraintEnd_toEndOf="@+id/circleMiddle"
+                        app:layout_constraintStart_toStartOf="@+id/circleMiddle"
+                        app:layout_constraintTop_toBottomOf="@+id/circleMiddle" />
+
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/circleBottom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/circle"
+                        android:layout_marginBottom="10dp"
+                        android:tint="@color/color_text_web_disable"
+                        app:tint="@color/color_text_web_disable"
+                        app:layout_constraintEnd_toEndOf="@+id/lineaMiddle"
+                        app:layout_constraintStart_toStartOf="@+id/lineaMiddle"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/lineaMiddle" />
+
+                    <!--Text Steps-->
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvStep1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:text="@string/inform_received_title"
+                        android:fontFamily="@font/uni_neue_bold"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="10dp"
+                        app:layout_constraintBottom_toTopOf="@+id/lineaTop"
+                        app:layout_constraintStart_toEndOf="@+id/circleTop"
+                        app:layout_constraintTop_toTopOf="@+id/circleTop" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvStep1Description"
+                        android:layout_width="0dp"
+                        android:layout_marginEnd="20dp"
+                        android:textSize="12dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/uni_neue_regular"
+                        android:text="@string/step1_comunity_description"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tvStep1"
+                        app:layout_constraintTop_toBottomOf="@+id/tvStep1" />
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvStep2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/uni_neue_bold"
+                        android:text="@string/inform_in_progress_title"
+                        android:textColor="@color/black"
+                        android:textSize="14dp"
+                        android:layout_marginTop="5dp"
+                        app:layout_constraintStart_toStartOf="@+id/tvStep1Description"
+                        app:layout_constraintTop_toBottomOf="@+id/tvStep1Description" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvStep2Description"
+                        android:layout_width="0dp"
+                        android:layout_marginEnd="20dp"
+                        android:textSize="12dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/uni_neue_regular"
+                        android:text="@string/step2_comunity_description"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tvStep2"
+                        app:layout_constraintTop_toBottomOf="@+id/tvStep2" />
+
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvStep3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/uni_neue_bold"
+                        android:text="@string/inform_solved_title"
+                        android:textColor="@color/black"
+                        android:textSize="14dp"
+                        android:layout_marginTop="5dp"
+                        app:layout_constraintStart_toStartOf="@+id/tvStep2Description"
+                        app:layout_constraintTop_toBottomOf="@+id/tvStep2Description" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvStep3Description"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:fontFamily="@font/uni_neue_regular"
+                        android:text="@string/step3_comunity_description"
+                        android:textColor="@color/black"
+                        android:textSize="12dp"
+                        android:layout_marginBottom="10dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/tvStep3"
+                        app:layout_constraintTop_toBottomOf="@+id/tvStep3" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnClose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginTop="10dp"
+                    android:minWidth="200dp"
+                    android:background="@drawable/buttom_normal"
+                    android:backgroundTint="@color/colorSecondaryYaku"
+                    android:elevation="4dp"
+                    android:fontFamily="@font/uni_neue_regular"
+                    android:orientation="vertical"
+                    android:text="@string/close"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="16dp"
+                    app:backgroundTint="@color/colorSecondaryYaku"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/opcion_comunity" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

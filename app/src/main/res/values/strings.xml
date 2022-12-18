@@ -69,4 +69,24 @@
     <string name="dont_see_post">No ver publicaciones de este usuario</string>
     <string name="report_user">Reportar usuario</string>
     <string name="concerned_about_user">Estoy preocupado por este usuario</string>
+    <string name="content_will_be_removed">Solo eliminamos contenido que va en contra de nuestras Normas comunitarias. No permitimos cosas como:</string>
+
+    <!-- Html sources-->
+    <string name="htmlComunityRulesToDelete"><![CDATA[<li style="padding-top: 24px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Amenazas de cometer violencia <br>Por ejemplo, apuntar a una persona y mencionar un arma específica</li>
+
+    <li style="padding-top: 24px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Personas u organizaciones peligrosas<br>Por ejemplo, el terrorismo o una organización criminal.</li>
+
+    <li style="padding-top: 24px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Violencia gráfica extrema<br>Por ejemplo, glorificar la violencia o celebrar el sufrimiento.</li>
+
+    <li style="padding-top: 24px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Otro tipo de violencia<br>Por ejemplo, imágenes perturbadoras u otra cosa.</li>]]></string>
+    <string name="sendReport">Enviar reporte</string>
+    <string name="close">Cerrar</string>
+    <string name="inform_received">Gracias, hemos recibido tu informe.</string>
+    <string name="inform_received_title">Informe recibido</string>
+    <string name="step1_comunity_description">Tu informe nos ayuda a mejorar nuestros procesos y mantiene Facebook seguro para todos.</string>
+    <string name="inform_in_progress_title">En espera de revisión</string>
+    <string name="step2_comunity_description">Usamos tecnología y equipos de revisión para eliminar cualquier cosa que no cumpla con nuestros estándares lo más rápido posible.</string>
+    <string name="inform_solved_title">Decisión tomada</string>
+    <string name="step3_comunity_description">Le enviaremos una notificación para ver el resultado en su bandeja de entrada de soporte lo antes posible.</string>
+
 </resources>

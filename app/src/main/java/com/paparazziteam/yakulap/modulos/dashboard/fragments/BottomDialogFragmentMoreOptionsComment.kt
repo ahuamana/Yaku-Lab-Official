@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulap.R
@@ -66,7 +65,7 @@ class BottomDialogFragmentMoreOptionsComment : BottomSheetDialogFragment() {
 
     private fun setupComponentes() {
         contenedorOptionReport?.setOnClickListener {
-            item?.let { it -> _viewModel.reportComment(it,TypeReport.COMMENT) }
+            item?.let { it -> _viewModel.reportComment(it,TypeReported.COMMENT) }
             dismiss()
         }
         txtTitleReport?.text = getString(R.string.report_comment)

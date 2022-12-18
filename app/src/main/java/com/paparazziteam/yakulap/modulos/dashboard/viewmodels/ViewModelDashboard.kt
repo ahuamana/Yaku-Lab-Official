@@ -297,7 +297,7 @@ class ViewModelDashboard @Inject constructor(
         }
     }
 
-    fun reportContent(item: ChallengeCompleted, type:TypeReport){
+    fun reportPost(item: ChallengeCompleted, type:TypeReported, typeReportedPost: TypeReportedPost?= null){
         CoroutineScope(Dispatchers.Unconfined).launch{
             //Report Post Update
             var reportPost = ReportPost(
@@ -305,6 +305,10 @@ class ViewModelDashboard @Inject constructor(
                 idChallengeReported = item?.challenge_id,
                 typeReport = type.value
             )
+
+            if(typeReportedPost!=null){
+                reportPost.typeReportedPost = typeReportedPost.value
+            }
 
             mReportProvider.create(reportPost)
             withContext(Dispatchers.Main){
@@ -314,7 +318,7 @@ class ViewModelDashboard @Inject constructor(
         }
     }
 
-    fun reportComment(item: Comment, type:TypeReport){
+    fun reportComment(item: Comment, type:TypeReported){
         CoroutineScope(Dispatchers.Unconfined).launch{
             //Report Post Update
             var reportPost = ReportPost(

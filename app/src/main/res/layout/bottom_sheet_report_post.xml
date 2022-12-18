@@ -141,7 +141,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/opcion_report_violence"
+                    android:id="@+id/opcion_violence"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -193,7 +193,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/opcion_report_terrorism"
+                    android:id="@+id/opcion_terrorism"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -202,7 +202,7 @@
                     android:padding="16dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/opcion_report_violence">
+                    app:layout_constraintTop_toBottomOf="@+id/opcion_violence">
 
                     <ImageButton
                         android:id="@+id/action_report_terrorism"
@@ -245,7 +245,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/opcion_report_harassment"
+                    android:id="@+id/opcion_harassment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -254,7 +254,7 @@
                     android:padding="16dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/opcion_report_terrorism">
+                    app:layout_constraintTop_toBottomOf="@+id/opcion_terrorism">
 
                     <ImageButton
                         android:id="@+id/action_report_harassment"
@@ -297,7 +297,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/opcion_report_suicide"
+                    android:id="@+id/opcion_suicide"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -306,7 +306,7 @@
                     android:padding="16dp"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/opcion_report_harassment">
+                    app:layout_constraintTop_toBottomOf="@+id/opcion_harassment">
 
                     <ImageButton
                         android:id="@+id/action_report_suicide"

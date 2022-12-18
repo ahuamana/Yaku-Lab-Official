@@ -1,13 +1,12 @@
 package com.paparazziteam.yakulap.modulos.dashboard.pojo
 
 import com.paparazziteam.yakulap.helper.application.MyPreferences
-import com.paparazziteam.yakulap.helper.toJson
-import kotlinx.serialization.SerialName
 
 data class ReportPost (
     var idPostReported: String? = null,
     var idChallengeReported: String? = null,
     var typeReport:String?=null,
+    var typeReportedPost:String?=null,
     var idCommentReported:String?=null,
     var idPhotoReported:String?=null,
     var reportedComentario:String?=null,
@@ -16,7 +15,18 @@ data class ReportPost (
     var firstNameWhoReport: String? = MyPreferences().firstName,
 )
 
-enum class TypeReport(val value:String) {
-    THREAD("THREAD"),
+enum class TypeReported(val value:String) {
+    POST("POST"),
     COMMENT("COMMENT")
 }
+
+enum class TypeReportedPost(val value:String) {
+    NAKED("NAKED"),
+    VIOLENCE("VIOLENCE"),
+    TERRORISM("TERRORISM"),
+    HARASSMENT("HARASSMENT"),
+    SUICIDE("SUICIDE"),
+    OTHER("OTHER")
+}
+
+
