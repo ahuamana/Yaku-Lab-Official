@@ -23,8 +23,8 @@ android {
         applicationId "com.paparazziteam.yakulap"
         minSdk 22
         targetSdk 32
-        versionCode 7
-        versionName "2.1.0"
+        versionCode 8
+        versionName "2.2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -75,17 +75,17 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:30.1.0')
     //Login
     implementation ('com.google.firebase:firebase-auth-ktx') {
-        exclude group: 'com.google.android.gms', module: 'play-services-auth'
+        exclude module: 'play-services-safetynet'
     }
 
     //Cloud firestore
     implementation ('com.google.firebase:firebase-firestore-ktx') {
-        exclude group: 'com.google.android.gms', module: 'play-services-auth'
+        exclude module: 'play-services-safetynet'
     }
 
     //Crashlytics
     implementation ('com.google.firebase:firebase-crashlytics-ktx') {
-        exclude group: 'com.google.android.gms', module: 'play-services-auth'
+        exclude module: 'play-services-safetynet'
     }
 
     //Libreria Imagenes Circulares
