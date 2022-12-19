@@ -38,7 +38,7 @@ class DashboardActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityDashboardBinding
 
-    private lateinit var mainToolbar: Toolbar
+    private var mainToolbar: Toolbar ?= null
     lateinit var drawer:DrawerLayout
     lateinit var navView:NavigationView
     lateinit var headerLayout: View
@@ -64,7 +64,6 @@ class DashboardActivity : AppCompatActivity() {
         saveLogin()
 
         binding.appBarDashboard.fab.setOnClickListener { view ->
-            //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show()
             startActivity(Intent(applicationContext, PuntajeActivity::class.java))
         }
         drawer = binding.drawerLayout
@@ -144,7 +143,7 @@ class DashboardActivity : AppCompatActivity() {
 
 
     private fun setToolbarConfig() {
-        mainToolbar.apply {
+        mainToolbar?.apply {
             title = "Desafíos"
             setTitleTextColor(ContextCompat.getColor(context, R.color.colorWhite))
             navigationIcon = getDrawable(R.drawable.ic_menu)

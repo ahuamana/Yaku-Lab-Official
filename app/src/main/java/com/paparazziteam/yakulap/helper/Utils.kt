@@ -140,6 +140,25 @@ fun replaceFirstCharInSequenceToUppercase(text: String): String {
     //Log.e("REPLACE","DATA: "+ datafinal);
 }
 
+fun replaceFirstCharInSequenceToUppercase(text: String, separator: String): String {
+    if(text.contains(separator)){
+        val words = text.trim().split(separator).toTypedArray()
+        val wordsUppercase: MutableList<String?> =
+            ArrayList()
+        for (data in words) {
+            val upperString = data.substring(0, 1)
+                .uppercase(Locale.getDefault()) + data.substring(1)
+                .lowercase(Locale.getDefault())
+            //Log.e("REPLACE","DATA: "+ upperString);
+            wordsUppercase.add(upperString)
+        }
+        return TextUtils.join(" ", wordsUppercase)
+    }else{
+        return text.replaceFirstChar { it.uppercase() }
+    }
+    //Log.e("REPLACE","DATA: "+ datafinal);
+}
+
 fun View.downloadData(
     url: String,
     carpetaDestino: String,

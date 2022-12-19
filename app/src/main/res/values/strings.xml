@@ -79,7 +79,7 @@
     <li style="padding-top: 24px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Violencia gráfica extrema<br>Por ejemplo, glorificar la violencia o celebrar el sufrimiento.</li>
 
     <li style="padding-top: 24px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Otro tipo de violencia<br>Por ejemplo, imágenes perturbadoras u otra cosa.</li>]]></string>
-    <string name="sendReport">Enviar reporte</string>
+    <string name="sendReport">Enviar</string>
     <string name="close">Cerrar</string>
     <string name="inform_received">Gracias, hemos recibido tu informe.</string>
     <string name="inform_received_title">Informe recibido</string>

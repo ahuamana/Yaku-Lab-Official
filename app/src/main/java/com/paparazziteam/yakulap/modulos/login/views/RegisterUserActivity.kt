@@ -47,7 +47,7 @@ class RegisterUserActivity : AppCompatActivity() {
     var isValidPass:Boolean? = false
     var btnSignUp: MaterialButton? = null
 
-    private lateinit var toolbar  : Toolbar
+    private var toolbar  : Toolbar ? = null
 
     //Sign up
     var userNew = User()
@@ -60,7 +60,7 @@ class RegisterUserActivity : AppCompatActivity() {
         setColorToStatusBar(this)
 
         binding.apply {
-            //toolbar = tool.toolbar
+            toolbar = tool.toolbar
             termsConditions.text = getString(R.string.terms_conditions_app_register, getString(R.string.app_name))
             edtFullname          = fullname
             edtLastname         = lastname
@@ -244,7 +244,7 @@ class RegisterUserActivity : AppCompatActivity() {
     }
 
     private fun setupToolbar() {
-        toolbar.apply {
+        toolbar?.apply {
             setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryYaku))
             setNavigationOnClickListener { onBackPressed() }
             title = "Registrar"

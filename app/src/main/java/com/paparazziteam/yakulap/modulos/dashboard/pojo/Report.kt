@@ -25,12 +25,12 @@ enum class TypeReported(val value:String) {
 }
 
 enum class TypeReportedPost(val value:String) {
-    NAKED("NAKED"),
-    VIOLENCE("VIOLENCE"),
-    TERRORISM("TERRORISM"),
-    HARASSMENT("HARASSMENT"),
-    SUICIDE("SUICIDE"),
-    OTHER("OTHER")
+    NAKED("DESNUDEZ"),
+    VIOLENCE("VIOLENCIA"),
+    TERRORISM("TERRORISMO"),
+    HARASSMENT("ACOSO"),
+    SUICIDE("SUICIDIO"),
+    OTHER("OTROS")
 }
 
 
