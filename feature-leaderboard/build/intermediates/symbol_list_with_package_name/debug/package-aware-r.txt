@@ -1,0 +1,2 @@
+com.paparazziteam.yakulab.leaderboard
+layout activity_leader_parent

@@ -14,19 +14,16 @@ kapt {
 
 android {
     namespace = "com.paparazziteam.yakulap"
-    compileSdk 32
-
-    lintOptions {
-        abortOnError false
-    }
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.paparazziteam.yakulap"
         minSdk 22
-        targetSdk 32
+        targetSdk 33
         versionCode 6
         versionName "2.1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -55,8 +52,8 @@ android {
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.google.firebase:firebase-storage-ktx:20.0.2'
     def lottieVersion = "5.2.0"
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -86,6 +83,8 @@ dependencies {
 
     //Crashlytics
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
+
+    implementation 'com.google.firebase:firebase-storage-ktx'
 
     //Libreria Imagenes Circulares
     implementation 'de.hdodenhof:circleimageview:3.1.0'

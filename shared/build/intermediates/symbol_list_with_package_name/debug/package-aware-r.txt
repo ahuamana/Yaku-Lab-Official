@@ -1,0 +1,3 @@
+com.paparazziteam.yakulab.shared
+string app_name
+string invite_to_download_app

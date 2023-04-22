@@ -1,0 +1,28 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.paparazziteam.yakulab.leaderboard" >
+4
+5    <uses-sdk
+6        android:minSdkVersion="22"
+6-->/Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml
+7        android:targetSdkVersion="32" />
+7-->/Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml
+8
+9    <application>
+9-->/Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:4:5-12:19
+10        <activity
+10-->/Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:5:9-11:20
+11            android:name="com.paparazziteam.yakulab.leaderboard.LeaderParentActivity"
+11-->/Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:6:13-49
+12            android:exported="false" >
+12-->/Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:7:13-37
+13            <meta-data
+13-->/Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:8:13-10:36
+14                android:name="android.app.lib_name"
+14-->/Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:9:17-52
+15                android:value="" />
+15-->/Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:10:17-33
+16        </activity>
+17    </application>
+18
+19</manifest>

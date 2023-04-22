@@ -1,0 +1,39 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:2:1-14:12
+INJECTED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:2:1-14:12
+INJECTED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:2:1-14:12
+	package
+		INJECTED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml
+		ADDED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:2:1-14:12
+		INJECTED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:2:11-69
+application
+ADDED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:4:5-12:19
+activity#com.paparazziteam.yakulab.leaderboard.LeaderParentActivity
+ADDED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:5:9-11:20
+	android:exported
+		ADDED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:7:13-37
+	android:name
+		ADDED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:6:13-49
+meta-data#android.app.lib_name
+ADDED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:8:13-10:36
+	android:value
+		ADDED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:10:17-33
+	android:name
+		ADDED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml:9:17-52
+uses-sdk
+INJECTED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml
+INJECTED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml
+INJECTED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml
+INJECTED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml
+		ADDED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml
+		INJECTED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml
+		ADDED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml
+		INJECTED from /Users/antonymac/Documents/Antony/Android/Yaku Lab/Yaku-Lab-Official/feature-leaderboard/src/main/AndroidManifest.xml

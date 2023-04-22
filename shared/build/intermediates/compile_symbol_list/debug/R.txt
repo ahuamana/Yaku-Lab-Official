@@ -1,0 +1,2 @@
+int string app_name 0x0
+int string invite_to_download_app 0x0
