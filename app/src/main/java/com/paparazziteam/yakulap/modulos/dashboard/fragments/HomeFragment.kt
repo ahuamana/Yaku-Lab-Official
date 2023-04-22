@@ -34,7 +34,7 @@ class HomeFragment : Fragment(), onClickThread {
     lateinit var mPreferences:MyPreferences
 
     private var binding: FragmentHomeBinding by autoCleared()
-    private val _viewModel:ViewModelDashboard by activityViewModels()
+    private val viewModel:ViewModelDashboard by activityViewModels()
 
     private var clickedItemCompleted:onClickThread?=null
 
@@ -92,7 +92,7 @@ class HomeFragment : Fragment(), onClickThread {
         }
 
         mAdapter?.onClickUpdateLikeListener {
-            _viewModel.updateLikeStatusFirebase(it)
+            viewModel.updateLikeStatusFirebase(it)
         }
     }
 
@@ -121,17 +121,17 @@ class HomeFragment : Fragment(), onClickThread {
 
     private fun observerComponents() {
 
-        _viewModel.challengesCompleted.observe(viewLifecycleOwner) { challenges ->
+        viewModel.challengesCompleted.observe(viewLifecycleOwner) { challenges ->
             hideSkeleton()
             mAdapter?.setUserList(challenges)
         }
 
-        _viewModel.challengesEmpty.observe(viewLifecycleOwner, Observer {
+        viewModel.challengesEmpty.observe(viewLifecycleOwner, Observer {
             //Show Skeleton empty
             hideSkeleton()
         })
 
-        _viewModel.loading.observe(viewLifecycleOwner){
+        viewModel.loading.observe(viewLifecycleOwner){
             if(it) showSkeleton()
             else hideSkeleton()
         }
@@ -152,18 +152,18 @@ class HomeFragment : Fragment(), onClickThread {
     }
 
     private fun getChallengesCompleted() {
-        _viewModel.showChallengesCompleted()
+        viewModel.showChallengesCompleted()
     }
 
     override fun onDestroyView() {
-        _viewModel.challengesCompleted.removeObservers(this)
-        _viewModel.newPostHided.removeObservers(this)
-        _viewModel.removeListener()
+        viewModel.challengesCompleted.removeObservers(this)
+        viewModel.newPostHided.removeObservers(this)
+        viewModel.removeListener()
         super.onDestroyView()
     }
 
     override fun clickOnUpdateLike(item: ChallengeCompleted) {
-        _viewModel.updateLikeStatusFirebase(item)
+        viewModel.updateLikeStatusFirebase(item)
     }
 
     override fun clickedComentThread(item: ChallengeCompleted) {

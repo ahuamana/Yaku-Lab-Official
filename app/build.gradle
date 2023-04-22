@@ -13,6 +13,7 @@ kapt {
 }
 
 android {
+    namespace = "com.paparazziteam.yakulap"
     compileSdk 32
 
     lintOptions {
@@ -25,11 +26,14 @@ android {
         targetSdk 32
         versionCode 6
         versionName "2.1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -46,6 +50,7 @@ android {
     buildFeatures {
         viewBinding true
         dataBinding true
+        buildConfig true
     }
 }
 

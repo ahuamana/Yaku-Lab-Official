@@ -22,6 +22,7 @@ import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityDashboardBinding
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.application.toast
+import com.paparazziteam.yakulap.helper.base.BaseActivity
 import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
 import com.paparazziteam.yakulap.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.modulos.bienvenida.views.WelcomeActivity
@@ -29,14 +30,14 @@ import com.paparazziteam.yakulap.modulos.dashboard.fragments.BottomDialogFragmen
 import com.paparazziteam.yakulap.modulos.dashboard.viewmodels.ViewModelDashboard
 import com.paparazziteam.yakulap.modulos.puntaje.views.PuntajeActivity
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.internal.managers.ActivityComponentManager
 import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class DashboardActivity : AppCompatActivity() {
+class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboardBinding::inflate) {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityDashboardBinding
 
     private lateinit var mainToolbar: Toolbar
     lateinit var drawer:DrawerLayout
@@ -51,7 +52,6 @@ class DashboardActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.apply {

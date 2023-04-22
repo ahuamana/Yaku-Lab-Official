@@ -357,10 +357,102 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    tools:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/appbar_layout">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/containerLayoutBodyNearbySpecies"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvTitleNearbySpecies"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/product_sans_bold"
+                            android:text="@string/title_nearby_species"
+                            android:textColor="@color/black"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/internalContainerLayoutBodyNearbySpecies"
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="10dp"
+                            android:layout_height="180dp"
+                            app:cardElevation="0dp"
+                            android:elevation="0dp"
+                            app:cardCornerRadius="0dp"
+                            app:cardBackgroundColor="@color/species_background_color"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tvTitleNearbySpecies">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/containerBodyNearbySpecies"
+                                android:layout_width="match_parent"
+                                android:visibility="gone"
+                                android:layout_height="match_parent">
+
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/rvNearbySpecies"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    tools:itemCount="5"
+                                    tools:listitem="@layout/item_nearby_species"
+                                    android:orientation="horizontal"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/containerBodyNearbySpeciesEmpty"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <com.airbnb.lottie.LottieAnimationView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_marginBottom="20dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toEndOf="@id/tvNearbySpeciesEmpty"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:lottie_autoPlay="true"
+                                    app:lottie_loop="true"
+                                    app:lottie_rawRes="@raw/lottie_empty_state_search" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvNearbySpeciesEmpty"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/uni_neue_regular"
+                                    android:text="@string/title_nearby_species_empty"
+                                    android:textColor="@color/colorSecondaryLightColor"
+                                    android:textSize="16dp"
+                                    android:layout_marginStart="20dp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </com.google.android.material.card.MaterialCardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/titleDiscover"
@@ -371,67 +463,56 @@
                         android:fontFamily="@font/product_sans_bold"
                         android:text="@string/subtitle_experiencias"
                         android:textColor="@color/black"
-                        android:textSize="20dp"
+                        android:textSize="16dp"
                         android:textStyle="bold"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@+id/containerLayoutBodyNearbySpecies" />
 
                     <LinearLayout
                         android:id="@+id/contentChallenges"
                         android:layout_width="match_parent"
+                        android:layout_marginTop="10dp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         app:layout_constraintTop_toBottomOf="@+id/titleDiscover">
-
-                        <com.google.android.material.button.MaterialButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:layout_marginTop="10dp"
-                            android:background="@drawable/buttom_normal"
-                            android:fontFamily="@font/product_sans_regular"
-                            android:padding="8dp"
-                            android:paddingStart="30dp"
-                            android:paddingEnd="30dp"
-                            android:text="Retos Completados"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="15dp"
-                            app:backgroundTint="@color/colorSecondaryYaku" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recycler"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            tools:itemCount="2"
+                            android:visibility="gone"
+                            tools:listitem="@layout/item_challenge_completed"
                             android:layout_marginTop="10dp"
                             android:orientation="horizontal" />
+
+                        <!--Container Skeleton  new challenges-->
+                        <com.facebook.shimmer.ShimmerFrameLayout
+                            android:id="@+id/shimmerLoading"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:layout_marginTop="20dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/appbar_layout">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <include layout="@layout/item_shimmer_challenge_completed" />
+                                <include layout="@layout/item_shimmer_challenge_completed" />
+                            </LinearLayout>
+                        </com.facebook.shimmer.ShimmerFrameLayout>
 
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <!--Container Skeleton-->
-                <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/shimmerLoading"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/appbar_layout">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-
-                        <include layout="@layout/item_shimmer_challenge_completed" />
-
-                        <include layout="@layout/item_shimmer_challenge_completed" />
-                    </LinearLayout>
-                </com.facebook.shimmer.ShimmerFrameLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

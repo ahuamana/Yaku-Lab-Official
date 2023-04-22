@@ -29,7 +29,7 @@
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="subtitle_experiencias">Descubre</string>
+    <string name="subtitle_experiencias">Explora nuevos retos</string>
 
     <string name="menu_home">Desafíos</string>
     <string name="menu_resources">Recursos de ayuda</string>
@@ -88,5 +88,8 @@
     <string name="step2_comunity_description">Usamos tecnología y equipos de revisión para eliminar cualquier cosa que no cumpla con nuestros estándares lo más rápido posible.</string>
     <string name="inform_solved_title">Decisión tomada</string>
     <string name="step3_comunity_description">Le enviaremos una notificación para ver el resultado en su bandeja de entrada de soporte lo antes posible.</string>
+    <string name="title_nearby_species">Especies cercanas</string>
+    <string name="sciurus_xyridis">Sciurus\nxyridis</string>
+    <string name="title_nearby_species_empty">No hay\nespecies\ncercanas</string>
 
 </resources>
