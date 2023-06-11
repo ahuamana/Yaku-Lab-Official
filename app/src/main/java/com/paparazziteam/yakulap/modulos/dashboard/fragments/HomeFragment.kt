@@ -73,7 +73,6 @@ class HomeFragment : Fragment(), onClickThread {
 
     private fun ui() {
         binding.apply {
-            mRecyclerChallengesCompleted = recycler
             mLinearLayoutAnimals = linearLayoutAnimales
             mCardFruits         = cardFruits
             mCardPlants         = cardPlants
@@ -86,7 +85,7 @@ class HomeFragment : Fragment(), onClickThread {
     private fun setUpRecycler() {
         mLinearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
         mAdapter = AdapterChallengeCompleted(clickedItemCompleted, mPreferences)
-        mRecyclerChallengesCompleted?.apply {
+        binding.rvChallengesCompleted.apply {
             layoutManager = mLinearLayoutManager
             adapter =  mAdapter
         }
@@ -123,6 +122,9 @@ class HomeFragment : Fragment(), onClickThread {
 
         viewModel.challengesCompleted.observe(viewLifecycleOwner) { challenges ->
             hideSkeleton()
+            if(challenges.isNotEmpty()) binding.rvChallengesCompleted.beVisible()
+            else binding.rvChallengesCompleted.beGone()
+
             mAdapter?.setUserList(challenges)
         }
 

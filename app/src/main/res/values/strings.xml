@@ -91,5 +91,6 @@
     <string name="title_nearby_species">Especies cercanas</string>
     <string name="sciurus_xyridis">Sciurus\nxyridis</string>
     <string name="title_nearby_species_empty">No hay\nespecies\ncercanas</string>
+    <string name="fragment_home_tittle_animals">Animales</string>
 
 </resources>
