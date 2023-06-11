@@ -3,13 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
-    id 'org.jetbrains.kotlin.plugin.serialization'
-    id("dagger.hilt.android.plugin")
+    id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
-}
-
-kapt {
-    correctErrorTypes = true
 }
 
 android {
@@ -37,17 +32,21 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_17
     }
 
     buildFeatures {
         viewBinding true
         dataBinding true
         buildConfig true
+    }
+
+    kapt {
+        correctErrorTypes = true
     }
 }
 
@@ -56,7 +55,7 @@ dependencies {
 
     def lottieVersion = "5.2.0"
 
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.core:core-ktx:1.10.1'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -111,9 +110,9 @@ dependencies {
     implementation 'id.zelory:compressor:2.1.1'
 
     //Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation("com.google.dagger:hilt-android:2.46.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.46.1")
 
-    implementation 'com.testfairy:testfairy-android-sdk:1.+@aar'
+    implementation 'com.testfairy:testfairy-android-sdk:1.12.31'
 
 }
