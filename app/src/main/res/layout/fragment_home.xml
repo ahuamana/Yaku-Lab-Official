@@ -402,6 +402,7 @@
                                 android:id="@+id/containerBodyNearbySpecies"
                                 android:layout_width="match_parent"
                                 android:visibility="gone"
+                                tools:visibility="gone"
                                 android:layout_height="match_parent">
 
                                 <androidx.recyclerview.widget.RecyclerView
