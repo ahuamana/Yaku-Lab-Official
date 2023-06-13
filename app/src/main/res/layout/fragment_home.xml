@@ -348,18 +348,44 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent">
 
+                        <!-- Icon species neraby-->
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/ivIconNearbySpecies"
+                            android:layout_width="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginStart="20dp"
+                            app:cardCornerRadius="8dp"
+                            android:backgroundTint="@color/background_icon_color"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_height="wrap_content">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:padding="5dp"
+                                app:srcCompat="@drawable/ic_maps_line"
+                                android:scaleType="centerInside" />
+
+                        </androidx.cardview.widget.CardView>
+
+                        <!--Title species neraby-->
+
+
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/tvTitleNearbySpecies"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
                             android:layout_marginTop="20dp"
                             android:fontFamily="@font/product_sans_bold"
                             android:text="@string/title_nearby_species"
+                            android:layout_marginStart="10dp"
                             android:textColor="@color/black"
                             android:textSize="16sp"
                             android:textStyle="bold"
-                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivIconNearbySpecies"
+                            app:layout_constraintLeft_toRightOf="@+id/ivIconNearbySpecies"
                             app:layout_constraintTop_toTopOf="parent" />
                         <!--Container Body species neraby-->
                         <com.google.android.material.card.MaterialCardView
@@ -495,19 +521,44 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
+                    <!--CardView Icon Explore new species-->
+                    <!-- Icon species neraby-->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/ivExploreNewSpecies"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="20dp"
+                        app:cardCornerRadius="8dp"
+                        android:backgroundTint="@color/background_icon_color"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/containerLayoutBodyNearbySpecies"
+                        android:layout_height="wrap_content">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:padding="5dp"
+                            app:srcCompat="@drawable/ic_explore"
+                            android:scaleType="centerInside" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <!--Title Explore new species-->
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/titleDiscover"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
                         android:fontFamily="@font/product_sans_bold"
                         android:text="@string/subtitle_experiencias"
                         android:textColor="@color/black"
+                        android:layout_marginStart="10dp"
                         android:textSize="16sp"
                         android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/ivExploreNewSpecies"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/containerLayoutBodyNearbySpecies" />
+                        app:layout_constraintStart_toEndOf="@+id/ivExploreNewSpecies"
+                        app:layout_constraintTop_toTopOf="@+id/ivExploreNewSpecies" />
 
                     <LinearLayout
                         android:id="@+id/contentChallenges"
