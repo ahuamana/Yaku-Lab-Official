@@ -4,6 +4,8 @@ import android.content.Context
 import android.database.Cursor
 import android.graphics.Bitmap
 import android.net.Uri
+import com.bumptech.glide.Glide
+import com.google.android.material.imageview.ShapeableImageView
 import id.zelory.compressor.Compressor
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -68,4 +70,11 @@ fun isDownloadsDocument(uri: Uri): Boolean {
 
 fun isMediaDocument(uri: Uri): Boolean {
     return "com.android.providers.media.documents" == uri.authority
+}
+
+
+fun ShapeableImageView.load(url: String) {
+    Glide.with(this)
+        .load(url)
+        .into(this)
 }

@@ -5,13 +5,13 @@
     <data>
             <variable
                 name="viewModel"
-                type="com.paparazziteam.yakulap.modulos.laboratorio.viewmodels.ViewModelResult" />
+                type="com.paparazziteam.yakulap.presentation.laboratorio.viewmodels.ViewModelResult" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".modulos.laboratorio.views.ResultCaptureImageActivity">
+        tools:context=".presentation.laboratorio.views.ResultCaptureImageActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

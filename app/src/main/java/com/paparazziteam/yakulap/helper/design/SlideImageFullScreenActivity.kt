@@ -2,7 +2,6 @@ package com.paparazziteam.yakulap.helper.design
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -24,7 +23,7 @@ import com.paparazziteam.yakulap.helper.design.toolbar.OnClickListener
 import com.paparazziteam.yakulap.helper.design.toolbar.ToolbarActivity
 import com.paparazziteam.yakulap.helper.downloadData
 import com.paparazziteam.yakulap.helper.setColorToStatusBar
-import com.paparazziteam.yakulap.modulos.bienvenida.adaters.PageAdaper
+import com.paparazziteam.yakulap.presentation.bienvenida.adaters.PageAdaper
 import com.paparazziteam.yakulap.root.ctx
 
 class SlideImageFullScreenActivity : ToolbarActivity(), OnClickListener {

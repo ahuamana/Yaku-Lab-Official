@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".modulos.laboratorio.fragments.ListChallengeFragment">
+        tools:context=".presentation.laboratorio.fragments.ListChallengeFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <androidx.recyclerview.widget.RecyclerView

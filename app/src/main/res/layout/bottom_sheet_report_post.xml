@@ -22,7 +22,7 @@
         android:filterTouchesWhenObscured="false"
         android:focusableInTouchMode="false"
         android:orientation="vertical"
-        tools:context=".modulos.dashboard.fragments.BottomDialogFragmentMoreOptions"
+        tools:context=".presentation.dashboard.fragments.BottomDialogFragmentMoreOptions"
         app:behavior_hideable="true">
 
         <LinearLayout

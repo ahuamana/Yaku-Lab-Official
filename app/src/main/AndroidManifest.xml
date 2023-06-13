@@ -6,7 +6,6 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -14,12 +13,6 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
-
-    <!--Permission TestFairy-->
-    <uses-permission android:name="android.permission.READ_LOGS"
-        tools:ignore="ProtectedPermissions"/>
-    <uses-permission android:name="android.permission.BATTERY_STATS"
-        tools:ignore="ProtectedPermissions" />
 
     <application
         android:name=".root.MyApp"
@@ -32,41 +25,41 @@
         android:theme="@style/Theme.Yakulap"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".modulos.laboratorio.views.ResultCaptureImageActivity"
+            android:name=".presentation.laboratorio.views.ResultCaptureImageActivity"
             android:exported="true"
             android:theme="@style/Theme.noActionBar" />
         <activity
-            android:name=".modulos.laboratorio.views.ChallengeActivity"
+            android:name=".presentation.laboratorio.views.ChallengeActivity"
             android:exported="false"
             android:theme="@style/Theme.noActionBar" />
         <activity
-            android:name=".modulos.laboratorio.views.ChallengeParentActivity"
+            android:name=".presentation.laboratorio.views.ChallengeParentActivity"
             android:exported="false"
             android:theme="@style/Theme.noActionBar" />
         <activity
-            android:name=".modulos.puntaje.views.PuntajeActivity"
+            android:name=".presentation.puntaje.views.PuntajeActivity"
             android:exported="false"
             android:theme="@style/Theme.noActionBar" />
         <activity
-            android:name=".modulos.dashboard.views.DashboardActivity"
+            android:name=".presentation.dashboard.views.DashboardActivity"
             android:exported="false"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/Theme.noActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".modulos.login.views.RegisterUserActivity"
+            android:name=".presentation.login.views.RegisterUserActivity"
             android:exported="false"
             android:theme="@style/Theme.noActionBar" />
         <activity
-            android:name=".modulos.bienvenida.views.WelcomeActivity"
+            android:name=".presentation.bienvenida.views.WelcomeActivity"
             android:exported="false"
             android:theme="@style/AppTheme.FullScreenPersonalizeMaterial" />
         <activity
-            android:name=".modulos.login.views.LoginActivity"
+            android:name=".presentation.login.views.LoginActivity"
             android:exported="false"
             android:theme="@style/Theme.noActionBar" />
         <activity
-            android:name=".modulos.bienvenida.views.SplashActivity"
+            android:name=".presentation.bienvenida.views.SplashActivity"
             android:exported="true"
             android:theme="@style/AppTheme.FullScreenPersonalize">
 

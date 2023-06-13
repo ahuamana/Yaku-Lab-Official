@@ -89,8 +89,10 @@
     <string name="inform_solved_title">Decisión tomada</string>
     <string name="step3_comunity_description">Le enviaremos una notificación para ver el resultado en su bandeja de entrada de soporte lo antes posible.</string>
     <string name="title_nearby_species">Especies cercanas</string>
-    <string name="sciurus_xyridis">Sciurus\nxyridis</string>
+    <string name="sciurus_xyridis">Sciurus xyridis</string>
     <string name="title_nearby_species_empty">No hay\nespecies\ncercanas</string>
     <string name="fragment_home_tittle_animals">Animales</string>
+    <string name="Fruits">Frutas</string>
+    <string name="title_plants">Plantas</string>
 
 </resources>

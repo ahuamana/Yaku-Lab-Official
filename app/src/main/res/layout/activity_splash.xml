@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewmodel"
-            type="com.paparazziteam.yakulap.modulos.bienvenida.viewmodels.ViewModelSplashScreen" />
+            type="com.paparazziteam.yakulap.presentation.bienvenida.viewmodels.ViewModelSplashScreen" />
 
     </data>
 
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="15dp"
-        tools:context=".modulos.bienvenida.views.SplashActivity">
+        tools:context=".presentation.bienvenida.views.SplashActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

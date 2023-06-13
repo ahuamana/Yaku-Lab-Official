@@ -10,7 +10,7 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".modulos.puntaje.views.PuntajeActivity">
+        tools:context=".presentation.puntaje.views.PuntajeActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_activity"
