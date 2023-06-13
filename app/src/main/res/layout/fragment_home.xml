@@ -60,9 +60,9 @@
 
                                 <com.google.android.material.imageview.ShapeableImageView
                                     android:id="@+id/image_icon_animals"
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
-                                    android:src="@drawable/ic_category_animals"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
+                                    android:src="@drawable/ic_dog_white"
                                     app:layout_constraintEnd_toEndOf="parent"
                                     app:layout_constraintStart_toStartOf="parent"
                                     app:layout_constraintTop_toTopOf="parent" />
@@ -107,12 +107,12 @@
                                 android:padding="5dp">
 
                                 <com.google.android.material.imageview.ShapeableImageView
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
                                     android:layout_gravity="center"
                                     android:padding="5dp"
                                     android:scaleType="centerInside"
-                                    android:src="@drawable/ic_category_fruits" />
+                                    app:srcCompat="@drawable/ic_pear" />
 
                                 <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="wrap_content"
@@ -149,12 +149,12 @@
                                 android:padding="5dp">
 
                                 <com.google.android.material.imageview.ShapeableImageView
-                                    android:layout_width="50dp"
-                                    android:layout_height="50dp"
+                                    android:layout_width="25dp"
+                                    android:layout_height="25dp"
                                     android:layout_gravity="center"
                                     android:padding="5dp"
                                     android:scaleType="centerInside"
-                                    android:src="@drawable/ic_category_plants" />
+                                    app:srcCompat="@drawable/ic_leaf"/>
 
                                 <com.google.android.material.textview.MaterialTextView
                                     android:layout_width="wrap_content"

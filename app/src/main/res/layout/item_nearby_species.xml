@@ -7,7 +7,7 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
-        android:layout_width="95dp"
+        android:layout_width="100dp"
         android:layout_height="95dp"
         app:cardCornerRadius="10dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -15,6 +15,8 @@
             <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/imgIcon"
                         android:layout_width="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
                         android:layout_height="wrap_content"
                         android:scaleType="centerCrop"
                         android:src="@drawable/axyridis"/>
@@ -25,17 +27,106 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
-        android:fontFamily="@font/product_sans_regular"
-        android:maxLines="2"
         android:ellipsize="end"
+        android:fontFamily="@font/product_sans_regular"
+        android:gravity="center"
+        android:lines="2"
+        android:maxLines="2"
         android:textColor="@color/white"
         android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/cardView"
         app:layout_constraintStart_toStartOf="@+id/cardView"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
         tools:text="@string/sciurus_xyridis"
-        android:gravity="center"
         tools:textColor="@color/black" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/containerExpandable"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/authorName">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ivIconWikipedia"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="3dp"
+            app:cardCornerRadius="15dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:backgroundTint="@color/white"
+            tools:backgroundTint="@color/colorPrimaryYaku"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgIconWikipedia"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                app:srcCompat="@drawable/ic_wikipedia"
+                android:scaleType="centerInside" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ivIconExtinct"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:layout_marginStart="3dp"
+            app:cardCornerRadius="15dp"
+            android:backgroundTint="@color/white"
+            tools:backgroundTint="@color/color_background_cardboard"
+            app:layout_constraintLeft_toRightOf="@+id/ivIconWikipedia"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgIconExtinct"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:padding="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:srcCompat="@drawable/ic_warning"
+                android:backgroundTint="@color/colorPrimaryYaku"
+                app:tint="@color/colorSecondaryYaku"
+                android:scaleType="centerInside" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ivIconMore"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="3dp"
+            app:cardCornerRadius="15dp"
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true"
+            android:backgroundTint="@color/white"
+            tools:backgroundTint="@color/colorPrimaryYaku"
+            app:layout_constraintLeft_toRightOf="@+id/ivIconExtinct"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.imageview.ShapeableImageView
+
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:clickable="false"
+                android:focusable="false"
+                android:padding="5dp"
+                app:srcCompat="@drawable/ic_more_horizontal_svg"
+                android:scaleType="centerInside" />
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

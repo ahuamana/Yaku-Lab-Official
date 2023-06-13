@@ -21,6 +21,7 @@ import com.paparazziteam.yakulap.databinding.FragmentHomeBinding
 import com.paparazziteam.yakulap.helper.*
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.design.decoration.ItemSpaceDecorationHorizontal
+import com.paparazziteam.yakulap.helper.network.openUrl
 import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterChallengeCompleted
 import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterNearbySpecies
 import com.paparazziteam.yakulap.presentation.dashboard.interfaces.onClickThread
@@ -93,6 +94,13 @@ class HomeFragment : Fragment(), onClickThread {
 
         adapterSpeciesNearby.onItemClickListener { observationEntity, position ->
             //TODO: Do logic
+        }
+
+        adapterSpeciesNearby.onClickItemWiki { observationEntity, position ->
+            println("WIKI: ${observationEntity.identifications.first()?.taxon?.wikipedia_url}")
+            observationEntity.identifications.first()?.taxon?.wikipedia_url?.let {
+                openUrl(requireContext(), it)
+            }
         }
     }
 

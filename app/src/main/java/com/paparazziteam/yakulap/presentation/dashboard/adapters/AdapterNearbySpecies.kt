@@ -28,6 +28,14 @@ class AdapterNearbySpecies : ListAdapter<ObservationEntity, RecyclerView.ViewHol
         onItemClickListener = listener
     }
 
+
+    private var onClickItemWiki: ((ObservationEntity, position:Int) -> Unit)? = null
+    fun onClickItemWiki(listener: (ObservationEntity, position: Int) -> Unit) {
+        onClickItemWiki = listener
+    }
+
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ItemSpeciesViewHolder(
             ItemNearbySpeciesBinding.inflate(
@@ -43,12 +51,19 @@ class AdapterNearbySpecies : ListAdapter<ObservationEntity, RecyclerView.ViewHol
     }
 
     inner class ItemSpeciesViewHolder(private val binding: ItemNearbySpeciesBinding): RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.imgIconWikipedia.setOnClickListener {
+                onClickItemWiki?.invoke(getItem(adapterPosition), adapterPosition)
+            }
+        }
+
         fun bind(item: ObservationEntity) {
             binding.apply {
-                root.setOnClickListener {
-                    onItemClickListener?.invoke(item, adapterPosition)
+                imgIcon.apply {
+                    setOnClickListener { onItemClickListener?.invoke(item, adapterPosition) }
+                    load(item.identifications.first()?.taxon?.default_photo?.medium_url?:"")
                 }
-                imgIcon.load(item.identifications.first()?.taxon?.default_photo?.medium_url?:"")
                 authorName.text = item.identifications.first()?.taxon?.name
             }
         }
