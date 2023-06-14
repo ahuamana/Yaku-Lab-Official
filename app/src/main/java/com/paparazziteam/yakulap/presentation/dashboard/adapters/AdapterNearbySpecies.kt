@@ -34,6 +34,11 @@ class AdapterNearbySpecies : ListAdapter<ObservationEntity, RecyclerView.ViewHol
         onClickItemWiki = listener
     }
 
+    private var onClickItemImageFullScreen: ((ObservationEntity, position:Int,url:String) -> Unit)? = null
+    fun onClickItemImageFullScreen(listener: (ObservationEntity, position: Int, url:String) -> Unit) {
+        onClickItemImageFullScreen = listener
+    }
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -61,8 +66,9 @@ class AdapterNearbySpecies : ListAdapter<ObservationEntity, RecyclerView.ViewHol
         fun bind(item: ObservationEntity) {
             binding.apply {
                 imgIcon.apply {
-                    setOnClickListener { onItemClickListener?.invoke(item, adapterPosition) }
-                    load(item.identifications.first()?.taxon?.default_photo?.medium_url?:"")
+                    val url = item.identifications.first()?.taxon?.default_photo?.medium_url?:""
+                    setOnClickListener { onClickItemImageFullScreen?.invoke(getItem(adapterPosition), adapterPosition,url) }
+                    load(url)
                 }
                 authorName.text = item.identifications.first()?.taxon?.name
             }

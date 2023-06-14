@@ -22,9 +22,11 @@ import com.google.type.LatLng
 import com.paparazziteam.yakulap.databinding.FragmentHomeBinding
 import com.paparazziteam.yakulap.helper.*
 import com.paparazziteam.yakulap.helper.application.MyPreferences
+import com.paparazziteam.yakulap.helper.design.SlideImageFullScreenActivity
 import com.paparazziteam.yakulap.helper.design.decoration.ItemSpaceDecorationHorizontal
 import com.paparazziteam.yakulap.helper.network.openUrl
 import com.paparazziteam.yakulap.helper.others.LocationManager
+import com.paparazziteam.yakulap.helper.others.PermissionManager
 import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterChallengeCompleted
 import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterNearbySpecies
 import com.paparazziteam.yakulap.presentation.dashboard.interfaces.onClickThread
@@ -70,6 +72,10 @@ class HomeFragment : Fragment(), onClickThread {
         LocationManager(requireActivity())
     }
 
+    private val permissionManager by lazy {
+        PermissionManager(requireActivity())
+    }
+
     private val onListenerLocation = object : LocationManager.OnLocationReceivedListener {
         override fun onLocationReceived(location: Location?) {
             if(location == null) return
@@ -112,7 +118,13 @@ class HomeFragment : Fragment(), onClickThread {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //get last know location
-        setupGetLastLocation()
+
+        if(permissionManager.checkLocationPermission()) {
+            locationManager.getLastKnownLocationOnlyOnce(onListenerLocation)
+        }else{
+            permissionManager.requestLocationPermission()
+            locationManager.getLastKnownLocationOnlyOnce(onListenerLocation)
+        }
     }
 
     private fun setupGetLastLocation() {
@@ -141,6 +153,14 @@ class HomeFragment : Fragment(), onClickThread {
             observationEntity.identifications.first()?.taxon?.wikipedia_url?.let {
                 openUrl(requireContext(), it)
             }
+        }
+
+        adapterSpeciesNearby.onClickItemImageFullScreen { observationEntity, position, url ->
+            var list = listOf(url)
+            val intent = Intent(this.context, SlideImageFullScreenActivity::class.java)
+            intent.putExtra("lista_imagenes", list.toString())
+            intent.putExtra("position"      , position)
+            requireActivity().startActivity(intent)
         }
     }
 
