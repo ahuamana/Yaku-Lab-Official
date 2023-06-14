@@ -35,7 +35,7 @@ class ResultCaptureImageActivity : AppCompatActivity() {
     private lateinit var txtTittle: MaterialTextView
     private lateinit var txtDescription: MaterialTextView
     private lateinit var imageRounded: ShapeableImageView
-    val options: RequestOptions =
+    private val options: RequestOptions =
         RequestOptions().override(300,200).transform(CenterCrop(), RoundedCorners(10))
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,19 +52,9 @@ class ResultCaptureImageActivity : AppCompatActivity() {
         }
         getExtras()
         setupActionBar()
-        OtherComponents()
-        observers()
     }
 
-    private fun observers() {
 
-    }
-
-    private fun OtherComponents() {
-        viewmodel.congratulations.observe(this){
-            Log.d("TAG","Congra: $it")
-        }
-    }
 
     private fun getExtras() {
         if(intent.extras!= null){

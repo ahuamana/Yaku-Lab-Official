@@ -94,5 +94,7 @@
     <string name="fragment_home_tittle_animals">Animales</string>
     <string name="Fruits">Frutas</string>
     <string name="title_plants">Plantas</string>
+    <string name="menu_challenge" />
+    <string name="menu_result_image_capture">Resultado</string>
 
 </resources>

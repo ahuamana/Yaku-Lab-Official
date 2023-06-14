@@ -44,9 +44,8 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
 
     var binding: FragmentChallengeBinding?= null
 
-    val ARG_JSON        = "extra"
-    val ARG_EXTRA_PATH  = "ARG_EXTRA_PATH"
-    var data_extra = DataChallenge()
+    private val argJson        = "extra"
+    private var dataExtra = DataChallenge()
 
     @Inject
     lateinit var mPreferences :MyPreferences
@@ -73,10 +72,10 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
     }
 
     private fun extras() {
-        if (activity?.intent?.extras != null) {
-            var json_object =  activity?.intent?.getStringExtra(ARG_JSON)
-            data_extra = fromJson(json_object?:"")
-            Log.d(TAG_CHALLENGE_FRAGMENT, "Json received: $data_extra")
+        if (requireActivity().intent?.extras != null) {
+            val json_object =  activity?.intent?.getStringExtra(argJson)
+            dataExtra = fromJson(json_object?:"")
+            Log.d(TAG_CHALLENGE_FRAGMENT, "Json received: $dataExtra")
         }
     }
 
@@ -135,21 +134,21 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
 
     private fun openResultActivity() {
         var ramdon: Int
-        data_extra.image_result?.let {
+        dataExtra.image_result?.let {
             ramdon = (it.indices).random()
             Log.d(TAG,"Ramdon number: $ramdon")
             Log.d(TAG,"Zise number: ${it.size}")
             requireActivity().startActivity(Intent(context,ResultCaptureImageActivity::class.java).apply {
-                putExtra("title", data_extra.name)
-                putExtra("description", data_extra?.text_result?.get(ramdon))
-                putExtra("image", data_extra?.image_result?.get(ramdon))
+                putExtra("title", dataExtra.name)
+                putExtra("description", dataExtra?.text_result?.get(ramdon))
+                putExtra("image", dataExtra?.image_result?.get(ramdon))
                 putExtra("pointsToGive", getPointsCompleted())
             })
         }
     }
 
     private fun getPointsCompleted():Int{
-        return if(isChallengeCompleted) 0 else data_extra.pointsToGive?:0
+        return if(isChallengeCompleted) 0 else dataExtra.pointsToGive?:0
     }
 
     private fun registerPhoto() {
@@ -166,9 +165,9 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
             author_lastname =  mPreferences.lastName,
             author_name = mPreferences.firstName,
             timestamp = Date().time,
-            tipo = data_extra.category,
-            challenge_id = data_extra.id,
-            name = data_extra.challenge_name
+            tipo = dataExtra.category,
+            challenge_id = dataExtra.id,
+            name = dataExtra.challenge_name
         )
         UploadedPhoto(completed)
     }
@@ -183,7 +182,7 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
             mDialog?.show()
             viewModelDashboard.uploadPhotoRemote(completed,
                 getImageFileActivity(),
-                data_extra.pointsToGive?:0,
+                dataExtra.pointsToGive?:0,
                 isChallengeCompleted,
                 idChallengeDocument)
         }
@@ -191,8 +190,8 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
 
     fun getInfoChallengeCompleted(){
         println("MySharedPreferences email: ${mPreferences.email}")
-        println("DataExtra id: ${data_extra.id}")
-        viewModel.getChallengeInformation(data_extra.id){
+        println("DataExtra id: ${dataExtra.id}")
+        viewModel.getChallengeInformation(dataExtra.id){
                 isCorrect:Boolean, challenge: ChallengeCompleted?->
             if(isCorrect){
                 Log.d(TAG_CHALLENGE_FRAGMENT,"result reto: $challenge")
@@ -307,13 +306,13 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
 
     private fun setupChallengeData() {
         Glide.with(this)
-            .load(data_extra.image_child)
+            .load(dataExtra.image_child)
             .error(R.drawable.ic_image_defect)
             .placeholder(R.drawable.ic_image_defect)
             .into(imgChallengeChild)
 
         Glide.with(this)
-            .load(data_extra.image_parent)
+            .load(dataExtra.image_parent)
             .error(R.drawable.ic_image_defect)
             .placeholder(R.drawable.ic_image_defect)
             .into(imgChallengeParent)
