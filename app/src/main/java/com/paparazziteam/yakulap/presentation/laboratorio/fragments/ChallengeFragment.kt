@@ -2,13 +2,17 @@ package com.paparazziteam.yakulap.presentation.laboratorio.fragments
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -24,6 +28,7 @@ import com.paparazziteam.yakulap.databinding.FragmentChallengeBinding
 import com.paparazziteam.yakulap.helper.*
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.application.toast
+import com.paparazziteam.yakulap.helper.others.PermissionManager
 import com.paparazziteam.yakulap.presentation.dashboard.pojo.ChallengeCompleted
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
 import com.paparazziteam.yakulap.presentation.laboratorio.pojo.DataChallenge
@@ -31,14 +36,20 @@ import com.paparazziteam.yakulap.presentation.laboratorio.viewmodels.ViewModelCh
 import com.paparazziteam.yakulap.presentation.laboratorio.viewmodels.ViewModelLab
 import com.paparazziteam.yakulap.presentation.laboratorio.views.ChallengeActivity
 import com.paparazziteam.yakulap.presentation.laboratorio.views.ResultCaptureImageActivity
+import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
+import io.ak1.pix.helpers.PixBus
+import io.ak1.pix.helpers.PixEventCallback
+import io.ak1.pix.utility.ARG_PARAM_PIX
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import java.io.File
 import java.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragment() {
+class ChallengeFragment : Fragment() {
 
     private val viewModelDashboard:ViewModelDashboard by viewModels()
 
@@ -49,6 +60,9 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
 
     @Inject
     lateinit var mPreferences :MyPreferences
+
+    @Inject
+    lateinit var navigationRoot : NavigationRootImpl
 
     var idChallengeDocument = ""
 
@@ -66,8 +80,11 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
 
     var mDialog: ProgressDialog? = null
 
+    private val permissionManager by lazy { PermissionManager(requireActivity()) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         extras()
     }
 
@@ -101,6 +118,25 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
         observers()
         otherComponents()
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        handlePixImageResult()
+    }
+
+    private fun handlePixImageResult() {
+        PixBus.results(coroutineScope = CoroutineScope(Dispatchers.Main)) {
+            when (it.status) {
+                PixEventCallback.Status.SUCCESS -> {
+                    //TODO: handle success result Pix image
+                    Log.d("TAG","PixEventCallback.Status.SUCCESS")
+                }
+                PixEventCallback.Status.BACK_PRESSED -> {
+                    requireActivity().onBackPressed()
+                }
+            }
+        }
     }
 
     private fun otherComponents() {
@@ -216,7 +252,8 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
     }
 
     private fun loadImageFromRemotoOrLocal(challenge: ChallengeCompleted?) {
-        var image  = (requireActivity() as ChallengeActivity).getPathResultPhoto()
+        //var image  = (requireActivity() as ChallengeActivity).getPathResultPhoto()
+        var image  = ""
         idChallengeDocument = challenge?.id?:""
         println("image activity: ${image}")
         if(!image.toString().isNullOrEmpty()){
@@ -241,7 +278,7 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
                     ): Boolean {
                         Log.d(TAG, "OnResourceReady")
                         //do something when picture already loaded
-                        binding?.progressLoadImage?.visibility = View.GONE
+                        binding?.progressLoadImage?.beGone()
                         return false
                     }
 
@@ -293,7 +330,20 @@ class ChallengeFragment(private val clickCallback: View.OnClickListener) : Fragm
     }
 
     private fun setupCamera() {
-        fabUploadImage.setOnClickListener(clickCallback)
+        fabUploadImage.setOnClickListener {
+            openCamera()
+        }
+    }
+
+    private fun openCamera() {
+        when {
+            permissionManager.hasCameraPermission() -> {
+                navigationRoot.navigateToCameraWhatsapp()
+            }
+            else -> {
+                permissionManager.requestCameraPermission()
+            }
+        }
     }
 
 

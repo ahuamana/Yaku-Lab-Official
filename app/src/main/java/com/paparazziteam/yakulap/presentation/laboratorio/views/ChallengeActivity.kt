@@ -29,7 +29,7 @@ import java.io.File
 
 
 @AndroidEntryPoint
-class ChallengeActivity : ToolbarActivity() {
+class ChallengeActivity() : ToolbarActivity() {
 
     var binding: ActivityChallengeBinding?= null
     val TAG = javaClass.name
@@ -48,9 +48,9 @@ class ChallengeActivity : ToolbarActivity() {
         path = "Pix/Camera"
     }
 
-    private val resultsFragment = ChallengeFragment {
+    /*private val resultsFragment = ChallengeFragment {
         showCameraFragment()
-    }
+    }*/
 
     fun showCameraFragment() {
         addPixToActivity(R.id.container_parent_challenge, mOptions) {
@@ -95,8 +95,8 @@ class ChallengeActivity : ToolbarActivity() {
 
     private fun showResultsFragment() {
         showStatusBarActivity()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.container_parent_challenge, resultsFragment).commit()
+        /*supportFragmentManager.beginTransaction()
+            .replace(R.id.container_parent_challenge, resultsFragment).commit()*/
     }
 
 

@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
+import androidx.navigation.get
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -31,6 +32,7 @@ import com.paparazziteam.yakulap.presentation.navigation.NavigationRoot
 import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
 import com.paparazziteam.yakulap.presentation.puntaje.views.PuntajeActivity
 import dagger.hilt.android.AndroidEntryPoint
+import io.ak1.pix.helpers.PixBus
 import java.util.*
 import javax.inject.Inject
 
@@ -153,6 +155,15 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
             title = "Desafíos"
             setTitleTextColor(ContextCompat.getColor(context, R.color.colorWhite))
             navigationIcon = getDrawable(R.drawable.ic_menu)
+        }
+    }
+
+    override fun onBackPressed() {
+        val navControllerRetrieved = navigationRoot.retrieveNavController()
+        if (navControllerRetrieved?.currentDestination == navControllerRetrieved?.graph?.get(R.id.nav_camera_whatsapp)) {
+            PixBus.onBackPressedEvent()
+        } else {
+            super.onBackPressed()
         }
     }
 

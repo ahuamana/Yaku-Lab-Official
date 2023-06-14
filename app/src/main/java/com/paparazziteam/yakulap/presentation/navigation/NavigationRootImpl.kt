@@ -14,6 +14,10 @@ class NavigationRootImpl @Inject constructor() : NavigationRoot{
         this.navController = navController
     }
 
+    override fun retrieveNavController(): NavController? {
+        return navController
+    }
+
     override fun navigateToChallenge() {
         navController?.navigate(R.id.nav_challenge)
     }
@@ -24,6 +28,10 @@ class NavigationRootImpl @Inject constructor() : NavigationRoot{
 
     override fun navigateToChallengeComplete() {
         navController?.navigate(R.id.nav_challenge_complete)
+    }
+
+    override fun navigateToCameraWhatsapp() {
+        navController?.navigate(R.id.nav_camera_whatsapp)
     }
 
 }

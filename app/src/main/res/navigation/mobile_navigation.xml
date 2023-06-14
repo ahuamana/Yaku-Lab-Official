@@ -19,12 +19,24 @@
         android:id="@+id/nav_challenge"
         android:name="com.paparazziteam.yakulap.presentation.laboratorio.fragments.ChallengeFragment"
         android:label="@string/menu_challenge"
-        tools:layout="@layout/fragment_challenge" />
+        tools:layout="@layout/fragment_challenge" >
+        <action
+            android:id="@+id/action_nav_challenge_to_CameraFragment"
+            app:destination="@id/nav_camera_whatsapp" />
+        <action
+            android:id="@+id/action_nav_challenge_to_nav_challenge_complete"
+            app:destination="@id/nav_challenge_complete" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_challenge_complete"
         android:name="com.paparazziteam.yakulap.presentation.laboratorio.fragments.ResultCaptureImageFragment"
         android:label="@string/menu_result_image_capture"
         tools:layout="@layout/fragment_result_capture_image" />
+
+    <fragment
+        android:id="@+id/nav_camera_whatsapp"
+        android:name="io.ak1.pix.PixFragment"
+        tools:layout="@layout/fragment_pix"></fragment>
 
 </navigation>
