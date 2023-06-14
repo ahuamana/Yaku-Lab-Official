@@ -71,6 +71,10 @@ class AdapterNearbySpecies : ListAdapter<ObservationEntity, RecyclerView.ViewHol
                     load(url)
                 }
                 authorName.text = item.identifications.first()?.taxon?.name
+
+                root.setOnClickListener {
+                    onItemClickListener?.invoke(getItem(adapterPosition), adapterPosition)
+                }
             }
         }
     }

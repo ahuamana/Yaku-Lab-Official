@@ -27,6 +27,8 @@ import com.paparazziteam.yakulap.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.presentation.bienvenida.views.WelcomeActivity
 import com.paparazziteam.yakulap.presentation.dashboard.fragments.BottomDialogFragment
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
+import com.paparazziteam.yakulap.presentation.navigation.NavigationRoot
+import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
 import com.paparazziteam.yakulap.presentation.puntaje.views.PuntajeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -45,6 +47,9 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
 
     @Inject
     lateinit var preferences:MyPreferences
+
+    @Inject
+    lateinit var navigationRoot: NavigationRootImpl
 
     private val _viewModel:ViewModelDashboard by viewModels()
 
@@ -73,6 +78,8 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
                 R.id.nav_home
             ), drawer
         )
+        //Here we bind the navController to the navigationRoot
+        navigationRoot.bind(navController)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)

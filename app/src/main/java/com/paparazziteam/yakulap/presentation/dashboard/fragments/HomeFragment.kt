@@ -34,6 +34,7 @@ import com.paparazziteam.yakulap.presentation.dashboard.pojo.ChallengeCompleted
 import com.paparazziteam.yakulap.presentation.dashboard.pojo.TypeGroup
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
 import com.paparazziteam.yakulap.presentation.laboratorio.views.ChallengeParentActivity
+import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
 import com.paparazziteam.yakulap.usecases.SpeciesByLocationResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -44,6 +45,9 @@ class HomeFragment : Fragment(), onClickThread {
 
     @Inject
     lateinit var mPreferences:MyPreferences
+
+    @Inject
+    lateinit var navigationRoot: NavigationRootImpl
 
     private var binding: FragmentHomeBinding by autoCleared()
     private val viewModel:ViewModelDashboard by activityViewModels()
@@ -145,7 +149,8 @@ class HomeFragment : Fragment(), onClickThread {
         )
 
         adapterSpeciesNearby.onItemClickListener { observationEntity, position ->
-            //TODO: Do logic
+            Log.d("CLICK", "onCreateView: ${observationEntity.identifications.first()?.taxon?.name}")
+            navigationRoot.navigateToChallenge()
         }
 
         adapterSpeciesNearby.onClickItemWiki { observationEntity, position ->

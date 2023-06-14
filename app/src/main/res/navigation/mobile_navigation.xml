@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_challenge" />
 
     <fragment
-        android:id="@+id/nav_result"
+        android:id="@+id/nav_challenge_complete"
         android:name="com.paparazziteam.yakulap.presentation.laboratorio.fragments.ResultCaptureImageFragment"
         android:label="@string/menu_result_image_capture"
         tools:layout="@layout/fragment_result_capture_image" />
