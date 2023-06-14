@@ -1,6 +1,7 @@
 package com.paparazziteam.yakulap.presentation.dashboard.fragments
 
 import android.content.Intent
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,11 +18,13 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.google.type.LatLng
 import com.paparazziteam.yakulap.databinding.FragmentHomeBinding
 import com.paparazziteam.yakulap.helper.*
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.design.decoration.ItemSpaceDecorationHorizontal
 import com.paparazziteam.yakulap.helper.network.openUrl
+import com.paparazziteam.yakulap.helper.others.LocationManager
 import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterChallengeCompleted
 import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterNearbySpecies
 import com.paparazziteam.yakulap.presentation.dashboard.interfaces.onClickThread
@@ -47,7 +50,6 @@ class HomeFragment : Fragment(), onClickThread {
 
     //Laboratorio
     var mLinearLayoutManager: LinearLayoutManager? = null
-    private var mRecyclerChallengesCompleted: RecyclerView? = null
 
     //UI shimmer
     private var shimmerSkeleton: ShimmerFrameLayout? = null
@@ -63,21 +65,59 @@ class HomeFragment : Fragment(), onClickThread {
     var mAdapter: AdapterChallengeCompleted? = null
     var adapterSpeciesNearby = AdapterNearbySpecies()
 
+    //Get Last Know Location
+    private val locationManager by lazy {
+        LocationManager(requireActivity())
+    }
+
+    private val onListenerLocation = object : LocationManager.OnLocationReceivedListener {
+        override fun onLocationReceived(location: Location?) {
+            if(location == null) return
+            location.let {
+                viewModel.getSpeciesByLocation(it.latitude, it.longitude)
+            }
+        }
+
+        override fun onLocationFailed() {
+            Log.d("LOCATION", "onLocationFailed: ")
+            val doubleLatitudePeruLima = -12.046374
+            val doubleLongitudePeruLima = -77.042793
+            viewModel.getSpeciesByLocation(doubleLatitudePeruLima, doubleLongitudePeruLima)
+        }
+
+        override fun onPermissionFailed() {
+            Log.d("LOCATION", "onPermissionFailed: ")
+            val doubleLatitudePeruLima = -12.046374
+            val doubleLongitudePeruLima = -77.042793
+            viewModel.getSpeciesByLocation(doubleLatitudePeruLima, doubleLongitudePeruLima)
+        }
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-
         ui()
         setUpRecycler()
         setupRecyclerNearbySpecies()
         observers()
         otherComponents()
         getChallengesCompleted()
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //get last know location
+        setupGetLastLocation()
+    }
+
+    private fun setupGetLastLocation() {
+        //Set up location listener to handle location changes or failures
+        locationManager.getLastKnownLocationOnlyOnce(onListenerLocation)
     }
 
     private fun setupRecyclerNearbySpecies() {

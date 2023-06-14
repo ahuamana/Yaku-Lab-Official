@@ -1,537 +1,356 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.dashboard.fragments.HomeFragment">
 
-    <data>
-
-    </data>
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.dashboard.fragments.HomeFragment">
+        app:layout_anchorGravity="center">
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/scrollView2"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_anchorGravity="center">
+            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appbar_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorTransparent"
+                android:elevation="0dp"
+                app:elevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-
-                <com.google.android.material.appbar.AppBarLayout
-                    android:id="@+id/appbar_layout"
+                <LinearLayout
+                    android:id="@+id/top_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/colorTransparent"
-                    android:elevation="0dp"
-                    app:elevation="0dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:id="@+id/top_layout"
-                        android:layout_width="match_parent"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_animals"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_margin="16dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/background_icon_color"
+                        android:elevation="0dp"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="0dp">
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card_animals"
-                            android:layout_width="0dp"
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="16dp"
-                            android:layout_weight="1"
-                            android:backgroundTint="@color/background_icon_color"
-                            android:elevation="0dp"
-                            app:cardCornerRadius="8dp"
-                            app:cardElevation="0dp">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="5dp">
-
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:id="@+id/image_icon_animals"
-                                    android:layout_width="25dp"
-                                    android:layout_height="25dp"
-                                    android:src="@drawable/ic_dog_white"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/materialTextView10"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="5dp"
-                                    android:fontFamily="@font/product_sans_regular"
-                                    android:gravity="center"
-                                    android:text="@string/fragment_home_tittle_animals"
-                                    android:textColor="@color/black"
-                                    android:textSize="12sp"
-                                    android:textStyle="bold"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@+id/image_icon_animals" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card_fruits"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="16dp"
-                            android:layout_weight="1"
-                            android:backgroundTint="@color/background_icon_color"
-                            android:clickable="true"
-                            android:elevation="6dp"
-                            android:focusable="true"
-                            app:cardCornerRadius="8dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="5dp">
-
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:layout_width="25dp"
-                                    android:layout_height="25dp"
-                                    android:layout_gravity="center"
-                                    android:padding="5dp"
-                                    android:scaleType="centerInside"
-                                    app:srcCompat="@drawable/ic_pear" />
-
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="5dp"
-                                    android:fontFamily="@font/product_sans_regular"
-                                    android:gravity="center"
-                                    android:text="@string/Fruits"
-                                    android:textColor="@color/black"
-                                    android:textSize="12sp"
-                                    android:textStyle="bold" />
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card_plants"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="16dp"
-                            android:layout_weight="1"
-                            android:backgroundTint="@color/background_icon_color"
-                            android:clickable="true"
-                            android:elevation="6dp"
-                            android:focusable="true"
-                            app:cardCornerRadius="8dp">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:padding="5dp">
-
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:layout_width="25dp"
-                                    android:layout_height="25dp"
-                                    android:layout_gravity="center"
-                                    android:padding="5dp"
-                                    android:scaleType="centerInside"
-                                    app:srcCompat="@drawable/ic_leaf"/>
-
-                                <com.google.android.material.textview.MaterialTextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_margin="5dp"
-                                    android:fontFamily="@font/product_sans_regular"
-                                    android:gravity="center"
-                                    android:text="@string/title_plants"
-                                    android:textColor="@color/black"
-                                    android:textSize="12sp"
-                                    android:textStyle="bold" />
-
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/middleMenus"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:visibility="gone"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/topMenus">
-
-                        <LinearLayout
-                            android:id="@+id/linearLayoutSustancias"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="16dp"
-                                android:backgroundTint="@color/background_icon_color"
-                                android:elevation="6dp"
-                                app:cardCornerRadius="8dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-
-                                    <com.google.android.material.imageview.ShapeableImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="100dp"
-                                        android:layout_gravity="center"
-                                        android:padding="5dp"
-                                        android:scaleType="centerInside"
-                                        android:src="@drawable/ic_category_science" />
-
-                                    <com.google.android.material.textview.MaterialTextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_margin="5dp"
-                                        android:fontFamily="@font/product_sans_regular"
-                                        android:gravity="center"
-                                        android:text="Sustancias"
-                                        android:textColor="@color/black"
-                                        android:textSize="12dp"
-                                        android:textStyle="bold" />
-
-                                </LinearLayout>
-
-                            </androidx.cardview.widget.CardView>
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:id="@+id/linearLayoutObjetos"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="16dp"
-                                android:backgroundTint="@color/background_icon_color"
-                                android:elevation="6dp"
-                                android:padding="5dp"
-                                app:cardCornerRadius="8dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-
-                                    <com.google.android.material.imageview.ShapeableImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="100dp"
-                                        android:layout_gravity="center"
-                                        android:padding="5dp"
-                                        android:scaleType="centerInside"
-                                        android:src="@drawable/ic_category_school" />
-
-                                    <com.google.android.material.textview.MaterialTextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_margin="5dp"
-                                        android:fontFamily="@font/product_sans_regular"
-                                        android:gravity="center"
-                                        android:text="Objetos"
-                                        android:textColor="@color/black"
-                                        android:textSize="12dp"
-                                        android:textStyle="bold" />
-                                </LinearLayout>
-
-                            </androidx.cardview.widget.CardView>
-
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:id="@+id/linearLayoutOtros"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
-
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="16dp"
-                                android:backgroundTint="@color/background_icon_color"
-                                android:elevation="6dp"
-                                app:cardCornerRadius="8dp">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical">
-
-                                    <com.google.android.material.imageview.ShapeableImageView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="100dp"
-                                        android:layout_gravity="center"
-                                        android:padding="5dp"
-                                        android:scaleType="centerInside"
-                                        android:src="@drawable/ic_category_water" />
-
-                                    <com.google.android.material.textview.MaterialTextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_margin="5dp"
-                                        android:fontFamily="@font/product_sans_regular"
-                                        android:gravity="center"
-                                        android:text="Agua"
-                                        android:textColor="@color/black"
-                                        android:textSize="12dp"
-                                        android:textStyle="bold" />
-
-                                </LinearLayout>
-
-                            </androidx.cardview.widget.CardView>
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                </com.google.android.material.appbar.AppBarLayout>
-
-                <!--Container Body-->
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/containerLayoutBodyChallenges"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/appbar_layout">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/containerLayoutBodyNearbySpecies"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent">
-
-                        <!-- Icon species neraby-->
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/ivIconNearbySpecies"
-                            android:layout_width="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginStart="20dp"
-                            app:cardCornerRadius="8dp"
-                            android:backgroundTint="@color/background_icon_color"
-                            app:layout_constraintLeft_toLeftOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            android:layout_height="wrap_content">
+                            android:orientation="vertical"
+                            android:padding="5dp">
 
                             <com.google.android.material.imageview.ShapeableImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:id="@+id/image_icon_animals"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:src="@drawable/ic_dog_white"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/materialTextView10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="5dp"
+                                android:fontFamily="@font/product_sans_regular"
+                                android:gravity="center"
+                                android:text="@string/fragment_home_tittle_animals"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/image_icon_animals" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_fruits"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/background_icon_color"
+                        android:clickable="true"
+                        android:elevation="6dp"
+                        android:focusable="true"
+                        app:cardCornerRadius="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
                                 android:layout_gravity="center"
                                 android:padding="5dp"
-                                app:srcCompat="@drawable/ic_maps_line"
-                                android:scaleType="centerInside" />
+                                android:scaleType="centerInside"
+                                app:srcCompat="@drawable/ic_pear" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="5dp"
+                                android:fontFamily="@font/product_sans_regular"
+                                android:gravity="center"
+                                android:text="@string/Fruits"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/card_plants"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="@color/background_icon_color"
+                        android:clickable="true"
+                        android:elevation="6dp"
+                        android:focusable="true"
+                        app:cardCornerRadius="8dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <com.google.android.material.imageview.ShapeableImageView
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_gravity="center"
+                                android:padding="5dp"
+                                android:scaleType="centerInside"
+                                app:srcCompat="@drawable/ic_leaf"/>
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="5dp"
+                                android:fontFamily="@font/product_sans_regular"
+                                android:gravity="center"
+                                android:text="@string/title_plants"
+                                android:textColor="@color/black"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/middleMenus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/topMenus">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutSustancias"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:backgroundTint="@color/background_icon_color"
+                            android:elevation="6dp"
+                            app:cardCornerRadius="8dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp"
+                                    android:layout_gravity="center"
+                                    android:padding="5dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_category_science" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="5dp"
+                                    android:fontFamily="@font/product_sans_regular"
+                                    android:gravity="center"
+                                    android:text="Sustancias"
+                                    android:textColor="@color/black"
+                                    android:textSize="12dp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
 
                         </androidx.cardview.widget.CardView>
 
-                        <!--Title species neraby-->
+                    </LinearLayout>
 
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/tvTitleNearbySpecies"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:fontFamily="@font/product_sans_bold"
-                            android:text="@string/title_nearby_species"
-                            android:layout_marginStart="10dp"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            app:layout_constraintBottom_toBottomOf="@+id/ivIconNearbySpecies"
-                            app:layout_constraintLeft_toRightOf="@+id/ivIconNearbySpecies"
-                            app:layout_constraintTop_toTopOf="parent" />
-                        <!--Container Body species neraby-->
-                        <com.google.android.material.card.MaterialCardView
-                            android:id="@+id/internalContainerLayoutBodyNearbySpecies"
+                    <LinearLayout
+                        android:id="@+id/linearLayoutObjetos"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
-                            android:layout_marginTop="10dp"
-                            android:minHeight="180dp"
                             android:layout_height="wrap_content"
-                            android:visibility="visible"
-                            app:cardElevation="0dp"
-                            android:elevation="0dp"
-                            app:cardCornerRadius="0dp"
-                            app:cardBackgroundColor="@color/species_background_color"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tvTitleNearbySpecies">
+                            android:layout_margin="16dp"
+                            android:backgroundTint="@color/background_icon_color"
+                            android:elevation="6dp"
+                            android:padding="5dp"
+                            app:cardCornerRadius="8dp">
 
-                            <!--Container Body species neraby full data-->
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/containerBodyNearbySpecies"
+                            <LinearLayout
                                 android:layout_width="match_parent"
-                                android:visibility="gone"
-                                tools:visibility="visible"
-                                android:layout_height="match_parent">
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
 
-                                <androidx.recyclerview.widget.RecyclerView
-                                    android:id="@+id/rvNearbySpecies"
-                                    android:layout_marginTop="20dp"
+                                <com.google.android.material.imageview.ShapeableImageView
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    tools:itemCount="5"
-                                    tools:listitem="@layout/item_nearby_species"
-                                    android:orientation="horizontal"
-                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-
-                            <!--Container Body species neraby empty-->
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/containerBodyNearbySpeciesEmpty"
-                                android:layout_width="match_parent"
-                                android:visibility="gone"
-                                tools:visibility="gone"
-                                android:layout_height="match_parent">
-
-                                <com.airbnb.lottie.LottieAnimationView
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="20dp"
-                                    android:layout_marginBottom="20dp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toEndOf="@id/tvNearbySpeciesEmpty"
-                                    app:layout_constraintTop_toTopOf="parent"
-                                    app:lottie_autoPlay="true"
-                                    app:lottie_loop="true"
-                                    app:lottie_rawRes="@raw/lottie_empty_state_search" />
+                                    android:layout_height="100dp"
+                                    android:layout_gravity="center"
+                                    android:padding="5dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_category_school" />
 
                                 <com.google.android.material.textview.MaterialTextView
-                                    android:id="@+id/tvNearbySpeciesEmpty"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:fontFamily="@font/uni_neue_regular"
-                                    android:text="@string/title_nearby_species_empty"
-                                    android:textColor="@color/colorSecondaryLightColor"
-                                    android:textSize="16dp"
-                                    android:layout_marginStart="20dp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintLeft_toLeftOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <!--Container loading shimmer neraby species-->
-                        <com.facebook.shimmer.ShimmerFrameLayout
-                            android:id="@+id/shimmerNearbySpecies"
-                            android:layout_width="match_parent"
-                            android:layout_height="180dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/tvTitleNearbySpecies">
-
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/containerBodyNearbySpeciesShimmer"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="5dp"
+                                    android:fontFamily="@font/product_sans_regular"
                                     android:gravity="center"
-                                    android:orientation="horizontal"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toTopOf="parent">
+                                    android:text="Objetos"
+                                    android:textColor="@color/black"
+                                    android:textSize="12dp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
 
-                                    <include
-                                        layout="@layout/item_nearby_species_shimmer"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1" />
+                        </androidx.cardview.widget.CardView>
 
-                                    <include
-                                        layout="@layout/item_nearby_species_shimmer"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1" />
-
-                                    <include
-                                        layout="@layout/item_nearby_species_shimmer"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1" />
-
-                                    <include
-                                        layout="@layout/item_nearby_species_shimmer"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1" />
-
-                                </LinearLayout>
+                    </LinearLayout>
 
 
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-                        </com.facebook.shimmer.ShimmerFrameLayout>
+                    <LinearLayout
+                        android:id="@+id/linearLayoutOtros"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:backgroundTint="@color/background_icon_color"
+                            android:elevation="6dp"
+                            app:cardCornerRadius="8dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp"
+                                    android:layout_gravity="center"
+                                    android:padding="5dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@drawable/ic_category_water" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="5dp"
+                                    android:fontFamily="@font/product_sans_regular"
+                                    android:gravity="center"
+                                    android:text="Agua"
+                                    android:textColor="@color/black"
+                                    android:textSize="12dp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
 
 
+                </LinearLayout>
 
-                    </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
-                    <!--CardView Icon Explore new species-->
+            <!--Container Body-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/containerLayoutBodyChallenges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appbar_layout">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/containerLayoutBodyNearbySpecies"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent">
+
                     <!-- Icon species neraby-->
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/ivExploreNewSpecies"
+                        android:id="@+id/ivIconNearbySpecies"
                         android:layout_width="wrap_content"
                         android:layout_marginTop="20dp"
                         android:layout_marginStart="20dp"
                         app:cardCornerRadius="8dp"
                         android:backgroundTint="@color/background_icon_color"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/containerLayoutBodyNearbySpecies"
+                        app:layout_constraintTop_toTopOf="parent"
                         android:layout_height="wrap_content">
 
                         <com.google.android.material.imageview.ShapeableImageView
@@ -539,78 +358,253 @@
                             android:layout_height="30dp"
                             android:layout_gravity="center"
                             android:padding="5dp"
-                            app:srcCompat="@drawable/ic_explore"
+                            app:srcCompat="@drawable/ic_maps_line"
                             android:scaleType="centerInside" />
 
                     </androidx.cardview.widget.CardView>
 
-                    <!--Title Explore new species-->
+                    <!--Title species neraby-->
+
+
                     <com.google.android.material.textview.MaterialTextView
-                        android:id="@+id/titleDiscover"
+                        android:id="@+id/tvTitleNearbySpecies"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
                         android:fontFamily="@font/product_sans_bold"
-                        android:text="@string/subtitle_experiencias"
-                        android:textColor="@color/black"
+                        android:text="@string/title_nearby_species"
                         android:layout_marginStart="10dp"
+                        android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="@+id/ivExploreNewSpecies"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/ivExploreNewSpecies"
-                        app:layout_constraintTop_toTopOf="@+id/ivExploreNewSpecies" />
-
-                    <LinearLayout
-                        android:id="@+id/contentChallenges"
+                        app:layout_constraintBottom_toBottomOf="@+id/ivIconNearbySpecies"
+                        app:layout_constraintLeft_toRightOf="@+id/ivIconNearbySpecies"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <!--Container Body species neraby-->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/internalContainerLayoutBodyNearbySpecies"
                         android:layout_width="match_parent"
                         android:layout_marginTop="10dp"
+                        android:minHeight="180dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintTop_toBottomOf="@+id/titleDiscover">
+                        android:visibility="visible"
+                        app:cardElevation="0dp"
+                        android:elevation="0dp"
+                        app:cardCornerRadius="0dp"
+                        app:cardBackgroundColor="@color/species_background_color"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvTitleNearbySpecies">
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvChallengesCompleted"
+                        <!--Container Body species neraby full data-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/containerBodyNearbySpecies"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            tools:itemCount="2"
-                            android:nestedScrollingEnabled="false"
                             android:visibility="gone"
-                            tools:listitem="@layout/item_challenge_completed"
-                            android:layout_marginTop="10dp"
-                            android:orientation="horizontal" />
+                            tools:visibility="visible"
+                            android:layout_height="match_parent">
 
-                        <!--Container Skeleton  new challenges-->
-                        <com.facebook.shimmer.ShimmerFrameLayout
-                            android:id="@+id/shimmerLoading"
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvNearbySpecies"
+                                android:layout_marginTop="20dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:itemCount="5"
+                                tools:listitem="@layout/item_nearby_species"
+                                android:orientation="horizontal"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <!--Container Body species neraby empty-->
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/containerBodyNearbySpeciesEmpty"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_marginTop="20dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/appbar_layout">
+                            android:visibility="gone"
+                            tools:visibility="gone"
+                            android:layout_height="match_parent">
+
+                            <com.airbnb.lottie.LottieAnimationView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="20dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toEndOf="@id/tvNearbySpeciesEmpty"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:lottie_autoPlay="true"
+                                app:lottie_loop="true"
+                                app:lottie_rawRes="@raw/lottie_empty_state_search" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvNearbySpeciesEmpty"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/uni_neue_regular"
+                                android:text="@string/title_nearby_species_empty"
+                                android:textColor="@color/colorSecondaryLightColor"
+                                android:textSize="16dp"
+                                android:layout_marginStart="20dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!--Container loading shimmer neraby species-->
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmerNearbySpecies"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvTitleNearbySpecies">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/containerBodyNearbySpeciesShimmer"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:orientation="vertical">
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent">
 
-                                <include layout="@layout/item_shimmer_challenge_completed" />
-                                <include layout="@layout/item_shimmer_challenge_completed" />
+                                <include
+                                    layout="@layout/item_nearby_species_shimmer"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1" />
+
+                                <include
+                                    layout="@layout/item_nearby_species_shimmer"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1" />
+
+                                <include
+                                    layout="@layout/item_nearby_species_shimmer"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1" />
+
+                                <include
+                                    layout="@layout/item_nearby_species_shimmer"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1" />
+
                             </LinearLayout>
-                        </com.facebook.shimmer.ShimmerFrameLayout>
 
-                    </LinearLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
+                <!--CardView Icon Explore new species-->
+                <!-- Icon species neraby-->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/ivExploreNewSpecies"
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginStart="20dp"
+                    app:cardCornerRadius="8dp"
+                    android:backgroundTint="@color/background_icon_color"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/containerLayoutBodyNearbySpecies"
+                    android:layout_height="wrap_content">
 
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:padding="5dp"
+                        app:srcCompat="@drawable/ic_explore"
+                        android:scaleType="centerInside" />
+
+                </androidx.cardview.widget.CardView>
+
+                <!--Title Explore new species-->
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/titleDiscover"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/product_sans_bold"
+                    android:text="@string/subtitle_experiencias"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="10dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivExploreNewSpecies"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/ivExploreNewSpecies"
+                    app:layout_constraintTop_toTopOf="@+id/ivExploreNewSpecies" />
+
+                <LinearLayout
+                    android:id="@+id/contentChallenges"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@+id/titleDiscover">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvChallengesCompleted"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:itemCount="2"
+                        android:nestedScrollingEnabled="false"
+                        android:visibility="gone"
+                        tools:listitem="@layout/item_challenge_completed"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal" />
+
+                    <!--Container Skeleton  new challenges-->
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmerLoading"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_marginTop="20dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/appbar_layout">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <include layout="@layout/item_shimmer_challenge_completed" />
+                            <include layout="@layout/item_shimmer_challenge_completed" />
+                        </LinearLayout>
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+
+                </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        </androidx.core.widget.NestedScrollView>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</layout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+

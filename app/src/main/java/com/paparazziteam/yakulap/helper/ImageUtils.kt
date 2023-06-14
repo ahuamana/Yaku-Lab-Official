@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.net.Uri
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
+import com.paparazziteam.yakulap.R
 import id.zelory.compressor.Compressor
 import java.io.ByteArrayOutputStream
 import java.io.File
@@ -76,5 +77,6 @@ fun isMediaDocument(uri: Uri): Boolean {
 fun ShapeableImageView.load(url: String) {
     Glide.with(this)
         .load(url)
+        .error(R.color.background_icon_color)
         .into(this)
 }

@@ -11,6 +11,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.toObject
+import com.paparazziteam.yakulap.domain.dashboard.ObservationEntity
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.fromJson
 import com.paparazziteam.yakulap.helper.getTimestamp
@@ -96,10 +97,6 @@ class ViewModelDashboard @Inject constructor(
         started = SharingStarted.WhileSubscribed(5000,1),
         initialValue = SpeciesByLocationResult.ShowLoading
     )
-
-    init {
-        getSpeciesByLocation(-10.926582, -74.874555)
-    }
 
     fun showUserData(){
        var emailLogged = mLoginProvider.getEmail()
@@ -486,6 +483,7 @@ class ViewModelDashboard @Inject constructor(
         lat : Double,
         lng : Double,
     ) = viewModelScope.launch(Dispatchers.IO) {
+
         getSpeciesByLocationUseCase
             .invoke(lat, lng)
             .onStart {
@@ -495,7 +493,8 @@ class ViewModelDashboard @Inject constructor(
             }.onEach {
                 withContext(Dispatchers.Main){
                     if (it.isNotEmpty()) {
-                        _speciesByLocation.value = SpeciesByLocationResult.Success(it)
+                        val listFiltered = handledSpeciesRemoveIfIdentificationsIsEmpty(it)
+                        _speciesByLocation.value = SpeciesByLocationResult.Success(listFiltered)
                     } else _speciesByLocation.value = SpeciesByLocationResult.Empty
                 }
             }.catch {
@@ -507,6 +506,12 @@ class ViewModelDashboard @Inject constructor(
                     _speciesByLocation.value = SpeciesByLocationResult.HideLoading
                 }
             }.launchIn(viewModelScope)
+    }
+
+    fun handledSpeciesRemoveIfIdentificationsIsEmpty(list:List<ObservationEntity>): List<ObservationEntity>{
+        return list.filter {
+            it.identifications.isNotEmpty()
+        }
     }
 
 }
