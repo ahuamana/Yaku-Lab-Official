@@ -21,4 +21,8 @@ object Constants {
 
     //PATH_OBSERVATIONS
     const val PATH_OBSERVATIONS = "observations"
+
+
+    //EXTRA CHALLENGE
+    const val EXTRA_CHALLENGE = "EXTRA_CHALLENGE"
 }

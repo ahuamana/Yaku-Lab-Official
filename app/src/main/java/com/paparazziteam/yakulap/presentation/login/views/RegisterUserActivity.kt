@@ -23,7 +23,9 @@ import com.paparazziteam.yakulap.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.presentation.dashboard.views.DashboardActivity
 import com.paparazziteam.yakulap.presentation.login.pojo.User
 import com.paparazziteam.yakulap.presentation.login.viewmodels.ViewModelRegistroUsuario
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RegisterUserActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterUserBinding
@@ -60,7 +62,7 @@ class RegisterUserActivity : AppCompatActivity() {
         setColorToStatusBar(this)
 
         binding.apply {
-            //toolbar = tool.toolbar
+            toolbar = tool.toolbar
             termsConditions.text = getString(R.string.terms_conditions_app_register, getString(R.string.app_name))
             edtFullname          = fullname
             edtLastname         = lastname

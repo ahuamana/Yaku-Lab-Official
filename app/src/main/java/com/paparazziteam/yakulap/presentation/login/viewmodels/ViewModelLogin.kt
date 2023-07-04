@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.paparazziteam.yakulap.presentation.login.providers.LoginProvider
+import timber.log.Timber
 
 class ViewModelLogin private constructor() {
 
@@ -35,16 +36,14 @@ class ViewModelLogin private constructor() {
         _isLoading.setValue(true)
         try {
             mLoginProvider.loginEmail(email?:"", pass?:"").addOnCompleteListener {
-
+                Timber.e("LoginWithEmail: ${it.isSuccessful}")
                 if (it.isSuccessful) {
                     _message.value = "Bienvenido"
                     _isLoginEmail.value = true
-
                 } else {
                     _message.value = "Usuario y/o contraseña incorrectos"
                     _isLoginEmail.value = false
                 }
-
                 _isLoading.value =false
             }
 

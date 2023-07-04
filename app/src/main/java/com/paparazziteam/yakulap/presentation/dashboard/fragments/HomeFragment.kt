@@ -16,9 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.facebook.shimmer.ShimmerFrameLayout
-import com.google.type.LatLng
 import com.paparazziteam.yakulap.databinding.FragmentHomeBinding
 import com.paparazziteam.yakulap.helper.*
 import com.paparazziteam.yakulap.helper.application.MyPreferences
@@ -33,11 +31,13 @@ import com.paparazziteam.yakulap.presentation.dashboard.interfaces.onClickThread
 import com.paparazziteam.yakulap.presentation.dashboard.pojo.ChallengeCompleted
 import com.paparazziteam.yakulap.presentation.dashboard.pojo.TypeGroup
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
-import com.paparazziteam.yakulap.presentation.laboratorio.views.ChallengeParentActivity
+import com.paparazziteam.yakulap.presentation.laboratorio.pojo.toDataChallenge
+import com.paparazziteam.yakulap.presentation.laboratorio.views.ChallengeListFragment
 import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
 import com.paparazziteam.yakulap.usecases.SpeciesByLocationResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import viewBinding
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -49,7 +49,7 @@ class HomeFragment : Fragment(), onClickThread {
     @Inject
     lateinit var navigationRoot: NavigationRootImpl
 
-    private var binding: FragmentHomeBinding by autoCleared()
+    private val binding by viewBinding { FragmentHomeBinding.bind(it) }
     private val viewModel:ViewModelDashboard by activityViewModels()
 
     private var clickedItemCompleted:onClickThread?=null
@@ -109,20 +109,20 @@ class HomeFragment : Fragment(), onClickThread {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        val binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         ui()
         setUpRecycler()
         setupRecyclerNearbySpecies()
         observers()
         otherComponents()
         getChallengesCompleted()
-        return binding.root
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         //get last know location
-
         if(permissionManager.checkLocationPermission()) {
             locationManager.getLastKnownLocationOnlyOnce(onListenerLocation)
         }else{
@@ -150,7 +150,12 @@ class HomeFragment : Fragment(), onClickThread {
 
         adapterSpeciesNearby.onItemClickListener { observationEntity, position ->
             Log.d("CLICK", "onCreateView: ${observationEntity.identifications.first()?.taxon?.name}")
-            navigationRoot.navigateToChallenge()
+
+            val observationJson = toJson(observationEntity.toDataChallenge())
+
+            val bundle = Bundle()
+            bundle.putString(Constants.EXTRA_CHALLENGE, observationJson)
+            navigationRoot.navigateToChallenge(bundle)
         }
 
         adapterSpeciesNearby.onClickItemWiki { observationEntity, position ->
@@ -194,25 +199,25 @@ class HomeFragment : Fragment(), onClickThread {
     }
 
     private fun otherComponents() {
-        mCardAnimals?.setOnClickListener {
+        binding.cardAnimals.setOnClickListener {
             it.preventDoubleClick()
-            startActivity(Intent(context, ChallengeParentActivity::class.java).apply {
-                putExtra("typeGroup",TypeGroup.ANIMALS.value)
-            })
+            val bundle = Bundle()
+            bundle.putString("typeGroup",TypeGroup.ANIMALS.value)
+            navigationRoot.navigateToChallengeList(bundle)
         }
 
-        mCardFruits?.setOnClickListener {
+        binding.cardFruits.setOnClickListener {
             it.preventDoubleClick()
-            startActivity(Intent(context, ChallengeParentActivity::class.java).apply {
-                putExtra("typeGroup",TypeGroup.FRUITS.value)
-            })
+            val bundle = Bundle()
+            bundle.putString("typeGroup",TypeGroup.FRUITS.value)
+            navigationRoot.navigateToChallengeList(bundle)
         }
 
-        mCardPlants?.setOnClickListener {
+        binding.cardPlants.setOnClickListener {
             it.preventDoubleClick()
-            startActivity(Intent(context, ChallengeParentActivity::class.java).apply {
-                putExtra("typeGroup",TypeGroup.PLANTS.value)
-            })
+            val bundle = Bundle()
+            bundle.putString("typeGroup",TypeGroup.PLANTS.value)
+            navigationRoot.navigateToChallengeList(bundle)
         }
     }
 

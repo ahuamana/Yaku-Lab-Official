@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.google.firebase.FirebaseApp
 import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
 
 lateinit var ctx      : Context
 
@@ -11,6 +12,7 @@ lateinit var ctx      : Context
 open class MyApp: Application() {
     override fun onCreate() {
         super.onCreate()
+        Timber.plant(Timber.DebugTree())
         FirebaseApp.initializeApp(this)
         ctx   = this
     }

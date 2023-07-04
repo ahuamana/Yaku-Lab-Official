@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_nav_home_to_nav_challenge"
             app:destination="@id/nav_challenge" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_challenge_list"
+            app:destination="@id/nav_challenge_list" />
     </fragment>
 
     <fragment
@@ -38,5 +41,10 @@
         android:id="@+id/nav_camera_whatsapp"
         android:name="io.ak1.pix.PixFragment"
         tools:layout="@layout/fragment_pix"></fragment>
+
+    <fragment
+        android:id="@+id/nav_challenge_list"
+        android:name="com.paparazziteam.yakulap.presentation.laboratorio.views.ChallengeListFragment"
+        android:label="@string/menu_challenge_list"></fragment>
 
 </navigation>

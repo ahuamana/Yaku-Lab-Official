@@ -120,7 +120,7 @@ class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerVi
 
                 customBinding.btnOk.setOnClickListener(View.OnClickListener {
                     context.startActivity(Intent(context,ChallengeActivity::class.java).apply {
-                        putExtra("extra", toJson(item))
+                        putExtra(Constants.EXTRA_CHALLENGE, toJson(item))
                     })
                 })
                 dialog.show()

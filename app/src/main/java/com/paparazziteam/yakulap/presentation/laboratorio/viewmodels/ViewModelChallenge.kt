@@ -56,20 +56,4 @@ class ViewModelChallenge @Inject constructor() : ViewModel() {
         }
 
     }
-
-    /*
-    companion object Singleton{
-        private var instance: ViewModelChallenge? = null
-
-        fun getInstance(): ViewModelChallenge =
-            instance ?: ViewModelChallenge(
-                //local y remoto
-            ).also {
-                instance = it
-            }
-
-        fun destroyInstance(){
-            instance = null
-        }
-    }*/
 }

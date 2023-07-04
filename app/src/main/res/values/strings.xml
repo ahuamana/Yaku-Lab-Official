@@ -96,5 +96,9 @@
     <string name="title_plants">Plantas</string>
     <string name="menu_challenge" />
     <string name="menu_result_image_capture">Resultado</string>
+    <string name="fragment_title_camera_options">Elige una opción</string>
+    <string name="camera">Cámara</string>
+    <string name="fragment_title_options_gallery">Galería</string>
+    <string name="menu_challenge_list">Retos\n</string>
 
 </resources>

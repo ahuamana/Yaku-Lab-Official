@@ -1,28 +1,27 @@
 package com.paparazziteam.yakulap.presentation.laboratorio.views
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.tabs.TabLayout
-import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityChallengeParentBinding
 import com.paparazziteam.yakulap.helper.beGone
 import com.paparazziteam.yakulap.helper.beVisible
-import com.paparazziteam.yakulap.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.helper.toJson
 import com.paparazziteam.yakulap.presentation.laboratorio.adapters.ViewPagerAdapter
 import com.paparazziteam.yakulap.presentation.laboratorio.fragments.ListChallengeFragment
 import com.paparazziteam.yakulap.presentation.laboratorio.pojo.DataChallenge
 import com.paparazziteam.yakulap.presentation.laboratorio.viewmodels.ViewModelLab
 import dagger.hilt.android.AndroidEntryPoint
+import viewBinding
 
 @AndroidEntryPoint
-class ChallengeParentActivity : AppCompatActivity() {
+class ChallengeListFragment : Fragment() {
 
-    var binding:ActivityChallengeParentBinding?= null
+    private val binding by viewBinding { ActivityChallengeParentBinding.bind(it) }
     var viewModelLab = ViewModelLab.getInstance()
     val TAG = javaClass.name
 
@@ -44,12 +43,16 @@ class ChallengeParentActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityChallengeParentBinding.inflate(layoutInflater)
-        setContentView(binding?.root)
-        setColorToStatusBar(this)
+        arguments?.let {
+            //data = it.getString(ARG_DATA)
+            //type_category = it.getString(ARG_TYPE_CATEGORY)
+        }
+    }
 
-        var type = intent.getStringExtra("typeGroup")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        val type = arguments?.getString("typeGroup")
 
         ui()
         otherComponents()
@@ -60,7 +63,7 @@ class ChallengeParentActivity : AppCompatActivity() {
 
     private fun otherComponents() {
         mTabLayout?.setupWithViewPager(mViewPager)
-        mAdapterViewPager = ViewPagerAdapter(supportFragmentManager)
+        mAdapterViewPager = ViewPagerAdapter(childFragmentManager)
     }
 
     private fun ui() {
@@ -73,16 +76,15 @@ class ChallengeParentActivity : AppCompatActivity() {
     }
 
     private fun setupActionBar() {
+        //get toolbar
+
         myToolbar?.apply {
-            setBackgroundColor(ContextCompat.getColor(context, R.color.colorPrimaryYaku))
-            setNavigationOnClickListener { onBackPressed() }
             title = "Retos"
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
     }
 
     private fun observers() {
-        viewModelLab.observableListData.observe(this){ itemList ->
+        viewModelLab.observableListData.observe(viewLifecycleOwner){ itemList ->
             if(!itemList.isNullOrEmpty()){
                 itemList.forEach {
                     when (it.Challenge?.get(0)?.category){
@@ -103,7 +105,7 @@ class ChallengeParentActivity : AppCompatActivity() {
             }
         }
 
-        viewModelLab.observableCategorias.observe(this){ list ->
+        viewModelLab.observableCategorias.observe(viewLifecycleOwner){ list ->
             if(!list.isNullOrEmpty()){
                 titles.clear()
                 titles = list.distinct().toMutableList()
@@ -114,7 +116,7 @@ class ChallengeParentActivity : AppCompatActivity() {
 
         }
 
-        viewModelLab.loading.observe(this){
+        viewModelLab.loading.observe(viewLifecycleOwner){
             if(it){
                 mShimmerLayout?.apply {
                     beVisible()
@@ -139,7 +141,6 @@ class ChallengeParentActivity : AppCompatActivity() {
                 mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriOne),titles[0]),titles[0])
                 mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriTwo),titles[1]),titles[1])
             }
-
             else->{
                 mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriOne),titles[0]),titles[0])
                 mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriTwo),titles[1]),titles[1])

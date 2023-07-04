@@ -1,5 +1,6 @@
 package com.paparazziteam.yakulap.presentation.laboratorio.pojo
 
+import com.paparazziteam.yakulap.domain.dashboard.ObservationEntity
 import com.paparazziteam.yakulap.helper.Constants
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -56,7 +57,38 @@ data class DataChallenge (
 
     @SerialName("challenge_name")
     var challenge_name: String? = null,
+
+    //nearbyspecies
+    @SerialName("is_nearby_species")
+    var is_nearby_species: Boolean = false,
 )
+
+fun ObservationEntity.toDataChallenge(): DataChallenge {
+    return DataChallenge(
+        description = this.id.toString(),
+        id = this.id.toString(),
+        url = this.identifications?.firstOrNull()?.taxon?.default_photo?.medium_url,
+        name = this.identifications?.firstOrNull()?.taxon?.name,
+        status = this.identifications?.firstOrNull()?.current,
+        category = "null",
+        image_parent = this.identifications?.firstOrNull()?.taxon?.default_photo?.medium_url,
+        image_child = this.identifications?.firstOrNull()?.taxon?.default_photo?.medium_url,
+        tittle = this.identifications?.firstOrNull()?.taxon?.name,
+        pointsToGive = randomInteger(),
+        image_result = listOf(
+            this.identifications?.firstOrNull()?.taxon?.default_photo?.medium_url?:""
+        ),
+        text_result = emptyList(),
+        challenge_name = this.identifications?.firstOrNull()?.taxon?.name,
+        is_nearby_species = true,
+    )
+}
+
+
+
+fun randomInteger(): Int {
+    return (0..10).random()
+}
 
 data class DataListChallenge (
     var listInsectos: List<DataChallenge>? = null,

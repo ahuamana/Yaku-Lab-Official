@@ -70,14 +70,6 @@ class ChallengeActivity() : ToolbarActivity() {
         }
     }
 
-    fun getPathResultPhoto():Uri{
-        return PHOTO_PATH
-    }
-
-    fun getFileResultPhoto():File?{
-        return PHOTO_FILE
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChallengeBinding.inflate(layoutInflater)

@@ -1,7 +1,9 @@
 package com.paparazziteam.yakulap.presentation.navigation
 
+import android.os.Bundle
 import androidx.navigation.NavController
 import com.paparazziteam.yakulap.R
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -18,8 +20,12 @@ class NavigationRootImpl @Inject constructor() : NavigationRoot{
         return navController
     }
 
-    override fun navigateToChallenge() {
-        navController?.navigate(R.id.nav_challenge)
+    override fun navigateToChallenge(bunble:Bundle) {
+        navController?.navigate(R.id.nav_challenge, bunble)
+    }
+
+    override fun navigateToChallengeList(bunble: Bundle) {
+        navController?.navigate(R.id.nav_challenge_list, bunble)
     }
 
     override fun navigateToChallengeDetail() {
