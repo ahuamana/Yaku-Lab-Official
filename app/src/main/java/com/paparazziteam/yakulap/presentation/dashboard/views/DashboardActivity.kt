@@ -102,9 +102,16 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
     private fun setupDrawerMenuLeft() {
         println("Header setup")
         headerLayout = navView.getHeaderView(0)
-        var menuSignOut: ConstraintLayout = headerLayout.findViewById(R.id.item_menu_signout)
-        var resourcesHelp: ConstraintLayout = headerLayout.findViewById(R.id.item_menu_recursos_de_ayuda)
+        val menuSignOut: ConstraintLayout = headerLayout.findViewById(R.id.item_menu_signout)
+        val resourcesHelp: ConstraintLayout = headerLayout.findViewById(R.id.item_menu_recursos_de_ayuda)
+        val challengesHome = headerLayout.findViewById<ConstraintLayout>(R.id.item_menu_home)
+
         greetingsNameHeader = headerLayout.findViewById(R.id.greetings_name)
+
+        challengesHome.setOnClickListener {
+            drawer.closeDrawers()
+            navigationRoot.navigateToHome()
+        }
 
         resourcesHelp.setOnClickListener {
             bottomDialogFragment()

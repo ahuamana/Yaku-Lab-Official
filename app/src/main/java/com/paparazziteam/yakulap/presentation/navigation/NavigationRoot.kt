@@ -5,6 +5,8 @@ import androidx.navigation.NavController
 
 interface NavigationRoot {
     fun bind(navController: NavController)
+
+    fun navigateToHome()
     fun retrieveNavController(): NavController?
     fun navigateToChallenge(bunble: Bundle)
     fun navigateToChallengeList(bunble: Bundle)

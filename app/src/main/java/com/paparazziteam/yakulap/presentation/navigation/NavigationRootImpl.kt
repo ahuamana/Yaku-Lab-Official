@@ -17,6 +17,10 @@ class NavigationRootImpl @Inject constructor() : NavigationRoot{
         this.navController = navController
     }
 
+    override fun navigateToHome() {
+        navController?.navigate(R.id.nav_home)
+    }
+
     override fun retrieveNavController(): NavController? {
         return navController
     }
