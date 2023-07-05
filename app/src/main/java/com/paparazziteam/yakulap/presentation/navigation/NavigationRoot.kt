@@ -9,7 +9,7 @@ interface NavigationRoot {
     fun navigateToChallenge(bunble: Bundle)
     fun navigateToChallengeList(bunble: Bundle)
     fun navigateToChallengeDetail()
-    fun navigateToChallengeComplete()
+    fun navigateToChallengeComplete(bunble: Bundle)
 
     fun navigateToCameraWhatsapp()
 }

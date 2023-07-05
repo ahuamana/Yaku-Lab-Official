@@ -1,9 +1,13 @@
 package com.paparazziteam.yakulap.presentation.laboratorio.views
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager.widget.ViewPager
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.tabs.TabLayout
@@ -16,19 +20,19 @@ import com.paparazziteam.yakulap.presentation.laboratorio.fragments.ListChalleng
 import com.paparazziteam.yakulap.presentation.laboratorio.pojo.DataChallenge
 import com.paparazziteam.yakulap.presentation.laboratorio.viewmodels.ViewModelLab
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import viewBinding
 
 @AndroidEntryPoint
 class ChallengeListFragment : Fragment() {
 
     private val binding by viewBinding { ActivityChallengeParentBinding.bind(it) }
-    var viewModelLab = ViewModelLab.getInstance()
+    private val viewModelLab  by viewModels<ViewModelLab>()
     val TAG = javaClass.name
 
     //Components
     var mTabLayout:TabLayout?= null
     var mViewPager:ViewPager?= null
-    var myToolbar:Toolbar?= null
 
     var titles = mutableListOf<String>()
     var mAdapterViewPager:ViewPagerAdapter?= null
@@ -41,24 +45,22 @@ class ChallengeListFragment : Fragment() {
     private var listCategoriThree: MutableList<DataChallenge> = mutableListOf()
     private var listCategoriFour: MutableList<DataChallenge> = mutableListOf()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            //data = it.getString(ARG_DATA)
-            //type_category = it.getString(ARG_TYPE_CATEGORY)
-        }
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val binding = ActivityChallengeParentBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val type = arguments?.getString("typeGroup")
-
         ui()
         otherComponents()
-        setupActionBar()
         observers()
-        viewModelLab.getData(type)
     }
 
     private fun otherComponents() {
@@ -67,68 +69,62 @@ class ChallengeListFragment : Fragment() {
     }
 
     private fun ui() {
-        binding?.apply {
+        binding.apply {
             mTabLayout  = tabLayout
             mViewPager  = viewPager
-            myToolbar   = include.toolbar
             mShimmerLayout = shimmerLoading
         }
     }
 
-    private fun setupActionBar() {
-        //get toolbar
-
-        myToolbar?.apply {
-            title = "Retos"
-        }
-    }
-
     private fun observers() {
-        viewModelLab.observableListData.observe(viewLifecycleOwner){ itemList ->
-            if(!itemList.isNullOrEmpty()){
-                itemList.forEach {
-                    when (it.Challenge?.get(0)?.category){
-                        titles[0] ->{
-                            listCategoriOne.add(it.Challenge!![0])
-                        }
-                        titles[1] -> {
-                            listCategoriTwo.add(it.Challenge!![0])
-                        }
-                        else -> {
-                            listCategoriThree.add(it.Challenge!![0])
+        lifecycleScope.launch {
+            viewModelLab.observableListData.observe(viewLifecycleOwner){ itemList ->
+                if(!itemList.isNullOrEmpty()){
+                    itemList.forEach {
+                        when (it.Challenge?.get(0)?.category){
+                            titles[0] ->{
+                                listCategoriOne.add(it.Challenge!![0])
+                            }
+                            titles[1] -> {
+                                listCategoriTwo.add(it.Challenge!![0])
+                            }
+                            else -> {
+                                listCategoriThree.add(it.Challenge!![0])
+                            }
                         }
                     }
+                    setupViewPager()
+                }else{
+                    println("Empty List items")
                 }
-                setupViewPager()
-            }else{
-                println("Empty List items")
+            }
+
+            viewModelLab.observableCategorias.observe(viewLifecycleOwner){ list ->
+                if(!list.isNullOrEmpty()){
+                    titles.clear()
+                    titles = list.distinct().toMutableList()
+                    println("Title size setted: ${titles.count()}")
+                }else{
+                    println("Titles empty")
+                }
+
+            }
+
+            viewModelLab.loading.observe(viewLifecycleOwner){
+                if(it){
+                    mShimmerLayout?.apply {
+                        beVisible()
+                        startShimmer()
+                    }
+                }else{
+                    mShimmerLayout?.apply {
+                        beGone()
+                        stopShimmer()
+                    }
+                }
             }
         }
 
-        viewModelLab.observableCategorias.observe(viewLifecycleOwner){ list ->
-            if(!list.isNullOrEmpty()){
-                titles.clear()
-                titles = list.distinct().toMutableList()
-                println("Title size setted: ${titles.count()}")
-            }else{
-                println("Titles empty")
-            }
-
-        }
-
-        viewModelLab.loading.observe(viewLifecycleOwner){
-            if(it){
-                mShimmerLayout?.apply {
-                    beVisible()
-                    startShimmer()
-                }
-            }else{
-                mShimmerLayout?.apply {
-                    beGone()
-                    stopShimmer()
-                }
-            }
-        }
     }
 
     private fun setupViewPager() {
@@ -149,10 +145,5 @@ class ChallengeListFragment : Fragment() {
         }
 
         mViewPager?.adapter = mAdapterViewPager
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        ViewModelLab.destroyInstance()
     }
 }

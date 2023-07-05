@@ -2,6 +2,7 @@ package com.paparazziteam.yakulap.presentation.navigation
 
 import android.os.Bundle
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import com.paparazziteam.yakulap.R
 import timber.log.Timber
 import javax.inject.Inject
@@ -32,12 +33,12 @@ class NavigationRootImpl @Inject constructor() : NavigationRoot{
         //navController?.navigate(R.id.nav_challenge_detail)
     }
 
-    override fun navigateToChallengeComplete() {
-        navController?.navigate(R.id.nav_challenge_complete)
+    override fun navigateToChallengeComplete(bunble: Bundle) {
+        navController?.navigate(R.id.action_nav_challenge_to_nav_challenge_complete, bunble)
     }
 
     override fun navigateToCameraWhatsapp() {
-        navController?.navigate(R.id.nav_camera_whatsapp)
+        //TODO: implementar navegacion a la camara de whatsapp
     }
 
 }

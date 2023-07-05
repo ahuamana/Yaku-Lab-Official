@@ -2,15 +2,24 @@ package com.paparazziteam.yakulap.presentation.laboratorio.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.ktx.toObject
 import com.paparazziteam.yakulap.presentation.laboratorio.pojo.DataCategory
 import com.paparazziteam.yakulap.presentation.laboratorio.pojo.DataItems
 import com.paparazziteam.yakulap.presentation.repositorio.LabAnimalsProvider
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
-class ViewModelLab private constructor() {
+@HiltViewModel
+class ViewModelLab @Inject constructor(
+    handle: SavedStateHandle
+) : ViewModel() {
 
     private var mLabProvider = LabAnimalsProvider()
 
@@ -25,7 +34,15 @@ class ViewModelLab private constructor() {
     private val _loading = MutableLiveData<Boolean>()
     val loading:LiveData<Boolean> = _loading
 
-    fun getData(type: String?) {
+    init {
+        handle.get<String>("typeGroup")?.let {
+            Timber.d("typeGroup: $it")
+            getData(it)
+        }
+    }
+
+
+    private fun getData(type: String?) = viewModelScope.launch {
         _loading.value = true
         CoroutineScope(Dispatchers.Unconfined).launch {
             mLabProvider.geDataProvider(type).addOnCompleteListener { snapshot ->
@@ -38,28 +55,12 @@ class ViewModelLab private constructor() {
                             it.category?.let { catego -> listCategoriasUnique.add(catego) }
                         }
                     }
-                    _observableCategorias.value = listCategoriasUnique
-                    _loading.value = false
-                    res?.Categorias.let { _observableListData.value = it }
+                    _observableCategorias.postValue(listCategoriasUnique)
+                    _loading.postValue(false)
+                    res?.Categorias.let { _observableListData.postValue(it) }
                 }
             }
         }
 
-    }
-
-
-    companion object Singleton{
-        private var instance: ViewModelLab? = null
-
-        fun getInstance(): ViewModelLab =
-            instance ?: ViewModelLab(
-                //local y remoto
-            ).also {
-                instance = it
-            }
-
-        fun destroyInstance(){
-            instance = null
-        }
     }
 }

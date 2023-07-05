@@ -94,7 +94,7 @@
     <string name="fragment_home_tittle_animals">Animales</string>
     <string name="Fruits">Frutas</string>
     <string name="title_plants">Plantas</string>
-    <string name="menu_challenge" />
+    <string name="menu_challenge">Retos</string>
     <string name="menu_result_image_capture">Resultado</string>
     <string name="fragment_title_camera_options">Elige una opción</string>
     <string name="camera">Cámara</string>

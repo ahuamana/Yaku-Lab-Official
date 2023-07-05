@@ -31,6 +31,7 @@ class ResultCaptureImageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         return binding.root
     }
 
@@ -40,12 +41,11 @@ class ResultCaptureImageFragment : Fragment() {
     }
 
     private fun getExtras() {
-        val intent = requireActivity().intent
-        if(intent.extras!= null){
-            var title = intent.getStringExtra("title")
-            var description = intent.getStringExtra("description")
-            var image = intent.getStringExtra("image")
-            var pointsToGive = intent.getIntExtra("pointsToGive",0)
+        if(arguments != null){
+            var title = arguments?.getString("title")
+            var description = arguments?.getString("description")
+            var image = arguments?.getString("image")
+            var pointsToGive = arguments?.getInt("pointsToGive",0)
 
             binding.textPoints.text = pointsToGive.toString()
             binding.title.text = title

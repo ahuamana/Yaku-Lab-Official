@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -39,7 +40,6 @@ import com.paparazziteam.yakulap.presentation.laboratorio.fragments.bottomsheets
 import com.paparazziteam.yakulap.presentation.laboratorio.fragments.bottomsheets.OnOptionSelectedSourcePicker
 import com.paparazziteam.yakulap.presentation.laboratorio.pojo.DataChallenge
 import com.paparazziteam.yakulap.presentation.laboratorio.viewmodels.ViewModelChallenge
-import com.paparazziteam.yakulap.presentation.laboratorio.viewmodels.ViewModelLab
 import com.paparazziteam.yakulap.presentation.laboratorio.views.ResultCaptureImageActivity
 import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
 import dagger.hilt.android.AndroidEntryPoint
@@ -64,7 +64,7 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
     lateinit var mPreferences :MyPreferences
 
     @Inject
-    lateinit var navigationRoot : NavigationRootImpl
+    lateinit var mNavigationRoot: NavigationRootImpl
 
     var idChallengeDocument = ""
 
@@ -192,14 +192,15 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
         var ramdon: Int
         dataExtra.image_result?.let {
             ramdon = (it.indices).random()
-            Log.d(TAG,"Ramdon number: $ramdon")
-            Log.d(TAG,"Zise number: ${it.size}")
-            requireActivity().startActivity(Intent(context,ResultCaptureImageActivity::class.java).apply {
-                putExtra("title", dataExtra.name)
-                putExtra("description", dataExtra?.text_result?.get(ramdon))
-                putExtra("image", dataExtra?.image_result?.get(ramdon))
-                putExtra("pointsToGive", getPointsCompleted())
-            })
+
+            val bundle = bundleOf(
+                "title" to dataExtra.name,
+                "description" to dataExtra?.text_result?.get(ramdon),
+                "image" to dataExtra?.image_result?.get(ramdon),
+                "pointsToGive" to getPointsCompleted()
+            )
+
+            mNavigationRoot.navigateToChallengeComplete(bundle)
         }
     }
 
@@ -363,7 +364,6 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
 
     override fun onDestroy() {
         super.onDestroy()
-        ViewModelLab.destroyInstance()
         viewModelDashboard.errorUpload.removeObservers(this)
         viewModelDashboard.completeUpload.removeObservers(this)
     }

@@ -24,10 +24,9 @@
         android:label="@string/menu_challenge"
         tools:layout="@layout/fragment_challenge" >
         <action
-            android:id="@+id/action_nav_challenge_to_CameraFragment"
-            app:destination="@id/nav_camera_whatsapp" />
-        <action
             android:id="@+id/action_nav_challenge_to_nav_challenge_complete"
+            app:popUpTo="@id/nav_challenge"
+            app:popUpToInclusive="true"
             app:destination="@id/nav_challenge_complete" />
     </fragment>
 
@@ -38,13 +37,9 @@
         tools:layout="@layout/fragment_result_capture_image" />
 
     <fragment
-        android:id="@+id/nav_camera_whatsapp"
-        android:name="io.ak1.pix.PixFragment"
-        tools:layout="@layout/fragment_pix"></fragment>
-
-    <fragment
         android:id="@+id/nav_challenge_list"
         android:name="com.paparazziteam.yakulap.presentation.laboratorio.views.ChallengeListFragment"
-        android:label="@string/menu_challenge_list"></fragment>
+        android:label="@string/menu_challenge_list"
+        tools:layout="@layout/activity_challenge_parent" />
 
 </navigation>

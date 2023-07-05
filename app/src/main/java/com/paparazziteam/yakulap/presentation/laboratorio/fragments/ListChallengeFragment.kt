@@ -11,11 +11,15 @@ import com.paparazziteam.yakulap.databinding.FragmentListChallengeBinding
 import com.paparazziteam.yakulap.helper.fromJson
 import com.paparazziteam.yakulap.presentation.laboratorio.adapters.AdapterGridChallenge
 import com.paparazziteam.yakulap.presentation.laboratorio.pojo.DataChallenge
+import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 private const val ARG_TYPE_CATEGORY= "param1"
 private const val ARG_DATA = "param2"
 
+@AndroidEntryPoint
 class ListChallengeFragment : Fragment() {
 
     private var data: String? = null
@@ -27,6 +31,9 @@ class ListChallengeFragment : Fragment() {
     //Components
     private lateinit var mRecyclerView:RecyclerView
     var mGridLayoutManager: GridLayoutManager? = null
+
+    @Inject
+    lateinit var navigationRootImpl: NavigationRootImpl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,10 +73,15 @@ class ListChallengeFragment : Fragment() {
             }
         }
 
+        val adapterGrid = AdapterGridChallenge(list)
 
         mRecyclerView.apply {
             layoutManager = mGridLayoutManager
-            adapter = AdapterGridChallenge(list)
+            adapter = adapterGrid
+        }
+
+        adapterGrid.onItemClicked { item, bundle ->
+            navigationRootImpl.navigateToChallenge(bundle)
         }
     }
 

@@ -48,10 +48,6 @@ class ChallengeActivity() : ToolbarActivity() {
         path = "Pix/Camera"
     }
 
-    /*private val resultsFragment = ChallengeFragment {
-        showCameraFragment()
-    }*/
-
     fun showCameraFragment() {
         addPixToActivity(R.id.container_parent_challenge, mOptions) {
             when (it.status) {
@@ -94,7 +90,6 @@ class ChallengeActivity() : ToolbarActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        ViewModelLab.destroyInstance()
     }
 
     private fun setupActionBar() {

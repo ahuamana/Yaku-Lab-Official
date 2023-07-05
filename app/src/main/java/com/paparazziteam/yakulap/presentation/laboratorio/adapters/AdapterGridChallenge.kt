@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,12 +25,22 @@ import com.paparazziteam.yakulap.databinding.ItemChallengeOptionBinding
 import com.paparazziteam.yakulap.helper.*
 import com.paparazziteam.yakulap.presentation.laboratorio.pojo.DataChallenge
 import com.paparazziteam.yakulap.presentation.laboratorio.views.ChallengeActivity
+import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerView.Adapter<AdapterGridChallenge.ViewHolder>() {
 
     var list = challengesList
 
-    class ViewHolder(itemview : View): RecyclerView.ViewHolder(itemview) {
+
+    private var onItemClickListener: ((DataChallenge, Bundle) -> Unit)? = null
+    fun onItemClicked(listener : (item: DataChallenge, bundle: Bundle)-> Unit){
+        onItemClickListener = listener
+    }
+
+
+    inner class ViewHolder(itemview : View): RecyclerView.ViewHolder(itemview) {
 
         val TAG = javaClass.name
 
@@ -119,9 +130,11 @@ class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerVi
                 customBinding.btnCancel.setOnClickListener(View.OnClickListener { dialog.dismiss() })
 
                 customBinding.btnOk.setOnClickListener(View.OnClickListener {
-                    context.startActivity(Intent(context,ChallengeActivity::class.java).apply {
-                        putExtra(Constants.EXTRA_CHALLENGE, toJson(item))
-                    })
+                    val bundle = Bundle()
+                    bundle.putString(Constants.EXTRA_CHALLENGE, toJson(item))
+                    //invoke
+                    onItemClickListener?.invoke(item, bundle)
+                    dialog.dismiss()
                 })
                 dialog.show()
             }

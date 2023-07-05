@@ -77,14 +77,14 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
         val navController = findNavController(R.id.nav_host_fragment_content_dashboard)
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home
+                R.id.nav_home,
+                R.id.nav_challenge_complete,
             ), drawer
         )
         //Here we bind the navController to the navigationRoot
         navigationRoot.bind(navController)
 
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
 
         //Change color toolbar
         setToolbarConfig()
@@ -155,15 +155,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
             title = "Desafíos"
             setTitleTextColor(ContextCompat.getColor(context, R.color.colorWhite))
             navigationIcon = getDrawable(R.drawable.ic_menu)
-        }
-    }
-
-    override fun onBackPressed() {
-        val navControllerRetrieved = navigationRoot.retrieveNavController()
-        if (navControllerRetrieved?.currentDestination == navControllerRetrieved?.graph?.get(R.id.nav_camera_whatsapp)) {
-            PixBus.onBackPressedEvent()
-        } else {
-            super.onBackPressed()
         }
     }
 
