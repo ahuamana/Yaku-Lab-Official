@@ -129,4 +129,7 @@ dependencies {
     //image picker
     implementation 'com.github.dhaval2404:imagepicker:2.1'
 
+
+    //play integrity
+    implementation 'com.google.android.play:integrity:1.1.0'
 }

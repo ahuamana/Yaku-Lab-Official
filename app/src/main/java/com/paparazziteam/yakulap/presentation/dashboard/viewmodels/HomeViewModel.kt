@@ -11,7 +11,6 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.toObject
-import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.domain.dashboard.ObservationEntity
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.fromJson
@@ -46,7 +45,7 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class ViewModelDashboard @Inject constructor(
+class HomeViewModel @Inject constructor(
     private val mUserProvider:UserProvider,
     private val mLoginProvider:LoginProvider,
     private val mCommentRepositoryImpl: CommentRepository,
@@ -398,13 +397,14 @@ class ViewModelDashboard @Inject constructor(
 
             mReportProvider.create(reportUser)
             withContext(Dispatchers.Main){
+                println("Notified: Usuario reportado.")
                 _snackbar.value = "Usuario reportado."
             }
         }
     }
     }
 
-    fun reportComment(item: Comment, type:TypeReported) = viewModelScope.launch{
+    fun reportComment(item: Comment, type:TypeReported){
         CoroutineScope(Dispatchers.Unconfined).launch{
             //Report Post Update
             var reportPost = Report(
@@ -454,13 +454,7 @@ class ViewModelDashboard @Inject constructor(
                 mPreferences.saveUsersBlocked = toJson(users)
                 mUserProvider.updateUsersBlocked(mPreferences.email, users)
                 removePostByUser(email)
-                withContext(Dispatchers.Main){
-                    _snackbar.value = "Usuario bloqueado."
-                }
             }catch (t:Throwable){
-                withContext(Dispatchers.Main){
-                    _snackbar.value = "Error al bloquear usuario."
-                }
                 println("Error addUserBlocked: ${t.message}")
             }
         }

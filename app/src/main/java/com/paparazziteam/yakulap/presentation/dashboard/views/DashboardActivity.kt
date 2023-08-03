@@ -10,6 +10,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.get
 import androidx.navigation.ui.AppBarConfiguration
@@ -25,6 +26,7 @@ import com.paparazziteam.yakulap.helper.application.toast
 import com.paparazziteam.yakulap.helper.base.BaseActivity
 import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
 import com.paparazziteam.yakulap.helper.setColorToStatusBar
+import com.paparazziteam.yakulap.helper.toast
 import com.paparazziteam.yakulap.presentation.bienvenida.views.WelcomeActivity
 import com.paparazziteam.yakulap.presentation.dashboard.fragments.BottomDialogFragment
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
@@ -33,6 +35,8 @@ import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
 import com.paparazziteam.yakulap.presentation.puntaje.views.PuntajeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import io.ak1.pix.helpers.PixBus
+import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
@@ -42,18 +46,18 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     private lateinit var mainToolbar: Toolbar
-    lateinit var drawer:DrawerLayout
-    lateinit var navView:NavigationView
+    lateinit var drawer: DrawerLayout
+    lateinit var navView: NavigationView
     lateinit var headerLayout: View
     lateinit var greetingsNameHeader: MaterialTextView
 
     @Inject
-    lateinit var preferences:MyPreferences
+    lateinit var preferences: MyPreferences
 
     @Inject
     lateinit var navigationRoot: NavigationRootImpl
 
-    private val _viewModel:ViewModelDashboard by viewModels()
+    private val viewModel: ViewModelDashboard by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,8 +96,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
         //Observers
         observers()
 
-        //features
-        _viewModel.showUserData()
 
         //setupDrawerItems
         setupDrawerMenuLeft()
@@ -103,7 +105,8 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
         println("Header setup")
         headerLayout = navView.getHeaderView(0)
         val menuSignOut: ConstraintLayout = headerLayout.findViewById(R.id.item_menu_signout)
-        val resourcesHelp: ConstraintLayout = headerLayout.findViewById(R.id.item_menu_recursos_de_ayuda)
+        val resourcesHelp: ConstraintLayout =
+            headerLayout.findViewById(R.id.item_menu_recursos_de_ayuda)
         val challengesHome = headerLayout.findViewById<ConstraintLayout>(R.id.item_menu_home)
 
         greetingsNameHeader = headerLayout.findViewById(R.id.greetings_name)
@@ -127,29 +130,34 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
 
     }
 
-    @Throws (Throwable::class)
+
     private fun observers() {
-        _viewModel.getUserData().observe(this) { user ->
-            if (user != null) {
-                println("Puntos Guardados: ${user.points}")
-                preferences.points = user.points?:0
-                preferences.firstName = user.nombres?:""
-                preferences.lastName = user.apellidos?:""
-                preferences.email = user.email?:""
-
-                //Asignar Nombres y Primera letra del apellido del usuario
-                val names = replaceFirstCharInSequenceToUppercase(user.nombres?:"")
-                val apellidos = user.apellidos?.substring(0,1)
-                greetingsNameHeader.text =  "$names ${apellidos?.uppercase(Locale.getDefault())}."
+        lifecycleScope.launch {
+            viewModel.snackbar.observe(this@DashboardActivity) {
+                if (!it.isNullOrEmpty()) {
+                    Timber.d("New Toast Post Reported")
+                    toast(it)
+                }
             }
         }
 
-        _viewModel.snackbar.observe(this){
-            if(!it.isNullOrEmpty()){
-                Log.d("TAG","New Toast Post Reported")
-                this.toast(it)
+        lifecycleScope.launch {
+            viewModel.getUserData().observe(this@DashboardActivity) { user ->
+                if (user != null) {
+                    println("Puntos Guardados: ${user.points}")
+                    preferences.points = user.points ?: 0
+                    preferences.firstName = user.nombres ?: ""
+                    preferences.lastName = user.apellidos ?: ""
+                    preferences.email = user.email ?: ""
+
+                    //Asignar Nombres y Primera letra del apellido del usuario
+                    val names = replaceFirstCharInSequenceToUppercase(user.nombres ?: "")
+                    val apellidos = user.apellidos?.substring(0, 1)
+                    greetingsNameHeader.text = "$names ${apellidos?.uppercase(Locale.getDefault())}."
+                }
             }
         }
+
     }
 
     private fun saveLogin() {
@@ -167,7 +175,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
 
     private fun bottomDialogFragment() {
         val bottomSheetDialogFragment = BottomDialogFragment.newInstance()
-        bottomSheetDialogFragment.show(supportFragmentManager,"bottomSheetDialogFragment")
+        bottomSheetDialogFragment.show(supportFragmentManager, "bottomSheetDialogFragment")
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -179,9 +187,4 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    override fun onDestroy() {
-        _viewModel.getUserData().removeObservers(this)
-        _viewModel.snackbar.removeObservers(this)
-        super.onDestroy()
-    }
 }

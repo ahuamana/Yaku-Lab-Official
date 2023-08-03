@@ -100,5 +100,6 @@
     <string name="camera">Cámara</string>
     <string name="fragment_title_options_gallery">Galería</string>
     <string name="menu_challenge_list">Retos\n</string>
+    <string name="fragment_comment_error_block">Error al bloquear usuario.</string>
 
 </resources>

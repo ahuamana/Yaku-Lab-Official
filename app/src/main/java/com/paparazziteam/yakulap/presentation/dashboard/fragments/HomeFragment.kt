@@ -30,6 +30,7 @@ import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterNearbySp
 import com.paparazziteam.yakulap.presentation.dashboard.interfaces.onClickThread
 import com.paparazziteam.yakulap.presentation.dashboard.pojo.ChallengeCompleted
 import com.paparazziteam.yakulap.presentation.dashboard.pojo.TypeGroup
+import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.HomeViewModel
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
 import com.paparazziteam.yakulap.presentation.laboratorio.pojo.toDataChallenge
 import com.paparazziteam.yakulap.presentation.laboratorio.views.ChallengeListFragment
@@ -37,7 +38,9 @@ import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
 import com.paparazziteam.yakulap.usecases.SpeciesByLocationResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import viewBinding
+import java.util.Locale
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -49,8 +52,11 @@ class HomeFragment : Fragment(), onClickThread {
     @Inject
     lateinit var navigationRoot: NavigationRootImpl
 
+    @Inject
+    lateinit var preferences:MyPreferences
+
     private val binding by viewBinding { FragmentHomeBinding.bind(it) }
-    private val viewModel:ViewModelDashboard by activityViewModels()
+    private val viewModel: HomeViewModel by activityViewModels()
 
     private var clickedItemCompleted:onClickThread?=null
 

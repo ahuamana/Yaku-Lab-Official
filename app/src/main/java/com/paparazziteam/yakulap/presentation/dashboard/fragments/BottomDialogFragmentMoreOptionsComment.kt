@@ -26,7 +26,6 @@ class BottomDialogFragmentMoreOptionsComment : BottomSheetDialogFragment() {
 
     private val _viewModel: ViewModelDashboard by activityViewModels()
 
-
     var contenedorOptionReport: ConstraintLayout? = null
     var contenedorOptionHidePost: ConstraintLayout? = null
     var txtTitleReport: MaterialTextView? = null
@@ -64,10 +63,24 @@ class BottomDialogFragmentMoreOptionsComment : BottomSheetDialogFragment() {
     }
 
     private fun setupComponentes() {
-        contenedorOptionReport?.setOnClickListener {
+        binding.opcionReportPost.setOnClickListener {
             item?.let { it -> _viewModel.reportComment(it,TypeReported.COMMENT) }
             dismiss()
         }
+
+        binding.opcionBlockUser.setOnClickListener {
+            item?.let { it -> _viewModel.blockUser(it.email?:"") }
+            dismiss()
+        }
+
+        binding.opcionReportUser.setOnClickListener {
+            item?.let { it -> _viewModel.reportUser(
+                type = TypeReported.COMMENT,
+                userReported = it.email?: "",
+            ) }
+            dismiss()
+        }
+
         txtTitleReport?.text = getString(R.string.report_comment)
         txtSubTitleReport?.text = getString(R.string.concerned_comment)
 
