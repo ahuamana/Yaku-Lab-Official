@@ -132,4 +132,7 @@ dependencies {
 
     //play integrity
     implementation 'com.google.android.play:integrity:1.1.0'
+
+    //Blur
+    implementation 'jp.wasabeef:glide-transformations:4.3.0'
 }

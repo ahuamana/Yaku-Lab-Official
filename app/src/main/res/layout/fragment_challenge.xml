@@ -19,37 +19,66 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/challenge_photo_parent"
-                android:layout_width="250dp"
-                android:layout_height="250dp"
-                android:layout_marginTop="50dp"
-                android:layout_gravity="center"
-                android:src="@drawable/circle"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/imgChallengeParent"
+                android:layout_width="match_parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_height="250dp">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/challenge_photo_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearance="?attr/shapeAppearanceMediumComponent"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialCardView.Custom"
+                    android:layout_gravity="center"
+                    android:background="@color/colorSecondaryYaku"
+                    tools:src="@drawable/img_example" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/challenge_photo_child"
-                android:layout_width="100dp"
-                tools:src="@drawable/ic_galeria"
-                android:layout_height="100dp"
-                android:clickable="false"
-                android:focusable="false"
-                android:layout_marginStart="-70dp"
-                app:layout_constraintStart_toEndOf="@+id/challenge_photo_parent"
-                app:layout_constraintTop_toTopOf="@+id/challenge_photo_parent" />
+            </com.google.android.material.card.MaterialCardView>
 
-            <View
-                android:id="@+id/divisor_challenge"
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/containerChallengeChild"
                 android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:layout_marginTop="15dp"
-                android:background="@color/colorGray"
+                app:layout_constraintBottom_toBottomOf="@+id/imgChallengeParent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/challenge_photo_parent" />
+                app:layout_constraintStart_toStartOf="@+id/imgChallengeParent"
+                app:layout_constraintTop_toTopOf="@+id/imgChallengeParent"
+                app:cardCornerRadius="75dp"
+                tools:visibility="visible"
+                app:strokeWidth="2dp"
+                app:strokeColor="@color/colorPrimaryYaku"
+                android:layout_height="wrap_content">
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/challenge_photo_child"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:clickable="false"
+                    android:focusable="false"
+                    app:strokeWidth="2dp"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MaterialCardView.Cut"
+                    app:strokeColor="@color/colorPrimaryYaku"
+                    android:elevation="10dp"
+                    tools:src="@color/color_background_cardboard" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!--Image for png-->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/challengePhotoChildPng"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:visibility="gone"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_galeria"
+                android:elevation="1dp"
+                app:layout_constraintBottom_toBottomOf="@+id/imgChallengeParent"
+                app:layout_constraintEnd_toEndOf="@+id/imgChallengeParent"
+                app:layout_constraintStart_toStartOf="@+id/imgChallengeParent"
+                app:layout_constraintTop_toTopOf="@+id/imgChallengeParent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -58,7 +87,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divisor_challenge">
+                app:layout_constraintTop_toBottomOf="@+id/imgChallengeParent">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/challenge_photo_to_complete"

@@ -22,9 +22,27 @@
         <item name="cornerSizeBottomLeft">8dp</item>
     </style>
 
+
+
     <style name="CustomBottomSheet">
         <item name="android:background">@drawable/bottom_sheet_corner</item>
         <item name="android:elevation">16dp</item>
     </style>
+
+    <!--Style for MAterical carview-->
+    <style name="MyCardViewChallenge" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MaterialCardView.Custom</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.MaterialCardView.Custom" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomRight">40dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+    </style>
+
+    <!--Style for Rounded-->
+
 
 </resources>

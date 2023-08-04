@@ -2,7 +2,6 @@ package com.paparazziteam.yakulap.presentation.laboratorio.fragments
 
 import android.app.Activity
 import android.app.ProgressDialog
-import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
@@ -40,10 +39,10 @@ import com.paparazziteam.yakulap.presentation.laboratorio.fragments.bottomsheets
 import com.paparazziteam.yakulap.presentation.laboratorio.fragments.bottomsheets.OnOptionSelectedSourcePicker
 import com.paparazziteam.yakulap.presentation.laboratorio.pojo.DataChallenge
 import com.paparazziteam.yakulap.presentation.laboratorio.viewmodels.ViewModelChallenge
-import com.paparazziteam.yakulap.presentation.laboratorio.views.ResultCaptureImageActivity
 import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
 import dagger.hilt.android.AndroidEntryPoint
 import de.hdodenhof.circleimageview.CircleImageView
+import jp.wasabeef.glide.transformations.BlurTransformation
 import timber.log.Timber
 import viewBinding
 import java.io.File
@@ -71,7 +70,6 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
     private val viewModel:ViewModelChallenge by viewModels()
     var txtImageNotUploaded: MaterialTextView?= null
 
-    private lateinit var imgChallengeParent: CircleImageView
     private lateinit var imgChallengeToComplete: CircleImageView
 
     //Upload Image
@@ -129,7 +127,6 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            imgChallengeParent      = challengePhotoParent
             imgChallengeToComplete  = challengePhotoToComplete
             txtImageNotUploaded     = textViewImagenNosubida
             fabUploadImage          = fabSelectImage
@@ -369,15 +366,27 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
     }
 
     private fun setupChallengeData() {
+
+        val urlChild = dataExtra.image_child?:""
+
+        var viewImageWhereToLoad = binding.challengePhotoChild
+        if(urlChild.contains("png", true)){
+            binding.containerChallengeChild.beGone()
+            binding.challengePhotoChildPng.beVisible()
+            viewImageWhereToLoad = binding.challengePhotoChildPng
+        }else viewImageWhereToLoad = binding.challengePhotoChild
+
+
         Glide.with(this)
             .load(dataExtra.image_child)
-            .apply(RequestOptions.circleCropTransform())
             .error(R.drawable.ic_image_defect)
             .placeholder(R.drawable.ic_image_defect)
-            .into(binding.challengePhotoChild)
+            .into(viewImageWhereToLoad)
 
         Glide.with(this)
             .load(dataExtra.image_parent)
+            //apply blur
+            .apply(RequestOptions.bitmapTransform(BlurTransformation(25, 3)))
             .error(R.drawable.ic_image_defect)
             .placeholder(R.drawable.ic_image_defect)
             .into(binding.challengePhotoParent)
