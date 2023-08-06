@@ -36,7 +36,7 @@ import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
-import com.paparazziteam.yakulap.helper.Constants.EXT_JPG
+import com.paparazziteam.yakulab.binding.Constants.EXT_JPG
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.application.toast
 import com.paparazziteam.yakulap.root.ctx
@@ -50,7 +50,6 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.inject.Inject
 
 
 private var appContext: Context? = null

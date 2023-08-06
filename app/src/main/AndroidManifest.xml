@@ -32,10 +32,7 @@
             android:name=".presentation.laboratorio.views.ChallengeActivity"
             android:exported="false"
             android:theme="@style/Theme.noActionBar" />
-        <activity
-            android:name=".presentation.laboratorio.views.ChallengeListFragment"
-            android:exported="false"
-            android:theme="@style/Theme.noActionBar" />
+
         <activity
             android:name=".presentation.puntaje.views.PuntajeActivity"
             android:exported="false"

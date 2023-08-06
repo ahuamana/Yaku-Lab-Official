@@ -1,7 +1,7 @@
 package com.paparazziteam.yakulap.presentation.laboratorio.pojo
 
-import com.paparazziteam.yakulap.domain.dashboard.ObservationEntity
-import com.paparazziteam.yakulap.helper.Constants
+import com.yakulab.domain.dashboard.ObservationEntity
+import com.paparazziteam.yakulab.binding.Constants
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -55,6 +55,11 @@ data class DataChallenge (
     @SerialName("text_result")
     var text_result: List<String>? = null,
 
+    var type: TypeChallenge? = null,
+
+    @SerialName("text_result_for_nerby_species")
+    var text_result_for_nerby_species: String? = null,
+
     @SerialName("challenge_name")
     var challenge_name: String? = null,
 
@@ -63,7 +68,13 @@ data class DataChallenge (
     var is_nearby_species: Boolean = false,
 )
 
-fun ObservationEntity.toDataChallenge(): DataChallenge {
+enum class TypeChallenge() {
+    NEARBY_SPECIES,
+    YAKULAB_PROPOSALS,
+    TEACHER_PROPOSALS,
+}
+
+fun ObservationEntity.toDataChallengeNearbySpecies(): DataChallenge {
     return DataChallenge(
         description = this.id.toString(),
         id = this.id.toString(),
@@ -71,6 +82,9 @@ fun ObservationEntity.toDataChallenge(): DataChallenge {
         name = this.identifications?.firstOrNull()?.taxon?.name,
         status = this.identifications?.firstOrNull()?.current,
         category = "null",
+        type = TypeChallenge.NEARBY_SPECIES, // Nearby species Type
+        is_nearby_species = true,
+        text_result_for_nerby_species = this.identifications?.firstOrNull()?.taxon?.wikipedia_url,
         image_parent = this.identifications?.firstOrNull()?.taxon?.default_photo?.medium_url,
         image_child = this.identifications?.firstOrNull()?.taxon?.default_photo?.medium_url,
         tittle = this.identifications?.firstOrNull()?.taxon?.name,
@@ -80,7 +94,6 @@ fun ObservationEntity.toDataChallenge(): DataChallenge {
         ),
         text_result = emptyList(),
         challenge_name = this.identifications?.firstOrNull()?.taxon?.name,
-        is_nearby_species = true,
     )
 }
 

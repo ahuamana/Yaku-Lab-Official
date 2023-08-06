@@ -17,12 +17,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.paparazziteam.yakulab.binding.Constants
+import com.paparazziteam.yakulab.binding.utils.openUrl
 import com.paparazziteam.yakulap.databinding.FragmentHomeBinding
 import com.paparazziteam.yakulap.helper.*
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.design.SlideImageFullScreenActivity
 import com.paparazziteam.yakulap.helper.design.decoration.ItemSpaceDecorationHorizontal
-import com.paparazziteam.yakulap.helper.network.openUrl
+
 import com.paparazziteam.yakulap.helper.others.LocationManager
 import com.paparazziteam.yakulap.helper.others.PermissionManager
 import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterChallengeCompleted
@@ -31,16 +33,13 @@ import com.paparazziteam.yakulap.presentation.dashboard.interfaces.onClickThread
 import com.paparazziteam.yakulap.presentation.dashboard.pojo.ChallengeCompleted
 import com.paparazziteam.yakulap.presentation.dashboard.pojo.TypeGroup
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.HomeViewModel
-import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
-import com.paparazziteam.yakulap.presentation.laboratorio.pojo.toDataChallenge
-import com.paparazziteam.yakulap.presentation.laboratorio.views.ChallengeListFragment
+import com.paparazziteam.yakulap.presentation.laboratorio.pojo.toDataChallengeNearbySpecies
 import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
-import com.paparazziteam.yakulap.usecases.SpeciesByLocationResult
+import com.yakulab.usecases.inaturalist.SpeciesByLocationResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import viewBinding
-import java.util.Locale
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -155,9 +154,8 @@ class HomeFragment : Fragment(), onClickThread {
         )
 
         adapterSpeciesNearby.onItemClickListener { observationEntity, position ->
-            Log.d("CLICK", "onCreateView: ${observationEntity.identifications.first()?.taxon?.name}")
-
-            val observationJson = toJson(observationEntity.toDataChallenge())
+            Timber.d( "onCreateView: ${observationEntity.identifications.first()?.taxon?.name}")
+            val observationJson = toJson(observationEntity.toDataChallengeNearbySpecies())
 
             val bundle = Bundle()
             bundle.putString(Constants.EXTRA_CHALLENGE, observationJson)
@@ -165,7 +163,7 @@ class HomeFragment : Fragment(), onClickThread {
         }
 
         adapterSpeciesNearby.onClickItemWiki { observationEntity, position ->
-            println("WIKI: ${observationEntity.identifications.first()?.taxon?.wikipedia_url}")
+            Timber.d("WIKI: ${observationEntity.identifications.first()?.taxon?.wikipedia_url}")
             observationEntity.identifications.first()?.taxon?.wikipedia_url?.let {
                 openUrl(requireContext(), it)
             }

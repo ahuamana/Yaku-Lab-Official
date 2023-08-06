@@ -24,24 +24,25 @@ import com.bumptech.glide.request.target.Target
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.FragmentChallengeBinding
 import com.paparazziteam.yakulap.helper.*
-import com.paparazziteam.yakulap.helper.Constants.EXTRA_CHALLENGE
+import com.paparazziteam.yakulab.binding.Constants.EXTRA_CHALLENGE
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.application.toast
 import com.paparazziteam.yakulap.helper.others.PermissionManager
 import com.paparazziteam.yakulap.presentation.dashboard.pojo.ChallengeCompleted
-import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
 import com.paparazziteam.yakulap.presentation.laboratorio.fragments.bottomsheets.BottomSheetDialogOptionsCameraFragment
 import com.paparazziteam.yakulap.presentation.laboratorio.fragments.bottomsheets.OnOptionSelectedSourcePicker
 import com.paparazziteam.yakulap.presentation.laboratorio.pojo.DataChallenge
+import com.paparazziteam.yakulap.presentation.laboratorio.pojo.TypeChallenge
 import com.paparazziteam.yakulap.presentation.laboratorio.viewmodels.ViewModelChallenge
+import com.paparazziteam.yakulap.presentation.laboratorio.viewmodels.ViewModelChallengeFragment
 import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
 import dagger.hilt.android.AndroidEntryPoint
-import de.hdodenhof.circleimageview.CircleImageView
 import jp.wasabeef.glide.transformations.BlurTransformation
 import timber.log.Timber
 import viewBinding
@@ -52,11 +53,10 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
 
-    private val viewModelDashboard:ViewModelDashboard by viewModels()
+    private val viewModelChallengeFragment: ViewModelChallengeFragment by viewModels()
 
     private val binding by viewBinding { FragmentChallengeBinding.bind(it) }
 
-    private val argJson        = EXTRA_CHALLENGE
     private var dataExtra = DataChallenge()
 
     @Inject
@@ -70,7 +70,7 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
     private val viewModel:ViewModelChallenge by viewModels()
     var txtImageNotUploaded: MaterialTextView?= null
 
-    private lateinit var imgChallengeToComplete: CircleImageView
+    private lateinit var imgChallengeToComplete: ShapeableImageView
 
     //Upload Image
     private lateinit var fabUploadImage: FloatingActionButton
@@ -165,7 +165,7 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
     }
 
     private fun observers() {
-        viewModelDashboard.errorUpload.observe(viewLifecycleOwner){
+        viewModelChallengeFragment.errorUpload.observe(viewLifecycleOwner){
             if(!it.isNullOrEmpty()){
                 mDialog?.dismiss()
                 requireActivity().toast(it)
@@ -173,7 +173,7 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
             }
         }
 
-        viewModelDashboard.completeUpload.observe(viewLifecycleOwner){
+        viewModelChallengeFragment.completeUpload.observe(viewLifecycleOwner){
             if(it){
                 Log.d("TAG","completeUpload running")
                 mDialog?.dismiss()
@@ -190,10 +190,25 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
         dataExtra.image_result?.let {
             ramdon = (it.indices).random()
 
+            var description = ""
+            var image = ""
+            //validate if exist position in array
+            when(dataExtra.type){
+                TypeChallenge.NEARBY_SPECIES -> {
+                    description = viewModelChallengeFragment.getExtraInfoChallengeNearbySpecies()
+                    image = dataExtra.image_parent?:""
+                }
+                else -> {
+                    description = dataExtra.text_result?.getOrNull(ramdon)?: ""
+                    image = dataExtra.image_result?.getOrNull(ramdon)?:""
+                }
+            }
+
+
             val bundle = bundleOf(
                 "title" to dataExtra.name,
-                "description" to dataExtra?.text_result?.get(ramdon),
-                "image" to dataExtra?.image_result?.get(ramdon),
+                "description" to description,
+                "image" to image,
                 "pointsToGive" to getPointsCompleted()
             )
 
@@ -236,7 +251,7 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
         val fileImage = File(mProfileUri?.path?:"")
         Timber.d("File Uri: $fileImage")
 
-        viewModelDashboard.uploadPhotoRemote(completed,
+        viewModelChallengeFragment.uploadPhotoRemote(completed,
             fileImage = fileImage,
             pointsToGive = dataExtra.pointsToGive?:0,
             isCompleted = isChallengeCompleted,
@@ -262,8 +277,7 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
     }
 
     private fun loadImageFromRemotoOrLocal(challenge: ChallengeCompleted?) {
-        //var image  = (requireActivity() as ChallengeActivity).getPathResultPhoto()
-        var image  = ""
+        val image  = ""
         idChallengeDocument = challenge?.id?:""
         println("image activity: ${image}")
         if(!image.toString().isNullOrEmpty()){
@@ -304,7 +318,6 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
     }
 
     fun loadImageNotUpload(challenge: ChallengeCompleted?) {
-
         Glide.with(this)
             .load(challenge?.url)
             .listener(object :RequestListener<Drawable>{
@@ -361,34 +374,30 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModelDashboard.errorUpload.removeObservers(this)
-        viewModelDashboard.completeUpload.removeObservers(this)
+        viewModelChallengeFragment.errorUpload.removeObservers(this)
+        viewModelChallengeFragment.completeUpload.removeObservers(this)
     }
 
     private fun setupChallengeData() {
 
         val urlChild = dataExtra.image_child?:""
 
-        var viewImageWhereToLoad = binding.challengePhotoChild
-        if(urlChild.contains("png", true)){
+
+        val viewImageWhereToLoad = if(urlChild.contains("png", true)){
             binding.containerChallengeChild.beGone()
             binding.challengePhotoChildPng.beVisible()
-            viewImageWhereToLoad = binding.challengePhotoChildPng
-        }else viewImageWhereToLoad = binding.challengePhotoChild
+            binding.challengePhotoChildPng
+        } else binding.challengePhotoChild
 
 
         Glide.with(this)
             .load(dataExtra.image_child)
-            .error(R.drawable.ic_image_defect)
-            .placeholder(R.drawable.ic_image_defect)
             .into(viewImageWhereToLoad)
 
         Glide.with(this)
             .load(dataExtra.image_parent)
             //apply blur
             .apply(RequestOptions.bitmapTransform(BlurTransformation(25, 3)))
-            .error(R.drawable.ic_image_defect)
-            .placeholder(R.drawable.ic_image_defect)
             .into(binding.challengePhotoParent)
     }
 

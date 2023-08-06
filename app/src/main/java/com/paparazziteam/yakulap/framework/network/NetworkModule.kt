@@ -1,6 +1,6 @@
 package com.paparazziteam.yakulap.framework.network
 
-import com.paparazziteam.yakulap.helper.Constants.BASE_URL_INATURALIST
+import com.paparazziteam.yakulab.binding.Constants.BASE_URL_INATURALIST
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

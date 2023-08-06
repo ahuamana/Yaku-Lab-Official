@@ -18,3 +18,7 @@ dependencyResolutionManagement {
 rootProject.name = "yakulap"
 include ':app'
 include ':common'
+include ':domain'
+include ':data'
+include ':framework:network'
+include ':usecases'

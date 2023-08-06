@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.paparazziteam.yakulap.databinding.BottomSheetInformReceivedBinding
-import com.paparazziteam.yakulap.helper.Constants.ARG_DATA
-import com.paparazziteam.yakulap.helper.Constants.REPORT_TYPE_POST
+import com.paparazziteam.yakulab.binding.Constants.ARG_DATA
+import com.paparazziteam.yakulab.binding.Constants.REPORT_TYPE_POST
 import com.paparazziteam.yakulap.helper.autoCleared
 import com.paparazziteam.yakulap.helper.convertFirstLetterToUpperCaseAndRestToLowerCase
 

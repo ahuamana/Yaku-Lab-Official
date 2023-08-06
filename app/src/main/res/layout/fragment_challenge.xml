@@ -89,15 +89,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imgChallengeParent">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/challenge_photo_to_complete"
-                    android:layout_width="250dp"
-                    android:layout_height="250dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/circle"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardViewContainerPhotoToComplete"
+                    android:layout_width="wrap_content"
+                    app:cardCornerRadius="125dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/colorPrimaryYaku"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/challenge_photo_to_complete"
+                        android:layout_width="250dp"
+                        app:strokeWidth="2dp"
+                        app:strokeColor="@color/colorPrimaryYaku"
+                        android:layout_height="250dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/circle" />
+
+                </com.google.android.material.card.MaterialCardView>
+
 
                 <ProgressBar
                     android:id="@+id/progress_loadImage"
@@ -105,23 +118,24 @@
                     android:layout_height="0dp"
                     android:layout_margin="30dp"
                     android:indeterminateTint="@color/colorSecondaryYaku"
-                    app:layout_constraintBottom_toBottomOf="@+id/challenge_photo_to_complete"
-                    app:layout_constraintEnd_toEndOf="@+id/challenge_photo_to_complete"
-                    app:layout_constraintStart_toStartOf="@+id/challenge_photo_to_complete"
-                    app:layout_constraintTop_toTopOf="@+id/challenge_photo_to_complete" />
+                    app:layout_constraintBottom_toBottomOf="@+id/cardViewContainerPhotoToComplete"
+                    app:layout_constraintEnd_toEndOf="@+id/cardViewContainerPhotoToComplete"
+                    app:layout_constraintStart_toStartOf="@+id/cardViewContainerPhotoToComplete"
+                    app:layout_constraintTop_toTopOf="@+id/cardViewContainerPhotoToComplete" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewImagenNosubida"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Imagen no subida"
+                    android:elevation="1dp"
+                    android:text="@string/imagen_no_subida"
                     android:textColor="#999"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/challenge_photo_to_complete"
-                    app:layout_constraintEnd_toEndOf="@+id/challenge_photo_to_complete"
-                    app:layout_constraintStart_toStartOf="@+id/challenge_photo_to_complete"
-                    app:layout_constraintTop_toTopOf="@+id/challenge_photo_to_complete" />
+                    app:layout_constraintBottom_toBottomOf="@+id/cardViewContainerPhotoToComplete"
+                    app:layout_constraintEnd_toEndOf="@+id/cardViewContainerPhotoToComplete"
+                    app:layout_constraintStart_toStartOf="@+id/cardViewContainerPhotoToComplete"
+                    app:layout_constraintTop_toTopOf="@+id/cardViewContainerPhotoToComplete" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fabSelectImage"
@@ -131,9 +145,9 @@
                     android:backgroundTint="@color/colorSecondaryYaku"
                     android:src="@drawable/ic_menu_camera"
                     app:borderWidth="0dp"
-                    app:elevation="0dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/challenge_photo_to_complete"
-                    app:layout_constraintEnd_toEndOf="@+id/challenge_photo_to_complete" />
+                    app:elevation="1dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/cardViewContainerPhotoToComplete"
+                    app:layout_constraintEnd_toEndOf="@+id/cardViewContainerPhotoToComplete" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnRegistrar"
@@ -150,7 +164,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/challenge_photo_to_complete" />
+                    app:layout_constraintTop_toBottomOf="@+id/cardViewContainerPhotoToComplete" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

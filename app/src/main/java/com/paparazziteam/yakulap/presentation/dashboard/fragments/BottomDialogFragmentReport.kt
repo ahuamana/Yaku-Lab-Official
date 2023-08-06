@@ -8,8 +8,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.paparazziteam.yakulap.databinding.BottomSheetReportPostBinding
-import com.paparazziteam.yakulap.helper.Constants.REPORT_TYPE
-import com.paparazziteam.yakulap.helper.Constants.REPORT_TYPE_POST
+import com.paparazziteam.yakulab.binding.Constants.REPORT_TYPE
+import com.paparazziteam.yakulab.binding.Constants.REPORT_TYPE_POST
 import com.paparazziteam.yakulap.helper.autoCleared
 import com.paparazziteam.yakulap.helper.fromJson
 import com.paparazziteam.yakulap.helper.preventDoubleClick

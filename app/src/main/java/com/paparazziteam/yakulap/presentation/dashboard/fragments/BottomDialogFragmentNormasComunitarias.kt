@@ -9,9 +9,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.BottomSheetNormasComunitariasBinding
 import com.paparazziteam.yakulap.helper.*
-import com.paparazziteam.yakulap.helper.Constants.ARG_DATA
-import com.paparazziteam.yakulap.helper.Constants.REPORT_TYPE
-import com.paparazziteam.yakulap.helper.Constants.REPORT_TYPE_POST
+import com.paparazziteam.yakulab.binding.Constants.ARG_DATA
+import com.paparazziteam.yakulab.binding.Constants.REPORT_TYPE
+import com.paparazziteam.yakulab.binding.Constants.REPORT_TYPE_POST
 import com.paparazziteam.yakulap.presentation.dashboard.pojo.*
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
 

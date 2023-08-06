@@ -1,7 +1,6 @@
 package com.paparazziteam.yakulap.presentation.laboratorio.adapters
 
 import android.app.Dialog
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
@@ -19,15 +18,12 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
+import com.paparazziteam.yakulab.binding.Constants
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.DialogMoreInfoBinding
 import com.paparazziteam.yakulap.databinding.ItemChallengeOptionBinding
 import com.paparazziteam.yakulap.helper.*
 import com.paparazziteam.yakulap.presentation.laboratorio.pojo.DataChallenge
-import com.paparazziteam.yakulap.presentation.laboratorio.views.ChallengeActivity
-import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 class AdapterGridChallenge(challengesList:MutableList<DataChallenge>):RecyclerView.Adapter<AdapterGridChallenge.ViewHolder>() {
 

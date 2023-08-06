@@ -1,6 +1,7 @@
 package com.paparazziteam.yakulap.helper
 
 import android.view.View
+import com.paparazziteam.yakulab.binding.SHORT_ANIMATION_DURATION
 
 fun View.beInvisible() {
     visibility = View.INVISIBLE

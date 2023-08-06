@@ -13,11 +13,11 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.paparazziteam.yakulap"
+        applicationId "com.yakulab.client"
         minSdk 22
         targetSdk 33
-        versionCode 6
-        versionName "2.1.0"
+        versionCode 13
+        versionName "2.1.1.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -30,6 +30,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
     }
     compileOptions {
@@ -54,6 +55,8 @@ android {
 dependencies {
 
     implementation( project(":common"))
+    implementation( project(":domain"))
+    implementation( project(":usecases"))
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.google.android.gms:play-services-location:21.0.1'
@@ -128,10 +131,6 @@ dependencies {
 
     //image picker
     implementation 'com.github.dhaval2404:imagepicker:2.1'
-
-
-    //play integrity
-    implementation 'com.google.android.play:integrity:1.1.0'
 
     //Blur
     implementation 'jp.wasabeef:glide-transformations:4.3.0'

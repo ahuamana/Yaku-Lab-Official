@@ -37,6 +37,35 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:152736778257:android:91877ebfcaec798c7009b0",
+        "android_client_info": {
+          "package_name": "com.yakulab.client"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "152736778257-slqnh64h0egijd2q1hhem00m661ss380.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhI6KWULKAl30nQZY52d41kCg8NzpWTJI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "152736778257-slqnh64h0egijd2q1hhem00m661ss380.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:152736778257:android:126e7146533d54837009b0",
         "android_client_info": {
           "package_name": "edu.aha.agualimpiafinal"

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.paparazziteam.yakulap.databinding.ItemNearbySpeciesBinding
-import com.paparazziteam.yakulap.domain.dashboard.ObservationEntity
+import com.yakulab.domain.dashboard.ObservationEntity
 import com.paparazziteam.yakulap.helper.load
 
 class AdapterNearbySpecies : ListAdapter<ObservationEntity, RecyclerView.ViewHolder>(ItemSpeciesDiffCallback()) {
@@ -34,7 +34,7 @@ class AdapterNearbySpecies : ListAdapter<ObservationEntity, RecyclerView.ViewHol
         onClickItemWiki = listener
     }
 
-    private var onClickItemImageFullScreen: ((ObservationEntity, position:Int,url:String) -> Unit)? = null
+    private var onClickItemImageFullScreen: ((ObservationEntity, position:Int, url:String) -> Unit)? = null
     fun onClickItemImageFullScreen(listener: (ObservationEntity, position: Int, url:String) -> Unit) {
         onClickItemImageFullScreen = listener
     }

@@ -11,6 +11,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.FragmentResultCaptureImageBinding
+import com.paparazziteam.yakulap.helper.fromHtml
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,7 +50,7 @@ class ResultCaptureImageFragment : Fragment() {
 
             binding.textPoints.text = pointsToGive.toString()
             binding.title.text = title
-            binding.textViewDescriptionSustantivo.text = description
+            binding.textViewDescriptionSustantivo.text = description.fromHtml()
 
             Glide.with(this)
                 .load(image)

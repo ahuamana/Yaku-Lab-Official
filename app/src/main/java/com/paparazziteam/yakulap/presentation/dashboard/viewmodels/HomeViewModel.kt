@@ -11,7 +11,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.toObject
-import com.paparazziteam.yakulap.domain.dashboard.ObservationEntity
+import com.yakulab.domain.dashboard.ObservationEntity
 import com.paparazziteam.yakulap.helper.application.MyPreferences
 import com.paparazziteam.yakulap.helper.fromJson
 import com.paparazziteam.yakulap.helper.getTimestamp
@@ -25,8 +25,8 @@ import com.paparazziteam.yakulap.presentation.login.providers.LoginProvider
 import com.paparazziteam.yakulap.presentation.login.providers.UserProvider
 import com.paparazziteam.yakulap.presentation.repositorio.*
 import com.paparazziteam.yakulap.presentation.providers.*
-import com.paparazziteam.yakulap.usecases.GetSpeciesByLocationUseCase
-import com.paparazziteam.yakulap.usecases.SpeciesByLocationResult
+import com.yakulab.usecases.inaturalist.GetSpeciesByLocationUseCase
+import com.yakulab.usecases.inaturalist.SpeciesByLocationResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -91,7 +91,8 @@ class HomeViewModel @Inject constructor(
     private val _loading = MutableLiveData<Boolean>()
     val loading:LiveData<Boolean> = _loading
 
-    private val _speciesByLocation = MutableStateFlow<SpeciesByLocationResult>(SpeciesByLocationResult.ShowLoading)
+    private val _speciesByLocation = MutableStateFlow<SpeciesByLocationResult>(
+        SpeciesByLocationResult.ShowLoading)
     val speciesByLocation = _speciesByLocation.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000,1),
