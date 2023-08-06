@@ -42,7 +42,7 @@ class BottomDialogFragmentNormasComunitarias : BottomSheetDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            item = fromJson(it.getString(ARG_DATA)?:"")
+            item = fromJson(it.getString(ARG_DATA)?:"", ChallengeCompleted::class.java)
             itemReportType = it.getString(REPORT_TYPE)
             itemReportTypePost = it.getString(REPORT_TYPE_POST)
         }

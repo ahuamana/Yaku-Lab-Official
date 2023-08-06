@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseUser
 import com.paparazziteam.yakulap.presentation.login.providers.UserProvider
-import com.paparazziteam.yakulap.presentation.login.pojo.User
+import com.yakulab.domain.login.User
 import com.paparazziteam.yakulap.presentation.login.providers.LoginProvider
 
 class ViewModelRegistroUsuario private constructor() {

@@ -34,7 +34,7 @@ import com.yakulab.domain.dashboard.ChallengeCompleted
 import com.yakulab.domain.dashboard.TypeGroup
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.HomeViewModel
 import com.yakulab.domain.laboratory.toDataChallengeNearbySpecies
-import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
+import com.paparazziteam.yakulap.navigation.NavigationRootImpl
 import com.paparazziteam.yakulap.utils.design.SlideImageFullScreenActivity
 import com.paparazziteam.yakulap.utils.design.decoration.ItemSpaceDecorationHorizontal
 import com.yakulab.usecases.inaturalist.SpeciesByLocationResult
@@ -325,7 +325,7 @@ class HomeFragment : Fragment(), onClickThread {
     }
 
     override fun clickedReportThread(item: ChallengeCompleted) {
-        val fragment = BottomDialogFragmentMoreOptions.newInstance(toJson(item))
+        val fragment = BottomDialogFragmentMoreOptions.newInstance(toJson(item)?:"")
         fragment.show(parentFragmentManager,"bottomSheetMoreOptions")
 
     }

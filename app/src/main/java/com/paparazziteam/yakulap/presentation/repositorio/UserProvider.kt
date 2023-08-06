@@ -5,7 +5,7 @@ import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
-import com.paparazziteam.yakulap.presentation.login.pojo.User
+import com.yakulab.domain.login.User
 import javax.inject.Inject
 
 class UserProvider @Inject constructor() {

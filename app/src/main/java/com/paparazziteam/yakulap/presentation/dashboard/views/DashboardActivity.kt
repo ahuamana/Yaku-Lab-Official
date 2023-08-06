@@ -29,8 +29,8 @@ import com.paparazziteam.yakulap.databinding.ActivityDashboardBinding
 import com.paparazziteam.yakulap.presentation.bienvenida.views.WelcomeActivity
 import com.paparazziteam.yakulap.presentation.dashboard.fragments.BottomDialogFragment
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
-import com.paparazziteam.yakulap.presentation.navigation.NavigationRoot
-import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
+import com.paparazziteam.yakulap.navigation.NavigationRoot
+import com.paparazziteam.yakulap.navigation.NavigationRootImpl
 import com.paparazziteam.yakulap.presentation.puntaje.views.PuntajeActivity
 import dagger.hilt.android.AndroidEntryPoint
 import io.ak1.pix.helpers.PixBus

@@ -1,33 +1,39 @@
 package com.yakulab.domain.laboratory
 
 import com.yakulab.domain.dashboard.ObservationEntity
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class DataCategory (
-    var Categorias: List<DataItems>? = null,
+    @SerialName("Categorias")
+    val Categorias: List<DataItems>? = null,
 )
 
+@Serializable
 data class DataItems (
-    var Challenge: List<DataChallenge>? = null,
+    @SerialName("Challenge")
+    val Challenge: List<DataChallenge>? = null,
 )
 
+@Serializable
 data class DataChallenge (
-    var description: String? = null,
-    var id: String? = null,
-    var url: String? = null,
-    var name: String? = null,
-    var status: Boolean? = null,
-    var category: String? = null,
-    var image_parent: String? = null,
-    var image_child: String? = null,
-    var tittle: String? = null,
-    var pointsToGive: Int? = null,
-    var image_result: List<String>? = null,
-    var text_result: List<String>? = null,
-
-    var type: TypeChallenge? = null,
-    var text_result_for_nerby_species: String? = null,
-    var challenge_name: String? = null,
-    var is_nearby_species: Boolean = false,
+    @SerialName("id") var id: String? = null,
+    @SerialName("description") var description: String? = null,
+    @SerialName("url") var url: String? = null,
+    @SerialName("name") var name: String? = null,
+    @SerialName("status") var status: Boolean? = null,
+    @SerialName("category") var category: String? = null,
+    @SerialName("image_parent") var image_parent: String? = null,
+    @SerialName("image_child") var image_child: String? = null,
+    @SerialName("tittle") var tittle: String? = null,
+    @SerialName("pointsToGive") var pointsToGive: Int? = null,
+    @SerialName("image_result") var image_result: List<String>? = null,
+    @SerialName("text_result") var text_result: List<String>? = null,
+    @SerialName("type") var type: TypeChallenge? = null,
+    @SerialName("text_result_for_nerby_species") var text_result_for_nerby_species: String? = null,
+    @SerialName("challenge_name") var challenge_name: String? = null,
+    @SerialName("is_nearby_species") var is_nearby_species: Boolean = false,
 )
 
 enum class TypeChallenge() {
@@ -65,6 +71,7 @@ fun randomInteger(): Int {
     return (0..10).random()
 }
 
+@Serializable
 data class DataListChallenge (
     var listInsectos: List<DataChallenge>? = null,
     var listAnimalsOther: List<DataChallenge>? = null,

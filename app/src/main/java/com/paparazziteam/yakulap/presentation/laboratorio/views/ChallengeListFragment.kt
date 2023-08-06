@@ -130,16 +130,18 @@ class ChallengeListFragment : Fragment() {
         println("Title size: ${titles.size}")
         when(titles.count()){
             1->{
-                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriOne),titles[0]),titles[0])
+                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(
+                    toJson(listCategoriOne)?:"",titles[0]),titles[0]
+                )
             }
             2->{
-                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriOne),titles[0]),titles[0])
-                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriTwo),titles[1]),titles[1])
+                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriOne)?:"",titles[0]),titles[0])
+                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriTwo)?:"",titles[1]),titles[1])
             }
             else->{
-                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriOne),titles[0]),titles[0])
-                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriTwo),titles[1]),titles[1])
-                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriThree),titles[2]),titles[2])
+                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriOne)?:"",titles[0]),titles[0])
+                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriTwo)?:"",titles[1]),titles[1])
+                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriThree)?:"",titles[2]),titles[2])
             }
         }
 

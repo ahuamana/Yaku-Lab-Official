@@ -32,7 +32,7 @@ class BottomDialogFragmentMoreOptions : BottomSheetDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            item = fromJson(it.getString(ARG_DATA)?:"")
+            item = fromJson(it.getString(ARG_DATA)?:"", ChallengeCompleted::class.java)
         }
     }
 

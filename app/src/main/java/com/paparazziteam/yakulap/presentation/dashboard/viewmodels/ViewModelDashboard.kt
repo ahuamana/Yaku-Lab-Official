@@ -19,7 +19,7 @@ import com.paparazziteam.yakulab.binding.helper.toJson
 import com.yakulab.domain.dashboard.ObservationEntity
 import com.paparazziteam.yakulap.presentation.dashboard.model.ChallengeRepository
 import com.paparazziteam.yakulap.presentation.dashboard.model.CommentRepository
-import com.paparazziteam.yakulap.presentation.login.pojo.User
+import com.yakulab.domain.login.User
 import com.paparazziteam.yakulap.presentation.login.providers.LoginProvider
 import com.paparazziteam.yakulap.presentation.login.providers.UserProvider
 import com.paparazziteam.yakulap.presentation.repositorio.*
@@ -134,7 +134,7 @@ class ViewModelDashboard @Inject constructor(
         }else  mPreferences.savePostsBlocked = ""
     }
 
-    private fun saveUsersBlockedInCache(user:User) {
+    private fun saveUsersBlockedInCache(user: User) {
         var usersBlocked = user.users_blocked
         if(!usersBlocked.isNullOrEmpty()){
             mPreferences.saveUsersBlocked = toJson(usersBlocked)

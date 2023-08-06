@@ -1,4 +1,4 @@
-package com.paparazziteam.yakulap.presentation.navigation
+package com.paparazziteam.yakulap.navigation
 
 import android.os.Bundle
 import androidx.navigation.NavController

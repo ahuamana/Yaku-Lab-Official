@@ -11,7 +11,7 @@ import com.paparazziteam.yakulab.binding.helper.fromJson
 import com.paparazziteam.yakulap.databinding.FragmentListChallengeBinding
 import com.paparazziteam.yakulap.presentation.laboratorio.adapters.AdapterGridChallenge
 import com.yakulab.domain.laboratory.DataChallenge
-import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
+import com.paparazziteam.yakulap.navigation.NavigationRootImpl
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

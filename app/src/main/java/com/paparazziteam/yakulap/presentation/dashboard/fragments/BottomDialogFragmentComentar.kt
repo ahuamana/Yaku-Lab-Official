@@ -111,7 +111,7 @@ class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
     }
 
     fun openDialogMoreOptionsComment(item: Comment){
-        val fragment = BottomDialogFragmentMoreOptionsComment.newInstance(toJson(item))
+        val fragment = BottomDialogFragmentMoreOptionsComment.newInstance(toJson(item)?:"")
         fragment.show(parentFragmentManager,"bottomSheetMoreOptionsComment")
     }
 

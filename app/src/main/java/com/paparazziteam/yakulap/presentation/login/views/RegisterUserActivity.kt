@@ -21,7 +21,7 @@ import com.paparazziteam.yakulab.binding.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityRegisterUserBinding
 import com.paparazziteam.yakulap.presentation.dashboard.views.DashboardActivity
-import com.paparazziteam.yakulap.presentation.login.pojo.User
+import com.yakulab.domain.login.User
 import com.paparazziteam.yakulap.presentation.login.viewmodels.ViewModelRegistroUsuario
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -1,4 +1,4 @@
-package com.paparazziteam.yakulap.framework.network
+package com.yakulab.framework.network.di
 
 import com.paparazziteam.yakulab.binding.Constants.BASE_URL_INATURALIST
 import dagger.Module

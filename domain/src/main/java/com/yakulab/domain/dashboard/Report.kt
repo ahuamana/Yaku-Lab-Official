@@ -1,18 +1,35 @@
 package com.yakulab.domain.dashboard
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Report (
+    @SerialName("idPostReported")
     var idPostReported: String? = null,
+    @SerialName("idChallengeReported")
     var idChallengeReported: String? = null,
+    @SerialName("typeReport")
     var typeReport:String?=null,
+    @SerialName("typeReportedPost")
     var typeReportedPost:String?=null,
+    @SerialName("idCommentReported")
     var idCommentReported:String?=null,
+    @SerialName("idPhotoReported")
     var idPhotoReported:String?=null,
+    @SerialName("reportedComentario")
     var reportedComentario:String?=null,
+    @SerialName("userReported")
     var userReported:String?=null,
-    var emailWhoReport: String,//? = MyPreferences().email,
-    var lastNameWhoReport: String,//? = MyPreferences().lastName,
-    var firstNameWhoReport: String?,// = MyPreferences().firstName,
+    @SerialName("emailWhoReport")
+    var emailWhoReport: String,
+    @SerialName("lastNameWhoReport")
+    var lastNameWhoReport: String,
+    @SerialName("firstNameWhoReport")
+    var firstNameWhoReport: String?,
+    @SerialName("datetimeUnixTime")
     var datetimeUnixTime: Long? = null,
+    @SerialName("datetime")
     var datetime: String? = null,
 )
 

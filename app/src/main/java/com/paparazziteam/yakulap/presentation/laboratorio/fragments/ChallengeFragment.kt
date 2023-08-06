@@ -44,7 +44,7 @@ import com.yakulab.domain.laboratory.DataChallenge
 import com.yakulab.domain.laboratory.TypeChallenge
 import com.paparazziteam.yakulap.presentation.laboratorio.viewmodels.ViewModelChallenge
 import com.paparazziteam.yakulap.presentation.laboratorio.viewmodels.ViewModelChallengeFragment
-import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
+import com.paparazziteam.yakulap.navigation.NavigationRootImpl
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.glide.transformations.BlurTransformation
 import timber.log.Timber

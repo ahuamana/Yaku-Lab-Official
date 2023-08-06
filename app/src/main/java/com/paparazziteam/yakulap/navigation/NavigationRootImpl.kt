@@ -1,4 +1,4 @@
-package com.paparazziteam.yakulap.presentation.navigation
+package com.paparazziteam.yakulap.navigation
 
 import android.os.Bundle
 import androidx.navigation.NavController
@@ -9,7 +9,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class NavigationRootImpl @Inject constructor() : NavigationRoot{
+class NavigationRootImpl @Inject constructor() : NavigationRoot {
 
     private var navController: NavController? = null
 

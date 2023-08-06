@@ -29,7 +29,7 @@ import com.yakulab.domain.dashboard.TypeReported
 import com.yakulab.domain.dashboard.TypeReportedPost
 import com.yakulab.domain.laboratory.DataChallenge
 import com.yakulab.domain.laboratory.TypeChallenge
-import com.paparazziteam.yakulap.presentation.login.pojo.User
+import com.yakulab.domain.login.User
 import com.paparazziteam.yakulap.presentation.login.providers.LoginProvider
 import com.paparazziteam.yakulap.presentation.login.providers.UserProvider
 import com.paparazziteam.yakulap.presentation.repositorio.ImageProvider

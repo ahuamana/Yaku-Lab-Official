@@ -36,6 +36,7 @@ import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat
+import com.google.gson.Gson
 import com.paparazziteam.yakulab.binding.Constants.EXT_JPG
 import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
 import kotlinx.serialization.decodeFromString
@@ -181,18 +182,20 @@ fun tintDrawable(drawable: Drawable, @ColorInt color: Int = MyPreferences().colo
 }
 
 
-
-inline fun <reified T> toJson(value : T) = Json{
+val jsonBuilder = Json {
     encodeDefaults = true
     ignoreUnknownKeys = true
     isLenient = true
-}.encodeToString(value)
+}
 
+inline fun <reified T> toJson(value : T) = jsonBuilder.encodeToString(value)
 inline fun <reified T> fromJson(json: String) : T {
-    return Json{
-        ignoreUnknownKeys = true
-        isLenient = true
-    }.decodeFromString(json)
+    return jsonBuilder.decodeFromString(json)
+}
+
+//using Gson
+inline fun <reified T> fromJson(json: String, type: Class<T>) : T {
+    return Gson().fromJson(json, type)
 }
 
 

@@ -66,7 +66,7 @@ class AdapterComment(private val viewModel: ViewModelDashboard) : RecyclerView.A
         }
 
         fun openDialogMoreOptionsComment(item: Comment){
-            val fragment = BottomDialogFragmentMoreOptionsComment.newInstance(toJson(item))
+            val fragment = BottomDialogFragmentMoreOptionsComment.newInstance(toJson(item)?: "")
             fragment.show((itemView.context.getActivity() as FragmentActivity).supportFragmentManager,"bottomSheetMoreOptionsComment")
         }
 
