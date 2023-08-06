@@ -15,11 +15,11 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.paparazziteam.yakulab.binding.helper.hideKeyboardActivity
+import com.paparazziteam.yakulab.binding.helper.isValidEmail
+import com.paparazziteam.yakulab.binding.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityRegisterUserBinding
-import com.paparazziteam.yakulap.helper.hideKeyboardActivity
-import com.paparazziteam.yakulap.helper.isValidEmail
-import com.paparazziteam.yakulap.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.presentation.dashboard.views.DashboardActivity
 import com.paparazziteam.yakulap.presentation.login.pojo.User
 import com.paparazziteam.yakulap.presentation.login.viewmodels.ViewModelRegistroUsuario

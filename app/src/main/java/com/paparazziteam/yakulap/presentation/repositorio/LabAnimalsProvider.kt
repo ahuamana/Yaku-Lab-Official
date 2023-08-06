@@ -2,7 +2,7 @@ package com.paparazziteam.yakulap.presentation.repositorio
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.*
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.TypeGroup
+import com.yakulab.domain.dashboard.TypeGroup
 
 class LabAnimalsProvider {
 

@@ -16,16 +16,16 @@ import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
+import com.paparazziteam.yakulab.binding.helper.application.toast
+import com.paparazziteam.yakulap.utils.design.SlideImageFullScreenActivity
+import com.paparazziteam.yakulab.binding.helper.preventDoubleClick
+import com.paparazziteam.yakulab.binding.helper.replaceFirstCharInSequenceToUppercase
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ItemChallengeCompletedBinding
-import com.paparazziteam.yakulap.helper.application.MyPreferences
-import com.paparazziteam.yakulap.helper.application.toast
-import com.paparazziteam.yakulap.helper.design.SlideImageFullScreenActivity
-import com.paparazziteam.yakulap.helper.preventDoubleClick
-import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
 import com.paparazziteam.yakulap.presentation.repositorio.ReaccionProvider
 import com.paparazziteam.yakulap.presentation.dashboard.interfaces.onClickThread
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.ChallengeCompleted
+import com.yakulab.domain.dashboard.ChallengeCompleted
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -3,9 +3,9 @@ package com.paparazziteam.yakulap.presentation.laboratorio.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.paparazziteam.yakulap.helper.application.MyPreferences
 import androidx.lifecycle.ViewModel
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.ChallengeCompleted
+import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
+import com.yakulab.domain.dashboard.ChallengeCompleted
 import com.paparazziteam.yakulap.presentation.dashboard.model.ChallengeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -22,12 +22,12 @@ class ViewModelChallenge @Inject constructor() : ViewModel() {
     lateinit var mChallengeProvider: ChallengeRepository
 
     private val _observableChallenge = MutableLiveData<ChallengeCompleted>()
-    val observableListData: LiveData< ChallengeCompleted> get() = _observableChallenge
+    val observableListData: LiveData<ChallengeCompleted> get() = _observableChallenge
 
     @Inject
-    lateinit var myPreferences:MyPreferences
+    lateinit var myPreferences: MyPreferences
 
-    fun getChallengeInformation(nameChallenge: String?, onComplete:(isCorrect:Boolean, challenge:ChallengeCompleted?)->Unit){
+    fun getChallengeInformation(nameChallenge: String?, onComplete:(isCorrect:Boolean, challenge: ChallengeCompleted?)->Unit){
         CoroutineScope(Dispatchers.Unconfined).launch {
             try {
                 withContext(Dispatchers.Main){

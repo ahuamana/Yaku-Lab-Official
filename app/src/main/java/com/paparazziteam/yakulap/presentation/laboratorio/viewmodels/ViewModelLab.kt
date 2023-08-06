@@ -6,8 +6,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.ktx.toObject
-import com.paparazziteam.yakulap.presentation.laboratorio.pojo.DataCategory
-import com.paparazziteam.yakulap.presentation.laboratorio.pojo.DataItems
+import com.yakulab.domain.laboratory.DataCategory
+import com.yakulab.domain.laboratory.DataItems
 import com.paparazziteam.yakulap.presentation.repositorio.LabAnimalsProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope

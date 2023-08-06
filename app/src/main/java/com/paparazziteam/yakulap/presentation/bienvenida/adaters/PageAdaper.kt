@@ -16,8 +16,8 @@ import androidx.core.content.FileProvider
 import com.bumptech.glide.Glide
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ViewpagerImageBinding
-import com.paparazziteam.yakulap.helper.application.PermissionCheck.writeExternalStorage
-import com.paparazziteam.yakulap.helper.design.toolbar.DescargaImagenes
+import com.paparazziteam.yakulap.utils.PermissionCheck.writeExternalStorage
+import com.paparazziteam.yakulap.utils.design.toolbar.DescargaImagenes
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException

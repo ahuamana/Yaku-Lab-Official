@@ -4,7 +4,7 @@ import android.net.Uri
 import com.google.android.gms.tasks.Task
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
-import com.paparazziteam.yakulap.helper.CompressorBitmapImage
+import com.paparazziteam.yakulab.binding.helper.CompressorBitmapImage
 
 import com.paparazziteam.yakulap.root.ctx
 import java.io.File

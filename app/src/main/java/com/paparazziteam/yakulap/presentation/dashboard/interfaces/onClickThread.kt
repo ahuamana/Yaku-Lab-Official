@@ -1,9 +1,9 @@
 package com.paparazziteam.yakulap.presentation.dashboard.interfaces
 
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.ChallengeCompleted
+import com.yakulab.domain.dashboard.ChallengeCompleted
 
 interface onClickThread {
-    fun clickOnUpdateLike(item:ChallengeCompleted)
-    fun clickedComentThread(item:ChallengeCompleted)
-    fun clickedReportThread(item:ChallengeCompleted)
+    fun clickOnUpdateLike(item: ChallengeCompleted)
+    fun clickedComentThread(item: ChallengeCompleted)
+    fun clickedReportThread(item: ChallengeCompleted)
 }

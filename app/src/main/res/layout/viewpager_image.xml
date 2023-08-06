@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.paparazziteam.yakulap.helper.design.TouchImageView
+        <com.paparazziteam.yakulap.utils.design.TouchImageView
             android:id="@+id/imageview_slide"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

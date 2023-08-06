@@ -15,10 +15,10 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
+import com.paparazziteam.yakulab.binding.helper.setColorToStatusBar
+import com.paparazziteam.yakulab.binding.helper.tintDrawable
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityResultCaptureImageBinding
-import com.paparazziteam.yakulap.helper.setColorToStatusBar
-import com.paparazziteam.yakulap.helper.tintDrawable
 import com.paparazziteam.yakulap.presentation.dashboard.views.DashboardActivity
 import com.paparazziteam.yakulap.presentation.laboratorio.viewmodels.ViewModelResult
 import dagger.hilt.android.AndroidEntryPoint

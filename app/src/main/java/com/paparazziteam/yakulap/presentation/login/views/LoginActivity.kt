@@ -13,13 +13,13 @@ import androidx.lifecycle.observe
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
+import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
+import com.paparazziteam.yakulab.binding.helper.hideKeyboardActivity
+import com.paparazziteam.yakulab.binding.helper.isConnected
+import com.paparazziteam.yakulab.binding.helper.isValidEmail
+import com.paparazziteam.yakulab.binding.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityLoginBinding
-import com.paparazziteam.yakulap.helper.application.MyPreferences
-import com.paparazziteam.yakulap.helper.hideKeyboardActivity
-import com.paparazziteam.yakulap.helper.isConnected
-import com.paparazziteam.yakulap.helper.isValidEmail
-import com.paparazziteam.yakulap.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.presentation.dashboard.views.DashboardActivity
 import com.paparazziteam.yakulap.presentation.login.viewmodels.ViewModelLogin
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
 
     @Inject
-    lateinit var mPreferences:MyPreferences
+    lateinit var mPreferences: MyPreferences
 
     lateinit var txtRegistroNuevo: MaterialTextView
     var btnLoginEmail: MaterialButton? = null

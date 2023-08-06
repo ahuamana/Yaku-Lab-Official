@@ -7,9 +7,9 @@ import android.view.animation.AnimationUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
+import com.paparazziteam.yakulab.binding.helper.getVersionName
 import com.paparazziteam.yakulap.R
-import com.paparazziteam.yakulap.helper.application.MyPreferences
-import com.paparazziteam.yakulap.helper.getVersionName
 import com.paparazziteam.yakulap.presentation.bienvenida.views.WelcomeActivity
 import com.paparazziteam.yakulap.presentation.dashboard.views.DashboardActivity
 import dagger.hilt.android.lifecycle.HiltViewModel

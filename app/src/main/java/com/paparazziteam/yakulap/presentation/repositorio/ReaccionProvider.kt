@@ -4,7 +4,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.Reaccion
+import com.yakulab.domain.dashboard.Reaccion
 import javax.inject.Inject
 
 class ReaccionProvider @Inject constructor(){

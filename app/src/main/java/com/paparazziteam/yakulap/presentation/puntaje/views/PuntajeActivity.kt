@@ -11,12 +11,12 @@ import androidx.core.content.ContextCompat
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
+import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
+import com.paparazziteam.yakulab.binding.helper.beGone
+import com.paparazziteam.yakulab.binding.helper.beVisible
+import com.paparazziteam.yakulab.binding.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityPuntajeBinding
-import com.paparazziteam.yakulap.helper.application.MyPreferences
-import com.paparazziteam.yakulap.helper.beGone
-import com.paparazziteam.yakulap.helper.beVisible
-import com.paparazziteam.yakulap.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.presentation.puntaje.viewmodels.ViewModelPuntaje
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -27,7 +27,7 @@ class PuntajeActivity : AppCompatActivity() {
     private val _viewModel:ViewModelPuntaje by viewModels()
 
     @Inject
-    lateinit var mPreferences:MyPreferences
+    lateinit var mPreferences: MyPreferences
 
     private lateinit var imgMedal:ShapeableImageView
     private lateinit var skeleton: ShimmerFrameLayout

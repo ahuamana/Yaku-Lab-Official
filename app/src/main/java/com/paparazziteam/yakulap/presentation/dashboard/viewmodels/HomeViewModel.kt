@@ -11,20 +11,24 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.toObject
+import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
+import com.paparazziteam.yakulab.binding.helper.fromJson
+import com.paparazziteam.yakulab.binding.helper.getTimestamp
+import com.paparazziteam.yakulab.binding.helper.getTimestampUnix
+import com.paparazziteam.yakulab.binding.helper.toJson
 import com.yakulab.domain.dashboard.ObservationEntity
-import com.paparazziteam.yakulap.helper.application.MyPreferences
-import com.paparazziteam.yakulap.helper.fromJson
-import com.paparazziteam.yakulap.helper.getTimestamp
-import com.paparazziteam.yakulap.helper.getTimestampUnix
-import com.paparazziteam.yakulap.helper.toJson
 import com.paparazziteam.yakulap.presentation.dashboard.model.ChallengeRepository
 import com.paparazziteam.yakulap.presentation.dashboard.model.CommentRepository
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.*
 import com.paparazziteam.yakulap.presentation.login.pojo.User
 import com.paparazziteam.yakulap.presentation.login.providers.LoginProvider
 import com.paparazziteam.yakulap.presentation.login.providers.UserProvider
 import com.paparazziteam.yakulap.presentation.repositorio.*
-import com.paparazziteam.yakulap.presentation.providers.*
+import com.yakulab.domain.dashboard.ChallengeCompleted
+import com.yakulab.domain.dashboard.Comment
+import com.yakulab.domain.dashboard.Reaccion
+import com.yakulab.domain.dashboard.Report
+import com.yakulab.domain.dashboard.TypeReported
+import com.yakulab.domain.dashboard.TypeReportedPost
 import com.yakulab.usecases.inaturalist.GetSpeciesByLocationUseCase
 import com.yakulab.usecases.inaturalist.SpeciesByLocationResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -53,7 +57,7 @@ class HomeViewModel @Inject constructor(
     private val mChallengeProvider: ChallengeRepository,
     private val mActionProvider:ReaccionProvider,
     private val mReportProvider:ReportProvider,
-    private val mPreferences:MyPreferences,
+    private val mPreferences: MyPreferences,
     private val getSpeciesByLocationUseCase: GetSpeciesByLocationUseCase,
 ): ViewModel(){
 
@@ -317,7 +321,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun updateLikeStatusFirebase(item:ChallengeCompleted){
+    fun updateLikeStatusFirebase(item: ChallengeCompleted){
         mActionProvider.getUserLike(mPreferences.email, item.id)?.get()
             ?.addOnSuccessListener {
                 if(it.isEmpty){
@@ -359,13 +363,16 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun reportPost(item: ChallengeCompleted, type:TypeReported, typeReportedPost: TypeReportedPost?= null){
+    fun reportPost(item: ChallengeCompleted, type: TypeReported, typeReportedPost: TypeReportedPost?= null){
         CoroutineScope(Dispatchers.Unconfined).launch{
             //Report Post Update
             var reportPost = Report(
                 idPostReported = item?.id,
                 idChallengeReported = item?.challenge_id,
-                typeReport = type.value
+                typeReport = type.value,
+                emailWhoReport = mPreferences.email,
+                firstNameWhoReport = mPreferences.firstName,
+                lastNameWhoReport = mPreferences.lastName,
             )
 
             if(typeReportedPost!=null){
@@ -380,14 +387,16 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun reportUser(type:TypeReported, userReported:String){
+    fun reportUser(type: TypeReported, userReported:String){
         CoroutineScope(Dispatchers.Unconfined).launch{
             //Report User Update
             var reportUser = Report(
                 typeReport = type.value,
-                emailWhoReport = mPreferences.email,
                 datetime = getTimestamp(),
-                datetimeUnixTime = getTimestampUnix()
+                datetimeUnixTime = getTimestampUnix(),
+                emailWhoReport = mPreferences.email,
+                firstNameWhoReport = mPreferences.firstName,
+                lastNameWhoReport = mPreferences.lastName,
             )
 
             if (userReported == mPreferences.email) {
@@ -405,14 +414,17 @@ class HomeViewModel @Inject constructor(
     }
     }
 
-    fun reportComment(item: Comment, type:TypeReported){
+    fun reportComment(item: Comment, type: TypeReported){
         CoroutineScope(Dispatchers.Unconfined).launch{
             //Report Post Update
             var reportPost = Report(
                 idCommentReported = item?.id,
                 reportedComentario = item?.message,
                 idPhotoReported = item?.id_photo,
-                typeReport = type.value
+                typeReport = type.value,
+                emailWhoReport = mPreferences.email,
+                firstNameWhoReport = mPreferences.firstName,
+                lastNameWhoReport = mPreferences.lastName,
             )
 
             mReportProvider.create(reportPost)

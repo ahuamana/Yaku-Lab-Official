@@ -18,23 +18,25 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.paparazziteam.yakulab.binding.Constants
+import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
+import com.paparazziteam.yakulab.binding.helper.beGone
+import com.paparazziteam.yakulab.binding.helper.beVisible
+import com.paparazziteam.yakulab.binding.helper.others.LocationManager
+import com.paparazziteam.yakulab.binding.helper.others.PermissionManager
+import com.paparazziteam.yakulab.binding.helper.preventDoubleClick
+import com.paparazziteam.yakulab.binding.helper.toJson
 import com.paparazziteam.yakulab.binding.utils.openUrl
 import com.paparazziteam.yakulap.databinding.FragmentHomeBinding
-import com.paparazziteam.yakulap.helper.*
-import com.paparazziteam.yakulap.helper.application.MyPreferences
-import com.paparazziteam.yakulap.helper.design.SlideImageFullScreenActivity
-import com.paparazziteam.yakulap.helper.design.decoration.ItemSpaceDecorationHorizontal
-
-import com.paparazziteam.yakulap.helper.others.LocationManager
-import com.paparazziteam.yakulap.helper.others.PermissionManager
 import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterChallengeCompleted
 import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterNearbySpecies
 import com.paparazziteam.yakulap.presentation.dashboard.interfaces.onClickThread
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.ChallengeCompleted
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.TypeGroup
+import com.yakulab.domain.dashboard.ChallengeCompleted
+import com.yakulab.domain.dashboard.TypeGroup
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.HomeViewModel
-import com.paparazziteam.yakulap.presentation.laboratorio.pojo.toDataChallengeNearbySpecies
+import com.yakulab.domain.laboratory.toDataChallengeNearbySpecies
 import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
+import com.paparazziteam.yakulap.utils.design.SlideImageFullScreenActivity
+import com.paparazziteam.yakulap.utils.design.decoration.ItemSpaceDecorationHorizontal
 import com.yakulab.usecases.inaturalist.SpeciesByLocationResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -46,7 +48,7 @@ import javax.inject.Inject
 class HomeFragment : Fragment(), onClickThread {
 
     @Inject
-    lateinit var mPreferences:MyPreferences
+    lateinit var mPreferences: MyPreferences
 
     @Inject
     lateinit var navigationRoot: NavigationRootImpl
@@ -206,21 +208,21 @@ class HomeFragment : Fragment(), onClickThread {
         binding.cardAnimals.setOnClickListener {
             it.preventDoubleClick()
             val bundle = Bundle()
-            bundle.putString("typeGroup",TypeGroup.ANIMALS.value)
+            bundle.putString("typeGroup", TypeGroup.ANIMALS.value)
             navigationRoot.navigateToChallengeList(bundle)
         }
 
         binding.cardFruits.setOnClickListener {
             it.preventDoubleClick()
             val bundle = Bundle()
-            bundle.putString("typeGroup",TypeGroup.FRUITS.value)
+            bundle.putString("typeGroup", TypeGroup.FRUITS.value)
             navigationRoot.navigateToChallengeList(bundle)
         }
 
         binding.cardPlants.setOnClickListener {
             it.preventDoubleClick()
             val bundle = Bundle()
-            bundle.putString("typeGroup",TypeGroup.PLANTS.value)
+            bundle.putString("typeGroup", TypeGroup.PLANTS.value)
             navigationRoot.navigateToChallengeList(bundle)
         }
     }

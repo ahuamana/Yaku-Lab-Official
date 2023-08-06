@@ -5,9 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.paparazziteam.yakulab.binding.helper.load
 import com.paparazziteam.yakulap.databinding.ItemNearbySpeciesBinding
 import com.yakulab.domain.dashboard.ObservationEntity
-import com.paparazziteam.yakulap.helper.load
 
 class AdapterNearbySpecies : ListAdapter<ObservationEntity, RecyclerView.ViewHolder>(ItemSpeciesDiffCallback()) {
 

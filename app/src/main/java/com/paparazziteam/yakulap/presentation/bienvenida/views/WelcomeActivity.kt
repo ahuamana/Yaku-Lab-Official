@@ -11,10 +11,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.viewpager.widget.ViewPager
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityWelcomeBinding
-import com.paparazziteam.yakulap.helper.design.FadePageTransfomer
 import com.paparazziteam.yakulap.presentation.bienvenida.adaters.MyPageAdapter
 import com.paparazziteam.yakulap.presentation.bienvenida.viewmodels.ViewModelWelcome
 import com.paparazziteam.yakulap.presentation.login.views.LoginActivity
+import com.paparazziteam.yakulap.utils.design.FadePageTransfomer
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

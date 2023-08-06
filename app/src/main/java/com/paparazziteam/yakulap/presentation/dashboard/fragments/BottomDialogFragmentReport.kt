@@ -10,12 +10,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.paparazziteam.yakulap.databinding.BottomSheetReportPostBinding
 import com.paparazziteam.yakulab.binding.Constants.REPORT_TYPE
 import com.paparazziteam.yakulab.binding.Constants.REPORT_TYPE_POST
-import com.paparazziteam.yakulap.helper.autoCleared
-import com.paparazziteam.yakulap.helper.fromJson
-import com.paparazziteam.yakulap.helper.preventDoubleClick
-import com.paparazziteam.yakulap.helper.toJson
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.*
+import com.paparazziteam.yakulab.binding.helper.autoCleared
+import com.paparazziteam.yakulab.binding.helper.fromJson
+import com.paparazziteam.yakulab.binding.helper.preventDoubleClick
+import com.paparazziteam.yakulab.binding.helper.toJson
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
+import com.yakulab.domain.dashboard.ChallengeCompleted
+import com.yakulab.domain.dashboard.TypeReported
+import com.yakulab.domain.dashboard.TypeReportedPost
 
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,7 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class BottomDialogFragmentReport : BottomSheetDialogFragment() {
 
     private val ARG_DATA = "DATA"
-    private var item:ChallengeCompleted?=null
+    private var item: ChallengeCompleted?=null
     private var _binding: BottomSheetReportPostBinding by autoCleared()
     private val binding get() = _binding!!
 
@@ -85,11 +87,11 @@ class BottomDialogFragmentReport : BottomSheetDialogFragment() {
         }
     }
 
-    fun openDialogNormsComunity(item:ChallengeCompleted, typeReportedPost: TypeReportedPost ){
+    fun openDialogNormsComunity(item: ChallengeCompleted, typeReportedPost: TypeReportedPost){
         val bottomDialogFragmentReport = BottomDialogFragmentNormasComunitarias()
         val bundle = Bundle()
         bundle.putString(ARG_DATA, toJson(item))
-        bundle.putString(REPORT_TYPE,TypeReported.POST.value)
+        bundle.putString(REPORT_TYPE, TypeReported.POST.value)
         bundle.putString(REPORT_TYPE_POST,typeReportedPost.value)
         bottomDialogFragmentReport.arguments = bundle
         bottomDialogFragmentReport.show(parentFragmentManager, bottomDialogFragmentReport.tag)
@@ -98,7 +100,7 @@ class BottomDialogFragmentReport : BottomSheetDialogFragment() {
 
     private fun setupComponentes() {
         contenedorOptionReport?.setOnClickListener {
-            item?.let { it -> _viewModel.reportPost(it,TypeReported.POST) }
+            item?.let { it -> _viewModel.reportPost(it, TypeReported.POST) }
             dismiss()
         }
 

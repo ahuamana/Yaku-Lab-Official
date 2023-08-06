@@ -5,15 +5,15 @@ import android.graphics.drawable.Drawable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
 import com.paparazziteam.yakulap.R
-import com.paparazziteam.yakulap.helper.application.MyPreferences
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 @HiltViewModel
 class ViewModelPuntaje @Inject constructor(
-    val preferences:MyPreferences,
+    val preferences: MyPreferences,
     @ApplicationContext val context: Context
 ):ViewModel() {
 

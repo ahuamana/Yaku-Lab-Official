@@ -15,14 +15,18 @@ import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
+import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
+import com.paparazziteam.yakulab.binding.helper.beGone
+import com.paparazziteam.yakulab.binding.helper.beVisible
+import com.paparazziteam.yakulab.binding.helper.onlyOneSpace
+import com.paparazziteam.yakulab.binding.helper.toJson
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.BottomSheetComentarBinding
-import com.paparazziteam.yakulap.helper.*
-import com.paparazziteam.yakulap.helper.application.MyPreferences
+
 import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterComment
 import com.paparazziteam.yakulap.presentation.dashboard.model.CommentRepository
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.Comment
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.TypeComment
+import com.yakulab.domain.dashboard.Comment
+import com.yakulab.domain.dashboard.TypeComment
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -106,7 +110,7 @@ class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
         _viewModel.getCommentsFromThread(idPhotoReceived?:"")
     }
 
-    fun openDialogMoreOptionsComment(item:Comment){
+    fun openDialogMoreOptionsComment(item: Comment){
         val fragment = BottomDialogFragmentMoreOptionsComment.newInstance(toJson(item))
         fragment.show(parentFragmentManager,"bottomSheetMoreOptionsComment")
     }

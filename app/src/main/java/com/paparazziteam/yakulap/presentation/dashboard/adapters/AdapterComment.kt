@@ -8,13 +8,13 @@ import android.widget.LinearLayout
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
+import com.paparazziteam.yakulab.binding.helper.getActivity
+import com.paparazziteam.yakulab.binding.helper.replaceFirstCharInSequenceToUppercase
+import com.paparazziteam.yakulab.binding.helper.toJson
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ItemComentarioBinding
-import com.paparazziteam.yakulap.helper.getActivity
-import com.paparazziteam.yakulap.helper.replaceFirstCharInSequenceToUppercase
-import com.paparazziteam.yakulap.helper.toJson
 import com.paparazziteam.yakulap.presentation.dashboard.fragments.BottomDialogFragmentMoreOptionsComment
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.Comment
+import com.yakulab.domain.dashboard.Comment
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
 import com.paparazziteam.yakulap.presentation.login.providers.UserProvider
 import javax.inject.Singleton
@@ -31,7 +31,7 @@ class AdapterComment(private val viewModel: ViewModelDashboard) : RecyclerView.A
         notifyDataSetChanged()
     }
 
-    fun addNewComment(comment:Comment){
+    fun addNewComment(comment: Comment){
         coments.add(comment)
         notifyItemInserted(coments.size)
     }
@@ -65,7 +65,7 @@ class AdapterComment(private val viewModel: ViewModelDashboard) : RecyclerView.A
             }
         }
 
-        fun openDialogMoreOptionsComment(item:Comment){
+        fun openDialogMoreOptionsComment(item: Comment){
             val fragment = BottomDialogFragmentMoreOptionsComment.newInstance(toJson(item))
             fragment.show((itemView.context.getActivity() as FragmentActivity).supportFragmentManager,"bottomSheetMoreOptionsComment")
         }
