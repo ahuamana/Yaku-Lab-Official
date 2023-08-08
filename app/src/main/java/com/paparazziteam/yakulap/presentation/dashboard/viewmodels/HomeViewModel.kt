@@ -95,8 +95,7 @@ class HomeViewModel @Inject constructor(
     private val _loading = MutableLiveData<Boolean>()
     val loading:LiveData<Boolean> = _loading
 
-    private val _speciesByLocation = MutableStateFlow<SpeciesByLocationResult>(
-        SpeciesByLocationResult.ShowLoading)
+    private val _speciesByLocation = MutableStateFlow<SpeciesByLocationResult>(SpeciesByLocationResult.ShowLoading)
     val speciesByLocation = _speciesByLocation.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000,1),
@@ -500,7 +499,6 @@ class HomeViewModel @Inject constructor(
         lat : Double,
         lng : Double,
     ) = viewModelScope.launch(Dispatchers.IO) {
-
         getSpeciesByLocationUseCase
             .invoke(lat, lng)
             .onStart {

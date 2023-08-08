@@ -91,19 +91,20 @@ class HomeFragment : Fragment(), onClickThread {
         override fun onLocationReceived(location: Location?) {
             if(location == null) return
             location.let {
+                Timber.d("onLocationReceived: ${it.latitude} ${it.longitude}")
                 viewModel.getSpeciesByLocation(it.latitude, it.longitude)
             }
         }
 
         override fun onLocationFailed() {
-            Log.d("LOCATION", "onLocationFailed: ")
+            Timber.d("LOCATION", "onLocationFailed: ")
             val doubleLatitudePeruLima = -12.046374
             val doubleLongitudePeruLima = -77.042793
             viewModel.getSpeciesByLocation(doubleLatitudePeruLima, doubleLongitudePeruLima)
         }
 
         override fun onPermissionFailed() {
-            Log.d("LOCATION", "onPermissionFailed: ")
+            Timber.d("LOCATION", "onPermissionFailed: ")
             val doubleLatitudePeruLima = -12.046374
             val doubleLongitudePeruLima = -77.042793
             viewModel.getSpeciesByLocation(doubleLatitudePeruLima, doubleLongitudePeruLima)
