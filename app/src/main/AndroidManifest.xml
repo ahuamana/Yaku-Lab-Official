@@ -68,7 +68,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".helper.design.SlideImageFullScreenActivity"
+            android:name=".utils.design.SlideImageFullScreenActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
 
