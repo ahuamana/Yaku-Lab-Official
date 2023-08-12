@@ -36,3 +36,8 @@
   # Only necessary if you downloaded the SDK jar directly instead of from maven.
   -keep class com.shaded.fasterxml.jackson.** { *; }
 
+
+ # Rules Auth Firebase
+-keep class com.google.android.gms.internal.** { *; }
+
+

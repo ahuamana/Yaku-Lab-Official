@@ -8,6 +8,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.observe
 import com.google.android.material.button.MaterialButton
@@ -30,6 +31,8 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
 
+    private val viewModelLogin: ViewModelLogin by viewModels()
+
     @Inject
     lateinit var mPreferences: MyPreferences
 
@@ -37,7 +40,6 @@ class LoginActivity : AppCompatActivity() {
     var btnLoginEmail: MaterialButton? = null
     var isValidEmail = false
     var isValidPass:Boolean = false
-    var _viewModelLogin = ViewModelLogin.getInstance()
     var TAG = this.javaClass.name
 
 
@@ -65,19 +67,19 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun showObservables() {
-        _viewModelLogin.showMessage().observe(this) { message ->
+        viewModelLogin.showMessage().observe(this) { message ->
             if (message != null) {
                 _showMessageMainThread(message)
             }
         }
-        _viewModelLogin.getIsLoginAnonymous().observe(this) { isLoginAnonymous ->
+        viewModelLogin.getIsLoginAnonymous().observe(this) { isLoginAnonymous ->
             if (isLoginAnonymous) {
                 startActivity(Intent(this, LoginActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
             }
         }
 
         //Login with email
-        _viewModelLogin.getIsLoginEmail().observe(this) { isLoginEmail ->
+        viewModelLogin.getIsLoginEmail().observe(this) { isLoginEmail ->
             println("isLoginEmail: $isLoginEmail")
             if (isLoginEmail) {
                 //Log.e(TAG, "EMAIL ENVIADO: " + binding.email.text.toString().lowercase())
@@ -89,7 +91,7 @@ class LoginActivity : AppCompatActivity() {
                 )
             }
         }
-        _viewModelLogin.getIsLoading().observe(this) { isLoading ->
+        viewModelLogin.getIsLoading().observe(this) { isLoading ->
             Log.e("ISLOADING", "ISLOADING:$isLoading")
             if (isLoading) {
                 binding.cortinaLayout.visibility = View.VISIBLE
@@ -103,7 +105,7 @@ class LoginActivity : AppCompatActivity() {
         btnLoginEmail!!.setOnClickListener {
             hideKeyboardActivity(this@LoginActivity)
             if (isConnected(applicationContext)) {
-                _viewModelLogin.loginWithEmail(
+                viewModelLogin.loginWithEmail(
                     binding.email.text.toString().trim(),
                     binding.pass.text.toString().trim()
                 )
@@ -181,7 +183,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        ViewModelLogin.destroyInstance()
         super.onDestroy()
     }
 }

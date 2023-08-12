@@ -54,11 +54,11 @@ android {
 
 dependencies {
 
+
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation( project(":common"))
     implementation( project(":domain"))
     implementation( project(":usecases"))
-
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.google.android.gms:play-services-location:21.0.1'
 
     def lottieVersion = "5.2.0"
