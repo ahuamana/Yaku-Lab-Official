@@ -203,6 +203,28 @@ class HomeFragment : Fragment(), onClickThread {
         mAdapter?.onClickUpdateLikeListener {
             viewModel.updateLikeStatusFirebase(it)
         }
+
+        mAdapter?.onClickShareListener {
+           //Share the app
+            Timber.d("Share the app")
+            shareApp()
+        }
+    }
+
+    private fun shareApp(){
+        val intentCompartir = Intent(Intent.ACTION_SEND)
+        intentCompartir.type = "text/plain"
+        intentCompartir.putExtra(Intent.EXTRA_SUBJECT, "¡Descubre YAKU LAB!")
+        val mensajeCompartir = """
+        ¡Hey! Quiero compartir contigo YAKU LAB, una increíble plataforma educativa de ciencia y tecnología. 🚀🔬
+
+        📱 Descarga la app y únete a la aventura del aprendizaje gamificado:
+        👉 https://play.google.com/store/apps/details?id=${requireActivity().packageName}
+
+        ¡Juntos, podemos hacer que el aprendizaje sea divertido e interactivo! 💡🎮
+        """.trimIndent()
+        intentCompartir.putExtra(Intent.EXTRA_TEXT, mensajeCompartir)
+        startActivity(Intent.createChooser(intentCompartir, "Compartir en"))
     }
 
     private fun otherComponents() {

@@ -17,7 +17,6 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
-import com.paparazziteam.yakulab.binding.helper.application.toast
 import com.paparazziteam.yakulap.utils.design.SlideImageFullScreenActivity
 import com.paparazziteam.yakulab.binding.helper.preventDoubleClick
 import com.paparazziteam.yakulab.binding.helper.replaceFirstCharInSequenceToUppercase
@@ -26,6 +25,7 @@ import com.paparazziteam.yakulap.databinding.ItemChallengeCompletedBinding
 import com.paparazziteam.yakulap.presentation.repositorio.ReaccionProvider
 import com.paparazziteam.yakulap.presentation.dashboard.interfaces.onClickThread
 import com.yakulab.domain.dashboard.ChallengeCompleted
+import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -48,6 +48,11 @@ class AdapterChallengeCompleted @Inject constructor(
     private var onItemClickListener: ((ChallengeCompleted) -> Unit)? = null
     fun onClickUpdateLikeListener(listener:(ChallengeCompleted)-> Unit){
         onItemClickListener = listener
+    }
+
+    private var onClickCompartirListener: ((ChallengeCompleted) -> Unit)? = null
+    fun onClickShareListener(listener:(ChallengeCompleted)-> Unit){
+        onClickCompartirListener = listener
     }
 
     var count = 0
@@ -73,7 +78,6 @@ class AdapterChallengeCompleted @Inject constructor(
         private lateinit var nameChalleng: MaterialTextView
         private lateinit var authorNameChallenge: MaterialTextView
         private lateinit var authorAliasChallenge: MaterialTextView
-        private lateinit var linearLayoutShare: LinearLayout
         private lateinit var layoutComment: LinearLayout
         private lateinit var likeImg: LottieAnimationView
         private lateinit var itemOptions: ShapeableImageView
@@ -91,7 +95,6 @@ class AdapterChallengeCompleted @Inject constructor(
                 authorNameChallenge     = authorName
                 authorAliasChallenge    = authorAlias
                 likeImg                 = likeImageView
-                linearLayoutShare       = linearCompartir
                 layoutComment     = linearLayoutComentar
                 itemOptions             = optionsChallenge
 
@@ -127,7 +130,14 @@ class AdapterChallengeCompleted @Inject constructor(
                 setupLike(item, clickedItem, mPreferences)
 
                 //Setup share
-                setupShare()
+                binding.actionShare.setOnClickListener{
+                    it.preventDoubleClick()
+                    setupShare(item)
+                }
+                binding.textViewShare.setOnClickListener{
+                    it.preventDoubleClick()
+                    setupShare(item)
+                }
 
                 //SetupComment
                 setupComment(item, clickedItem)
@@ -150,11 +160,9 @@ class AdapterChallengeCompleted @Inject constructor(
             }
         }
 
-        private fun setupShare() {
-            linearLayoutShare.setOnClickListener {
-                it.preventDoubleClick()
-                it.context.toast("No disponible por el momento (¡Muy pronto!)")
-            }
+        private fun setupShare(item:ChallengeCompleted) {
+            Timber.d("Share -- AdapterChallengeCompleted")
+            onClickCompartirListener?.invoke(item)
         }
 
         private fun setupLike(
@@ -194,7 +202,6 @@ class AdapterChallengeCompleted @Inject constructor(
                 onItemClickListener?.let {
                     it(item)
                 }
-                //clickedItem?.clickOnUpdateLike(item)
             }
         }
 
