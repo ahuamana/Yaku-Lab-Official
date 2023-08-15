@@ -110,7 +110,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
         lifecycleScope.launch {
             viewModel.getUserData().observe(this@DashboardActivity) { user ->
                 if (user != null) {
-                    println("Puntos Guardados: ${user.points}")
+                    Timber.d("Puntos Guardados: ${user.points}")
                     preferences.points = user.points ?: 0
                     preferences.firstName = user.nombres ?: ""
                     preferences.lastName = user.apellidos ?: ""

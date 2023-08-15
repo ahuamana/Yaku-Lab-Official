@@ -14,7 +14,9 @@ class GetSpeciesByLocationUseCase @Inject constructor(
         lng: Double,
         order: String = "desc",
         per_page: Int = 20) = dashboardRepository.getSpeciesByLocation(lat, lng, order, per_page).map {
-            it.results.toObservationEntityList()
+            it.results.toObservationEntityList().distinctBy {
+                it.taxon?.name
+            }
     }
 }
 
