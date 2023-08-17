@@ -272,7 +272,6 @@ class HomeFragment : Fragment(), onClickThread {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 viewModel.speciesByLocation.collect() {
-                    Log.d("TAG","speciesByLocation: $it")
                     showSpeciesByLocationDialog(it)
                 }
             }
@@ -282,7 +281,11 @@ class HomeFragment : Fragment(), onClickThread {
     private fun showSpeciesByLocationDialog(it: SpeciesByLocationResult) {
         when(it){
             is SpeciesByLocationResult.Error -> it.run{
-                Log.e("TAG","Error: $message")
+                binding.apply {
+                    internalContainerLayoutBodyNearbySpecies.beVisible()
+                    containerBodyNearbySpecies.beGone()
+                    containerBodyNearbySpeciesEmpty.beVisible()
+                }
             }
             SpeciesByLocationResult.HideLoading -> {
 
@@ -297,8 +300,6 @@ class HomeFragment : Fragment(), onClickThread {
                     containerBodyNearbySpecies.beVisible()
                     containerBodyNearbySpeciesEmpty.beGone()
                 }
-
-                Log.d("TAG","Success: $species")
                 adapterSpeciesNearby.submitList(species)
             }
 

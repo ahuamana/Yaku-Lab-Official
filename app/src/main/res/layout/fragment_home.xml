@@ -468,6 +468,7 @@
                                 app:layout_constraintTop_toTopOf="parent" />
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
+
                     </com.google.android.material.card.MaterialCardView>
 
                     <!--Container loading shimmer neraby species-->
