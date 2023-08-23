@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
@@ -173,18 +174,19 @@ class SlideImageFullScreenActivity : ToolbarActivity(), OnClickListener {
                 handleDownloadFileImage(response)
             }
             is DownloadFileResult.SuccessShare -> it.run{
-                handleShareFileImage(response)
+                val imageUri = getUriFromBitmap(this@SlideImageFullScreenActivity,response)
+                handleShareFileImage(imageUri)
             }
         }
     }
 
-    private fun handleShareFileImage(response: Bitmap) {
+    private fun handleShareFileImage(imageUri: Uri) {
         val shareIntent: Intent = Intent().apply {
             action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_STREAM, response)
+            putExtra(Intent.EXTRA_STREAM, imageUri)
             type = "image/jpeg"
         }
-        startActivity(Intent.createChooser(shareIntent, "Compartir imagen"))
+        startActivity(Intent.createChooser(shareIntent, "Compartir comprobante con..."))
     }
 
     fun handleDownloadFileImage(response: Bitmap) {
