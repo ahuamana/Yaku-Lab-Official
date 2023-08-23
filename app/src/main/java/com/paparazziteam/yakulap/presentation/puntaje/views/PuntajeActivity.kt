@@ -14,7 +14,7 @@ import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
 import com.paparazziteam.yakulab.binding.helper.beGone
 import com.paparazziteam.yakulab.binding.helper.beVisible
-import com.paparazziteam.yakulab.binding.helper.setColorToStatusBar
+import com.paparazziteam.yakulab.binding.utils.setColorToStatusBar
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityPuntajeBinding
 import com.paparazziteam.yakulap.presentation.puntaje.viewmodels.ViewModelPuntaje

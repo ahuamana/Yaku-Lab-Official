@@ -22,8 +22,8 @@ import com.paparazziteam.yakulab.binding.Constants
 import com.paparazziteam.yakulab.binding.helper.beGone
 import com.paparazziteam.yakulab.binding.helper.beVisible
 import com.paparazziteam.yakulab.binding.helper.preventDoubleClick
-import com.paparazziteam.yakulab.binding.helper.replaceFirstCharInSequenceToUppercase
-import com.paparazziteam.yakulab.binding.helper.toJson
+import com.paparazziteam.yakulab.binding.utils.replaceFirstCharInSequenceToUppercase
+import com.paparazziteam.yakulab.binding.utils.toJson
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.DialogMoreInfoBinding
 import com.paparazziteam.yakulap.databinding.ItemChallengeOptionBinding

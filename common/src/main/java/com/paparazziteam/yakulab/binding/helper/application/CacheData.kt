@@ -2,7 +2,7 @@ package com.paparazziteam.yakulab.binding.helper.application
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.paparazziteam.yakulab.binding.helper.application
+import com.paparazziteam.yakulab.binding.utils.application
 import javax.inject.Inject
 
 class CacheData @Inject constructor() {

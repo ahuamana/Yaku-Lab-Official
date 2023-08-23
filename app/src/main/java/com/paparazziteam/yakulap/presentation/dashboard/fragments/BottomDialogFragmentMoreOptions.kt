@@ -11,8 +11,8 @@ import com.paparazziteam.yakulap.databinding.BottomSheetMoreOptionsBinding
 import com.paparazziteam.yakulab.binding.Constants.ARG_DATA
 import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
 import com.paparazziteam.yakulab.binding.helper.autoCleared
-import com.paparazziteam.yakulab.binding.helper.fromJson
-import com.paparazziteam.yakulab.binding.helper.toJson
+import com.paparazziteam.yakulab.binding.utils.fromJson
+import com.paparazziteam.yakulab.binding.utils.toJson
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
 import com.yakulab.domain.dashboard.ChallengeCompleted
 import com.yakulab.domain.dashboard.TypeReported

@@ -18,8 +18,8 @@ import com.google.android.material.textfield.TextInputEditText
 import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
 import com.paparazziteam.yakulab.binding.helper.beGone
 import com.paparazziteam.yakulab.binding.helper.beVisible
-import com.paparazziteam.yakulab.binding.helper.onlyOneSpace
-import com.paparazziteam.yakulab.binding.helper.toJson
+import com.paparazziteam.yakulab.binding.utils.onlyOneSpace
+import com.paparazziteam.yakulab.binding.utils.toJson
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.BottomSheetComentarBinding
 
@@ -111,7 +111,7 @@ class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
     }
 
     fun openDialogMoreOptionsComment(item: Comment){
-        val fragment = BottomDialogFragmentMoreOptionsComment.newInstance(toJson(item)?:"")
+        val fragment = BottomDialogFragmentMoreOptionsComment.newInstance(toJson(item) ?:"")
         fragment.show(parentFragmentManager,"bottomSheetMoreOptionsComment")
     }
 

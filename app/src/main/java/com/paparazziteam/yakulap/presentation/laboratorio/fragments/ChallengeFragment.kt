@@ -33,10 +33,10 @@ import com.paparazziteam.yakulab.binding.Constants.EXTRA_CHALLENGE
 import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
 import com.paparazziteam.yakulab.binding.helper.beGone
 import com.paparazziteam.yakulab.binding.helper.beVisible
-import com.paparazziteam.yakulab.binding.helper.fromJson
+import com.paparazziteam.yakulab.binding.utils.fromJson
 import com.paparazziteam.yakulab.binding.helper.others.PermissionManager
 import com.paparazziteam.yakulab.binding.helper.preventDoubleClick
-import com.paparazziteam.yakulab.binding.helper.toast
+import com.paparazziteam.yakulab.binding.utils.toast
 import com.yakulab.domain.dashboard.ChallengeCompleted
 import com.paparazziteam.yakulap.presentation.laboratorio.fragments.bottomsheets.BottomSheetDialogOptionsCameraFragment
 import com.paparazziteam.yakulap.presentation.laboratorio.fragments.bottomsheets.OnOptionSelectedSourcePicker

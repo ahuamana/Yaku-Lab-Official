@@ -9,9 +9,9 @@ import android.view.WindowManager
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.paparazziteam.yakulap.utils.design.toolbar.ToolbarActivity
-import com.paparazziteam.yakulab.binding.helper.fromJson
-import com.paparazziteam.yakulab.binding.helper.getRealPathFromURI
-import com.paparazziteam.yakulab.binding.helper.setColorToStatusBar
+import com.paparazziteam.yakulab.binding.utils.fromJson
+import com.paparazziteam.yakulab.binding.utils.getRealPathFromURI
+import com.paparazziteam.yakulab.binding.utils.setColorToStatusBar
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityChallengeBinding
 import com.paparazziteam.yakulap.presentation.laboratorio.fragments.ChallengeFragment

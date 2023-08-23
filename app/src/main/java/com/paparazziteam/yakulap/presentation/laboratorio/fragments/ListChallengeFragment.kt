@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.paparazziteam.yakulab.binding.helper.fromJson
+import com.paparazziteam.yakulab.binding.utils.fromJson
 import com.paparazziteam.yakulap.databinding.FragmentListChallengeBinding
 import com.paparazziteam.yakulap.presentation.laboratorio.adapters.AdapterGridChallenge
 import com.yakulab.domain.laboratory.DataChallenge

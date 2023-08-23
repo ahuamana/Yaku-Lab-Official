@@ -1,7 +1,6 @@
 package com.paparazziteam.yakulap.presentation.dashboard.adapters
 
 
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
@@ -17,9 +16,8 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
-import com.paparazziteam.yakulap.utils.design.SlideImageFullScreenActivity
 import com.paparazziteam.yakulab.binding.helper.preventDoubleClick
-import com.paparazziteam.yakulab.binding.helper.replaceFirstCharInSequenceToUppercase
+import com.paparazziteam.yakulab.binding.utils.replaceFirstCharInSequenceToUppercase
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ItemChallengeCompletedBinding
 import com.paparazziteam.yakulap.presentation.repositorio.ReaccionProvider
@@ -53,6 +51,11 @@ class AdapterChallengeCompleted @Inject constructor(
     private var onClickCompartirListener: ((ChallengeCompleted) -> Unit)? = null
     fun onClickShareListener(listener:(ChallengeCompleted)-> Unit){
         onClickCompartirListener = listener
+    }
+
+    private var onClickImage: ((ChallengeCompleted, position:Int) -> Unit)? = null
+    fun onClickImageListener(listener:(ChallengeCompleted, position:Int)-> Unit){
+        onClickImage = listener
     }
 
     var count = 0
@@ -113,12 +116,8 @@ class AdapterChallengeCompleted @Inject constructor(
                     .into(imageChalleng)
 
                 imageChalleng.setOnClickListener {
-
-                    var list = listOf(item.url)
-                    val intent = Intent(this.context, SlideImageFullScreenActivity::class.java)
-                    intent.putExtra("lista_imagenes", list.toString())
-                    intent.putExtra("position"      , position)
-                    context.startActivity(intent)
+                    it.preventDoubleClick()
+                    onClickImage?.invoke(item, position)
                 }
 
                 nameChalleng.text = replaceFirstCharInSequenceToUppercase(item.name?:"")

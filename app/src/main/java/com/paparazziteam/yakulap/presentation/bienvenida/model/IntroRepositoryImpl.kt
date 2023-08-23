@@ -3,7 +3,7 @@ package com.paparazziteam.yakulap.presentation.bienvenida.model
 import android.app.Application
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
-import com.paparazziteam.yakulab.binding.helper.application
+import com.paparazziteam.yakulab.binding.utils.application
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.presentation.bienvenida.fragments.IntroFragment
 import javax.inject.Inject

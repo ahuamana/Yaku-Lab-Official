@@ -15,10 +15,10 @@ import com.google.firebase.firestore.ktx.toObject
 import com.yakulab.domain.dashboard.ObservationEntity
 import com.paparazziteam.yakulab.binding.Constants
 import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
-import com.paparazziteam.yakulab.binding.helper.fromJson
-import com.paparazziteam.yakulab.binding.helper.getTimestamp
-import com.paparazziteam.yakulab.binding.helper.getTimestampUnix
-import com.paparazziteam.yakulab.binding.helper.toJson
+import com.paparazziteam.yakulab.binding.utils.fromJson
+import com.paparazziteam.yakulab.binding.utils.getTimestamp
+import com.paparazziteam.yakulab.binding.utils.getTimestampUnix
+import com.paparazziteam.yakulab.binding.utils.toJson
 import com.paparazziteam.yakulap.presentation.dashboard.model.ChallengeRepository
 import com.paparazziteam.yakulap.presentation.dashboard.model.CommentRepository
 import com.yakulab.domain.dashboard.ChallengeCompleted

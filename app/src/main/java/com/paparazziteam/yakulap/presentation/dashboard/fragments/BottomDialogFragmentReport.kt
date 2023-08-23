@@ -11,9 +11,9 @@ import com.paparazziteam.yakulap.databinding.BottomSheetReportPostBinding
 import com.paparazziteam.yakulab.binding.Constants.REPORT_TYPE
 import com.paparazziteam.yakulab.binding.Constants.REPORT_TYPE_POST
 import com.paparazziteam.yakulab.binding.helper.autoCleared
-import com.paparazziteam.yakulab.binding.helper.fromJson
+import com.paparazziteam.yakulab.binding.utils.fromJson
 import com.paparazziteam.yakulab.binding.helper.preventDoubleClick
-import com.paparazziteam.yakulab.binding.helper.toJson
+import com.paparazziteam.yakulab.binding.utils.toJson
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
 import com.yakulab.domain.dashboard.ChallengeCompleted
 import com.yakulab.domain.dashboard.TypeReported

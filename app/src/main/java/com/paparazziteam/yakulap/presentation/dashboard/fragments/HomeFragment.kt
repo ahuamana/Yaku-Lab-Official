@@ -24,7 +24,7 @@ import com.paparazziteam.yakulab.binding.helper.beVisible
 import com.paparazziteam.yakulab.binding.helper.others.LocationManager
 import com.paparazziteam.yakulab.binding.helper.others.PermissionManager
 import com.paparazziteam.yakulab.binding.helper.preventDoubleClick
-import com.paparazziteam.yakulab.binding.helper.toJson
+import com.paparazziteam.yakulab.binding.utils.toJson
 import com.paparazziteam.yakulab.binding.utils.openUrl
 import com.paparazziteam.yakulap.databinding.FragmentHomeBinding
 import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterChallengeCompleted
@@ -35,7 +35,7 @@ import com.yakulab.domain.dashboard.TypeGroup
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.HomeViewModel
 import com.yakulab.domain.laboratory.toDataChallengeNearbySpecies
 import com.paparazziteam.yakulap.navigation.NavigationRootImpl
-import com.paparazziteam.yakulap.utils.design.SlideImageFullScreenActivity
+import com.paparazziteam.yakulap.presentation.dashboard.views.SlideImageFullScreenActivity
 import com.paparazziteam.yakulap.utils.design.decoration.ItemSpaceDecorationHorizontal
 import com.yakulab.usecases.inaturalist.SpeciesByLocationResult
 import dagger.hilt.android.AndroidEntryPoint
@@ -209,6 +209,14 @@ class HomeFragment : Fragment(), onClickThread {
             Timber.d("Share the app")
             shareApp()
         }
+
+        mAdapter?.onClickImageListener { challenge, position ->
+            var list = listOf(challenge.url)
+            val intent = Intent(this.context, SlideImageFullScreenActivity::class.java)
+            intent.putExtra("lista_imagenes", list.toString())
+            intent.putExtra("position"      , position)
+            requireContext().startActivity(intent)
+        }
     }
 
     private fun shareApp(){
@@ -349,7 +357,7 @@ class HomeFragment : Fragment(), onClickThread {
     }
 
     override fun clickedReportThread(item: ChallengeCompleted) {
-        val fragment = BottomDialogFragmentMoreOptions.newInstance(toJson(item)?:"")
+        val fragment = BottomDialogFragmentMoreOptions.newInstance(toJson(item) ?:"")
         fragment.show(parentFragmentManager,"bottomSheetMoreOptions")
 
     }

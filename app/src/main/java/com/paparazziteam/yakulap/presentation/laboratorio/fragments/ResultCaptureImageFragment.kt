@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.paparazziteam.yakulab.binding.helper.fromHtml
+import com.paparazziteam.yakulab.binding.utils.fromHtml
 import com.paparazziteam.yakulap.databinding.FragmentResultCaptureImageBinding
 import dagger.hilt.android.AndroidEntryPoint
 

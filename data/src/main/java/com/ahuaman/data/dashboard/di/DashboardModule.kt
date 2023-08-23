@@ -2,6 +2,7 @@ package com.ahuaman.data.dashboard.di
 
 import com.ahuaman.data.dashboard.remote.DashboardRemoteDataSource
 import com.ahuaman.data.dashboard.remote.DashboardService
+import com.yakulab.framework.network.di.RetrofitInaturalist
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,9 +15,10 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object DashboardModule {
 
+
     @Provides
     @Singleton
-    fun provideDashboardService(retrofit: Retrofit) : DashboardService = retrofit.create(
+    fun provideDashboardService(@RetrofitInaturalist retrofit: Retrofit) : DashboardService = retrofit.create(
         DashboardService::class.java
     )
 

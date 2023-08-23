@@ -12,7 +12,7 @@ import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.tabs.TabLayout
 import com.paparazziteam.yakulab.binding.helper.beGone
 import com.paparazziteam.yakulab.binding.helper.beVisible
-import com.paparazziteam.yakulab.binding.helper.toJson
+import com.paparazziteam.yakulab.binding.utils.toJson
 import com.paparazziteam.yakulap.databinding.ActivityChallengeParentBinding
 import com.paparazziteam.yakulap.presentation.laboratorio.adapters.ViewPagerAdapter
 import com.paparazziteam.yakulap.presentation.laboratorio.fragments.ListChallengeFragment
@@ -131,17 +131,22 @@ class ChallengeListFragment : Fragment() {
         when(titles.count()){
             1->{
                 mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(
-                    toJson(listCategoriOne)?:"",titles[0]),titles[0]
+                    toJson(listCategoriOne) ?:"",titles[0]),titles[0]
                 )
             }
             2->{
-                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriOne)?:"",titles[0]),titles[0])
-                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriTwo)?:"",titles[1]),titles[1])
+                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(
+                    toJson(listCategoriOne) ?:"",titles[0]),titles[0])
+                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(
+                    toJson(listCategoriTwo) ?:"",titles[1]),titles[1])
             }
             else->{
-                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriOne)?:"",titles[0]),titles[0])
-                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriTwo)?:"",titles[1]),titles[1])
-                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(toJson(listCategoriThree)?:"",titles[2]),titles[2])
+                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(
+                    toJson(listCategoriOne) ?:"",titles[0]),titles[0])
+                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(
+                    toJson(listCategoriTwo) ?:"",titles[1]),titles[1])
+                mAdapterViewPager?.addFragment(ListChallengeFragment.newInstance(
+                    toJson(listCategoriThree) ?:"",titles[2]),titles[2])
             }
         }
 

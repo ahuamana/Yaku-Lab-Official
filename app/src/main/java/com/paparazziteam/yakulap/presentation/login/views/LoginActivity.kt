@@ -15,10 +15,10 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
-import com.paparazziteam.yakulab.binding.helper.hideKeyboardActivity
-import com.paparazziteam.yakulab.binding.helper.isConnected
-import com.paparazziteam.yakulab.binding.helper.isValidEmail
-import com.paparazziteam.yakulab.binding.helper.setColorToStatusBar
+import com.paparazziteam.yakulab.binding.utils.hideKeyboardActivity
+import com.paparazziteam.yakulab.binding.utils.isConnected
+import com.paparazziteam.yakulab.binding.utils.isValidEmail
+import com.paparazziteam.yakulab.binding.utils.setColorToStatusBar
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityLoginBinding
 import com.paparazziteam.yakulap.presentation.dashboard.views.DashboardActivity

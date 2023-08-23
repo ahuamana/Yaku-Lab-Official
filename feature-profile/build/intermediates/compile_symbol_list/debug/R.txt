@@ -1,0 +1,2 @@
+int layout fragment_profile_parent 0x0
+int string hello_blank_fragment 0x0

@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulab.binding.helper.beGone
-import com.paparazziteam.yakulab.binding.helper.fromJson
+import com.paparazziteam.yakulab.binding.utils.fromJson
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.BottomSheetMoreOptionsBinding
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
