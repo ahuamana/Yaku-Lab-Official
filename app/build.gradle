@@ -58,6 +58,7 @@ dependencies {
     implementation( project(":common"))
     implementation( project(":domain"))
     implementation( project(":usecases"))
+    implementation( project(":feature-profile"))
     implementation 'com.google.android.gms:play-services-location:21.0.1'
 
     def lottieVersion = "5.2.0"
