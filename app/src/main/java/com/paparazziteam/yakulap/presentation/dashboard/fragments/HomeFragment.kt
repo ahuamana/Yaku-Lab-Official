@@ -145,11 +145,11 @@ class HomeFragment : Fragment(), onClickThread {
             adapter = adapterSpeciesNearby
         }
 
-        val spaceDecorationHorizontal = ItemSpaceDecorationHorizontal(30)
+        /*val spaceDecorationHorizontal = ItemSpaceDecorationHorizontal(30)
         //add divider to recycler
         binding.rvNearbySpecies.addItemDecoration(
             spaceDecorationHorizontal
-        )
+        )*/
 
         adapterSpeciesNearby.onItemClickListener { observationEntity, position ->
             Timber.d( "onCreateView: ${observationEntity.identifications.first()?.taxon?.name}")
