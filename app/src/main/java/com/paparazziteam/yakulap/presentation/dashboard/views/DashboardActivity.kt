@@ -63,6 +63,9 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
         val navHostController = supportFragmentManager.findFragmentById(R.id.nav_host_dashboard_fragment) as NavHostFragment
 
         binding.bottomNavView.setupWithNavController(navHostController.navController)
+
+        //Setup Navigation Root for fragments navigation
+        navigationRoot.bind(navHostController.navController)
     }
 
 
