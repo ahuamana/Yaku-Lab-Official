@@ -178,7 +178,6 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
 
         viewModelChallengeFragment.completeUpload.observe(viewLifecycleOwner){
             if(it){
-                Log.d("TAG","completeUpload running")
                 mDialog?.dismiss()
                 btnRegistrarPhoto.isEnabled = true
                 requireActivity().toast("Se guardo la información correctamente")
@@ -283,8 +282,8 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
         val image  = ""
         idChallengeDocument = challenge?.id?:""
         println("image activity: ${image}")
-        if(!image.toString().isNullOrEmpty()){
-            Glide.with(this)
+        if(!image.isNullOrEmpty()){
+            Glide.with(requireContext())
                 .load(image)
                 .listener(object :RequestListener<Drawable>{
                     override fun onLoadFailed(
@@ -305,7 +304,7 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
                     ): Boolean {
                         Timber.d("OnResourceReady")
                         //do something when picture already loaded
-                        binding?.progressLoadImage?.beGone()
+                        binding.progressLoadImage.beGone()
                         return false
                     }
 
@@ -320,7 +319,7 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
 
     }
 
-    fun loadImageNotUpload(challenge: ChallengeCompleted?) {
+    private fun loadImageNotUpload(challenge: ChallengeCompleted?) {
         Glide.with(this)
             .load(challenge?.url)
             .listener(object :RequestListener<Drawable>{

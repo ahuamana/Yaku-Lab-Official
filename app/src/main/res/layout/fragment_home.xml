@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/card_animals"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                                 app:layout_constraintTop_toTopOf="parent" />
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/materialTextView10"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/product_sans_regular"
@@ -72,6 +72,7 @@
                                 android:textColor="@color/black"
                                 android:textSize="12sp"
                                 android:textStyle="bold"
+                                android:layout_marginEnd="5dp"
                                 app:layout_constraintBottom_toBottomOf="@+id/image_icon_animals"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/image_icon_animals"
@@ -79,13 +80,13 @@
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/card_fruits"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
+                        android:layout_marginVertical="16dp"
                         android:layout_weight="1"
                         android:backgroundTint="@color/background_icon_color"
                         android:clickable="true"
@@ -113,7 +114,7 @@
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/materialTextView11"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/product_sans_regular"
@@ -122,15 +123,17 @@
                                 android:textColor="@color/black"
                                 android:textSize="12sp"
                                 android:textStyle="bold"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toEndOf="@+id/shapeableImageView2"
                                 app:layout_constraintTop_toTopOf="parent" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/card_plants"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -153,6 +156,7 @@
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
                                 android:layout_gravity="center"
+                                android:layout_marginStart="5dp"
                                 android:scaleType="centerInside"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -161,7 +165,9 @@
 
                             <com.google.android.material.textview.MaterialTextView
                                 android:id="@+id/materialTextView12"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_marginEnd="5dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:fontFamily="@font/product_sans_regular"
@@ -177,7 +183,7 @@
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
 
                 </LinearLayout>
 
@@ -383,16 +389,15 @@
                         android:id="@+id/tvTitleNearbySpecies"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="20dp"
                         android:fontFamily="@font/product_sans_bold"
                         android:text="@string/title_nearby_species"
-                        android:layout_marginStart="10dp"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         android:textStyle="bold"
+                        android:layout_marginStart="10dp"
                         app:layout_constraintBottom_toBottomOf="@+id/ivIconNearbySpecies"
                         app:layout_constraintLeft_toRightOf="@+id/ivIconNearbySpecies"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="@+id/ivIconNearbySpecies" />
                     <!--Container Body species neraby-->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/internalContainerLayoutBodyNearbySpecies"
