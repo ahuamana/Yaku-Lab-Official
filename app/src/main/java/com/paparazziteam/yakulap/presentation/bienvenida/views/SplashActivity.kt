@@ -7,15 +7,20 @@ import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivitySplashBinding
 import com.paparazziteam.yakulap.presentation.bienvenida.viewmodels.ViewModelSplashScreen
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
     private val _viewmodel:ViewModelSplashScreen by viewModels()
+
+    @Inject
+    lateinit var preferences: MyPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         requestWindowFeature(Window.FEATURE_NO_TITLE)

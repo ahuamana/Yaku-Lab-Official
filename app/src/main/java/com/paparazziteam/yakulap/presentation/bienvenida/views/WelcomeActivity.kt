@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager.widget.ViewPager
+import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityWelcomeBinding
 import com.paparazziteam.yakulap.presentation.bienvenida.adaters.MyPageAdapter
@@ -16,6 +17,7 @@ import com.paparazziteam.yakulap.presentation.bienvenida.viewmodels.ViewModelWel
 import com.paparazziteam.yakulap.presentation.login.views.LoginActivity
 import com.paparazziteam.yakulap.utils.design.FadePageTransfomer
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class WelcomeActivity : AppCompatActivity() {
@@ -28,6 +30,9 @@ class WelcomeActivity : AppCompatActivity() {
 
     private val _viewmodel: ViewModelWelcome by viewModels()
     private lateinit var binding: ActivityWelcomeBinding
+
+    @Inject
+    lateinit var preferences: MyPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +47,11 @@ class WelcomeActivity : AppCompatActivity() {
 
         instanceAdapters()
         observers()
+        updateTutorialToNeverShowAgain()
+    }
+
+    private fun updateTutorialToNeverShowAgain() {
+        preferences.needsToShowTutorial = false
     }
 
     private fun observers() {

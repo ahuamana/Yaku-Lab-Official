@@ -107,7 +107,7 @@ class ViewModelDashboard @Inject constructor(
     }
 
     fun showUserData(){
-       var emailLogged = mLoginProvider.getEmail()
+       val emailLogged = mLoginProvider.getEmail()
         mUserProvider.searchUserByEmail(emailLogged).addOnCompleteListener {
             if(it.isSuccessful){
                 try {

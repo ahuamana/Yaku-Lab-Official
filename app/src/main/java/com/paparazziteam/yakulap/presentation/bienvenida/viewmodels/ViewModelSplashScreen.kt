@@ -12,6 +12,7 @@ import com.paparazziteam.yakulab.binding.utils.getVersionName
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.presentation.bienvenida.views.WelcomeActivity
 import com.paparazziteam.yakulap.presentation.dashboard.views.DashboardActivity
+import com.paparazziteam.yakulap.presentation.login.views.LoginActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.*
 import javax.inject.Inject
@@ -37,13 +38,20 @@ class ViewModelSplashScreen @Inject public constructor(
     private fun loadNextActivity() {
         Timer().schedule(object : TimerTask() {
             override fun run() {
-                if (myPreferences.isLogin) {
-                    isAlreadyLogin()
-                } else {
-                    application.startActivity(Intent(application, WelcomeActivity::class.java).apply {
-                        addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK) //Remove activities that have been created before
-                    })
-
+                when {
+                    myPreferences.isLogin -> {
+                        isAlreadyLogin()
+                    }
+                    myPreferences.needsToShowTutorial -> {
+                        application.startActivity(Intent(application, WelcomeActivity::class.java).apply {
+                            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK) //Remove activities that have been created before
+                        })
+                    }
+                    else -> {
+                        application.startActivity(Intent(application, LoginActivity::class.java).apply {
+                            addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK) //Remove activities that have been created before
+                        })
+                    }
                 }
             }
         }, 4000)
