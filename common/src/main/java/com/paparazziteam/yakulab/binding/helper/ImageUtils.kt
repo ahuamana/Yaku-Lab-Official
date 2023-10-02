@@ -4,6 +4,7 @@ import android.content.Context
 import android.database.Cursor
 import android.graphics.Bitmap
 import android.net.Uri
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.paparazziteam.yakulap.common.R
@@ -77,6 +78,16 @@ fun isMediaDocument(uri: Uri): Boolean {
 fun ShapeableImageView.load(url: String) {
     Glide.with(this)
         .load(url)
+        .error(R.color.background_icon_color)
+        .into(this)
+}
+
+//Load with placeholder loading
+
+fun ShapeableImageView.load(url: String, placeholder: CircularProgressDrawable) {
+    Glide.with(this)
+        .load(url)
+        .placeholder(placeholder)
         .error(R.color.background_icon_color)
         .into(this)
 }
