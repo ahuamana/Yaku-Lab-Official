@@ -9,14 +9,14 @@ object MedalsFakeData {
             name = "Oro",
             icon = "https://imagizer.imageshack.com/img924/8550/zKVmBm.png",
             color = "#FFD700",
-            total = 10,
+            total = 0,
         ),
         MedalsDomain(
             id = 2,
             name = "Plata",
             icon = "https://imagizer.imageshack.com/img923/2772/nAsdEh.png",
             color = "#C0C0C0",
-            total = 5,
+            total = 0,
         ),
 
         MedalsDomain(
@@ -24,7 +24,7 @@ object MedalsFakeData {
             name = "Bronce",
             icon = "https://imagizer.imageshack.com/img924/1441/ZkRf0u.png",
             color = "#CD7F32",
-            total = 2,
+            total = 0,
         ),
     )
 }
