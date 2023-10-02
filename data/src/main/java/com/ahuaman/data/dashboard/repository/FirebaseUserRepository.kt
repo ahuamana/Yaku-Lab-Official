@@ -11,4 +11,6 @@ class FirebaseUserRepository @Inject constructor(
     suspend fun getInfoUser(email: String) = remote.getUser(email)
 
     fun getMedals() = fake.getMedals()
+
+    fun getCertifications() = fake.getCertifications()
 }

@@ -27,6 +27,8 @@ class ProfileParentFragment : Fragment() {
 
     private val medalsAdapter = MedalsAdapter()
 
+    private val certificationsAdapter = CertificationAdapter()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,6 +55,17 @@ class ProfileParentFragment : Fragment() {
         medalsAdapter.onItemClickListener { item, position ->
             /*TODO:*/
         }
+
+        val managerCertifications = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        binding.rvCertifications.apply {
+            layoutManager = managerCertifications
+            adapter = certificationsAdapter
+        }
+
+        certificationsAdapter.onItemClickListener { item, position ->
+            /*TODO:*/
+        }
     }
 
     private fun observers() {
@@ -66,6 +79,13 @@ class ProfileParentFragment : Fragment() {
             viewModel.medals.collect {
                 Timber.d("Medals: $it")
                 medalsAdapter.submitList(it)
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.certifications.collect {
+                Timber.d("Certifications: $it")
+                certificationsAdapter.submitList(it)
             }
         }
     }
