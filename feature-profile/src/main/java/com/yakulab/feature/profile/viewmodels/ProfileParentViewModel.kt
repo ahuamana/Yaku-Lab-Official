@@ -2,22 +2,27 @@ package com.yakulab.feature.profile.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.yakulab.usecases.inaturalist.firebase.getEmailLoggedUseCase
-import com.yakulab.usecases.inaturalist.firebase.getUserInfoUseCase
+import com.paparazziteam.yakulab.binding.utils.text.capitalizeWords
+import com.yakulab.domain.profile.MedalsDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileParentViewModel  @Inject constructor(
-    private val getUserInfoUseCase: getUserInfoUseCase,
-    private val getEmailLoggedUseCase: getEmailLoggedUseCase
+    private val getEmailLoggedUseCase: com.yakulab.usecases.firebase.getEmailLoggedUseCase,
+    private val getUserInfoUseCase: com.yakulab.usecases.firebase.getUserInfoUseCase,
+    private val getMedalsUseCase: com.yakulab.usecases.yakulab.GetMedalsUseCase
 ) : ViewModel() {
+
 
     init {
         val email = getEmailLoggedUseCase.invoke()
@@ -27,7 +32,18 @@ class ProfileParentViewModel  @Inject constructor(
     private val _user: MutableStateFlow<String> = MutableStateFlow("")
     val user = _user
 
-    fun getUserInfo(email: String) = viewModelScope.launch {
+    private val _medals: MutableStateFlow<List<MedalsDomain>> = MutableStateFlow(emptyList())
+    val medals:StateFlow<List<MedalsDomain>> = _medals.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000, 1),
+        emptyList()
+    )
+
+    init {
+        getMedals()
+    }
+
+    private fun getUserInfo(email: String) = viewModelScope.launch {
         getUserInfoUseCase
             .invoke(email)
             .onEach {
@@ -36,9 +52,22 @@ class ProfileParentViewModel  @Inject constructor(
                     return@onEach
                 }
                 //first_name, last_name
-                _user.value = "${it.nombres}, ${it.apellidos}"
+                val name = it.nombres?.capitalizeWords()
+                val lastName = it.apellidos?.capitalizeWords()
+                _user.value = "${name}, $lastName"
             }.catch {
                 Timber.e("Error: ${it.message}")
             }.launchIn(viewModelScope)
     }
+
+    private fun getMedals() = viewModelScope.launch {
+        getMedalsUseCase
+            .invoke()
+            .onEach {
+                _medals.value = it
+            }.catch {
+                Timber.e("Error: ${it.message}")
+            }.launchIn(viewModelScope)
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.yakulab.usecases.inaturalist.firebase
+package com.yakulab.usecases.firebase
 
 import com.ahuaman.data.dashboard.repository.FirebaseUserRepository
 import javax.inject.Inject

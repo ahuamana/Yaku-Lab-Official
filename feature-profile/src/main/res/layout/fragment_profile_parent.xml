@@ -41,7 +41,8 @@
             <com.google.android.material.imageview.ShapeableImageView
                 android:layout_width="58dp"
                 android:layout_height="58dp"
-                android:src="@drawable/alice" />
+                android:tint="@color/colorPrimaryYaku"
+                android:src="@drawable/ic_profile_checked" />
         </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
