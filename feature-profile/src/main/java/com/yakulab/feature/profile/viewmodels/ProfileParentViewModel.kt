@@ -20,7 +20,8 @@ import javax.inject.Inject
 class ProfileParentViewModel  @Inject constructor(
     private val getEmailLoggedUseCase: com.yakulab.usecases.firebase.getEmailLoggedUseCase,
     private val getUserInfoUseCase: com.yakulab.usecases.firebase.getUserInfoUseCase,
-    private val getMedalsUseCase: com.yakulab.usecases.yakulab.GetMedalsUseCase
+    private val getMedalsUseCase: com.yakulab.usecases.yakulab.GetMedalsUseCase,
+    private val getCertificationsUseCase: com.yakulab.usecases.yakulab.GetCertificationsUseCase
 ) : ViewModel() {
 
 
@@ -39,8 +40,16 @@ class ProfileParentViewModel  @Inject constructor(
         emptyList()
     )
 
+    private val _certifications: MutableStateFlow<List<com.yakulab.domain.profile.CertificationsDomain>> = MutableStateFlow(emptyList())
+    val certifications:StateFlow<List<com.yakulab.domain.profile.CertificationsDomain>> = _certifications.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000, 1),
+        emptyList()
+    )
+
     init {
         getMedals()
+        getCertifications()
     }
 
     private fun getUserInfo(email: String) = viewModelScope.launch {
@@ -65,6 +74,16 @@ class ProfileParentViewModel  @Inject constructor(
             .invoke()
             .onEach {
                 _medals.value = it
+            }.catch {
+                Timber.e("Error: ${it.message}")
+            }.launchIn(viewModelScope)
+    }
+
+    private fun getCertifications() = viewModelScope.launch {
+        getCertificationsUseCase
+            .invoke()
+            .onEach {
+                _certifications.value = it
             }.catch {
                 Timber.e("Error: ${it.message}")
             }.launchIn(viewModelScope)
