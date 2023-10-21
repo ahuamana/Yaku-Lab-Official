@@ -46,4 +46,18 @@ dependencies {
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // Firebase
+    //Firebase modules
+    implementation platform('com.google.firebase:firebase-bom:30.1.0')
+    //Login
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    //Cloud firestore
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+    //Crashlytics
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-storage-ktx'
+
+    //Coroutines firebase
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.1'
 }

@@ -57,8 +57,12 @@
     <string name="common_open_on_phone">Apri sul telefono</string>
     <string name="common_signin_button_text">Accedi</string>
     <string name="common_signin_button_text_long">Accedi con Google</string>
+    <string msgid="3260749812566568062" name="copy_toast_msg">"Link copiato negli appunti"</string>
     <string name="error_icon_content_description">Errore</string>
     <string name="exposed_dropdown_menu_content_description">Mostra il menu a discesa</string>
+    <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"Copia link"</string>
+    <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"Apri nel browser"</string>
+    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"Condividi link"</string>
     <string name="icon_content_description">Icona della finestra di dialogo</string>
     <string name="item_view_role_description">Scheda</string>
     <string name="material_clock_toggle_content_description">Seleziona AM o PM</string>
@@ -110,6 +114,8 @@
     <string name="mtrl_picker_toggle_to_year_selection">Tocca per passare alla selezione di un anno</string>
     <string name="mtrl_timepicker_cancel">Annulla</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Torna indietro"</string>
+    <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Apri riquadro di navigazione"</string>
     <string name="password_toggle_content_description">Mostra password</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Cerca"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>

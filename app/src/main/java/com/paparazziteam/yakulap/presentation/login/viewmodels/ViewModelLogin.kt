@@ -4,7 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.paparazziteam.yakulap.presentation.login.providers.LoginProvider
+import com.yakulab.usecases.yakulab.LoginWithEmailUseCase
+import com.yakulab.usecases.yakulab.LogoutUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -12,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ViewModelLogin @Inject constructor() : ViewModel() {
 
-    private var mLoginProvider = LoginProvider()
+    private var mLoginProvider = com.ahuaman.data.dashboard.providers.LoginProvider()
     private val _message = MutableLiveData<String>()
     private val _isLoginEmail = MutableLiveData<Boolean>()
     private val _isLoginAnonymous = MutableLiveData<Boolean>()
@@ -22,8 +23,6 @@ class ViewModelLogin @Inject constructor() : ViewModel() {
     fun showMessage(): LiveData<String> = _message
     fun getIsLoginEmail(): LiveData<Boolean> = _isLoginEmail
     fun getIsLoginAnonymous(): LiveData<Boolean> = _isLoginAnonymous
-
-    fun logout() = mLoginProvider.signout()
 
 
     fun isAlreadyLogging(): LiveData<String?> {
@@ -58,7 +57,7 @@ class ViewModelLogin @Inject constructor() : ViewModel() {
     fun loginAnonymous() {
         _isLoading.setValue(true)
         try {
-            mLoginProvider.loginAnonimously().addOnCompleteListener { task ->
+            mLoginProvider.loginAnonymous().addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         _message.setValue("Bienvenido anónimo")
                         try {

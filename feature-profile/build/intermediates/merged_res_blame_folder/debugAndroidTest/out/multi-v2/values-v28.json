@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.yakulab.feature.profile.test.feature-profile-mergeDebugAndroidTestResources-32:/values-v28/values-v28.xml",
+            "outputFile": "com.yakulab.feature.profile.test.feature-profile-mergeDebugAndroidTestResources-56:/values-v28/values-v28.xml",
             "map": [
                 {
                     "source": "/Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/res/values-v28/values.xml",

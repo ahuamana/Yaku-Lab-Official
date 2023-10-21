@@ -57,8 +57,12 @@
     <string name="common_open_on_phone">Telefonda aç</string>
     <string name="common_signin_button_text">Oturum aç</string>
     <string name="common_signin_button_text_long">Google\'da oturum aç</string>
+    <string msgid="3260749812566568062" name="copy_toast_msg">"Bağlantı panoya kopyalandı"</string>
     <string name="error_icon_content_description">Hata</string>
     <string name="exposed_dropdown_menu_content_description">Açılır menüyü göster</string>
+    <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"Bağlantıyı kopyala"</string>
+    <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"Tarayıcıda aç"</string>
+    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"Bağlantıyı paylaş"</string>
     <string name="icon_content_description">İletişim kutusu simgesi</string>
     <string name="item_view_role_description">Sekme</string>
     <string name="material_clock_toggle_content_description">ÖÖ veya ÖS\'yi seçin</string>
@@ -110,6 +114,8 @@
     <string name="mtrl_picker_toggle_to_year_selection">Yıl seçmeye geçmek için dokunun</string>
     <string name="mtrl_timepicker_cancel">İptal</string>
     <string name="mtrl_timepicker_confirm">Tamam</string>
+    <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Yukarı git"</string>
+    <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Gezinme çekmecesini aç"</string>
     <string name="password_toggle_content_description">Şifreyi göster</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Ara"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>

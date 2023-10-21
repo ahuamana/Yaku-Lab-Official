@@ -5,19 +5,105 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
+import androidx.viewbinding.ViewBindings;
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.textview.MaterialTextView;
+import com.paparazziteam.yakulap.common.databinding.CustomEmptyLaboratoryBinding;
 import com.yakulab.feature.profile.R;
 import java.lang.NullPointerException;
 import java.lang.Override;
+import java.lang.String;
 
 public final class FragmentProfileParentBinding implements ViewBinding {
   @NonNull
   private final FrameLayout rootView;
 
-  private FragmentProfileParentBinding(@NonNull FrameLayout rootView) {
+  @NonNull
+  public final ConstraintLayout containerProfile;
+
+  @NonNull
+  public final ExtendedFloatingActionButton efabLogout;
+
+  @NonNull
+  public final CustomEmptyLaboratoryBinding include;
+
+  @NonNull
+  public final MaterialCardView materialCardView;
+
+  @NonNull
+  public final ProgressBar progressBar;
+
+  @NonNull
+  public final RecyclerView rvCertifications;
+
+  @NonNull
+  public final RecyclerView rvMedals;
+
+  @NonNull
+  public final MaterialTextView tvCurrentLevel;
+
+  @NonNull
+  public final MaterialTextView tvLevelCount;
+
+  @NonNull
+  public final MaterialTextView tvLevelCountWithText;
+
+  @NonNull
+  public final MaterialTextView tvMissingPoints;
+
+  @NonNull
+  public final MaterialTextView tvName;
+
+  @NonNull
+  public final MaterialTextView tvNextLevel;
+
+  @NonNull
+  public final MaterialTextView tvPointsMiddle;
+
+  @NonNull
+  public final MaterialTextView tvTitleCertifications;
+
+  @NonNull
+  public final MaterialTextView tvTitleLevel;
+
+  @NonNull
+  public final MaterialTextView tvTitleMedals;
+
+  private FragmentProfileParentBinding(@NonNull FrameLayout rootView,
+      @NonNull ConstraintLayout containerProfile, @NonNull ExtendedFloatingActionButton efabLogout,
+      @NonNull CustomEmptyLaboratoryBinding include, @NonNull MaterialCardView materialCardView,
+      @NonNull ProgressBar progressBar, @NonNull RecyclerView rvCertifications,
+      @NonNull RecyclerView rvMedals, @NonNull MaterialTextView tvCurrentLevel,
+      @NonNull MaterialTextView tvLevelCount, @NonNull MaterialTextView tvLevelCountWithText,
+      @NonNull MaterialTextView tvMissingPoints, @NonNull MaterialTextView tvName,
+      @NonNull MaterialTextView tvNextLevel, @NonNull MaterialTextView tvPointsMiddle,
+      @NonNull MaterialTextView tvTitleCertifications, @NonNull MaterialTextView tvTitleLevel,
+      @NonNull MaterialTextView tvTitleMedals) {
     this.rootView = rootView;
+    this.containerProfile = containerProfile;
+    this.efabLogout = efabLogout;
+    this.include = include;
+    this.materialCardView = materialCardView;
+    this.progressBar = progressBar;
+    this.rvCertifications = rvCertifications;
+    this.rvMedals = rvMedals;
+    this.tvCurrentLevel = tvCurrentLevel;
+    this.tvLevelCount = tvLevelCount;
+    this.tvLevelCountWithText = tvLevelCountWithText;
+    this.tvMissingPoints = tvMissingPoints;
+    this.tvName = tvName;
+    this.tvNextLevel = tvNextLevel;
+    this.tvPointsMiddle = tvPointsMiddle;
+    this.tvTitleCertifications = tvTitleCertifications;
+    this.tvTitleLevel = tvTitleLevel;
+    this.tvTitleMedals = tvTitleMedals;
   }
 
   @Override
@@ -43,10 +129,119 @@ public final class FragmentProfileParentBinding implements ViewBinding {
 
   @NonNull
   public static FragmentProfileParentBinding bind(@NonNull View rootView) {
-    if (rootView == null) {
-      throw new NullPointerException("rootView");
-    }
+    // The body of this method is generated in a way you would not otherwise write.
+    // This is done to optimize the compiled bytecode for size and performance.
+    int id;
+    missingId: {
+      id = R.id.container_profile;
+      ConstraintLayout containerProfile = ViewBindings.findChildViewById(rootView, id);
+      if (containerProfile == null) {
+        break missingId;
+      }
 
-    return new FragmentProfileParentBinding((FrameLayout) rootView);
+      id = R.id.efab_logout;
+      ExtendedFloatingActionButton efabLogout = ViewBindings.findChildViewById(rootView, id);
+      if (efabLogout == null) {
+        break missingId;
+      }
+
+      id = R.id.include;
+      View include = ViewBindings.findChildViewById(rootView, id);
+      if (include == null) {
+        break missingId;
+      }
+      CustomEmptyLaboratoryBinding binding_include = CustomEmptyLaboratoryBinding.bind(include);
+
+      id = R.id.materialCardView;
+      MaterialCardView materialCardView = ViewBindings.findChildViewById(rootView, id);
+      if (materialCardView == null) {
+        break missingId;
+      }
+
+      id = R.id.progressBar;
+      ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
+      if (progressBar == null) {
+        break missingId;
+      }
+
+      id = R.id.rv_certifications;
+      RecyclerView rvCertifications = ViewBindings.findChildViewById(rootView, id);
+      if (rvCertifications == null) {
+        break missingId;
+      }
+
+      id = R.id.rv_medals;
+      RecyclerView rvMedals = ViewBindings.findChildViewById(rootView, id);
+      if (rvMedals == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_current_level;
+      MaterialTextView tvCurrentLevel = ViewBindings.findChildViewById(rootView, id);
+      if (tvCurrentLevel == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_level_count;
+      MaterialTextView tvLevelCount = ViewBindings.findChildViewById(rootView, id);
+      if (tvLevelCount == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_level_count_with_text;
+      MaterialTextView tvLevelCountWithText = ViewBindings.findChildViewById(rootView, id);
+      if (tvLevelCountWithText == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_missing_points;
+      MaterialTextView tvMissingPoints = ViewBindings.findChildViewById(rootView, id);
+      if (tvMissingPoints == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_name;
+      MaterialTextView tvName = ViewBindings.findChildViewById(rootView, id);
+      if (tvName == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_next_level;
+      MaterialTextView tvNextLevel = ViewBindings.findChildViewById(rootView, id);
+      if (tvNextLevel == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_points_middle;
+      MaterialTextView tvPointsMiddle = ViewBindings.findChildViewById(rootView, id);
+      if (tvPointsMiddle == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_title_certifications;
+      MaterialTextView tvTitleCertifications = ViewBindings.findChildViewById(rootView, id);
+      if (tvTitleCertifications == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_title_level;
+      MaterialTextView tvTitleLevel = ViewBindings.findChildViewById(rootView, id);
+      if (tvTitleLevel == null) {
+        break missingId;
+      }
+
+      id = R.id.tv_title_medals;
+      MaterialTextView tvTitleMedals = ViewBindings.findChildViewById(rootView, id);
+      if (tvTitleMedals == null) {
+        break missingId;
+      }
+
+      return new FragmentProfileParentBinding((FrameLayout) rootView, containerProfile, efabLogout,
+          binding_include, materialCardView, progressBar, rvCertifications, rvMedals,
+          tvCurrentLevel, tvLevelCount, tvLevelCountWithText, tvMissingPoints, tvName, tvNextLevel,
+          tvPointsMiddle, tvTitleCertifications, tvTitleLevel, tvTitleMedals);
+    }
+    String missingId = rootView.getResources().getResourceName(id);
+    throw new NullPointerException("Missing required view with ID: ".concat(missingId));
   }
 }

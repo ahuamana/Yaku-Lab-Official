@@ -56,7 +56,7 @@ class HomeFragment : Fragment(), onClickThread {
     @Inject
     lateinit var preferences:MyPreferences
 
-    private val binding by viewBinding { FragmentHomeBinding.bind(it) }
+    private val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
     private val viewModel: HomeViewModel by activityViewModels()
 
     private var clickedItemCompleted:onClickThread?=null
@@ -68,11 +68,6 @@ class HomeFragment : Fragment(), onClickThread {
     private var shimmerSkeleton: ShimmerFrameLayout? = null
     //UI body
     private var bodyLayout: ConstraintLayout? = null
-
-    //Content Animals
-    var mCardAnimals: CardView? = null
-    var mCardFruits: CardView? = null
-    var mCardPlants: CardView? = null
 
     //Adapter
     var mAdapter: AdapterChallengeCompleted? = null
@@ -117,7 +112,7 @@ class HomeFragment : Fragment(), onClickThread {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentHomeBinding.inflate(inflater, container, false)
+        //val binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -150,11 +145,11 @@ class HomeFragment : Fragment(), onClickThread {
             adapter = adapterSpeciesNearby
         }
 
-        val spaceDecorationHorizontal = ItemSpaceDecorationHorizontal(30)
+        /*val spaceDecorationHorizontal = ItemSpaceDecorationHorizontal(30)
         //add divider to recycler
         binding.rvNearbySpecies.addItemDecoration(
             spaceDecorationHorizontal
-        )
+        )*/
 
         adapterSpeciesNearby.onItemClickListener { observationEntity, position ->
             Timber.d( "onCreateView: ${observationEntity.identifications.first()?.taxon?.name}")
@@ -183,9 +178,6 @@ class HomeFragment : Fragment(), onClickThread {
 
     private fun ui() {
         binding.apply {
-            mCardAnimals    = cardAnimals
-            mCardFruits         = cardFruits
-            mCardPlants         = cardPlants
             shimmerSkeleton              = shimmerLoading
             bodyLayout                   = containerLayoutBodyChallenges
         }
@@ -237,6 +229,7 @@ class HomeFragment : Fragment(), onClickThread {
 
     private fun otherComponents() {
         binding.cardAnimals.setOnClickListener {
+            println("Animals")
             it.preventDoubleClick()
             val bundle = Bundle()
             bundle.putString("typeGroup", TypeGroup.ANIMALS.value)

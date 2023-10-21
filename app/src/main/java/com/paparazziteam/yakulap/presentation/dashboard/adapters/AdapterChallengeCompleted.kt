@@ -20,7 +20,7 @@ import com.paparazziteam.yakulab.binding.helper.preventDoubleClick
 import com.paparazziteam.yakulab.binding.utils.replaceFirstCharInSequenceToUppercase
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ItemChallengeCompletedBinding
-import com.paparazziteam.yakulap.presentation.repositorio.ReaccionProvider
+import com.ahuaman.data.dashboard.providers.ReaccionProvider
 import com.paparazziteam.yakulap.presentation.dashboard.interfaces.onClickThread
 import com.yakulab.domain.dashboard.ChallengeCompleted
 import timber.log.Timber
@@ -73,7 +73,7 @@ class AdapterChallengeCompleted @Inject constructor(
 
     inner class ViewHolder(itemview : View): RecyclerView.ViewHolder(itemview) {
 
-        var mActionProvider = ReaccionProvider()
+        var mActionProvider = com.ahuaman.data.dashboard.providers.ReaccionProvider()
         val binding = ItemChallengeCompletedBinding.bind(itemView)
 
         private lateinit var imageChalleng: ShapeableImageView
