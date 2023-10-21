@@ -102,7 +102,8 @@
     <string name="menu_challenge_list">Retos\n</string>
     <string name="fragment_comment_error_block">Error al bloquear usuario.</string>
     <string name="imagen_no_subida">Imagen no subida</string>
-    <string name="menu_rank">Ranking\n</string>
-    <string name="menu_profile">Perfil\n</string>
+    <string name="menu_rank">Ranking</string>
+    <string name="menu_profile">Perfil</string>
+    <string name="menu_aula">Salas</string>
 
 </resources>

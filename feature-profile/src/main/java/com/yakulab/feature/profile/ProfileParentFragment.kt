@@ -43,6 +43,13 @@ class ProfileParentFragment : Fragment() {
         setupUI()
         setupRecyclerMedals()
         observers()
+        setupButtons()
+    }
+
+    private fun setupButtons() {
+        binding.efabLogout.setOnClickListener {
+            requireActivity().finish()
+        }
     }
 
     private fun setupRecyclerMedals() {
