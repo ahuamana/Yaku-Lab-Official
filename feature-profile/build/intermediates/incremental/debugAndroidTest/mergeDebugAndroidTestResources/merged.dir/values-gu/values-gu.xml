@@ -57,8 +57,12 @@
     <string name="common_open_on_phone">ફોનમાં ખોલો</string>
     <string name="common_signin_button_text">સાઇન ઇન કરો</string>
     <string name="common_signin_button_text_long">Google માં સાઇન ઇન કરો</string>
+    <string msgid="3260749812566568062" name="copy_toast_msg">"ક્લિપબોર્ડ પર લિંક કૉપિ કરી"</string>
     <string name="error_icon_content_description">ભૂલ</string>
     <string name="exposed_dropdown_menu_content_description">ડ્રૉપડાઉન મેનૂ બતાવો</string>
+    <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"લિંક કૉપિ કરો"</string>
+    <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"બ્રાઉઝરમાં ખોલો"</string>
+    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"લિંક શેર કરો"</string>
     <string name="icon_content_description">સંવાદનું આઇકન</string>
     <string name="item_view_role_description">ટૅબ</string>
     <string name="material_clock_toggle_content_description">AM અથવા PM પસંદ કરો</string>
@@ -110,6 +114,8 @@
     <string name="mtrl_picker_toggle_to_year_selection">વર્ષની પસંદગી પર સ્વિચ કરવા માટે ટૅપ કરો</string>
     <string name="mtrl_timepicker_cancel">રદ કરો</string>
     <string name="mtrl_timepicker_confirm">ઓકે</string>
+    <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"ઉપર નૅવિગેટ કરો"</string>
+    <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"નૅવિગેશન ડ્રૉઅર ખોલો"</string>
     <string name="password_toggle_content_description">પાસવર્ડ બતાવો</string>
     <string msgid="6264217191555673260" name="search_menu_title">"શોધો"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>

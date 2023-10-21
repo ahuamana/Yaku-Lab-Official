@@ -57,8 +57,12 @@
     <string name="common_open_on_phone">Утсаар нээх</string>
     <string name="common_signin_button_text">Нэвтрэх</string>
     <string name="common_signin_button_text_long">Google-р нэвтрэх:</string>
+    <string msgid="3260749812566568062" name="copy_toast_msg">"Холбоосыг түр санах ойд хуулсан"</string>
     <string name="error_icon_content_description">Алдаа</string>
     <string name="exposed_dropdown_menu_content_description">Доош унадаг цэсийг харуулах</string>
+    <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"Холбоосыг хуулах"</string>
+    <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"Хөтчид нээх"</string>
+    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"Холбоосыг хуваалцах"</string>
     <string name="icon_content_description">Харилцах цонхны дүрс тэмдэг</string>
     <string name="item_view_role_description">Таб</string>
     <string name="material_clock_toggle_content_description">ҮӨ эсвэл ҮХ сонгоно уу</string>
@@ -110,6 +114,8 @@
     <string name="mtrl_picker_toggle_to_year_selection">Он сонгох руу сэлгэхийн тулд товшино уу</string>
     <string name="mtrl_timepicker_cancel">Цуцлах</string>
     <string name="mtrl_timepicker_confirm">OK</string>
+    <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Дээш шилжих"</string>
+    <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Навигацийн шургуулгыг нээх"</string>
     <string name="password_toggle_content_description">Нууц үгийг харуулах</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Хайх"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>

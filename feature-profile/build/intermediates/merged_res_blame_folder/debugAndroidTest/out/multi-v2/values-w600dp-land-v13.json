@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.yakulab.feature.profile.test.feature-profile-mergeDebugAndroidTestResources-32:/values-w600dp-land-v13/values-w600dp-land-v13.xml",
+            "outputFile": "com.yakulab.feature.profile.test.feature-profile-mergeDebugAndroidTestResources-56:/values-w600dp-land-v13/values-w600dp-land-v13.xml",
             "map": [
                 {
                     "source": "/Users/antonymac/.gradle/caches/transforms-3/b6c7cf4f865255a5511ed011c9e1f607/transformed/material-1.9.0/res/values-w600dp-land-v13/values-w600dp-land-v13.xml",

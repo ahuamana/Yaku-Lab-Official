@@ -57,8 +57,12 @@
     <string name="common_open_on_phone">Ireki telefonoan</string>
     <string name="common_signin_button_text">Hasi saioa</string>
     <string name="common_signin_button_text_long">Hasi saioa Google-ko kontuarekin</string>
+    <string msgid="3260749812566568062" name="copy_toast_msg">"Arbelean kopiatu da esteka"</string>
     <string name="error_icon_content_description">Errorea</string>
     <string name="exposed_dropdown_menu_content_description">Erakutsi goitibeherako menua</string>
+    <string msgid="4566929209979330987" name="fallback_menu_item_copy_link">"Kopiatu esteka"</string>
+    <string msgid="3413186855122069269" name="fallback_menu_item_open_in_browser">"Ireki arakatzailean"</string>
+    <string msgid="7145444925855055364" name="fallback_menu_item_share_link">"Partekatu esteka"</string>
     <string name="icon_content_description">Leihoko ikonoa</string>
     <string name="item_view_role_description">Fitxa</string>
     <string name="material_clock_toggle_content_description">Hautatu AM edo PM</string>
@@ -110,6 +114,8 @@
     <string name="mtrl_picker_toggle_to_year_selection">Sakatu urtea hautatzeko modura aldatzeko</string>
     <string name="mtrl_timepicker_cancel">Utzi</string>
     <string name="mtrl_timepicker_confirm">Ados</string>
+    <string msgid="6301633601645100427" name="nav_app_bar_navigate_up_description">"Joan gora"</string>
+    <string msgid="7456070600745802113" name="nav_app_bar_open_drawer_description">"Ireki nabigazio-panel lerrakorra"</string>
     <string name="password_toggle_content_description">Erakutsi pasahitza</string>
     <string msgid="6264217191555673260" name="search_menu_title">"Bilatu"</string>
     <string msgid="6277540029070332960" name="status_bar_notification_info_overflow">"999+"</string>
