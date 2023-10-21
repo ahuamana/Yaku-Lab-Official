@@ -103,4 +103,5 @@
     <string name="menu_challenge_list">Retos\n</string>
     <string name="fragment_comment_error_block">Error al bloquear usuario.</string>
     <string name="imagen_no_subida">Imagen no subida</string>
+    <string name="custom_empty_not_developed_description">Muy Pronto</string>
 </resources>

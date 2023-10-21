@@ -35,6 +35,10 @@ class MyPreferences @Inject constructor() {
         get()      = prefs.getBoolean("isLogin", false)
         set(value) = prefs.setBoolean("isLogin", value)
 
+    var needsToShowTutorial: Boolean
+        get()      = prefs.getBoolean("needsToShowTutorial", true)
+        set(value) = prefs.setBoolean("needsToShowTutorial", value)
+
     //PREFERENCES INTEGER
     var color: Int
         get() = prefs.getInt("color",  Color.parseColor("#ff0066"))

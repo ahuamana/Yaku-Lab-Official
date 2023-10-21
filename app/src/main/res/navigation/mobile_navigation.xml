@@ -16,6 +16,7 @@
         <action
             android:id="@+id/action_nav_home_to_nav_challenge_list"
             app:destination="@id/nav_challenge_list" />
+
     </fragment>
 
     <fragment
@@ -47,5 +48,17 @@
         android:name="com.paparazziteam.yakulap.presentation.laboratorio.views.ChallengeListFragment"
         android:label="@string/menu_challenge_list"
         tools:layout="@layout/activity_challenge_parent" />
+
+    <fragment
+        android:id="@+id/nav_rank"
+        android:name="com.paparazziteam.yakulap.presentation.puntaje.views.PuntajeActivity"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/activity_puntaje" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.yakulab.feature.profile.ProfileParentFragment"
+        android:label="@string/menu_profile"
+        tools:layout="@layout/fragment_profile_parent" />
 
 </navigation>

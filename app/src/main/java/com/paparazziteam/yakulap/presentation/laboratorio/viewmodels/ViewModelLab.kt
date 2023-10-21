@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.ktx.toObject
 import com.yakulab.domain.laboratory.DataCategory
 import com.yakulab.domain.laboratory.DataItems
-import com.paparazziteam.yakulap.presentation.repositorio.LabAnimalsProvider
+import com.ahuaman.data.dashboard.providers.LabAnimalsProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +21,7 @@ class ViewModelLab @Inject constructor(
     handle: SavedStateHandle
 ) : ViewModel() {
 
-    private var mLabProvider = LabAnimalsProvider()
+    private var mLabProvider = com.ahuaman.data.dashboard.providers.LabAnimalsProvider()
 
     private val _observableListData = MutableLiveData<List<DataItems>>()
     val observableListData:LiveData<List<DataItems>> get() = _observableListData

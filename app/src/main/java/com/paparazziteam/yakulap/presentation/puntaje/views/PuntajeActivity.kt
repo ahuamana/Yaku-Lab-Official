@@ -4,10 +4,17 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil.setContentView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
@@ -19,52 +26,33 @@ import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityPuntajeBinding
 import com.paparazziteam.yakulap.presentation.puntaje.viewmodels.ViewModelPuntaje
 import dagger.hilt.android.AndroidEntryPoint
+import viewBinding
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class PuntajeActivity : AppCompatActivity() {
+class PuntajeActivity : Fragment() {
 
     private val _viewModel:ViewModelPuntaje by viewModels()
 
     @Inject
     lateinit var mPreferences: MyPreferences
 
-    private lateinit var imgMedal:ShapeableImageView
-    private lateinit var skeleton: ShimmerFrameLayout
-    private lateinit var contenidoPrincipal: LinearLayout
-    private lateinit var puntajeTxt: MaterialTextView
-    private lateinit var myToolbar: Toolbar
+    val binding:ActivityPuntajeBinding by viewBinding { ActivityPuntajeBinding.bind(it) }
 
-    var binding:ActivityPuntajeBinding?= null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityPuntajeBinding.inflate(layoutInflater)
-        setContentView(binding?.root)
-        setColorToStatusBar(this)
-
-        binding?.apply {
-            imgMedal = imageViewMedalPoints
-            skeleton = contentSkeletom
-            contenidoPrincipal  = contentMain
-            puntajeTxt  = textViewPoints
-            myToolbar   = toolbarActivity
-        }
-
-        observers()
-        initializeComponents()
-        toolbar()
-        //Star some features
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        val view = ActivityPuntajeBinding.inflate(inflater, container, false)
+        return view.root
     }
 
-    private fun toolbar() {
-        myToolbar.apply {
-            navigationIcon = getDrawable(R.drawable.ic_arrow_back_white)
-            setTitleTextColor(ContextCompat.getColor(context,R.color.white));
-            title = "Puntaje"
-            setNavigationOnClickListener {
-                finish()
-            }
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observers()
+        initializeComponents()
+        //Star some features
     }
 
     private fun initializeComponents() {
@@ -72,26 +60,28 @@ class PuntajeActivity : AppCompatActivity() {
             //Do something after 2000mms
             _viewModel.showMedal()
         }, 1000)
-
-        puntajeTxt.text = mPreferences.points.toString()
-
+        binding.textViewPoints.text = mPreferences.points.toString()
     }
 
 
     private fun observers() {
-        _viewModel.getMedal().observe(this){ medal->
-            skeleton.beGone()
-            imgMedal.setImageDrawable(medal)
-            contenidoPrincipal.beVisible()
+        _viewModel.getMedal().observe(viewLifecycleOwner){ medal->
+            binding.contentSkeletom.beGone()
+            binding.imageViewMedalPoints.setImageDrawable(medal)
+            binding.contentMain.beVisible()
         }
 
-        _viewModel.loading.observe(this){
+        _viewModel.loading.observe(viewLifecycleOwner){
             if(it){
-                skeleton.beVisible()
-                skeleton.startShimmer()
+                binding.contentSkeletom.apply {
+                    beVisible()
+                    startShimmer()
+                }
             }else{
-                skeleton.beGone()
-                skeleton.stopShimmer()
+                binding.contentSkeletom.apply {
+                    beGone()
+                    stopShimmer()
+                }
             }
         }
 
