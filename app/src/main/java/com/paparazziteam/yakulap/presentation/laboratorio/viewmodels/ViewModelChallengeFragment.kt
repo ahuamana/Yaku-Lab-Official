@@ -30,11 +30,11 @@ import com.yakulab.domain.dashboard.TypeReportedPost
 import com.yakulab.domain.laboratory.DataChallenge
 import com.yakulab.domain.laboratory.TypeChallenge
 import com.yakulab.domain.login.User
-import com.paparazziteam.yakulap.presentation.login.providers.LoginProvider
-import com.paparazziteam.yakulap.presentation.login.providers.UserProvider
-import com.paparazziteam.yakulap.presentation.repositorio.ImageProvider
-import com.paparazziteam.yakulap.presentation.repositorio.ReaccionProvider
-import com.paparazziteam.yakulap.presentation.repositorio.ReportProvider
+import com.ahuaman.data.dashboard.providers.LoginProvider
+import com.ahuaman.data.dashboard.providers.UserProvider
+import com.ahuaman.data.dashboard.providers.ImageProvider
+import com.ahuaman.data.dashboard.providers.ReaccionProvider
+import com.ahuaman.data.dashboard.providers.ReportProvider
 import com.yakulab.usecases.inaturalist.GetSpeciesByLocationUseCase
 import com.yakulab.usecases.inaturalist.GetSpeciesByTaxonIdUseCase
 import com.yakulab.usecases.inaturalist.SpeciesByLocationResult
@@ -57,13 +57,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewModelChallengeFragment @Inject constructor(
-    private val mUserProvider: UserProvider,
-    private val mLoginProvider: LoginProvider,
+    private val mUserProvider: com.ahuaman.data.dashboard.providers.UserProvider,
+    private val mLoginProvider: com.ahuaman.data.dashboard.providers.LoginProvider,
     private val mCommentRepositoryImpl: CommentRepository,
-    private val mImageProvider: ImageProvider,
+    private val mImageProvider: com.ahuaman.data.dashboard.providers.ImageProvider,
     private val mChallengeProvider: ChallengeRepository,
-    private val mActionProvider: ReaccionProvider,
-    private val mReportProvider: ReportProvider,
+    private val mActionProvider: com.ahuaman.data.dashboard.providers.ReaccionProvider,
+    private val mReportProvider: com.ahuaman.data.dashboard.providers.ReportProvider,
     private val mPreferences: MyPreferences,
     private val getSpeciesByLocationUseCase: GetSpeciesByLocationUseCase,
     private val getSpeciesByTaxonIdUseCase: GetSpeciesByTaxonIdUseCase,

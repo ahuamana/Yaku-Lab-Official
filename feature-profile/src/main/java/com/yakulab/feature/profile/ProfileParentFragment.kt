@@ -1,5 +1,6 @@
 package com.yakulab.feature.profile
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.paparazziteam.yakulab.binding.helper.navigator.Navigator
 import com.yakulab.feature.profile.databinding.FragmentProfileParentBinding
 import com.yakulab.feature.profile.viewmodels.ProfileParentViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,6 +18,7 @@ import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import viewBinding
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -28,6 +31,9 @@ class ProfileParentFragment : Fragment() {
     private val medalsAdapter = MedalsAdapter()
 
     private val certificationsAdapter = CertificationAdapter()
+
+    @Inject
+    lateinit var navigator: Navigator
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +54,8 @@ class ProfileParentFragment : Fragment() {
 
     private fun setupButtons() {
         binding.efabLogout.setOnClickListener {
-            requireActivity().finish()
+            viewModel.logout()
+            navigator.navigateToLogin(requireContext(), true)
         }
     }
 

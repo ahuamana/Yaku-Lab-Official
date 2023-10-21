@@ -3,15 +3,15 @@ package com.paparazziteam.yakulap.presentation.login.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseUser
-import com.paparazziteam.yakulap.presentation.login.providers.UserProvider
+import com.ahuaman.data.dashboard.providers.UserProvider
 import com.yakulab.domain.login.User
-import com.paparazziteam.yakulap.presentation.login.providers.LoginProvider
+import com.ahuaman.data.dashboard.providers.LoginProvider
 
 class ViewModelRegistroUsuario private constructor() {
 
     var user: FirebaseUser? = null
-    var mUserProvider = UserProvider()
-    var mRegisterProvider = LoginProvider()
+    var mUserProvider = com.ahuaman.data.dashboard.providers.UserProvider()
+    var mRegisterProvider = com.ahuaman.data.dashboard.providers.LoginProvider()
     private val _message = MutableLiveData<String>()
     private val _user = MutableLiveData<FirebaseUser>()
     private val _isLoading = MutableLiveData<Boolean>()
