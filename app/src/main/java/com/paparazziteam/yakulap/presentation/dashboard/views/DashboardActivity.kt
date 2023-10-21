@@ -16,9 +16,9 @@ import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
 import com.paparazziteam.yakulab.binding.helper.base.BaseActivity
-import com.paparazziteam.yakulab.binding.helper.replaceFirstCharInSequenceToUppercase
-import com.paparazziteam.yakulab.binding.helper.setColorToStatusBar
-import com.paparazziteam.yakulab.binding.helper.toast
+import com.paparazziteam.yakulab.binding.utils.replaceFirstCharInSequenceToUppercase
+import com.paparazziteam.yakulab.binding.utils.setColorToStatusBar
+import com.paparazziteam.yakulab.binding.utils.toast
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityDashboardBinding
 import com.paparazziteam.yakulap.presentation.dashboard.fragments.BottomDialogFragment

@@ -16,8 +16,8 @@ android {
         applicationId "com.yakulab.client"
         minSdk 22
         targetSdk 33
-        versionCode 18
-        versionName "2.1.8"
+        versionCode 19
+        versionName "2.3.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
