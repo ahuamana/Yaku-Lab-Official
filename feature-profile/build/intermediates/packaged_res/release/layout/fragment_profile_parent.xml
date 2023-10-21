@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ProfileParentFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/custom_empty_laboratory"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_profile"
+        android:layout_marginTop="20dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/background_rounded_gradiant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            app:cardCornerRadius="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:strokeColor="@color/colorWhite"
+            app:strokeWidth="4dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="58dp"
+                android:layout_height="58dp"
+                android:tint="@color/colorPrimaryYaku"
+                android:src="@drawable/ic_profile_checked" />
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/uni_neue_bold"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="@+id/container_profile"
+        app:layout_constraintStart_toStartOf="@+id/container_profile"
+        app:layout_constraintTop_toBottomOf="@+id/container_profile"
+        tools:text="Antony, Huaman" />
+
+
+    <!-- Levels-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/uni_neue_bold"
+            android:text="Logros"
+            android:textColor="@color/facebook_color_like"
+            android:textSize="16sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/materialCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_title_level"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_level">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_level_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/background_circle_gray"
+                    android:fontFamily="@font/uni_neue_bold"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/colorPrimaryYaku"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_level_count_with_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/uni_neue_bold"
+                    android:text="Nivel 1"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/tv_level_count"
+                    app:layout_constraintTop_toTopOf="@+id/tv_level_count" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_missing_points"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/uni_neue_bold"
+                    android:text="99 puntos para el siguiente nivel"
+                    android:textSize="11sp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tv_level_count_with_text"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_level_count_with_text" />
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="25dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="24dp"
+                    app:cardBackgroundColor="#80FFCE51"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_level_count"
+                    app:strokeWidth="0dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ProgressBar
+                            android:id="@+id/progressBar"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:max="100"
+                            android:progress="0"
+                            android:progressDrawable="@drawable/background_gradiant_progress_linear"
+                            app:layout_constraintBottom_toBottomOf="@+id/tv_current_level"
+                            app:layout_constraintEnd_toEndOf="@+id/tv_next_level"
+                            app:layout_constraintStart_toStartOf="@+id/tv_current_level"
+                            app:layout_constraintTop_toTopOf="@+id/tv_current_level"
+                            app:trackCornerRadius="25dp"
+                            app:trackThickness="29dp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_points_middle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:alpha="0.5"
+                            android:fontFamily="@font/uni_neue_bold"
+                            android:text="1 / 100"
+                            android:textColor="@android:color/black"
+                            android:textSize="12sp"
+                            app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_next_level"
+                            app:layout_constraintStart_toEndOf="@+id/tv_current_level"
+                            app:layout_constraintTop_toTopOf="@+id/progressBar" />
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_marginEnd="5dp"
+                            android:src="@drawable/ic_star"
+                            app:layout_constraintBottom_toBottomOf="@+id/progressBar"
+                            app:layout_constraintEnd_toStartOf="@+id/tv_points_middle"
+                            app:layout_constraintTop_toTopOf="@+id/progressBar" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_next_level"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="3dp"
+                            android:alpha="0.5"
+                            android:background="@drawable/background_circle_gold"
+                            android:fontFamily="@font/uni_neue_bold"
+                            android:gravity="center"
+                            android:text="2"
+                            android:textColor="@android:color/black"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tv_current_level"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="3dp"
+                            android:layout_marginStart="84dp"
+                            android:background="@drawable/background_circle_gold"
+                            android:fontFamily="@font/uni_neue_bold"
+                            android:gravity="center"
+                            android:text="1"
+                            android:textColor="@android:color/black"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title_medals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="30dp"
+            android:fontFamily="@font/uni_neue_bold"
+            android:text="Medallas"
+            android:textColor="@color/facebook_color_like"
+            android:textSize="16sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_medals"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_medal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_medals" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title_certifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="30dp"
+            android:fontFamily="@font/uni_neue_bold"
+            android:text="Certificaciones"
+            android:textColor="@color/facebook_color_like"
+            android:textSize="16sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_medals" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_certifications"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:orientation="horizontal"
+            tools:itemCount="3"
+            tools:listitem="@layout/item_certification"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_certifications" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/efab_logout"
+        android:layout_width="wrap_content"
+        android:text="@string/profile_close_session_title"
+        app:icon="@drawable/ic_close"
+        app:iconTint="@android:color/white"
+        app:backgroundTint="@color/colorPrimaryYaku"
+        android:textColor="@android:color/white"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_height="wrap_content"/>
+
+</FrameLayout>
