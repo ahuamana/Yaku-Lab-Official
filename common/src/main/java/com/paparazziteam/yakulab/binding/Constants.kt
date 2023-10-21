@@ -6,9 +6,7 @@ const val SHORT_ANIMATION_DURATION = 150L
 
 object Constants {
     val EXT_JPG        = ".jpg"
-    val CATEGORY_INSECTS = "Insectos"
-    val CATEGORY_DOMESTIC_ANIMALS = "Animales Domesticos"
-    val CATEGORY_OTHERS_ANIMALS = "Otros"
+
 
     //EXTRAS
 
@@ -18,6 +16,7 @@ object Constants {
 
     //BASE_URL_INATURALIST
     const val BASE_URL_INATURALIST = "https://api.inaturalist.org/v1/"
+    const val BASE_URL_FIREBASE_IMAGES = "https://firebasestorage.googleapis.com/"
 
     //PATH_OBSERVATIONS
     const val PATH_OBSERVATIONS = "observations"

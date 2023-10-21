@@ -3,10 +3,14 @@ package com.paparazziteam.yakulap.presentation.login.viewmodels
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.paparazziteam.yakulap.presentation.login.providers.LoginProvider
+import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
+import javax.inject.Inject
 
-class ViewModelLogin private constructor() {
+@HiltViewModel
+class ViewModelLogin @Inject constructor() : ViewModel() {
 
     private var mLoginProvider = LoginProvider()
     private val _message = MutableLiveData<String>()
@@ -21,9 +25,6 @@ class ViewModelLogin private constructor() {
 
     fun logout() = mLoginProvider.signout()
 
-    init {
-        //isAlreadyLogging()
-    }
 
     fun isAlreadyLogging(): LiveData<String?> {
         if(mLoginProvider.getIsLogin()) {
@@ -36,11 +37,12 @@ class ViewModelLogin private constructor() {
         _isLoading.setValue(true)
         try {
             mLoginProvider.loginEmail(email?:"", pass?:"").addOnCompleteListener {
-                Timber.e("LoginWithEmail: ${it.isSuccessful}")
+                Timber.d("LoginWithEmail: ${it.isSuccessful}")
                 if (it.isSuccessful) {
                     _message.value = "Bienvenido"
                     _isLoginEmail.value = true
                 } else {
+                    Timber.e("Error: ${it.exception?.message}")
                     _message.value = "Usuario y/o contraseña incorrectos"
                     _isLoginEmail.value = false
                 }
@@ -77,22 +79,6 @@ class ViewModelLogin private constructor() {
         } catch (e: java.lang.Exception) {
             Log.e("VM_LOGIN", "Error:" + e.message)
         }
-    }
-
-
-    companion object Singleton{
-            private var instance: ViewModelLogin? = null
-
-            fun getInstance(): ViewModelLogin =
-                instance ?: ViewModelLogin(
-                    //local y remoto
-                ).also {
-                    instance = it
-                }
-
-            fun destroyInstance(){
-                instance = null
-            }
     }
 
 }

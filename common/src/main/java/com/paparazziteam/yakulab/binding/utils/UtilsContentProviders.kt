@@ -10,3 +10,4 @@ fun openUrl(context: Context, url: String) {
     intent.data = Uri.parse(url)
     context.startActivity(intent)
 }
+

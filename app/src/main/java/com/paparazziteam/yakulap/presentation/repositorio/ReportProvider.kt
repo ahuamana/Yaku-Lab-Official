@@ -3,7 +3,7 @@ package com.paparazziteam.yakulap.presentation.repositorio
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.Report
+import com.yakulab.domain.dashboard.Report
 import javax.inject.Inject
 
 class ReportProvider @Inject constructor() {

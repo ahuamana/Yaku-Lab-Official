@@ -14,22 +14,22 @@ import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.toObject
 import com.yakulab.domain.dashboard.ObservationEntity
 import com.paparazziteam.yakulab.binding.Constants
-import com.paparazziteam.yakulap.helper.application.MyPreferences
-import com.paparazziteam.yakulap.helper.fromJson
-import com.paparazziteam.yakulap.helper.getTimestamp
-import com.paparazziteam.yakulap.helper.getTimestampUnix
-import com.paparazziteam.yakulap.helper.toJson
+import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
+import com.paparazziteam.yakulab.binding.utils.fromJson
+import com.paparazziteam.yakulab.binding.utils.getTimestamp
+import com.paparazziteam.yakulab.binding.utils.getTimestampUnix
+import com.paparazziteam.yakulab.binding.utils.toJson
 import com.paparazziteam.yakulap.presentation.dashboard.model.ChallengeRepository
 import com.paparazziteam.yakulap.presentation.dashboard.model.CommentRepository
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.ChallengeCompleted
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.Comment
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.Reaccion
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.Report
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.TypeReported
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.TypeReportedPost
-import com.paparazziteam.yakulap.presentation.laboratorio.pojo.DataChallenge
-import com.paparazziteam.yakulap.presentation.laboratorio.pojo.TypeChallenge
-import com.paparazziteam.yakulap.presentation.login.pojo.User
+import com.yakulab.domain.dashboard.ChallengeCompleted
+import com.yakulab.domain.dashboard.Comment
+import com.yakulab.domain.dashboard.Reaccion
+import com.yakulab.domain.dashboard.Report
+import com.yakulab.domain.dashboard.TypeReported
+import com.yakulab.domain.dashboard.TypeReportedPost
+import com.yakulab.domain.laboratory.DataChallenge
+import com.yakulab.domain.laboratory.TypeChallenge
+import com.yakulab.domain.login.User
 import com.paparazziteam.yakulap.presentation.login.providers.LoginProvider
 import com.paparazziteam.yakulap.presentation.login.providers.UserProvider
 import com.paparazziteam.yakulap.presentation.repositorio.ImageProvider
@@ -415,7 +415,10 @@ class ViewModelChallengeFragment @Inject constructor(
             var reportPost = Report(
                 idPostReported = item?.id,
                 idChallengeReported = item?.challenge_id,
-                typeReport = type.value
+                typeReport = type.value,
+                emailWhoReport = mPreferences.email,
+                lastNameWhoReport = mPreferences.lastName,
+                firstNameWhoReport = mPreferences.firstName,
             )
 
             if(typeReportedPost!=null){
@@ -435,9 +438,11 @@ class ViewModelChallengeFragment @Inject constructor(
             //Report User Update
             var reportUser = Report(
                 typeReport = type.value,
-                emailWhoReport = mPreferences.email,
                 datetime = getTimestamp(),
-                datetimeUnixTime = getTimestampUnix()
+                datetimeUnixTime = getTimestampUnix(),
+                emailWhoReport = mPreferences.email,
+                lastNameWhoReport = mPreferences.lastName,
+                firstNameWhoReport = mPreferences.firstName,
             )
 
             if (userReported == mPreferences.email) {
@@ -461,7 +466,10 @@ class ViewModelChallengeFragment @Inject constructor(
                 idCommentReported = item?.id,
                 reportedComentario = item?.message,
                 idPhotoReported = item?.id_photo,
-                typeReport = type.value
+                typeReport = type.value,
+                emailWhoReport = mPreferences.email,
+                lastNameWhoReport = mPreferences.lastName,
+                firstNameWhoReport = mPreferences.firstName,
             )
 
             mReportProvider.create(reportPost)

@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.paparazziteam.yakulap.R
-import com.paparazziteam.yakulap.presentation.laboratorio.pojo.DataChallenge
-import com.paparazziteam.yakulap.presentation.laboratorio.pojo.DataListChallenge
+import com.yakulab.domain.laboratory.DataChallenge
+import com.yakulab.domain.laboratory.DataListChallenge
 import com.paparazziteam.yakulap.presentation.repositorio.LabAnimalsProvider
 import com.paparazziteam.yakulap.presentation.repositorio.ResourcesProvider
 import dagger.hilt.android.lifecycle.HiltViewModel

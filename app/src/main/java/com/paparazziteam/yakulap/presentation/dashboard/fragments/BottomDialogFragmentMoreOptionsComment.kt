@@ -8,19 +8,20 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textview.MaterialTextView
+import com.paparazziteam.yakulab.binding.helper.beGone
+import com.paparazziteam.yakulab.binding.utils.fromJson
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.BottomSheetMoreOptionsBinding
-import com.paparazziteam.yakulap.helper.beGone
-import com.paparazziteam.yakulap.helper.fromJson
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.*
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
+import com.yakulab.domain.dashboard.Comment
+import com.yakulab.domain.dashboard.TypeReported
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class BottomDialogFragmentMoreOptionsComment : BottomSheetDialogFragment() {
 
     private val ARG_DATA = "DATA"
-    private var item:Comment?=null
+    private var item: Comment?=null
     private var _binding: BottomSheetMoreOptionsBinding? = null
     private val binding get() = _binding!!
 
@@ -64,7 +65,7 @@ class BottomDialogFragmentMoreOptionsComment : BottomSheetDialogFragment() {
 
     private fun setupComponentes() {
         binding.opcionReportPost.setOnClickListener {
-            item?.let { it -> _viewModel.reportComment(it,TypeReported.COMMENT) }
+            item?.let { it -> _viewModel.reportComment(it, TypeReported.COMMENT) }
             dismiss()
         }
 

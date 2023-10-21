@@ -1,0 +1,3 @@
+com.yakulab.feature.profile
+layout fragment_profile_parent
+string hello_blank_fragment

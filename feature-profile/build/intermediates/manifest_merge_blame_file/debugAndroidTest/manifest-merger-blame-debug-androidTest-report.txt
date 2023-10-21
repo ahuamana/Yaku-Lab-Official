@@ -1,0 +1,156 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.yakulab.feature.profile.test" >
+4
+5    <uses-sdk
+5-->/Users/antonymac/Documents/Antony/Android/YakuLab/Yaku-Lab-Official/feature-profile/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest10067345358869064574.xml:5:5-74
+6        android:minSdkVersion="26"
+6-->/Users/antonymac/Documents/Antony/Android/YakuLab/Yaku-Lab-Official/feature-profile/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest10067345358869064574.xml:5:15-41
+7        android:targetSdkVersion="26" />
+7-->/Users/antonymac/Documents/Antony/Android/YakuLab/Yaku-Lab-Official/feature-profile/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest10067345358869064574.xml:5:42-71
+8
+9    <instrumentation
+9-->/Users/antonymac/Documents/Antony/Android/YakuLab/Yaku-Lab-Official/feature-profile/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest10067345358869064574.xml:11:5-15:82
+10        android:name="androidx.test.runner.AndroidJUnitRunner"
+10-->/Users/antonymac/Documents/Antony/Android/YakuLab/Yaku-Lab-Official/feature-profile/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest10067345358869064574.xml:11:22-76
+11        android:functionalTest="false"
+11-->/Users/antonymac/Documents/Antony/Android/YakuLab/Yaku-Lab-Official/feature-profile/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest10067345358869064574.xml:14:22-52
+12        android:handleProfiling="false"
+12-->/Users/antonymac/Documents/Antony/Android/YakuLab/Yaku-Lab-Official/feature-profile/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest10067345358869064574.xml:13:22-53
+13        android:label="Tests for com.yakulab.feature.profile.test"
+13-->/Users/antonymac/Documents/Antony/Android/YakuLab/Yaku-Lab-Official/feature-profile/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest10067345358869064574.xml:15:22-80
+14        android:targetPackage="com.yakulab.feature.profile.test" />
+14-->/Users/antonymac/Documents/Antony/Android/YakuLab/Yaku-Lab-Official/feature-profile/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest10067345358869064574.xml:12:22-78
+15
+16    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+16-->[:common] /Users/antonymac/Documents/Antony/Android/YakuLab/Yaku-Lab-Official/common/build/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-81
+16-->[:common] /Users/antonymac/Documents/Antony/Android/YakuLab/Yaku-Lab-Official/common/build/intermediates/merged_manifest/debug/AndroidManifest.xml:7:22-78
+17    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+17-->[:common] /Users/antonymac/Documents/Antony/Android/YakuLab/Yaku-Lab-Official/common/build/intermediates/merged_manifest/debug/AndroidManifest.xml:8:5-79
+17-->[:common] /Users/antonymac/Documents/Antony/Android/YakuLab/Yaku-Lab-Official/common/build/intermediates/merged_manifest/debug/AndroidManifest.xml:8:22-76
+18    <uses-permission android:name="android.permission.REORDER_TASKS" />
+18-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:24:5-72
+18-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:24:22-69
+19
+20    <queries>
+20-->[androidx.test:runner:1.5.2] /Users/antonymac/.gradle/caches/transforms-3/a1c6bc3a94a2b987232e993cc4ae9ce8/transformed/runner-1.5.2/AndroidManifest.xml:24:5-28:15
+21        <package android:name="androidx.test.orchestrator" />
+21-->[androidx.test:runner:1.5.2] /Users/antonymac/.gradle/caches/transforms-3/a1c6bc3a94a2b987232e993cc4ae9ce8/transformed/runner-1.5.2/AndroidManifest.xml:25:9-62
+21-->[androidx.test:runner:1.5.2] /Users/antonymac/.gradle/caches/transforms-3/a1c6bc3a94a2b987232e993cc4ae9ce8/transformed/runner-1.5.2/AndroidManifest.xml:25:18-59
+22        <package android:name="androidx.test.services" />
+22-->[androidx.test:runner:1.5.2] /Users/antonymac/.gradle/caches/transforms-3/a1c6bc3a94a2b987232e993cc4ae9ce8/transformed/runner-1.5.2/AndroidManifest.xml:26:9-58
+22-->[androidx.test:runner:1.5.2] /Users/antonymac/.gradle/caches/transforms-3/a1c6bc3a94a2b987232e993cc4ae9ce8/transformed/runner-1.5.2/AndroidManifest.xml:26:18-55
+23        <package android:name="com.google.android.apps.common.testing.services" />
+23-->[androidx.test:runner:1.5.2] /Users/antonymac/.gradle/caches/transforms-3/a1c6bc3a94a2b987232e993cc4ae9ce8/transformed/runner-1.5.2/AndroidManifest.xml:27:9-83
+23-->[androidx.test:runner:1.5.2] /Users/antonymac/.gradle/caches/transforms-3/a1c6bc3a94a2b987232e993cc4ae9ce8/transformed/runner-1.5.2/AndroidManifest.xml:27:18-80
+24    </queries>
+25
+26    <permission
+26-->[androidx.core:core:1.9.0] /Users/antonymac/.gradle/caches/transforms-3/5c363f05f7cd496d47c883edf4016ddf/transformed/core-1.9.0/AndroidManifest.xml:22:5-24:47
+27        android:name="com.yakulab.feature.profile.test.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+27-->[androidx.core:core:1.9.0] /Users/antonymac/.gradle/caches/transforms-3/5c363f05f7cd496d47c883edf4016ddf/transformed/core-1.9.0/AndroidManifest.xml:23:9-81
+28        android:protectionLevel="signature" />
+28-->[androidx.core:core:1.9.0] /Users/antonymac/.gradle/caches/transforms-3/5c363f05f7cd496d47c883edf4016ddf/transformed/core-1.9.0/AndroidManifest.xml:24:9-44
+29
+30    <uses-permission android:name="com.yakulab.feature.profile.test.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+30-->[androidx.core:core:1.9.0] /Users/antonymac/.gradle/caches/transforms-3/5c363f05f7cd496d47c883edf4016ddf/transformed/core-1.9.0/AndroidManifest.xml:26:5-97
+30-->[androidx.core:core:1.9.0] /Users/antonymac/.gradle/caches/transforms-3/5c363f05f7cd496d47c883edf4016ddf/transformed/core-1.9.0/AndroidManifest.xml:26:22-94
+31
+32    <application
+32-->/Users/antonymac/Documents/Antony/Android/YakuLab/Yaku-Lab-Official/feature-profile/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest10067345358869064574.xml:7:5-9:19
+33        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+33-->[androidx.core:core:1.9.0] /Users/antonymac/.gradle/caches/transforms-3/5c363f05f7cd496d47c883edf4016ddf/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
+34        android:debuggable="true"
+35        android:extractNativeLibs="false" >
+36        <uses-library android:name="android.test.runner" />
+36-->/Users/antonymac/Documents/Antony/Android/YakuLab/Yaku-Lab-Official/feature-profile/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest10067345358869064574.xml:8:9-60
+36-->/Users/antonymac/Documents/Antony/Android/YakuLab/Yaku-Lab-Official/feature-profile/build/intermediates/tmp/manifest/androidTest/debug/tempFile1ProcessTestManifest10067345358869064574.xml:8:23-57
+37
+38        <activity
+38-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:27:9-34:20
+39            android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"
+39-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:28:13-99
+40            android:exported="true"
+40-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:29:13-36
+41            android:theme="@style/WhiteBackgroundTheme" >
+41-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:30:13-56
+42            <intent-filter android:priority="-100" >
+42-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:31:13-33:29
+42-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:31:28-51
+43                <category android:name="android.intent.category.LAUNCHER" />
+43-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:32:17-77
+43-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:32:27-74
+44            </intent-filter>
+45        </activity>
+46        <activity
+46-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:35:9-42:20
+47            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"
+47-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:36:13-95
+48            android:exported="true"
+48-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:37:13-36
+49            android:theme="@style/WhiteBackgroundTheme" >
+49-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:38:13-56
+50            <intent-filter android:priority="-100" >
+50-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:31:13-33:29
+50-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:31:28-51
+51                <category android:name="android.intent.category.LAUNCHER" />
+51-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:32:17-77
+51-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:32:27-74
+52            </intent-filter>
+53        </activity>
+54        <activity
+54-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:43:9-50:20
+55            android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"
+55-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:44:13-103
+56            android:exported="true"
+56-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:45:13-36
+57            android:theme="@style/WhiteBackgroundDialogTheme" >
+57-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:46:13-62
+58            <intent-filter android:priority="-100" >
+58-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:31:13-33:29
+58-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:31:28-51
+59                <category android:name="android.intent.category.LAUNCHER" />
+59-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:32:17-77
+59-->[androidx.test:core:1.5.0] /Users/antonymac/.gradle/caches/transforms-3/9f5be4a5e9e81ee7d5196571d35a5fb4/transformed/core-1.5.0/AndroidManifest.xml:32:27-74
+60            </intent-filter>
+61        </activity>
+62        <activity
+62-->[com.google.android.gms:play-services-base:18.1.0] /Users/antonymac/.gradle/caches/transforms-3/20ee9f70084cac7c4b81aec9c2b002dc/transformed/play-services-base-18.1.0/AndroidManifest.xml:20:9-22:45
+63            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+63-->[com.google.android.gms:play-services-base:18.1.0] /Users/antonymac/.gradle/caches/transforms-3/20ee9f70084cac7c4b81aec9c2b002dc/transformed/play-services-base-18.1.0/AndroidManifest.xml:20:19-85
+64            android:exported="false"
+64-->[com.google.android.gms:play-services-base:18.1.0] /Users/antonymac/.gradle/caches/transforms-3/20ee9f70084cac7c4b81aec9c2b002dc/transformed/play-services-base-18.1.0/AndroidManifest.xml:22:19-43
+65            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+65-->[com.google.android.gms:play-services-base:18.1.0] /Users/antonymac/.gradle/caches/transforms-3/20ee9f70084cac7c4b81aec9c2b002dc/transformed/play-services-base-18.1.0/AndroidManifest.xml:21:19-78
+66
+67        <meta-data
+67-->[com.google.android.gms:play-services-basement:18.1.0] /Users/antonymac/.gradle/caches/transforms-3/4c754e5d691d786c02d5c660e3fb53a4/transformed/play-services-basement-18.1.0/AndroidManifest.xml:21:9-23:69
+68            android:name="com.google.android.gms.version"
+68-->[com.google.android.gms:play-services-basement:18.1.0] /Users/antonymac/.gradle/caches/transforms-3/4c754e5d691d786c02d5c660e3fb53a4/transformed/play-services-basement-18.1.0/AndroidManifest.xml:22:13-58
+69            android:value="@integer/google_play_services_version" />
+69-->[com.google.android.gms:play-services-basement:18.1.0] /Users/antonymac/.gradle/caches/transforms-3/4c754e5d691d786c02d5c660e3fb53a4/transformed/play-services-basement-18.1.0/AndroidManifest.xml:23:13-66
+70
+71        <provider
+71-->[androidx.emoji2:emoji2:1.2.0] /Users/antonymac/.gradle/caches/transforms-3/8700f470ce070a40444d39ddac400664/transformed/emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+72            android:name="androidx.startup.InitializationProvider"
+72-->[androidx.emoji2:emoji2:1.2.0] /Users/antonymac/.gradle/caches/transforms-3/8700f470ce070a40444d39ddac400664/transformed/emoji2-1.2.0/AndroidManifest.xml:25:13-67
+73            android:authorities="com.yakulab.feature.profile.test.androidx-startup"
+73-->[androidx.emoji2:emoji2:1.2.0] /Users/antonymac/.gradle/caches/transforms-3/8700f470ce070a40444d39ddac400664/transformed/emoji2-1.2.0/AndroidManifest.xml:26:13-68
+74            android:exported="false" >
+74-->[androidx.emoji2:emoji2:1.2.0] /Users/antonymac/.gradle/caches/transforms-3/8700f470ce070a40444d39ddac400664/transformed/emoji2-1.2.0/AndroidManifest.xml:27:13-37
+75            <meta-data
+75-->[androidx.emoji2:emoji2:1.2.0] /Users/antonymac/.gradle/caches/transforms-3/8700f470ce070a40444d39ddac400664/transformed/emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+76                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+76-->[androidx.emoji2:emoji2:1.2.0] /Users/antonymac/.gradle/caches/transforms-3/8700f470ce070a40444d39ddac400664/transformed/emoji2-1.2.0/AndroidManifest.xml:30:17-75
+77                android:value="androidx.startup" />
+77-->[androidx.emoji2:emoji2:1.2.0] /Users/antonymac/.gradle/caches/transforms-3/8700f470ce070a40444d39ddac400664/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
+78            <meta-data
+78-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/antonymac/.gradle/caches/transforms-3/56d5241312b48029779f23765e959d52/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
+79                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+79-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/antonymac/.gradle/caches/transforms-3/56d5241312b48029779f23765e959d52/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
+80                android:value="androidx.startup" />
+80-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/antonymac/.gradle/caches/transforms-3/56d5241312b48029779f23765e959d52/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
+81        </provider>
+82    </application>
+83
+84</manifest>

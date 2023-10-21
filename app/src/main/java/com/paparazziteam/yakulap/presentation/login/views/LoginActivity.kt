@@ -8,18 +8,19 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.observe
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
+import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
+import com.paparazziteam.yakulab.binding.utils.hideKeyboardActivity
+import com.paparazziteam.yakulab.binding.utils.isConnected
+import com.paparazziteam.yakulab.binding.utils.isValidEmail
+import com.paparazziteam.yakulab.binding.utils.setColorToStatusBar
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityLoginBinding
-import com.paparazziteam.yakulap.helper.application.MyPreferences
-import com.paparazziteam.yakulap.helper.hideKeyboardActivity
-import com.paparazziteam.yakulap.helper.isConnected
-import com.paparazziteam.yakulap.helper.isValidEmail
-import com.paparazziteam.yakulap.helper.setColorToStatusBar
 import com.paparazziteam.yakulap.presentation.dashboard.views.DashboardActivity
 import com.paparazziteam.yakulap.presentation.login.viewmodels.ViewModelLogin
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,14 +31,15 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
 
+    private val viewModelLogin: ViewModelLogin by viewModels()
+
     @Inject
-    lateinit var mPreferences:MyPreferences
+    lateinit var mPreferences: MyPreferences
 
     lateinit var txtRegistroNuevo: MaterialTextView
     var btnLoginEmail: MaterialButton? = null
     var isValidEmail = false
     var isValidPass:Boolean = false
-    var _viewModelLogin = ViewModelLogin.getInstance()
     var TAG = this.javaClass.name
 
 
@@ -65,19 +67,19 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun showObservables() {
-        _viewModelLogin.showMessage().observe(this) { message ->
+        viewModelLogin.showMessage().observe(this) { message ->
             if (message != null) {
                 _showMessageMainThread(message)
             }
         }
-        _viewModelLogin.getIsLoginAnonymous().observe(this) { isLoginAnonymous ->
+        viewModelLogin.getIsLoginAnonymous().observe(this) { isLoginAnonymous ->
             if (isLoginAnonymous) {
                 startActivity(Intent(this, LoginActivity::class.java).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
             }
         }
 
         //Login with email
-        _viewModelLogin.getIsLoginEmail().observe(this) { isLoginEmail ->
+        viewModelLogin.getIsLoginEmail().observe(this) { isLoginEmail ->
             println("isLoginEmail: $isLoginEmail")
             if (isLoginEmail) {
                 //Log.e(TAG, "EMAIL ENVIADO: " + binding.email.text.toString().lowercase())
@@ -89,7 +91,7 @@ class LoginActivity : AppCompatActivity() {
                 )
             }
         }
-        _viewModelLogin.getIsLoading().observe(this) { isLoading ->
+        viewModelLogin.getIsLoading().observe(this) { isLoading ->
             Log.e("ISLOADING", "ISLOADING:$isLoading")
             if (isLoading) {
                 binding.cortinaLayout.visibility = View.VISIBLE
@@ -103,7 +105,7 @@ class LoginActivity : AppCompatActivity() {
         btnLoginEmail!!.setOnClickListener {
             hideKeyboardActivity(this@LoginActivity)
             if (isConnected(applicationContext)) {
-                _viewModelLogin.loginWithEmail(
+                viewModelLogin.loginWithEmail(
                     binding.email.text.toString().trim(),
                     binding.pass.text.toString().trim()
                 )
@@ -181,7 +183,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        ViewModelLogin.destroyInstance()
         super.onDestroy()
     }
 }

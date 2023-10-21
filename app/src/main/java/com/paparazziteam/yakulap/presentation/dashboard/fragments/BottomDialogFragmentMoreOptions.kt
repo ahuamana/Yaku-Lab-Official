@@ -8,18 +8,21 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.paparazziteam.yakulap.databinding.BottomSheetMoreOptionsBinding
-import com.paparazziteam.yakulap.helper.*
 import com.paparazziteam.yakulab.binding.Constants.ARG_DATA
-import com.paparazziteam.yakulap.helper.application.MyPreferences
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.*
+import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
+import com.paparazziteam.yakulab.binding.helper.autoCleared
+import com.paparazziteam.yakulab.binding.utils.fromJson
+import com.paparazziteam.yakulab.binding.utils.toJson
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
+import com.yakulab.domain.dashboard.ChallengeCompleted
+import com.yakulab.domain.dashboard.TypeReported
 
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class BottomDialogFragmentMoreOptions : BottomSheetDialogFragment() {
 
-    private var item:ChallengeCompleted?=null
+    private var item: ChallengeCompleted?=null
     private var _binding: BottomSheetMoreOptionsBinding by autoCleared()
     private val _viewModel: ViewModelDashboard by activityViewModels()
 
@@ -29,7 +32,7 @@ class BottomDialogFragmentMoreOptions : BottomSheetDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            item = fromJson(it.getString(ARG_DATA)?:"")
+            item = fromJson(it.getString(ARG_DATA)?:"", ChallengeCompleted::class.java)
         }
     }
 

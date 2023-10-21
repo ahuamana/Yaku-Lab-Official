@@ -3,7 +3,7 @@ package com.paparazziteam.yakulap.presentation.dashboard.model
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.Query
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.ChallengeCompleted
+import com.yakulab.domain.dashboard.ChallengeCompleted
 
 interface ChallengeRepository {
     fun createDocument(): DocumentReference?

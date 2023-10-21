@@ -2,9 +2,9 @@ package com.paparazziteam.yakulap.presentation.dashboard.adapters
 
 import androidx.annotation.Nullable
 import androidx.recyclerview.widget.DiffUtil
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.ChallengeCompleted
+import com.yakulab.domain.dashboard.ChallengeCompleted
 
-class ChallengeCompletedDiffCallback(private val oldList: List<ChallengeCompleted>,private val newList: List<ChallengeCompleted>) : DiffUtil.Callback() {
+class ChallengeCompletedDiffCallback(private val oldList: List<ChallengeCompleted>, private val newList: List<ChallengeCompleted>) : DiffUtil.Callback() {
 
     override fun getOldListSize(): Int {
         return oldList.size

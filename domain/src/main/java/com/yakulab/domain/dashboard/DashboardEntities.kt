@@ -19,8 +19,6 @@ data class ObservationItem(
     val taxon: Taxon? = null
 )
 
-
-
 data class Observation(
     val id:Long?,
     val uuid: String?,

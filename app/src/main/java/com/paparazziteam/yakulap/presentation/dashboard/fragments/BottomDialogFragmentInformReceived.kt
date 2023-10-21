@@ -8,8 +8,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.paparazziteam.yakulap.databinding.BottomSheetInformReceivedBinding
 import com.paparazziteam.yakulab.binding.Constants.ARG_DATA
 import com.paparazziteam.yakulab.binding.Constants.REPORT_TYPE_POST
-import com.paparazziteam.yakulap.helper.autoCleared
-import com.paparazziteam.yakulap.helper.convertFirstLetterToUpperCaseAndRestToLowerCase
+import com.paparazziteam.yakulab.binding.helper.autoCleared
+import com.paparazziteam.yakulab.binding.utils.convertFirstLetterToUpperCaseAndRestToLowerCase
 
 import dagger.hilt.android.AndroidEntryPoint
 

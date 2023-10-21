@@ -18,23 +18,25 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.paparazziteam.yakulab.binding.Constants
+import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
+import com.paparazziteam.yakulab.binding.helper.beGone
+import com.paparazziteam.yakulab.binding.helper.beVisible
+import com.paparazziteam.yakulab.binding.helper.others.LocationManager
+import com.paparazziteam.yakulab.binding.helper.others.PermissionManager
+import com.paparazziteam.yakulab.binding.helper.preventDoubleClick
+import com.paparazziteam.yakulab.binding.utils.toJson
 import com.paparazziteam.yakulab.binding.utils.openUrl
 import com.paparazziteam.yakulap.databinding.FragmentHomeBinding
-import com.paparazziteam.yakulap.helper.*
-import com.paparazziteam.yakulap.helper.application.MyPreferences
-import com.paparazziteam.yakulap.helper.design.SlideImageFullScreenActivity
-import com.paparazziteam.yakulap.helper.design.decoration.ItemSpaceDecorationHorizontal
-
-import com.paparazziteam.yakulap.helper.others.LocationManager
-import com.paparazziteam.yakulap.helper.others.PermissionManager
 import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterChallengeCompleted
 import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterNearbySpecies
 import com.paparazziteam.yakulap.presentation.dashboard.interfaces.onClickThread
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.ChallengeCompleted
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.TypeGroup
+import com.yakulab.domain.dashboard.ChallengeCompleted
+import com.yakulab.domain.dashboard.TypeGroup
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.HomeViewModel
-import com.paparazziteam.yakulap.presentation.laboratorio.pojo.toDataChallengeNearbySpecies
-import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
+import com.yakulab.domain.laboratory.toDataChallengeNearbySpecies
+import com.paparazziteam.yakulap.navigation.NavigationRootImpl
+import com.paparazziteam.yakulap.presentation.dashboard.views.SlideImageFullScreenActivity
+import com.paparazziteam.yakulap.utils.design.decoration.ItemSpaceDecorationHorizontal
 import com.yakulab.usecases.inaturalist.SpeciesByLocationResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -46,7 +48,7 @@ import javax.inject.Inject
 class HomeFragment : Fragment(), onClickThread {
 
     @Inject
-    lateinit var mPreferences:MyPreferences
+    lateinit var mPreferences: MyPreferences
 
     @Inject
     lateinit var navigationRoot: NavigationRootImpl
@@ -89,19 +91,20 @@ class HomeFragment : Fragment(), onClickThread {
         override fun onLocationReceived(location: Location?) {
             if(location == null) return
             location.let {
+                Timber.d("onLocationReceived: ${it.latitude} ${it.longitude}")
                 viewModel.getSpeciesByLocation(it.latitude, it.longitude)
             }
         }
 
         override fun onLocationFailed() {
-            Log.d("LOCATION", "onLocationFailed: ")
+            Timber.d("LOCATION", "onLocationFailed: ")
             val doubleLatitudePeruLima = -12.046374
             val doubleLongitudePeruLima = -77.042793
             viewModel.getSpeciesByLocation(doubleLatitudePeruLima, doubleLongitudePeruLima)
         }
 
         override fun onPermissionFailed() {
-            Log.d("LOCATION", "onPermissionFailed: ")
+            Timber.d("LOCATION", "onPermissionFailed: ")
             val doubleLatitudePeruLima = -12.046374
             val doubleLongitudePeruLima = -77.042793
             viewModel.getSpeciesByLocation(doubleLatitudePeruLima, doubleLongitudePeruLima)
@@ -200,27 +203,57 @@ class HomeFragment : Fragment(), onClickThread {
         mAdapter?.onClickUpdateLikeListener {
             viewModel.updateLikeStatusFirebase(it)
         }
+
+        mAdapter?.onClickShareListener {
+           //Share the app
+            Timber.d("Share the app")
+            shareApp()
+        }
+
+        mAdapter?.onClickImageListener { challenge, position ->
+            var list = listOf(challenge.url)
+            val intent = Intent(this.context, SlideImageFullScreenActivity::class.java)
+            intent.putExtra("lista_imagenes", list.toString())
+            intent.putExtra("position"      , position)
+            requireContext().startActivity(intent)
+        }
+    }
+
+    private fun shareApp(){
+        val intentCompartir = Intent(Intent.ACTION_SEND)
+        intentCompartir.type = "text/plain"
+        intentCompartir.putExtra(Intent.EXTRA_SUBJECT, "¡Descubre YAKU LAB!")
+        val mensajeCompartir = """
+        ¡Hey! Quiero compartir contigo YAKU LAB, una increíble plataforma educativa de ciencia y tecnología. 🚀🔬
+
+        📱 Descarga la app y únete a la aventura del aprendizaje gamificado:
+        👉 https://play.google.com/store/apps/details?id=${requireActivity().packageName}
+
+        ¡Juntos, podemos hacer que el aprendizaje sea divertido e interactivo! 💡🎮
+        """.trimIndent()
+        intentCompartir.putExtra(Intent.EXTRA_TEXT, mensajeCompartir)
+        startActivity(Intent.createChooser(intentCompartir, "Compartir en"))
     }
 
     private fun otherComponents() {
         binding.cardAnimals.setOnClickListener {
             it.preventDoubleClick()
             val bundle = Bundle()
-            bundle.putString("typeGroup",TypeGroup.ANIMALS.value)
+            bundle.putString("typeGroup", TypeGroup.ANIMALS.value)
             navigationRoot.navigateToChallengeList(bundle)
         }
 
         binding.cardFruits.setOnClickListener {
             it.preventDoubleClick()
             val bundle = Bundle()
-            bundle.putString("typeGroup",TypeGroup.FRUITS.value)
+            bundle.putString("typeGroup", TypeGroup.FRUITS.value)
             navigationRoot.navigateToChallengeList(bundle)
         }
 
         binding.cardPlants.setOnClickListener {
             it.preventDoubleClick()
             val bundle = Bundle()
-            bundle.putString("typeGroup",TypeGroup.PLANTS.value)
+            bundle.putString("typeGroup", TypeGroup.PLANTS.value)
             navigationRoot.navigateToChallengeList(bundle)
         }
     }
@@ -247,7 +280,6 @@ class HomeFragment : Fragment(), onClickThread {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED){
                 viewModel.speciesByLocation.collect() {
-                    Log.d("TAG","speciesByLocation: $it")
                     showSpeciesByLocationDialog(it)
                 }
             }
@@ -257,7 +289,11 @@ class HomeFragment : Fragment(), onClickThread {
     private fun showSpeciesByLocationDialog(it: SpeciesByLocationResult) {
         when(it){
             is SpeciesByLocationResult.Error -> it.run{
-                Log.e("TAG","Error: $message")
+                binding.apply {
+                    internalContainerLayoutBodyNearbySpecies.beVisible()
+                    containerBodyNearbySpecies.beGone()
+                    containerBodyNearbySpeciesEmpty.beVisible()
+                }
             }
             SpeciesByLocationResult.HideLoading -> {
 
@@ -272,8 +308,6 @@ class HomeFragment : Fragment(), onClickThread {
                     containerBodyNearbySpecies.beVisible()
                     containerBodyNearbySpeciesEmpty.beGone()
                 }
-
-                Log.d("TAG","Success: $species")
                 adapterSpeciesNearby.submitList(species)
             }
 
@@ -323,7 +357,7 @@ class HomeFragment : Fragment(), onClickThread {
     }
 
     override fun clickedReportThread(item: ChallengeCompleted) {
-        val fragment = BottomDialogFragmentMoreOptions.newInstance(toJson(item))
+        val fragment = BottomDialogFragmentMoreOptions.newInstance(toJson(item) ?:"")
         fragment.show(parentFragmentManager,"bottomSheetMoreOptions")
 
     }

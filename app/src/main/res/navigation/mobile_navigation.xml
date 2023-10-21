@@ -34,7 +34,13 @@
         android:id="@+id/nav_challenge_complete"
         android:name="com.paparazziteam.yakulap.presentation.laboratorio.fragments.ResultCaptureImageFragment"
         android:label="@string/menu_result_image_capture"
-        tools:layout="@layout/fragment_result_capture_image" />
+        tools:layout="@layout/fragment_result_capture_image" >
+        <action
+            android:id="@+id/action_nav_challenge_complete_to_nav_home"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true"
+            app:destination="@id/nav_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_challenge_list"

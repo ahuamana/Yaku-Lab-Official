@@ -29,19 +29,22 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.FragmentChallengeBinding
-import com.paparazziteam.yakulap.helper.*
 import com.paparazziteam.yakulab.binding.Constants.EXTRA_CHALLENGE
-import com.paparazziteam.yakulap.helper.application.MyPreferences
-import com.paparazziteam.yakulap.helper.application.toast
-import com.paparazziteam.yakulap.helper.others.PermissionManager
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.ChallengeCompleted
+import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
+import com.paparazziteam.yakulab.binding.helper.beGone
+import com.paparazziteam.yakulab.binding.helper.beVisible
+import com.paparazziteam.yakulab.binding.utils.fromJson
+import com.paparazziteam.yakulab.binding.helper.others.PermissionManager
+import com.paparazziteam.yakulab.binding.helper.preventDoubleClick
+import com.paparazziteam.yakulab.binding.utils.toast
+import com.yakulab.domain.dashboard.ChallengeCompleted
 import com.paparazziteam.yakulap.presentation.laboratorio.fragments.bottomsheets.BottomSheetDialogOptionsCameraFragment
 import com.paparazziteam.yakulap.presentation.laboratorio.fragments.bottomsheets.OnOptionSelectedSourcePicker
-import com.paparazziteam.yakulap.presentation.laboratorio.pojo.DataChallenge
-import com.paparazziteam.yakulap.presentation.laboratorio.pojo.TypeChallenge
+import com.yakulab.domain.laboratory.DataChallenge
+import com.yakulab.domain.laboratory.TypeChallenge
 import com.paparazziteam.yakulap.presentation.laboratorio.viewmodels.ViewModelChallenge
 import com.paparazziteam.yakulap.presentation.laboratorio.viewmodels.ViewModelChallengeFragment
-import com.paparazziteam.yakulap.presentation.navigation.NavigationRootImpl
+import com.paparazziteam.yakulap.navigation.NavigationRootImpl
 import dagger.hilt.android.AndroidEntryPoint
 import jp.wasabeef.glide.transformations.BlurTransformation
 import timber.log.Timber
@@ -60,7 +63,7 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
     private var dataExtra = DataChallenge()
 
     @Inject
-    lateinit var mPreferences :MyPreferences
+    lateinit var mPreferences : MyPreferences
 
     @Inject
     lateinit var mNavigationRoot: NavigationRootImpl
@@ -300,7 +303,7 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
                         dataSource: DataSource?,
                         isFirstResource: Boolean
                     ): Boolean {
-                        Log.d(TAG, "OnResourceReady")
+                        Timber.d("OnResourceReady")
                         //do something when picture already loaded
                         binding?.progressLoadImage?.beGone()
                         return false
@@ -337,7 +340,7 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
                     dataSource: DataSource?,
                     isFirstResource: Boolean
                 ): Boolean {
-                    Log.d(TAG, "OnResourceReady")
+                    Timber.d("OnResourceReady")
                     //do something when picture already loaded
                     txtImageNotUploaded?.beGone()
 

@@ -8,12 +8,18 @@ import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.BottomSheetNormasComunitariasBinding
-import com.paparazziteam.yakulap.helper.*
+
 import com.paparazziteam.yakulab.binding.Constants.ARG_DATA
 import com.paparazziteam.yakulab.binding.Constants.REPORT_TYPE
 import com.paparazziteam.yakulab.binding.Constants.REPORT_TYPE_POST
-import com.paparazziteam.yakulap.presentation.dashboard.pojo.*
+import com.paparazziteam.yakulab.binding.helper.autoCleared
+import com.paparazziteam.yakulab.binding.utils.convertFirstLetterToUpperCaseAndRestToLowerCase
+import com.paparazziteam.yakulab.binding.utils.fromHtml
+import com.paparazziteam.yakulab.binding.utils.fromJson
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
+import com.yakulab.domain.dashboard.ChallengeCompleted
+import com.yakulab.domain.dashboard.TypeReported
+import com.yakulab.domain.dashboard.TypeReportedPost
 
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class BottomDialogFragmentNormasComunitarias : BottomSheetDialogFragment() {
 
 
-    private var item:ChallengeCompleted?=null
+    private var item: ChallengeCompleted?=null
     private var itemReportType:String?=null
     private var itemReportTypePost:String?=null
 
@@ -36,7 +42,7 @@ class BottomDialogFragmentNormasComunitarias : BottomSheetDialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            item = fromJson(it.getString(ARG_DATA)?:"")
+            item = fromJson(it.getString(ARG_DATA)?:"", ChallengeCompleted::class.java)
             itemReportType = it.getString(REPORT_TYPE)
             itemReportTypePost = it.getString(REPORT_TYPE_POST)
         }
