@@ -6,16 +6,16 @@ import androidx.lifecycle.ViewModel
 import com.paparazziteam.yakulap.R
 import com.yakulab.domain.laboratory.DataChallenge
 import com.yakulab.domain.laboratory.DataListChallenge
-import com.paparazziteam.yakulap.presentation.repositorio.LabAnimalsProvider
-import com.paparazziteam.yakulap.presentation.repositorio.ResourcesProvider
+import com.ahuaman.data.dashboard.providers.LabAnimalsProvider
+import com.ahuaman.data.dashboard.providers.ResourcesProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 
 @HiltViewModel
-class ViewModelResult @Inject constructor(private val resoursesProvider:ResourcesProvider):ViewModel() {
+class ViewModelResult @Inject constructor(private val resoursesProvider: com.ahuaman.data.dashboard.providers.ResourcesProvider):ViewModel() {
 
-    private var mLabProvider = LabAnimalsProvider()
+    private var mLabProvider = com.ahuaman.data.dashboard.providers.LabAnimalsProvider()
 
     private var listCategoriaInsectos: MutableList<DataChallenge>? = mutableListOf()
     private var listAnimalesDomesticos: MutableList<DataChallenge>? = mutableListOf()

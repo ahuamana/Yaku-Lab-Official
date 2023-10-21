@@ -1,4 +1,4 @@
-package com.paparazziteam.yakulap.presentation.login.providers
+package com.ahuaman.data.dashboard.providers
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -26,11 +26,11 @@ class LoginProvider @Inject constructor() {
        return mAuth.signInWithEmailAndPassword(email, pass)
     }
 
-    fun loginAnonimously(): Task<AuthResult> {
+    fun loginAnonymous(): Task<AuthResult> {
         return  mAuth.signInAnonymously()
     }
 
-    fun signout() {
+    fun signOut() {
         return mAuth.signOut()
     }
 

@@ -1,4 +1,4 @@
-package com.paparazziteam.yakulap.presentation.repositorio
+package com.ahuaman.data.dashboard.providers
 
 import android.content.Context
 import androidx.annotation.StringRes

@@ -1,4 +1,4 @@
-package com.paparazziteam.yakulap.presentation.login.providers
+package com.ahuaman.data.dashboard.providers
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference

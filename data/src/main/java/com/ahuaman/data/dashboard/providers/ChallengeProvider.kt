@@ -1,10 +1,11 @@
-package com.paparazziteam.yakulap.presentation.repositorio
+package com.ahuaman.data.dashboard.providers
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.*
 import com.yakulab.domain.dashboard.ChallengeCompleted
+import javax.inject.Inject
 
-class ChallengeProvider {
+class ChallengeProvider @Inject constructor() {
 
     var mCollection: CollectionReference = FirebaseFirestore.getInstance().collection("LaboratorioDigital")
 

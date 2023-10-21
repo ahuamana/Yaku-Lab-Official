@@ -20,9 +20,6 @@ import com.yakulab.domain.dashboard.ObservationEntity
 import com.paparazziteam.yakulap.presentation.dashboard.model.ChallengeRepository
 import com.paparazziteam.yakulap.presentation.dashboard.model.CommentRepository
 import com.yakulab.domain.login.User
-import com.paparazziteam.yakulap.presentation.login.providers.LoginProvider
-import com.paparazziteam.yakulap.presentation.login.providers.UserProvider
-import com.paparazziteam.yakulap.presentation.repositorio.*
 import com.yakulab.domain.dashboard.ChallengeCompleted
 import com.yakulab.domain.dashboard.Comment
 import com.yakulab.domain.dashboard.Reaccion
@@ -50,13 +47,13 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewModelDashboard @Inject constructor(
-    private val mUserProvider:UserProvider,
-    private val mLoginProvider:LoginProvider,
+    private val mUserProvider: com.ahuaman.data.dashboard.providers.UserProvider,
+    private val mLoginProvider: com.ahuaman.data.dashboard.providers.LoginProvider,
     private val mCommentRepositoryImpl: CommentRepository,
-    private val mImageProvider:ImageProvider,
+    private val mImageProvider: com.ahuaman.data.dashboard.providers.ImageProvider,
     private val mChallengeProvider: ChallengeRepository,
-    private val mActionProvider:ReaccionProvider,
-    private val mReportProvider:ReportProvider,
+    private val mActionProvider: com.ahuaman.data.dashboard.providers.ReaccionProvider,
+    private val mReportProvider: com.ahuaman.data.dashboard.providers.ReportProvider,
     private val mPreferences: MyPreferences,
     private val getSpeciesByLocationUseCase: GetSpeciesByLocationUseCase,
 ): ViewModel(){

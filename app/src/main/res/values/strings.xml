@@ -104,6 +104,6 @@
     <string name="imagen_no_subida">Imagen no subida</string>
     <string name="menu_rank">Ranking</string>
     <string name="menu_profile">Perfil</string>
-    <string name="menu_aula">Salas</string>
+    <string name="menu_aula">Ranking</string>
 
 </resources>

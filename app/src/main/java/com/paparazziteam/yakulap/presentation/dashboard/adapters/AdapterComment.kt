@@ -16,7 +16,7 @@ import com.paparazziteam.yakulap.databinding.ItemComentarioBinding
 import com.paparazziteam.yakulap.presentation.dashboard.fragments.BottomDialogFragmentMoreOptionsComment
 import com.yakulab.domain.dashboard.Comment
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.ViewModelDashboard
-import com.paparazziteam.yakulap.presentation.login.providers.UserProvider
+import com.ahuaman.data.dashboard.providers.UserProvider
 import javax.inject.Singleton
 
 @Singleton
@@ -73,7 +73,7 @@ class AdapterComment(private val viewModel: ViewModelDashboard) : RecyclerView.A
         private fun getUserInfo(item: Comment) {
             messageText?.text = item.message
 
-            UserProvider().searchUserByEmail(item.email).addOnCompleteListener {
+            com.ahuaman.data.dashboard.providers.UserProvider().searchUserByEmail(item.email).addOnCompleteListener {
                 if(it.isSuccessful){
                     val first = it.result.get("nombres").toString()
                     val last = it.result.get("apellidos").toString()
