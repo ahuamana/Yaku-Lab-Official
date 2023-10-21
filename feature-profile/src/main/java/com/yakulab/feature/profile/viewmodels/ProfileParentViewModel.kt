@@ -2,6 +2,7 @@ package com.yakulab.feature.profile.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
 import com.paparazziteam.yakulab.binding.utils.text.capitalizeWords
 import com.yakulab.domain.profile.MedalsDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +23,8 @@ class ProfileParentViewModel  @Inject constructor(
     private val getUserInfoUseCase: com.yakulab.usecases.firebase.getUserInfoUseCase,
     private val getMedalsUseCase: com.yakulab.usecases.yakulab.GetMedalsUseCase,
     private val getCertificationsUseCase: com.yakulab.usecases.yakulab.GetCertificationsUseCase,
-    private val logoutUseCase: com.yakulab.usecases.yakulab.LogoutUseCase
+    private val logoutUseCase: com.yakulab.usecases.yakulab.LogoutUseCase,
+    private val myPreferences: MyPreferences
 ) : ViewModel() {
 
 
@@ -54,7 +56,7 @@ class ProfileParentViewModel  @Inject constructor(
     }
 
     fun logout() = viewModelScope.launch {
-
+        myPreferences.removeLoginData()
         logoutUseCase.invoke()
     }
 

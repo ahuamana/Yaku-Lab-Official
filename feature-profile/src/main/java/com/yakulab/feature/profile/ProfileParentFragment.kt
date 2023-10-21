@@ -15,6 +15,7 @@ import com.yakulab.feature.profile.databinding.FragmentProfileParentBinding
 import com.yakulab.feature.profile.viewmodels.ProfileParentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import viewBinding
