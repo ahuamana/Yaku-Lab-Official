@@ -1,5 +1,6 @@
 package com.yakulab.feature.profile;
 
+import com.paparazziteam.yakulab.binding.helper.analytics.FBaseAnalytics;
 import com.paparazziteam.yakulab.binding.helper.navigator.Navigator;
 import dagger.MembersInjector;
 import dagger.internal.DaggerGenerated;
@@ -23,22 +24,33 @@ import javax.inject.Provider;
 public final class ProfileParentFragment_MembersInjector implements MembersInjector<ProfileParentFragment> {
   private final Provider<Navigator> navigatorProvider;
 
-  public ProfileParentFragment_MembersInjector(Provider<Navigator> navigatorProvider) {
+  private final Provider<FBaseAnalytics> fBaseAnalyticsProvider;
+
+  public ProfileParentFragment_MembersInjector(Provider<Navigator> navigatorProvider,
+      Provider<FBaseAnalytics> fBaseAnalyticsProvider) {
     this.navigatorProvider = navigatorProvider;
+    this.fBaseAnalyticsProvider = fBaseAnalyticsProvider;
   }
 
-  public static MembersInjector<ProfileParentFragment> create(
-      Provider<Navigator> navigatorProvider) {
-    return new ProfileParentFragment_MembersInjector(navigatorProvider);
+  public static MembersInjector<ProfileParentFragment> create(Provider<Navigator> navigatorProvider,
+      Provider<FBaseAnalytics> fBaseAnalyticsProvider) {
+    return new ProfileParentFragment_MembersInjector(navigatorProvider, fBaseAnalyticsProvider);
   }
 
   @Override
   public void injectMembers(ProfileParentFragment instance) {
     injectNavigator(instance, navigatorProvider.get());
+    injectFBaseAnalytics(instance, fBaseAnalyticsProvider.get());
   }
 
   @InjectedFieldSignature("com.yakulab.feature.profile.ProfileParentFragment.navigator")
   public static void injectNavigator(ProfileParentFragment instance, Navigator navigator) {
     instance.navigator = navigator;
+  }
+
+  @InjectedFieldSignature("com.yakulab.feature.profile.ProfileParentFragment.fBaseAnalytics")
+  public static void injectFBaseAnalytics(ProfileParentFragment instance,
+      FBaseAnalytics fBaseAnalytics) {
+    instance.fBaseAnalytics = fBaseAnalytics;
   }
 }
