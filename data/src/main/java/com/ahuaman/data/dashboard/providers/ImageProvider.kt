@@ -15,7 +15,7 @@ class ImageProvider @Inject constructor(
     @ApplicationContext private val appContext: Context
 ) {
 
-    private var mFirebaseStorage = FirebaseStorage.getInstance()
+    private val mFirebaseStorage = FirebaseStorage.getInstance()
     var mStorage = mFirebaseStorage?.reference
 
     fun save(file: File): UploadTask? {

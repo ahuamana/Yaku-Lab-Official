@@ -14,12 +14,8 @@ class LoginProvider @Inject constructor() {
     }
 
     //Local
-    fun getEmail(): String? {
-        return if(mAuth.currentUser != null) {
-            mAuth.currentUser!!.email
-        }else {
-            ""
-        }
+    fun getEmail(): String {
+        return mAuth.currentUser?.email?: ""
     }
 
     fun loginEmail(email:String, pass:String): Task<AuthResult> {

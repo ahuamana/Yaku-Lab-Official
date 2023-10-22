@@ -18,10 +18,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewModelLab @Inject constructor(
-    handle: SavedStateHandle
+    handle: SavedStateHandle,
+    private val mLabProvider: LabAnimalsProvider
 ) : ViewModel() {
-
-    private var mLabProvider = com.ahuaman.data.dashboard.providers.LabAnimalsProvider()
 
     private val _observableListData = MutableLiveData<List<DataItems>>()
     val observableListData:LiveData<List<DataItems>> get() = _observableListData

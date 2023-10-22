@@ -20,12 +20,6 @@ object FirebaseModule {
         return FirebaseAuth.getInstance()
     }
 
-    @Provides
-    @Singleton
-    fun provideFirestoreProvider():FirebaseFirestore{
-        return FirebaseFirestore.getInstance()
-    }
-
     //Collections
     @UsersCollection
     @Provides

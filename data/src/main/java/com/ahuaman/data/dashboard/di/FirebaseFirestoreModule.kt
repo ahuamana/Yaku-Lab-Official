@@ -13,18 +13,15 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object FirebaseFirestoreModule {
 
-    @Singleton
     @Provides
+    @Singleton
     fun provideFirebaseFirestore() : FirebaseFirestore {
-        val db = FirebaseFirestore.getInstance()
-
-        val localChacheSettings = FirebaseFirestoreSettings
-            .Builder()
-            .setLocalCacheSettings(PersistentCacheSettings.newBuilder().build())
-            .build()
-
-        db.firestoreSettings = localChacheSettings
-
+        val db = FirebaseFirestore.getInstance().also {
+            val settings = FirebaseFirestoreSettings.Builder()
+                .setPersistenceEnabled(true)
+                .build()
+            it.firestoreSettings = settings
+        }
         return db
     }
 }

@@ -13,9 +13,11 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class ViewModelResult @Inject constructor(private val resoursesProvider: com.ahuaman.data.dashboard.providers.ResourcesProvider):ViewModel() {
+class ViewModelResult @Inject constructor(
+    private val resoursesProvider: ResourcesProvider,
+    private val mLabProvider: LabAnimalsProvider
+):ViewModel() {
 
-    private var mLabProvider = com.ahuaman.data.dashboard.providers.LabAnimalsProvider()
 
     private var listCategoriaInsectos: MutableList<DataChallenge>? = mutableListOf()
     private var listAnimalesDomesticos: MutableList<DataChallenge>? = mutableListOf()

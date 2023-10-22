@@ -31,7 +31,7 @@ import javax.inject.Singleton
 @Singleton
 class AdapterChallengeCompleted @Inject constructor(
     val clickedItemCompleted: onClickThread?,
-    private val mPreferences: MyPreferences
+    private val mPreferences: MyPreferences,
 ) : RecyclerView.Adapter<AdapterChallengeCompleted.ViewHolder>() {
 
     private var oldListChallenges = mutableListOf<ChallengeCompleted>()
@@ -73,7 +73,7 @@ class AdapterChallengeCompleted @Inject constructor(
 
     inner class ViewHolder(itemview : View): RecyclerView.ViewHolder(itemview) {
 
-        var mActionProvider = com.ahuaman.data.dashboard.providers.ReaccionProvider()
+        var mActionProvider = ReaccionProvider()
         val binding = ItemChallengeCompletedBinding.bind(itemView)
 
         private lateinit var imageChalleng: ShapeableImageView

@@ -9,10 +9,18 @@ import com.yakulab.domain.login.User
 import javax.inject.Inject
 
 class UserProvider @Inject constructor(
-    private val firebaseFirestore: FirebaseFirestore
+
 ) {
 
-    val mCollection: CollectionReference = firebaseFirestore.collection("Users")
+    val mCollection: CollectionReference = FirebaseFirestore.getInstance().collection("Users")
+
+    init {
+        val settings = FirebaseFirestoreSettings.Builder()
+            .setPersistenceEnabled(true)
+            .build()
+
+        FirebaseFirestore.getInstance().firestoreSettings = settings
+    }
 
     fun create(user: User): Task<Void> {
         return mCollection.document(user.email?:"").set(user)
