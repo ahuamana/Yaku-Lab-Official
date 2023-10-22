@@ -14,6 +14,7 @@ import androidx.lifecycle.observe
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
+import com.paparazziteam.yakulab.binding.helper.analytics.FBaseAnalytics
 import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
 import com.paparazziteam.yakulab.binding.utils.hideKeyboardActivity
 import com.paparazziteam.yakulab.binding.utils.isConnected
@@ -35,6 +36,9 @@ class LoginActivity : AppCompatActivity() {
 
     @Inject
     lateinit var mPreferences: MyPreferences
+
+    @Inject
+    lateinit var fBaseAnalytics: FBaseAnalytics
 
     lateinit var txtRegistroNuevo: MaterialTextView
     var btnLoginEmail: MaterialButton? = null
@@ -103,6 +107,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun loginFirebase() {
         btnLoginEmail!!.setOnClickListener {
+            fBaseAnalytics.logLoginEvent()
             hideKeyboardActivity(this@LoginActivity)
             if (isConnected(applicationContext)) {
                 viewModelLogin.loginWithEmail(
@@ -173,6 +178,7 @@ class LoginActivity : AppCompatActivity() {
     private fun openNewRegistro() {
         txtRegistroNuevo.apply {
             setOnClickListener {
+                fBaseAnalytics.startRegistrationEvent()
                 startActivity(Intent(this@LoginActivity,RegisterUserActivity::class.java))
             }
         }

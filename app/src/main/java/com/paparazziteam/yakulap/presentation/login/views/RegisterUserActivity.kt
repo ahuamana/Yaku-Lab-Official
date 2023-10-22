@@ -15,6 +15,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.paparazziteam.yakulab.binding.helper.analytics.FBaseAnalytics
 import com.paparazziteam.yakulab.binding.utils.hideKeyboardActivity
 import com.paparazziteam.yakulab.binding.utils.isValidEmail
 import com.paparazziteam.yakulab.binding.utils.setColorToStatusBar
@@ -24,6 +25,7 @@ import com.paparazziteam.yakulap.presentation.dashboard.views.DashboardActivity
 import com.yakulab.domain.login.User
 import com.paparazziteam.yakulap.presentation.login.viewmodels.ViewModelRegistroUsuario
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RegisterUserActivity : AppCompatActivity() {
@@ -50,6 +52,9 @@ class RegisterUserActivity : AppCompatActivity() {
     var btnSignUp: MaterialButton? = null
 
     private lateinit var toolbar  : Toolbar
+
+    @Inject
+    lateinit var fBaseAnalytics: FBaseAnalytics
 
     //Sign up
     var userNew = User()
@@ -257,6 +262,7 @@ class RegisterUserActivity : AppCompatActivity() {
 
     private fun signUp() {
         binding.signUp.setOnClickListener {
+            fBaseAnalytics.completeRegistrationEvent()
             userNew.apellidos = edtLastname?.text.toString().trim()
             userNew.email = edtEmail?.text.toString().trim()
             userNew.nombres = edtFullname?.text.toString().trim()
