@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -26,6 +25,7 @@ import com.paparazziteam.yakulab.binding.helper.others.PermissionManager
 import com.paparazziteam.yakulab.binding.helper.preventDoubleClick
 import com.paparazziteam.yakulab.binding.utils.toJson
 import com.paparazziteam.yakulab.binding.utils.openUrl
+import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.FragmentHomeBinding
 import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterChallengeCompleted
 import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterNearbySpecies
@@ -36,12 +36,10 @@ import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.HomeViewModel
 import com.yakulab.domain.laboratory.toDataChallengeNearbySpecies
 import com.paparazziteam.yakulap.navigation.NavigationRootImpl
 import com.paparazziteam.yakulap.presentation.dashboard.views.SlideImageFullScreenActivity
-import com.paparazziteam.yakulap.utils.design.decoration.ItemSpaceDecorationHorizontal
 import com.yakulab.usecases.inaturalist.SpeciesByLocationResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import viewBinding
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -215,15 +213,8 @@ class HomeFragment : Fragment(), onClickThread {
         val intentCompartir = Intent(Intent.ACTION_SEND)
         intentCompartir.type = "text/plain"
         intentCompartir.putExtra(Intent.EXTRA_SUBJECT, "¡Descubre YAKU LAB!")
-        val mensajeCompartir = """
-        ¡Hey! Quiero compartir contigo YAKU LAB, una increíble plataforma educativa de ciencia y tecnología. 🚀🔬
-
-        📱 Descarga la app y únete a la aventura del aprendizaje gamificado:
-        👉 https://play.google.com/store/apps/details?id=${requireActivity().packageName}
-
-        ¡Juntos, podemos hacer que el aprendizaje sea divertido e interactivo! 💡🎮
-        """.trimIndent()
-        intentCompartir.putExtra(Intent.EXTRA_TEXT, mensajeCompartir)
+        val messageShare = getString(R.string.fragment_home_message_share, requireActivity().packageName).trimIndent()
+        intentCompartir.putExtra(Intent.EXTRA_TEXT, messageShare)
         startActivity(Intent.createChooser(intentCompartir, "Compartir en"))
     }
 
