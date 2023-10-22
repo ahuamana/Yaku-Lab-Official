@@ -24,7 +24,7 @@ android {
 
     buildTypes {
         debug {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
@@ -59,6 +59,8 @@ dependencies {
     implementation( project(":common"))
     implementation( project(":domain"))
     implementation( project(":usecases"))
+    implementation( project(":data"))
+    implementation( project(":feature-profile"))
     implementation ("com.google.android.gms:play-services-location:21.0.1")
 
 
