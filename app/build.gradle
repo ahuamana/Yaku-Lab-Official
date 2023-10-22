@@ -10,12 +10,12 @@ plugins {
 
 android {
     namespace = "com.paparazziteam.yakulap"
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         applicationId "com.yakulab.client"
         minSdk 22
-        targetSdk 33
+        targetSdk 34
         versionCode 22
         versionName "2.4.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
