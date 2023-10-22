@@ -85,7 +85,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
 
-    implementation platform('com.google.firebase:firebase-bom:30.1.0')
+    implementation platform('com.google.firebase:firebase-bom:32.4.0')
     //Login
     implementation 'com.google.firebase:firebase-auth-ktx'
 
@@ -95,7 +95,11 @@ dependencies {
     //Crashlytics
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
 
+    //Storage
     implementation 'com.google.firebase:firebase-storage-ktx'
+
+    //Analytics
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     //Libreria Imagenes Circulares
     implementation 'de.hdodenhof:circleimageview:3.1.0'

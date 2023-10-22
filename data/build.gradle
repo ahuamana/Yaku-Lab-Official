@@ -49,7 +49,7 @@ dependencies {
 
     // Firebase
     //Firebase modules
-    implementation platform('com.google.firebase:firebase-bom:30.1.0')
+    implementation platform('com.google.firebase:firebase-bom:32.4.0')
     //Login
     implementation 'com.google.firebase:firebase-auth-ktx'
     //Cloud firestore
