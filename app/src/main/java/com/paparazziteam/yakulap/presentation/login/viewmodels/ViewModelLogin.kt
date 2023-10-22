@@ -4,14 +4,15 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.yakulab.usecases.yakulab.LoginWithEmailUseCase
-import com.yakulab.usecases.yakulab.LogoutUseCase
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import dagger.hilt.android.lifecycle.HiltViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class ViewModelLogin @Inject constructor() : ViewModel() {
+class ViewModelLogin @Inject constructor(
+    private val firebaseCrashlytics: FirebaseCrashlytics
+) : ViewModel() {
 
     private var mLoginProvider = com.ahuaman.data.dashboard.providers.LoginProvider()
     private val _message = MutableLiveData<String>()
@@ -38,6 +39,7 @@ class ViewModelLogin @Inject constructor() : ViewModel() {
             mLoginProvider.loginEmail(email?:"", pass?:"").addOnCompleteListener {
                 Timber.d("LoginWithEmail: ${it.isSuccessful}")
                 if (it.isSuccessful) {
+                    firebaseCrashlytics.setUserId(email?:"")
                     _message.value = "Bienvenido"
                     _isLoginEmail.value = true
                 } else {

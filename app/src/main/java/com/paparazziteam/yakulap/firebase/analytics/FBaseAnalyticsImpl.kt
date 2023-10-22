@@ -1,7 +1,6 @@
-package com.paparazziteam.yakulap.navigation
+package com.paparazziteam.yakulap.firebase.analytics
 
 
-import android.content.Context
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.paparazziteam.yakulab.binding.helper.analytics.FBaseAnalytics
 import javax.inject.Inject
