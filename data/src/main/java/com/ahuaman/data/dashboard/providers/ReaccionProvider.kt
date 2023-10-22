@@ -7,9 +7,11 @@ import com.google.firebase.firestore.Query
 import com.yakulab.domain.dashboard.Reaccion
 import javax.inject.Inject
 
-class ReaccionProvider @Inject constructor(){
+class ReaccionProvider @Inject constructor(
+    private val firebaseFirestore: FirebaseFirestore
+){
 
-    var mCollection: CollectionReference = FirebaseFirestore.getInstance().collection("Actions")
+    val mCollection: CollectionReference = firebaseFirestore.collection("Actions")
 
     fun create(reaccion: Reaccion): Task<Void?>? {
         return reaccion.id_email?.let { mCollection.document(it).set(reaccion) }

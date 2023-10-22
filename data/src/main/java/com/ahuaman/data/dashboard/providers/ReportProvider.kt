@@ -6,9 +6,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.yakulab.domain.dashboard.Report
 import javax.inject.Inject
 
-class ReportProvider @Inject constructor() {
+class ReportProvider @Inject constructor(
+    private val firebaseFirestore: FirebaseFirestore
+) {
 
-    var mCollection: CollectionReference = FirebaseFirestore.getInstance().collection("Reports")
+    val mCollection: CollectionReference =firebaseFirestore.collection("Reports")
 
     fun create(post: Report): Task<Void?>? {
         return mCollection.document().set(post)

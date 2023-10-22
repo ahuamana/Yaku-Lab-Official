@@ -14,8 +14,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object FirebaseImageModule {
 
-
-
     @Provides
     @Singleton
     fun provideFirebaseImageService(@RetrofitFirebase retrofitFirebase: Retrofit) : FirebaseImageService = retrofitFirebase.create(
