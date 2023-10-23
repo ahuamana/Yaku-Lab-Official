@@ -1,5 +1,6 @@
 package com.paparazziteam.yakulap.presentation.bienvenida.views
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.Window
@@ -14,6 +15,7 @@ import com.paparazziteam.yakulap.presentation.bienvenida.viewmodels.ViewModelSpl
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding

@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Yaku Lap</string>
-    <string name="app_powered_by">Powered by Yaku Lab</string>
+    <string name="app_powered_by">Powered by YAKU LAB</string>
     <string name="app_version_code">Versión </string>
-    <string name="app_welcome_message">Bienvenido a yaku-lab</string>
+    <string name="app_welcome_message">Bienvenido a YAKU LAB</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="text_begining">Empecemos</string>
