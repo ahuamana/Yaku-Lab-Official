@@ -35,8 +35,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    lateinit var greetingsNameHeader: MaterialTextView
-
     @Inject
     lateinit var preferences: MyPreferences
 
@@ -122,7 +120,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
                     //Asignar Nombres y Primera letra del apellido del usuario
                     val names = replaceFirstCharInSequenceToUppercase(user.nombres ?: "")
                     val apellidos = user.apellidos?.substring(0, 1)
-                    greetingsNameHeader.text = "$names ${apellidos?.uppercase(Locale.getDefault())}."
+                    //greetingsNameHeader.text = "$names ${apellidos?.uppercase(Locale.getDefault())}."
                 }
             }
         }
