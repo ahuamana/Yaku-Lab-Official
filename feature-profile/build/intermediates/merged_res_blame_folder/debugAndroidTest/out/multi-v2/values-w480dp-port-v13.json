@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.yakulab.feature.profile.test.feature-profile-mergeDebugAndroidTestResources-56:/values-w480dp-port-v13/values-w480dp-port-v13.xml",
+            "outputFile": "com.yakulab.feature.profile.test.feature-profile-mergeDebugAndroidTestResources-58:/values-w480dp-port-v13/values-w480dp-port-v13.xml",
             "map": [
                 {
-                    "source": "/Users/antonymac/.gradle/caches/transforms-3/b6c7cf4f865255a5511ed011c9e1f607/transformed/material-1.9.0/res/values-w480dp-port-v13/values-w480dp-port-v13.xml",
+                    "source": "/Users/antonymac/.gradle/caches/transforms-3/8702b8c587ca4950018193ace88d44b0/transformed/material-1.9.0/res/values-w480dp-port-v13/values-w480dp-port-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

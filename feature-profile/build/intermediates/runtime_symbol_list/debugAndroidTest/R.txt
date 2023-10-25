@@ -3772,7 +3772,7 @@ int layout select_dialog_multichoice_material 0x7f0c006c
 int layout select_dialog_singlechoice_material 0x7f0c006d
 int layout support_simple_spinner_dropdown_item 0x7f0c006e
 int plurals mtrl_badge_content_description 0x7f0e0000
-int raw keep 0x7f0f0000
+int raw firebase_common_keep 0x7f0f0000
 int raw yakulab_background_class_lab 0x7f0f0001
 int raw yakulab_lottie_student_working_on_desk 0x7f0f0002
 int string Fruits 0x7f100000

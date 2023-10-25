@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.yakulab.feature.profile.test.feature-profile-mergeDebugAndroidTestResources-56:/values-v26/values-v26.xml",
+            "outputFile": "com.yakulab.feature.profile.test.feature-profile-mergeDebugAndroidTestResources-58:/values-v26/values-v26.xml",
             "map": [
                 {
-                    "source": "/Users/antonymac/.gradle/caches/transforms-3/ca718fe27fc15f45e26574daf4cb2dbf/transformed/appcompat-1.6.1/res/values-v26/values-v26.xml",
+                    "source": "/Users/antonymac/.gradle/caches/transforms-3/836bcd5f20114c242bda729e7f7cbc3e/transformed/appcompat-1.6.1/res/values-v26/values-v26.xml",
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",
