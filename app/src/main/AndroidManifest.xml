@@ -13,9 +13,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove"/>
-
 
     <application
         android:name=".root.MyApp"
@@ -58,14 +56,8 @@
             android:name=".presentation.bienvenida.views.SplashActivity"
             android:exported="true"
             android:theme="@style/AppTheme.FullScreenPersonalize">
-
-            <!--  -->
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
+
         <activity
             android:name=".presentation.dashboard.views.SlideImageFullScreenActivity"
             android:screenOrientation="portrait"

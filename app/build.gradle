@@ -61,6 +61,7 @@ dependencies {
     implementation( project(":usecases"))
     implementation( project(":data"))
     implementation( project(":feature-profile"))
+    implementation( project(":feature-splash"))
     implementation ("com.google.android.gms:play-services-location:21.0.1")
 
 

@@ -4,7 +4,7 @@
             "outputFile": "com.yakulab.feature.profile.test.feature-profile-mergeDebugAndroidTestResources-58:/values-v23/values-v23.xml",
             "map": [
                 {
-                    "source": "/Users/antonymac/.gradle/caches/transforms-3/f4836275154821181b38cdab4c805a72/transformed/cardview-1.0.0/res/values-v23/values-v23.xml",
+                    "source": "/Users/antonymac/.gradle/caches/transforms-3/6977e4b333dca1334b344703556aab13/transformed/cardview-1.0.0/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/antonymac/.gradle/caches/transforms-3/8702b8c587ca4950018193ace88d44b0/transformed/material-1.9.0/res/values-v23/values-v23.xml",
+                    "source": "/Users/antonymac/.gradle/caches/transforms-3/ffeb0a5a2e94b7022d41bded0c4e1f4a/transformed/material-1.9.0/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2,5,8,13,17,20,23,26,31,34,38",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
@@ -42,7 +42,7 @@
                     }
                 },
                 {
-                    "source": "/Users/antonymac/.gradle/caches/transforms-3/836bcd5f20114c242bda729e7f7cbc3e/transformed/appcompat-1.6.1/res/values-v23/values-v23.xml",
+                    "source": "/Users/antonymac/.gradle/caches/transforms-3/360658a81db504ae00117837ecc5a1db/transformed/appcompat-1.6.1/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,20,34,35,36,39,43,44,45,46",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",

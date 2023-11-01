@@ -35,7 +35,7 @@ dependencies {
     implementation( project(":common"))
     implementation( project(":domain"))
 
-    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.core:core-ktx:1.8.22'
     implementation 'androidx.appcompat:appcompat:1.6.1'
 
     //retrofit
