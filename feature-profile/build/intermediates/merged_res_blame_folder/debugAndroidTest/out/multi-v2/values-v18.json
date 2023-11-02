@@ -4,7 +4,17 @@
             "outputFile": "com.yakulab.feature.profile.test.feature-profile-mergeDebugAndroidTestResources-58:/values-v18/values-v18.xml",
             "map": [
                 {
-                    "source": "/Users/antonymac/.gradle/caches/transforms-3/034789bd646144d57a5b75979725dbf1/transformed/core-1.5.0/res/values-v18/values.xml",
+                    "source": "/Users/antonymac/.gradle/caches/transforms-3/1f94e78c5ea2600e124862afb0129452/transformed/appcompat-1.6.1/res/values-v18/values-v18.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "48",
+                        "endOffsets": "99"
+                    }
+                },
+                {
+                    "source": "/Users/antonymac/.gradle/caches/transforms-3/7f6e944879be79f331f2e0c690ef5575/transformed/core-1.5.0/res/values-v18/values.xml",
                     "from": {
                         "startLines": "4,12",
                         "startColumns": "0,0",
@@ -20,16 +30,6 @@
                         "endLines": "10,18",
                         "endColumns": "8,8",
                         "endOffsets": "519,937"
-                    }
-                },
-                {
-                    "source": "/Users/antonymac/.gradle/caches/transforms-3/360658a81db504ae00117837ecc5a1db/transformed/appcompat-1.6.1/res/values-v18/values-v18.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "48",
-                        "endOffsets": "99"
                     }
                 }
             ]

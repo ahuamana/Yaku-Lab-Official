@@ -17,9 +17,7 @@ import javax.inject.Provider;
 )
 @SuppressWarnings({
     "unchecked",
-    "rawtypes",
-    "KotlinInternal",
-    "KotlinInternalInJava"
+    "rawtypes"
 })
 public final class ProfileParentFragment_MembersInjector implements MembersInjector<ProfileParentFragment> {
   private final Provider<Navigator> navigatorProvider;

@@ -4,26 +4,7 @@
             "outputFile": "com.yakulab.feature.profile.test.feature-profile-mergeDebugAndroidTestResources-58:/values-v28/values-v28.xml",
             "map": [
                 {
-                    "source": "/Users/antonymac/.gradle/caches/transforms-3/ffeb0a5a2e94b7022d41bded0c4e1f4a/transformed/material-1.9.0/res/values-v28/values-v28.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,153,248,343,441,529,617,705,793,880,967,1054,1141",
-                        "endLines": "2,3,4,5,6,7,8,9,10,11,12,13,17",
-                        "endColumns": "97,94,94,97,87,87,87,87,86,86,86,86,10",
-                        "endOffsets": "148,243,338,436,524,612,700,788,875,962,1049,1136,1423"
-                    },
-                    "to": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,42",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,153,248,343,441,529,617,705,793,880,967,1054,2639",
-                        "endLines": "2,3,4,5,6,7,8,9,10,11,12,13,45",
-                        "endColumns": "97,94,94,97,87,87,87,87,86,86,86,86,10",
-                        "endOffsets": "148,243,338,436,524,612,700,788,875,962,1049,1136,2921"
-                    }
-                },
-                {
-                    "source": "/Users/antonymac/.gradle/caches/transforms-3/360658a81db504ae00117837ecc5a1db/transformed/appcompat-1.6.1/res/values-v28/values-v28.xml",
+                    "source": "/Users/antonymac/.gradle/caches/transforms-3/1f94e78c5ea2600e124862afb0129452/transformed/appcompat-1.6.1/res/values-v28/values-v28.xml",
                     "from": {
                         "startLines": "2,3,4,8",
                         "startColumns": "4,4,4,4",
@@ -42,7 +23,26 @@
                     }
                 },
                 {
-                    "source": "/Users/antonymac/.gradle/caches/transforms-3/034789bd646144d57a5b75979725dbf1/transformed/core-1.5.0/res/values-v28/values.xml",
+                    "source": "/Users/antonymac/.gradle/caches/transforms-3/9b267c81b82a71ca6b69ad4fcc3d9e39/transformed/material-1.9.0/res/values-v28/values-v28.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,153,248,343,441,529,617,705,793,880,967,1054,1141",
+                        "endLines": "2,3,4,5,6,7,8,9,10,11,12,13,17",
+                        "endColumns": "97,94,94,97,87,87,87,87,86,86,86,86,10",
+                        "endOffsets": "148,243,338,436,524,612,700,788,875,962,1049,1136,1423"
+                    },
+                    "to": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,42",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,153,248,343,441,529,617,705,793,880,967,1054,2639",
+                        "endLines": "2,3,4,5,6,7,8,9,10,11,12,13,45",
+                        "endColumns": "97,94,94,97,87,87,87,87,86,86,86,86,10",
+                        "endOffsets": "148,243,338,436,524,612,700,788,875,962,1049,1136,2921"
+                    }
+                },
+                {
+                    "source": "/Users/antonymac/.gradle/caches/transforms-3/7f6e944879be79f331f2e0c690ef5575/transformed/core-1.5.0/res/values-v28/values.xml",
                     "from": {
                         "startLines": "4,13",
                         "startColumns": "0,0",

@@ -41,7 +41,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":usecases"))
 
-    implementation 'androidx.core:core-ktx:1.8.22'
+    implementation libs.core.ktx
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
@@ -50,8 +50,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     //Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.46.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.46.1")
+    implementation (libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
     //timber
     implementation 'com.jakewharton.timber:timber:5.0.1'

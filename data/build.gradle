@@ -36,12 +36,12 @@ dependencies {
     implementation( project(":domain"))
     implementation( project(":common"))
 
-    implementation 'androidx.core:core-ktx:1.8.22'
+    implementation libs.core.ktx
     implementation 'androidx.appcompat:appcompat:1.6.1'
 
     //Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.46.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.46.1")
+    implementation (libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

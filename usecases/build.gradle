@@ -35,11 +35,11 @@ dependencies {
     implementation( project(":data"))
     implementation( project(":domain"))
 
-    implementation 'androidx.core:core-ktx:1.8.22'
+    implementation libs.core.ktx
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
 
     //Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.46.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.46.1")
+    implementation (libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 }

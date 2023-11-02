@@ -67,7 +67,7 @@ dependencies {
 
     def lottieVersion = "5.2.0"
 
-    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation libs.core.ktx
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -127,8 +127,8 @@ dependencies {
     implementation 'id.zelory:compressor:2.1.1'
 
     //Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.46.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.46.1")
+    implementation (libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

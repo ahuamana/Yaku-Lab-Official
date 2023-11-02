@@ -4,7 +4,7 @@
             "outputFile": "com.yakulab.feature.profile.test.feature-profile-mergeDebugAndroidTestResources-58:/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "/Users/antonymac/.gradle/caches/transforms-3/d30ab10368cc4497a924f4c2ecf3393e/transformed/core-1.9.0/res/values-v16/values-v16.xml",
+                    "source": "/Users/antonymac/.gradle/caches/transforms-3/836d6009b92658eb77c4a0dc264a3397/transformed/core-1.9.0/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/Users/antonymac/.gradle/caches/transforms-3/360658a81db504ae00117837ecc5a1db/transformed/appcompat-1.6.1/res/values-v16/values-v16.xml",
+                    "source": "/Users/antonymac/.gradle/caches/transforms-3/1f94e78c5ea2600e124862afb0129452/transformed/appcompat-1.6.1/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

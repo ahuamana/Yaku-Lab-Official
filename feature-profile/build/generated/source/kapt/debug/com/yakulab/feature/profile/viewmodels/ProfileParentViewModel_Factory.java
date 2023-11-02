@@ -22,9 +22,7 @@ import javax.inject.Provider;
 )
 @SuppressWarnings({
     "unchecked",
-    "rawtypes",
-    "KotlinInternal",
-    "KotlinInternalInJava"
+    "rawtypes"
 })
 public final class ProfileParentViewModel_Factory implements Factory<ProfileParentViewModel> {
   private final Provider<getEmailLoggedUseCase> getEmailLoggedUseCaseProvider;
