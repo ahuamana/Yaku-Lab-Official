@@ -4,9 +4,13 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -88,23 +92,52 @@ fun TopBackButton(
     onClickBack: () -> Unit = {}
 ) {
     val context = LocalContext.current
-    Card(
-        modifier = Modifier.padding(16.dp),
-        shape = RoundedCornerShape(16.dp),
-        onClick = {
-            //Close feature AR
-            findActivity(context)?.finish()
-        }) {
-        Box(
-            modifier = Modifier.padding(4.dp),
-            contentAlignment = Alignment.Center,
-        ) {
-            Icon(
-                Icons.Default.ArrowBack, contentDescription = null
-            )
+    Row(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        Card(
+            modifier = Modifier.padding(16.dp),
+            shape = RoundedCornerShape(16.dp),
+            onClick = {
+                //Close feature AR
+                findActivity(context)?.finish()
+            }) {
+            Box(
+                modifier = Modifier.padding(4.dp),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(
+                    Icons.Default.ArrowBack, contentDescription = null
+                )
+            }
+
         }
 
+        Card(
+            modifier = Modifier
+                .align(Alignment.CenterVertically)
+                .padding(16.dp),
+            shape = RoundedCornerShape(16.dp),
+            onClick = {
+                //Close feature AR
+                findActivity(context)?.finish()
+            }) {
+            Box(
+                modifier = Modifier.padding(4.dp),
+                contentAlignment = Alignment.Center,
+            ) {
+                Image(
+                    modifier = Modifier.size(24.dp),
+                    painter = painterResource(id = com.paparazziteam.yakulap.common.R.drawable.ic_logo_ya), contentDescription = null
+                )
+            }
+
+        }
+
+
     }
+
 }
 
 

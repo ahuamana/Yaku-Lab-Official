@@ -16,9 +16,7 @@ import javax.annotation.processing.Generated;
 )
 @SuppressWarnings({
     "unchecked",
-    "rawtypes",
-    "KotlinInternal",
-    "KotlinInternalInJava"
+    "rawtypes"
 })
 public final class ProfileParentViewModel_HiltModules_KeyModule_ProvideFactory implements Factory<String> {
   @Override
