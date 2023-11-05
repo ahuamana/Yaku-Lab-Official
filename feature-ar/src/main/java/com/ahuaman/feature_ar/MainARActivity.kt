@@ -1,13 +1,24 @@
 package com.ahuaman.feature_ar
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,9 +30,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ahuaman.feature_ar.ui.theme.YakulapTheme
+import com.ahuaman.feature_ar.utils.findActivity
 import com.google.ar.core.Config
 import com.google.ar.core.Plane
 import io.github.sceneview.ar.ARScene
@@ -44,14 +59,69 @@ class MainARActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ARComposable()
+                    HomeARScreen()
                 }
             }
         }
     }
 }
 
-private const val kModelFile = "https://github.com/ahuamana/YAKULAB-AR-MODELS/blob/main/animal-cell-with-information.glb"
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun HomeARScreen() {
+    Scaffold(modifier = Modifier.fillMaxSize()) {
+        //button top back
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black)
+        ) {
+            ARComposable()
+            TopBackButton()
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopBackButton(
+    onClickBack: () -> Unit = {}
+) {
+    val context = LocalContext.current
+    Card(
+        modifier = Modifier.padding(16.dp),
+        shape = RoundedCornerShape(16.dp),
+        onClick = {
+            //Close feature AR
+            findActivity(context)?.finish()
+        }) {
+        Box(
+            modifier = Modifier.padding(4.dp),
+            contentAlignment = Alignment.Center,
+        ) {
+            Icon(
+                Icons.Default.ArrowBack, contentDescription = null
+            )
+        }
+
+    }
+}
+
+
+@Preview
+@Composable
+fun ARComposablePreview() {
+    TopBackButton()
+}
+
+@Preview
+@Composable
+fun HomeARPreview() {
+    HomeARScreen()
+}
+
+
+private const val kModelFile = "https://ahuamana.github.io/models-ar/insect/ant.glb"
 
 @Composable
 fun ARComposable() {
@@ -120,7 +190,7 @@ fun ARComposable() {
                 modifier = Modifier
                     .size(64.dp)
                     .align(Alignment.Center),
-                color = Color.Magenta
+                color = colorResource(id = com.paparazziteam.yakulap.common.R.color.colorPrimaryYaku)
             )
         }
     }

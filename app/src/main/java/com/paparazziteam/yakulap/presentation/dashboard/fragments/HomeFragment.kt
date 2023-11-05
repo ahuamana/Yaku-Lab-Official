@@ -20,6 +20,7 @@ import com.paparazziteam.yakulab.binding.Constants
 import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
 import com.paparazziteam.yakulab.binding.helper.beGone
 import com.paparazziteam.yakulab.binding.helper.beVisible
+import com.paparazziteam.yakulab.binding.helper.navigator.Navigator
 import com.paparazziteam.yakulab.binding.helper.others.LocationManager
 import com.paparazziteam.yakulab.binding.helper.others.PermissionManager
 import com.paparazziteam.yakulab.binding.helper.preventDoubleClick
@@ -47,10 +48,10 @@ import javax.inject.Inject
 class HomeFragment : Fragment(), onClickThread {
 
     @Inject
-    lateinit var mPreferences: MyPreferences
+    lateinit var navigationRoot: NavigationRootImpl
 
     @Inject
-    lateinit var navigationRoot: NavigationRootImpl
+    lateinit var navigatorModule: Navigator
 
     @Inject
     lateinit var preferences:MyPreferences
@@ -63,10 +64,6 @@ class HomeFragment : Fragment(), onClickThread {
     //Laboratorio
     var mLinearLayoutManager: LinearLayoutManager? = null
 
-    //UI shimmer
-    private var shimmerSkeleton: ShimmerFrameLayout? = null
-    //UI body
-    private var bodyLayout: ConstraintLayout? = null
 
     //Adapter
     var mAdapter: AdapterChallengeCompleted? = null
@@ -145,8 +142,7 @@ class HomeFragment : Fragment(), onClickThread {
         }
 
         adapterSpeciesWithAR.onItemClickListener { itemSpecieAR, position ->
-            /*TODO - open fragment species with AR*/
-
+            navigatorModule.navigateToAR(requireContext(), false)
         }
     }
 
@@ -193,15 +189,12 @@ class HomeFragment : Fragment(), onClickThread {
     }
 
     private fun ui() {
-        binding.apply {
-            shimmerSkeleton              = shimmerLoading
-        }
         clickedItemCompleted = this
     }
 
     private fun setUpRecycler() {
         mLinearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL,false)
-        mAdapter = AdapterChallengeCompleted(clickedItemCompleted, mPreferences)
+        mAdapter = AdapterChallengeCompleted(clickedItemCompleted, preferences)
         binding.rvChallengesCompleted.apply {
             layoutManager = mLinearLayoutManager
             adapter =  mAdapter
@@ -335,15 +328,15 @@ class HomeFragment : Fragment(), onClickThread {
 
     private fun hideSkeleton() {
         Log.d("TAG","hideSkeleton")
-        shimmerSkeleton?.beGone()
-        bodyLayout?.beVisible()
+        binding.shimmerLoading.beGone()
+        binding.containerBody.beVisible()
 
     }
 
     private fun showSkeleton() {
         Log.d("TAG","ShowSkeleton")
-        bodyLayout?.beGone()
-        shimmerSkeleton?.beVisible()
+        binding.containerBody.beGone()
+        binding.shimmerLoading.beVisible()
 
     }
 

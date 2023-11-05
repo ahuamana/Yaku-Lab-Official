@@ -344,7 +344,7 @@
 
             <!--Container Body-->
             <LinearLayout
-                android:id="@+id/containerLayoutBodyChallenges"
+                android:id="@+id/containerBody"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
