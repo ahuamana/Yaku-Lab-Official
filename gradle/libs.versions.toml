@@ -15,6 +15,9 @@ hilt-android-compiler = "2.44"
 appcompat = "1.6.1"
 material = "1.10.0"
 
+#AR
+arsceneview = "1.2.2"
+
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -36,6 +39,9 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 #xml
+
+#AR
+arsceneview = { group = "io.github.sceneview", name = "arsceneview", version.ref = "arsceneview" }
 
 
 [plugins]
