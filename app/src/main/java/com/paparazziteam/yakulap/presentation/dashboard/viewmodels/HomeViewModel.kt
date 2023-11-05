@@ -22,10 +22,12 @@ import com.paparazziteam.yakulap.presentation.dashboard.model.CommentRepository
 import com.yakulab.domain.login.User
 import com.yakulab.domain.dashboard.ChallengeCompleted
 import com.yakulab.domain.dashboard.Comment
+import com.yakulab.domain.dashboard.ItemSpecieAR
 import com.yakulab.domain.dashboard.Reaccion
 import com.yakulab.domain.dashboard.Report
 import com.yakulab.domain.dashboard.TypeReported
 import com.yakulab.domain.dashboard.TypeReportedPost
+import com.yakulab.usecases.ar.GetSpeciesWithArUseCase
 import com.yakulab.usecases.inaturalist.GetSpeciesByLocationUseCase
 import com.yakulab.usecases.inaturalist.SpeciesByLocationResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,6 +43,7 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
 
@@ -56,6 +59,7 @@ class HomeViewModel @Inject constructor(
     private val mReportProvider: com.ahuaman.data.dashboard.providers.ReportProvider,
     private val mPreferences: MyPreferences,
     private val getSpeciesByLocationUseCase: GetSpeciesByLocationUseCase,
+    private val getSpeciesWithArUseCase: GetSpeciesWithArUseCase
 ): ViewModel(){
 
     private var listChallenges = mutableListOf<ChallengeCompleted>()
@@ -99,8 +103,26 @@ class HomeViewModel @Inject constructor(
         initialValue = SpeciesByLocationResult.ShowLoading
     )
 
+    private val _speciesWithAR = MutableStateFlow<List<ItemSpecieAR>>(emptyList())
+    val speciesWithAR = _speciesWithAR.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000,1),
+        initialValue = emptyList()
+    )
+
     init {
         showUserData()
+        getSpeciesWithAR()
+    }
+
+    private fun getSpeciesWithAR() = viewModelScope.launch {
+            getSpeciesWithArUseCase
+                .invoke()
+                .onEach {
+                    _speciesWithAR.value = it
+                }.catch {
+                    Timber.e(it)
+                }.launchIn(viewModelScope)
     }
 
     fun showUserData(){

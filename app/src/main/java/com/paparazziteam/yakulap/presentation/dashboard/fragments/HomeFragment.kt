@@ -35,6 +35,7 @@ import com.yakulab.domain.dashboard.TypeGroup
 import com.paparazziteam.yakulap.presentation.dashboard.viewmodels.HomeViewModel
 import com.yakulab.domain.laboratory.toDataChallengeNearbySpecies
 import com.paparazziteam.yakulap.navigation.NavigationRootImpl
+import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterSpeciesWithAR
 import com.paparazziteam.yakulap.presentation.dashboard.views.SlideImageFullScreenActivity
 import com.yakulab.usecases.inaturalist.SpeciesByLocationResult
 import dagger.hilt.android.AndroidEntryPoint
@@ -69,7 +70,10 @@ class HomeFragment : Fragment(), onClickThread {
 
     //Adapter
     var mAdapter: AdapterChallengeCompleted? = null
-    var adapterSpeciesNearby = AdapterNearbySpecies()
+    private val adapterSpeciesNearby = AdapterNearbySpecies()
+
+    //Adapter Species With AR
+    private val adapterSpeciesWithAR = AdapterSpeciesWithAR()
 
     //Get Last Know Location
     private val locationManager by lazy {
@@ -119,6 +123,7 @@ class HomeFragment : Fragment(), onClickThread {
         ui()
         setUpRecycler()
         setupRecyclerNearbySpecies()
+        setupRecyclerSpeciesWithAR()
         observers()
         otherComponents()
         getChallengesCompleted()
@@ -129,6 +134,19 @@ class HomeFragment : Fragment(), onClickThread {
         }else{
             permissionManager.requestLocationPermission()
             locationManager.getLastKnownLocationOnlyOnce(onListenerLocation)
+        }
+    }
+
+    private fun setupRecyclerSpeciesWithAR() {
+        val lManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL,false)
+        binding.rvSpeciesWithAR.apply {
+            layoutManager = lManager
+            adapter = adapterSpeciesWithAR
+        }
+
+        adapterSpeciesWithAR.onItemClickListener { itemSpecieAR, position ->
+            /*TODO - open fragment species with AR*/
+
         }
     }
 
@@ -177,7 +195,6 @@ class HomeFragment : Fragment(), onClickThread {
     private fun ui() {
         binding.apply {
             shimmerSkeleton              = shimmerLoading
-            bodyLayout                   = containerLayoutBodyChallenges
         }
         clickedItemCompleted = this
     }
@@ -268,6 +285,16 @@ class HomeFragment : Fragment(), onClickThread {
                 }
             }
         }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.speciesWithAR.collect {
+                   adapterSpeciesWithAR.submitList(it)
+                }
+            }
+        }
+
+
     }
 
     private fun showSpeciesByLocationDialog(it: SpeciesByLocationResult) {
