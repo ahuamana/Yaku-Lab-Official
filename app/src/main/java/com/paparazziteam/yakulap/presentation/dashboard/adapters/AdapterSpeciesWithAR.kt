@@ -50,10 +50,19 @@ class AdapterSpeciesWithAR : ListAdapter<ItemSpecieAR, RecyclerView.ViewHolder>(
 
         fun bind(item: ItemSpecieAR) {
             binding.apply {
+
+                title.text = item.name
+
+                icArgumentedReality.setOnClickListener {
+                    onItemClickListener?.invoke(getItem(adapterPosition), adapterPosition)
+                }
+
                 imgPreview.apply {
                     load(item.preview?: "")
+                    setOnClickListener {
+                        onItemClickListener?.invoke(getItem(adapterPosition), adapterPosition)
+                    }
                 }
-                title.text = item.name
 
                 root.setOnClickListener {
                     onItemClickListener?.invoke(getItem(adapterPosition), adapterPosition)

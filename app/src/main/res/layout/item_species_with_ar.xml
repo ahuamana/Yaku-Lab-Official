@@ -29,6 +29,7 @@
                 android:src="@drawable/ant_photo" />
             
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/ic_argumented_reality"
                 android:layout_width="wrap_content"
                 app:cardCornerRadius="50dp"
                 android:layout_gravity="bottom|end"

@@ -12,7 +12,7 @@ class GetSpeciesWithArUseCase @Inject constructor(){
         val list:List<ItemSpecieAR> = listOf(
             ItemSpecieAR(
                 uuid = createUUID(),
-                name = "Ant",
+                name = "Hormiga",
                 urlModel = "https://ahuamana.github.io/models-ar/insect/ant.glb",
                 preview = "https://ahuamana.github.io/models-ar/insect/ant.jpeg"
             )
