@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId "com.yakulab.client"
-        minSdk 22
+        minSdk 24
         targetSdk 34
         versionCode 24
         versionName "2.4.4"

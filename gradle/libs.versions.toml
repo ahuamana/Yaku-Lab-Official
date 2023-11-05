@@ -15,6 +15,9 @@ hilt-android-compiler = "2.44"
 appcompat = "1.6.1"
 material = "1.10.0"
 
+#compose compiler
+compose-compiler = "1.4.8"
+
 #AR
 arsceneview = "1.2.2"
 
@@ -50,3 +53,5 @@ kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 hiltPlugin = { id = "com.google.dagger.hilt.android", version.ref = "hilt-plugin" }
 kotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin-kapt" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
+
+

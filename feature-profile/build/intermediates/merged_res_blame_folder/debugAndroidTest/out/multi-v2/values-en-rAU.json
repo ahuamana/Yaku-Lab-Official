@@ -4,7 +4,7 @@
             "outputFile": "com.yakulab.feature.profile.test.feature-profile-mergeDebugAndroidTestResources-58:/values-en-rAU/values-en-rAU.xml",
             "map": [
                 {
-                    "source": "/Users/antonymac/.gradle/caches/transforms-3/c0c0402ae2dd6154a5fa60e9210981c4/transformed/browser-1.4.0/res/values-en-rAU/values-en-rAU.xml",
+                    "source": "/Users/antonymac/.gradle/caches/transforms-3/4986bbec734437426d3b7a78fe98b64d/transformed/browser-1.4.0/res/values-en-rAU/values-en-rAU.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
@@ -21,7 +21,24 @@
                     }
                 },
                 {
-                    "source": "/Users/antonymac/.gradle/caches/transforms-3/1f94e78c5ea2600e124862afb0129452/transformed/appcompat-1.6.1/res/values-en-rAU/values-en-rAU.xml",
+                    "source": "/Users/antonymac/.gradle/caches/transforms-3/49771b4b228bfd16141ad32a0b3c28ef/transformed/core-1.9.0/res/values-en-rAU/values-en-rAU.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "36",
+                        "startColumns": "4",
+                        "startOffsets": "3471",
+                        "endColumns": "100",
+                        "endOffsets": "3567"
+                    }
+                },
+                {
+                    "source": "/Users/antonymac/.gradle/caches/transforms-3/624310c5bcd1af40cbacf3a67abfe173/transformed/appcompat-1.6.1/res/values-en-rAU/values-en-rAU.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -38,7 +55,7 @@
                     }
                 },
                 {
-                    "source": "/Users/antonymac/.gradle/caches/transforms-3/955b4fb3e5e6079cf57ec4241348f9b0/transformed/navigation-ui-2.6.0/res/values-en-rAU/values-en-rAU.xml",
+                    "source": "/Users/antonymac/.gradle/caches/transforms-3/a045ab72fa26a375691d3dad9c8ae2fe/transformed/navigation-ui-2.6.0/res/values-en-rAU/values-en-rAU.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -52,23 +69,6 @@
                         "startOffsets": "3165,3271",
                         "endColumns": "105,116",
                         "endOffsets": "3266,3383"
-                    }
-                },
-                {
-                    "source": "/Users/antonymac/.gradle/caches/transforms-3/836d6009b92658eb77c4a0dc264a3397/transformed/core-1.9.0/res/values-en-rAU/values-en-rAU.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "36",
-                        "startColumns": "4",
-                        "startOffsets": "3471",
-                        "endColumns": "100",
-                        "endOffsets": "3567"
                     }
                 }
             ]
