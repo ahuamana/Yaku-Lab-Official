@@ -1,5 +1,6 @@
 package com.ahuaman.data.dashboard.providers
 
+import com.ahuaman.data.dashboard.di.DashboardModule
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentSnapshot
@@ -9,18 +10,10 @@ import com.yakulab.domain.login.User
 import javax.inject.Inject
 
 class UserProvider @Inject constructor(
-
+    @DashboardModule.UsersCollection private val mCollection:CollectionReference
 ) {
 
-    val mCollection: CollectionReference = FirebaseFirestore.getInstance().collection("Users")
 
-    init {
-        val settings = FirebaseFirestoreSettings.Builder()
-            .setPersistenceEnabled(true)
-            .build()
-
-        FirebaseFirestore.getInstance().firestoreSettings = settings
-    }
 
     fun create(user: User): Task<Void> {
         return mCollection.document(user.email?:"").set(user)

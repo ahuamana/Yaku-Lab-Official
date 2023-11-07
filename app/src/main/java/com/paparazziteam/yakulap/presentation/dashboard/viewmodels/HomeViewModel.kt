@@ -28,6 +28,7 @@ import com.yakulab.domain.dashboard.Report
 import com.yakulab.domain.dashboard.TypeReported
 import com.yakulab.domain.dashboard.TypeReportedPost
 import com.yakulab.usecases.ar.GetSpeciesWithArUseCase
+import com.yakulab.usecases.firebase.login.GetEmailUseCase
 import com.yakulab.usecases.inaturalist.GetSpeciesByLocationUseCase
 import com.yakulab.usecases.inaturalist.SpeciesByLocationResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -51,7 +52,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val mUserProvider: com.ahuaman.data.dashboard.providers.UserProvider,
-    private val mLoginProvider: com.ahuaman.data.dashboard.providers.LoginProvider,
+    private val getEmailLoginUseCase: GetEmailUseCase,
     private val mCommentRepositoryImpl: CommentRepository,
     private val mImageProvider: com.ahuaman.data.dashboard.providers.ImageProvider,
     private val mChallengeProvider: ChallengeRepository,
@@ -126,7 +127,7 @@ class HomeViewModel @Inject constructor(
     }
 
     fun showUserData(){
-       var emailLogged = mLoginProvider.getEmail()
+       var emailLogged = getEmailLoginUseCase.invoke()
         mUserProvider.searchUserByEmail(emailLogged).addOnCompleteListener {
             if(it.isSuccessful){
                 try {
@@ -139,9 +140,9 @@ class HomeViewModel @Inject constructor(
                 }catch (e:Throwable){
                     FirebaseCrashlytics.getInstance().recordException(e)
                 }
-            }else{
-               //TODO: show error user not found
             }
+        }.addOnFailureListener {
+            Log.e("ERROR", "Error al traer los datos de Firebase" + it.message)
         }
     }
 

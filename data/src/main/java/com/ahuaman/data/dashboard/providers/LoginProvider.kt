@@ -7,35 +7,35 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class LoginProvider @Inject constructor() {
-
-    private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+class LoginProvider @Inject constructor(
+    private val firebaseAuth: FirebaseAuth
+) {
 
     fun getIsLogin(): Boolean {
-        return mAuth.currentUser != null
+        return firebaseAuth.currentUser != null
     }
 
     //Local
     fun getEmail(): String {
-        return mAuth.currentUser?.email?: ""
+        return firebaseAuth.currentUser?.email?: ""
     }
 
     fun loginEmail(email:String, pass:String) = flow {
-       val result = mAuth.signInWithEmailAndPassword(email, pass).await()
+       val result = firebaseAuth.signInWithEmailAndPassword(email, pass).await()
         emit(result)
     }
 
     fun loginAnonymous() = flow {
-        val result = mAuth.signInAnonymously().await()
+        val result = firebaseAuth.signInAnonymously().await()
         emit(result)
     }
 
     fun signOut() {
-        return mAuth.signOut()
+        return firebaseAuth.signOut()
     }
 
     fun createUser(email:String,pass:String) = flow {
-        val result = mAuth.createUserWithEmailAndPassword(email, pass).await()
+        val result = firebaseAuth.createUserWithEmailAndPassword(email, pass).await()
         emit(result)
     }
 

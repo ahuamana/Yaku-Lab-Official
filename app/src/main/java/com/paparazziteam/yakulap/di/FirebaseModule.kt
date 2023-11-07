@@ -20,19 +20,4 @@ object FirebaseModule {
         return FirebaseAuth.getInstance()
     }
 
-    //Collections
-    @UsersCollection
-    @Provides
-    @Singleton
-    fun provideUsersCollection(
-        firestore: FirebaseFirestore
-    ):CollectionReference{
-        return firestore.collection("users")
-    }
-
-    @Qualifier
-    @Retention(AnnotationRetention.BINARY)
-    annotation class UsersCollection
-
-
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.ahuaman.data.dashboard.providers.UserProvider
 import com.google.firebase.auth.FirebaseUser
 import com.yakulab.domain.login.User
 import com.yakulab.usecases.firebase.login.RegisterUserUseCase
@@ -17,11 +18,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewModelRegisterUser @Inject constructor(
-    private val registerUserUseCase: RegisterUserUseCase
+    private val registerUserUseCase: RegisterUserUseCase,
+    private val mUserProvider: UserProvider
 ):ViewModel() {
 
     var user: FirebaseUser? = null
-    var mUserProvider = com.ahuaman.data.dashboard.providers.UserProvider()
     private val _message = MutableLiveData<String>()
     private val _user = MutableLiveData<FirebaseUser>()
     private val _isLoading = MutableLiveData<Boolean>()

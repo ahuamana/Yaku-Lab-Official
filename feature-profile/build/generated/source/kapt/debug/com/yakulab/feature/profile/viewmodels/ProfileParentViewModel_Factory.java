@@ -1,8 +1,8 @@
 package com.yakulab.feature.profile.viewmodels;
 
 import com.paparazziteam.yakulab.binding.helper.application.MyPreferences;
-import com.yakulab.usecases.firebase.getEmailLoggedUseCase;
-import com.yakulab.usecases.firebase.getUserInfoUseCase;
+import com.yakulab.usecases.firebase.GetEmailLoggedUseCase;
+import com.yakulab.usecases.firebase.GetUserInfoUseCase;
 import com.yakulab.usecases.yakulab.GetCertificationsUseCase;
 import com.yakulab.usecases.yakulab.GetMedalsUseCase;
 import com.yakulab.usecases.yakulab.LogoutUseCase;
@@ -25,9 +25,9 @@ import javax.inject.Provider;
     "rawtypes"
 })
 public final class ProfileParentViewModel_Factory implements Factory<ProfileParentViewModel> {
-  private final Provider<getEmailLoggedUseCase> getEmailLoggedUseCaseProvider;
+  private final Provider<GetEmailLoggedUseCase> getEmailLoggedUseCaseProvider;
 
-  private final Provider<getUserInfoUseCase> getUserInfoUseCaseProvider;
+  private final Provider<GetUserInfoUseCase> getUserInfoUseCaseProvider;
 
   private final Provider<GetMedalsUseCase> getMedalsUseCaseProvider;
 
@@ -38,8 +38,8 @@ public final class ProfileParentViewModel_Factory implements Factory<ProfilePare
   private final Provider<MyPreferences> myPreferencesProvider;
 
   public ProfileParentViewModel_Factory(
-      Provider<getEmailLoggedUseCase> getEmailLoggedUseCaseProvider,
-      Provider<getUserInfoUseCase> getUserInfoUseCaseProvider,
+      Provider<GetEmailLoggedUseCase> getEmailLoggedUseCaseProvider,
+      Provider<GetUserInfoUseCase> getUserInfoUseCaseProvider,
       Provider<GetMedalsUseCase> getMedalsUseCaseProvider,
       Provider<GetCertificationsUseCase> getCertificationsUseCaseProvider,
       Provider<LogoutUseCase> logoutUseCaseProvider,
@@ -58,8 +58,8 @@ public final class ProfileParentViewModel_Factory implements Factory<ProfilePare
   }
 
   public static ProfileParentViewModel_Factory create(
-      Provider<getEmailLoggedUseCase> getEmailLoggedUseCaseProvider,
-      Provider<getUserInfoUseCase> getUserInfoUseCaseProvider,
+      Provider<GetEmailLoggedUseCase> getEmailLoggedUseCaseProvider,
+      Provider<GetUserInfoUseCase> getUserInfoUseCaseProvider,
       Provider<GetMedalsUseCase> getMedalsUseCaseProvider,
       Provider<GetCertificationsUseCase> getCertificationsUseCaseProvider,
       Provider<LogoutUseCase> logoutUseCaseProvider,
@@ -67,8 +67,8 @@ public final class ProfileParentViewModel_Factory implements Factory<ProfilePare
     return new ProfileParentViewModel_Factory(getEmailLoggedUseCaseProvider, getUserInfoUseCaseProvider, getMedalsUseCaseProvider, getCertificationsUseCaseProvider, logoutUseCaseProvider, myPreferencesProvider);
   }
 
-  public static ProfileParentViewModel newInstance(getEmailLoggedUseCase getEmailLoggedUseCase,
-      getUserInfoUseCase getUserInfoUseCase, GetMedalsUseCase getMedalsUseCase,
+  public static ProfileParentViewModel newInstance(GetEmailLoggedUseCase getEmailLoggedUseCase,
+      GetUserInfoUseCase getUserInfoUseCase, GetMedalsUseCase getMedalsUseCase,
       GetCertificationsUseCase getCertificationsUseCase, LogoutUseCase logoutUseCase,
       MyPreferences myPreferences) {
     return new ProfileParentViewModel(getEmailLoggedUseCase, getUserInfoUseCase, getMedalsUseCase, getCertificationsUseCase, logoutUseCase, myPreferences);

@@ -19,8 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileParentViewModel  @Inject constructor(
-    private val getEmailLoggedUseCase: com.yakulab.usecases.firebase.getEmailLoggedUseCase,
-    private val getUserInfoUseCase: com.yakulab.usecases.firebase.getUserInfoUseCase,
+    private val getEmailLoggedUseCase: com.yakulab.usecases.firebase.GetEmailLoggedUseCase,
+    private val getUserInfoUseCase: com.yakulab.usecases.firebase.GetUserInfoUseCase,
     private val getMedalsUseCase: com.yakulab.usecases.yakulab.GetMedalsUseCase,
     private val getCertificationsUseCase: com.yakulab.usecases.yakulab.GetCertificationsUseCase,
     private val logoutUseCase: com.yakulab.usecases.yakulab.LogoutUseCase,
