@@ -223,7 +223,7 @@ class HomeFragment : Fragment(), onClickThread {
     private fun shareApp(){
         val intentCompartir = Intent(Intent.ACTION_SEND)
         intentCompartir.type = "text/plain"
-        intentCompartir.putExtra(Intent.EXTRA_SUBJECT, "¡Descubre YAKU LAB!")
+        intentCompartir.putExtra(Intent.EXTRA_SUBJECT, "¡Descubre Yaku lab!")
         val messageShare = getString(R.string.fragment_home_message_share, requireActivity().packageName).trimIndent()
         intentCompartir.putExtra(Intent.EXTRA_TEXT, messageShare)
         startActivity(Intent.createChooser(intentCompartir, "Compartir en"))

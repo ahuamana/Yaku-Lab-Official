@@ -22,7 +22,7 @@ class GetSpeciesWithArUseCase @Inject constructor(){
                 uuid = createUUID(),
                 name = "Abdomen Anatomía",
                 urlModel = "https://ahuamana.github.io/models-ar/human/abdomen-anatomy.glb",
-                preview = "https://ahuamana.github.io/models-ar/biology/abdomen-anatomy.jpeg",
+                preview = "https://ahuamana.github.io/models-ar/human/abdomen-anatomy.jpeg",
                 scaleInUnit = 2f
             ),
 
