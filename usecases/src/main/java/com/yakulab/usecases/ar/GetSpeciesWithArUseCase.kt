@@ -17,6 +17,15 @@ class GetSpeciesWithArUseCase @Inject constructor(){
                 preview = "https://ahuamana.github.io/models-ar/biology/plant-cell.jpeg",
                 scaleInUnit = 0.01f
             ),
+            //abdomen-anatomy.glb
+            ItemSpecieAR(
+                uuid = createUUID(),
+                name = "Abdomen Anatomía",
+                urlModel = "https://ahuamana.github.io/models-ar/human/abdomen-anatomy.glb",
+                preview = "https://ahuamana.github.io/models-ar/biology/abdomen-anatomy.jpeg",
+                scaleInUnit = 2f
+            ),
+
             ItemSpecieAR(
                 uuid = createUUID(),
                 name = "Hormiga",
