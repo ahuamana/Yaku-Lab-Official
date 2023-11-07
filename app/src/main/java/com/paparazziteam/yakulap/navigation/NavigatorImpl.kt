@@ -2,6 +2,7 @@ package com.paparazziteam.yakulap.navigation
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import com.ahuaman.feature_ar.MainARActivity
 import com.paparazziteam.yakulab.binding.helper.navigator.Navigator
 import com.paparazziteam.yakulap.presentation.login.views.LoginActivity
@@ -15,10 +16,15 @@ class NavigatorImpl @Inject constructor() : Navigator {
         context.startActivity(intent)
     }
 
-    override fun navigateToAR(context: Context, isUnique: Boolean) {
+    override fun navigateToAR(context: Context, isUnique: Boolean, bunble:Bundle?) {
         val intent = Intent(context, MainARActivity::class.java).also {
             if(isUnique) it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        }.also { intentt ->
+            bunble?.let {
+                intentt.putExtras(bunble)
+            }
         }
+
         context.startActivity(intent)
     }
 }

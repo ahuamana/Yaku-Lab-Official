@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -15,7 +14,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.facebook.shimmer.ShimmerFrameLayout
 import com.paparazziteam.yakulab.binding.Constants
 import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
 import com.paparazziteam.yakulab.binding.helper.beGone
@@ -142,7 +140,10 @@ class HomeFragment : Fragment(), onClickThread {
         }
 
         adapterSpeciesWithAR.onItemClickListener { itemSpecieAR, position ->
-            navigatorModule.navigateToAR(requireContext(), false)
+            val bundle = Bundle()
+            bundle.putString(Constants.AR_MODEL, itemSpecieAR.urlModel)
+            bundle.putFloat(Constants.AR_SCALE_IN_UNIT, itemSpecieAR.scaleInUnit)
+            navigatorModule.navigateToAR(requireContext(), false, bundle)
         }
     }
 

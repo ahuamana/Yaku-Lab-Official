@@ -5,4 +5,5 @@ data class ItemSpecieAR (
     val urlModel: String?,
     val name: String?,
     val preview: String?,
+    val scaleInUnit: Float = 0.5f,
 )

@@ -24,4 +24,8 @@ object Constants {
 
     //EXTRA CHALLENGE
     const val EXTRA_CHALLENGE = "EXTRA_CHALLENGE"
+
+    //AR-MODEL
+    const val AR_MODEL = "AR_MODEL"
+    const val AR_SCALE_IN_UNIT = "AR_SCALE_IN_UNIT"
 }

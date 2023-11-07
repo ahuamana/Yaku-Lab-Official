@@ -43,6 +43,7 @@ import com.ahuaman.feature_ar.ui.theme.YakulapTheme
 import com.ahuaman.feature_ar.utils.findActivity
 import com.google.ar.core.Config
 import com.google.ar.core.Plane
+import com.paparazziteam.yakulab.binding.Constants
 import io.github.sceneview.ar.ARScene
 import io.github.sceneview.ar.arcore.getUpdatedPlanes
 import io.github.sceneview.ar.node.AnchorNode
@@ -54,6 +55,11 @@ import io.github.sceneview.rememberNodes
 import kotlinx.coroutines.launch
 
 class MainARActivity : ComponentActivity() {
+
+    //get extras string AR_MODEL using lazy
+    private val arModel by lazy { intent.extras?.getString(Constants.AR_MODEL)?:"" }
+    private val scaleInUnitItem by lazy { intent.extras?.getFloat(Constants.AR_SCALE_IN_UNIT)?:0.5f }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -63,7 +69,10 @@ class MainARActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    HomeARScreen()
+                    HomeARScreen(
+                        arModel = arModel,
+                        scaleInUnitItem = scaleInUnitItem
+                    )
                 }
             }
         }
@@ -73,14 +82,20 @@ class MainARActivity : ComponentActivity() {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeARScreen() {
+fun HomeARScreen(
+    arModel: String,
+    scaleInUnitItem: Float
+) {
     Scaffold(modifier = Modifier.fillMaxSize()) {
         //button top back
         Box(modifier = Modifier
             .fillMaxSize()
             .background(Color.Black)
         ) {
-            ARComposable()
+            ARComposable(
+                arModel = arModel,
+                scaleInUnitItem = scaleInUnitItem
+            )
             TopBackButton()
         }
     }
@@ -150,14 +165,21 @@ fun ARComposablePreview() {
 @Preview
 @Composable
 fun HomeARPreview() {
-    HomeARScreen()
+    HomeARScreen(
+        arModel = kModelFile,
+        scaleInUnitItem = kScaleInUnit
+    )
 }
 
 
 private const val kModelFile = "https://ahuamana.github.io/models-ar/insect/ant.glb"
+private const val kScaleInUnit = 0.5f
 
 @Composable
-fun ARComposable() {
+fun ARComposable(
+    arModel: String,
+    scaleInUnitItem: Float
+) {
     Box(
         modifier = Modifier.fillMaxSize(),
     ) {
@@ -197,12 +219,12 @@ fun ARComposable() {
                         ).apply {
                             isEditable = true
                             coroutineScope.launch {
-                                modelLoader.loadModelInstance(kModelFile)?.let {
+                                modelLoader.loadModelInstance(arModel)?.let {
                                     addChildNode(
                                         ModelNode(
                                             modelInstance = it,
                                             // Scale to fit in a 0.5 meters cube
-                                            scaleToUnits = 0.5f,
+                                            scaleToUnits = scaleInUnitItem,
                                             // Bottom origin instead of center so the
                                             // model base is on floor
                                             centerOrigin = Position(y = -0.5f)
