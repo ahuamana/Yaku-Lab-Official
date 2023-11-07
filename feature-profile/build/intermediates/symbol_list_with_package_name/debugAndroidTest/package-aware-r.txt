@@ -2987,6 +2987,7 @@ drawable ic_clock_black_24dp
 drawable ic_close
 drawable ic_gold
 drawable ic_keyboard_black_24dp
+drawable ic_logo_ya
 drawable ic_m3_chip_check
 drawable ic_m3_chip_checked_circle
 drawable ic_m3_chip_close

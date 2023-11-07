@@ -65,6 +65,9 @@ dependencies {
     implementation( project(":feature-splash"))
     implementation ("com.google.android.gms:play-services-location:21.0.1")
 
+    //kotlin play services
+    implementation (libs.kotlinx.coroutines.play.services)
+
 
     def lottieVersion = "5.2.0"
 
@@ -128,7 +131,7 @@ dependencies {
     implementation 'id.zelory:compressor:2.1.1'
 
     //Dagger Hilt
-    implementation (libs.hilt.android)
+    implementation (libs.hilt.android.android)
     kapt(libs.hilt.android.compiler)
 
     //retrofit

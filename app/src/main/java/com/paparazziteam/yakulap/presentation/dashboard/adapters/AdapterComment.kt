@@ -73,7 +73,7 @@ class AdapterComment(private val viewModel: ViewModelDashboard) : RecyclerView.A
         private fun getUserInfo(item: Comment) {
             messageText?.text = item.message
 
-            com.ahuaman.data.dashboard.providers.UserProvider().searchUserByEmail(item.email).addOnCompleteListener {
+            UserProvider().searchUserByEmail(item.email).addOnCompleteListener {
                 if(it.isSuccessful){
                     val first = it.result.get("nombres").toString()
                     val last = it.result.get("apellidos").toString()

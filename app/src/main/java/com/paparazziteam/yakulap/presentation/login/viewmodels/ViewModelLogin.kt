@@ -4,17 +4,25 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.yakulab.usecases.firebase.login.GetLoginWithEmailUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onCompletion
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class ViewModelLogin @Inject constructor(
-    private val firebaseCrashlytics: FirebaseCrashlytics
+    private val firebaseCrashlytics: FirebaseCrashlytics,
+    private val getLoginWithEmailUseCase: GetLoginWithEmailUseCase
 ) : ViewModel() {
 
-    private var mLoginProvider = com.ahuaman.data.dashboard.providers.LoginProvider()
     private val _message = MutableLiveData<String>()
     private val _isLoginEmail = MutableLiveData<Boolean>()
     private val _isLoginAnonymous = MutableLiveData<Boolean>()
@@ -26,60 +34,21 @@ class ViewModelLogin @Inject constructor(
     fun getIsLoginAnonymous(): LiveData<Boolean> = _isLoginAnonymous
 
 
-    fun isAlreadyLogging(): LiveData<String?> {
-        if(mLoginProvider.getIsLogin()) {
-            _message.setValue("Ya tienes un Inicio de Session")
-        }else _message.setValue("No tienes un Inicio de Session")
-        return _message
-    }
-
-    fun loginWithEmail(email: String?, pass: String?) {
-        _isLoading.setValue(true)
-        try {
-            mLoginProvider.loginEmail(email?:"", pass?:"").addOnCompleteListener {
-                Timber.d("LoginWithEmail: ${it.isSuccessful}")
-                if (it.isSuccessful) {
-                    firebaseCrashlytics.setUserId(email?:"")
-                    _message.value = "Bienvenido"
-                    _isLoginEmail.value = true
-                } else {
-                    Timber.e("Error: ${it.exception?.message}")
-                    _message.value = "Usuario y/o contraseña incorrectos"
-                    _isLoginEmail.value = false
+    fun loginWithEmail(email: String?, pass: String?) = viewModelScope.launch {
+        getLoginWithEmailUseCase
+            .invoke(email?:"", pass?:"")
+            .onStart {
+                _isLoading.value = true
+            }.onEach {
+                it.user?.let { user->
+                    firebaseCrashlytics.setUserId(user.email?:"")
                 }
-                _isLoading.value =false
-            }
-
-        } catch (e: Exception) {
-            _message.setValue(e.message)
-        }
-    }
-
-
-    fun loginAnonymous() {
-        _isLoading.setValue(true)
-        try {
-            mLoginProvider.loginAnonymous().addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        _message.setValue("Bienvenido anónimo")
-                        try {
-                            Thread.sleep(2000)
-                        } catch (e: java.lang.Exception) {
-                            Log.e("TAG", "Error esperando")
-                        }
-                        _isLoginAnonymous.value = true
-                        _isLoading.value = false
-                    } else {
-                        _message.setValue("No es posible ingresar. Porfavor contacta con soporte")
-                        _isLoginAnonymous.setValue(false)
-                        _isLoading.setValue(false)
-                    }
-                }.addOnFailureListener{
-                    e -> _message.setValue("" + e.message)
-                }
-        } catch (e: java.lang.Exception) {
-            Log.e("VM_LOGIN", "Error:" + e.message)
-        }
+                _message.value = "Bienvenido"
+                _isLoginEmail.value = true
+            }.catch {
+                _message.value = "Usuario y/o contraseña incorrectos"
+                _isLoginEmail.value = false
+            }.launchIn(viewModelScope)
     }
 
 }

@@ -43,6 +43,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
     //Dagger Hilt
-    implementation (libs.hilt.android)
+    implementation (libs.hilt.android.android)
     kapt(libs.hilt.android.compiler)
 }

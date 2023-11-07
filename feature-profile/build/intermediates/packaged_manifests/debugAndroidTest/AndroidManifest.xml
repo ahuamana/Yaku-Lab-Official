@@ -3,8 +3,8 @@
     package="com.yakulab.feature.profile.test" >
 
     <uses-sdk
-        android:minSdkVersion="22"
-        android:targetSdkVersion="22" />
+        android:minSdkVersion="24"
+        android:targetSdkVersion="24" />
 
     <instrumentation
         android:name="androidx.test.runner.AndroidJUnitRunner"
@@ -34,7 +34,7 @@
     <application
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
-        android:extractNativeLibs="true" >
+        android:extractNativeLibs="false" >
         <uses-library android:name="android.test.runner" />
 
         <activity
