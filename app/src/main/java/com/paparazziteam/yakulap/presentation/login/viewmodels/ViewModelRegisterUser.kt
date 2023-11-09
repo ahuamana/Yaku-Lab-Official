@@ -8,6 +8,7 @@ import com.ahuaman.data.dashboard.providers.UserProvider
 import com.google.firebase.auth.FirebaseUser
 import com.yakulab.domain.login.User
 import com.yakulab.usecases.firebase.login.RegisterUserUseCase
+import com.yakulab.usecases.firebase.user.CreateUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
@@ -19,7 +20,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ViewModelRegisterUser @Inject constructor(
     private val registerUserUseCase: RegisterUserUseCase,
-    private val mUserProvider: UserProvider
+    private val createUserUseCase: CreateUserUseCase
 ):ViewModel() {
 
     var user: FirebaseUser? = null
@@ -34,7 +35,6 @@ class ViewModelRegisterUser @Inject constructor(
     fun getUser(): LiveData<FirebaseUser>  = _user
 
     fun createUser(email: String, pass: String) = viewModelScope.launch {
-
         registerUserUseCase
             .invoke(email, pass)
             .onStart {
@@ -50,26 +50,16 @@ class ViewModelRegisterUser @Inject constructor(
             }.launchIn(viewModelScope)
     }
 
-    fun saveFirebaseUser(usernew: User) {
-        try {
-            mUserProvider.create(usernew).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    _isLoading.setValue(false)
-                    _isSavedFirebase.setValue(true)
-                } else {
-                    _isLoading.setValue(false)
-                    _isSavedFirebase.setValue(false)
-                }
-            }.addOnFailureListener{ e ->
-                _isLoading.setValue(false)
-                _message.setValue(e.message)
-                _isSavedFirebase.setValue(false)
-            }
-
-        } catch (e: java.lang.Exception) {
-            _isLoading.setValue(false)
-            _message.setValue(e.message)
-            _isSavedFirebase.setValue(false)
-        }
+    fun saveFirebaseUser(usernew: User) = viewModelScope.launch{
+        createUserUseCase
+            .invoke(usernew)
+            .onStart {
+                _isLoading.value = true
+            }.onEach {
+                _isSavedFirebase.value = it
+            }.catch {
+                _message.value = "Ah ocurrido un error al intentar crear un usuario nuevo"
+                _isLoading.value = false
+            }.launchIn(viewModelScope)
     }
 }

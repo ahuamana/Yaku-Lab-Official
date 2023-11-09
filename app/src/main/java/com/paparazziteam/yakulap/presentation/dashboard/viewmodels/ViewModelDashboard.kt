@@ -27,6 +27,10 @@ import com.yakulab.domain.dashboard.Report
 import com.yakulab.domain.dashboard.TypeReported
 import com.yakulab.domain.dashboard.TypeReportedPost
 import com.yakulab.usecases.firebase.image.SaveAndDownloadUriUseCase
+import com.yakulab.usecases.firebase.login.GetEmailUseCase
+import com.yakulab.usecases.firebase.user.SearchUserByEmailUseCase
+import com.yakulab.usecases.firebase.user.UpdatePostBlockedUseCase
+import com.yakulab.usecases.firebase.user.UpdateUsersBlockedUseCase
 import com.yakulab.usecases.inaturalist.GetSpeciesByLocationUseCase
 import com.yakulab.usecases.inaturalist.SpeciesByLocationResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -42,28 +46,23 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
 
 
 @HiltViewModel
 class ViewModelDashboard @Inject constructor(
-    private val mUserProvider: com.ahuaman.data.dashboard.providers.UserProvider,
-    private val mLoginProvider: com.ahuaman.data.dashboard.providers.LoginProvider,
+    private val searchUserByEmailUseCase: SearchUserByEmailUseCase,
+    private val getEmailUseCase: GetEmailUseCase,
+    private val updatePostBlockedUseCase: UpdatePostBlockedUseCase,
+    private val updateUsersBlockedUseCase: UpdateUsersBlockedUseCase,
     private val mCommentRepositoryImpl: CommentRepository,
     private val mReportProvider: com.ahuaman.data.dashboard.providers.ReportProvider,
     private val mPreferences: MyPreferences,
 ): ViewModel(){
 
     private var listChallenges = mutableListOf<ChallengeCompleted>()
-
-    private var mListener: ListenerRegistration?= null
-
-    private val _errorUpload = MutableLiveData<String>()
-    val errorUpload:LiveData<String> = _errorUpload
-
-    private val _completeUpload = MutableLiveData<Boolean>()
-    val completeUpload:LiveData<Boolean> = _completeUpload
 
     private val _snackbar = MutableLiveData<String>()
     val snackbar:LiveData<String> = _snackbar
@@ -91,33 +90,24 @@ class ViewModelDashboard @Inject constructor(
 
     private val _speciesByLocation = MutableStateFlow<SpeciesByLocationResult>(
         SpeciesByLocationResult.ShowLoading)
-    val speciesByLocation = _speciesByLocation.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5000,1),
-        initialValue = SpeciesByLocationResult.ShowLoading
-    )
+
     init {
         showUserData()
     }
 
-    fun showUserData(){
-       val emailLogged = mLoginProvider.getEmail()
-        mUserProvider.searchUserByEmail(emailLogged).addOnCompleteListener {
-            if(it.isSuccessful){
-                try {
-                    var user = it.result?.toObject<User>()
-                    user?.let {
-                        saveUsersBlockedInCache(it)
-                        savePostsBlockedInCache(it)
-                        _user.value = it
-                    }
-                }catch (e:Throwable){
-                    FirebaseCrashlytics.getInstance().recordException(e)
+    private fun showUserData() = viewModelScope.launch{
+       val currentEmail = getEmailUseCase.invoke()
+        searchUserByEmailUseCase
+            .invoke(currentEmail)
+            .onEach { user->
+                user?.let {
+                    saveUsersBlockedInCache(it)
+                    savePostsBlockedInCache(it)
+                    _user.value = it
                 }
-            }else{
-               //TODO: show error user not found
-            }
-        }
+            }.catch {
+                Timber.d("Error al obtener datos del usuario.")
+        }.launchIn(viewModelScope)
     }
 
     private fun savePostsBlockedInCache(user: User) {
@@ -134,16 +124,6 @@ class ViewModelDashboard @Inject constructor(
             mPreferences.saveUsersBlocked = toJson(usersBlocked)
         }else mPreferences.saveUsersBlocked = ""
     }
-
-
-
-    private fun updatePoints(pointsToGive: Int) {
-        mUserProvider.updatePoints(mPreferences.email,mPreferences.points.plus(pointsToGive))?.
-        addOnSuccessListener {
-            mPreferences.points+=pointsToGive
-        }
-    }
-
 
     fun getCommentsFromThread(idPhoto:String){
         mCommentRepositoryImpl.getCommentsByIdPhoto(idPhoto)?.addSnapshotListener { value, error ->
@@ -237,41 +217,52 @@ class ViewModelDashboard @Inject constructor(
         }
     }
 
-    fun addPostBlocked(idChallenge:String){
+    fun addPostBlocked(idChallenge:String) = viewModelScope.launch{
         CoroutineScope(Dispatchers.Unconfined).launch {
             var posts = mutableListOf<String>()
             try {
                 if(!mPreferences.savePostsBlocked.isNullOrEmpty()) posts = fromJson(mPreferences.savePostsBlocked)
                 posts.add(idChallenge)
                 mPreferences.savePostsBlocked = toJson(posts)
-                mUserProvider.updatePostBlocked(mPreferences.email, posts)
-                removePostFromList(idChallenge)
-                //_newPostHided.value = idChallenge
+
+                updatePostBlockedUseCase
+                    .invoke(mPreferences.email, posts)
+                    .onEach {
+                        removePostFromList(idChallenge)
+                    }.catch {
+                        Timber.e("Error al bloquear posts.")
+                    }.launchIn(viewModelScope)
+
             }catch (t:Throwable){
                 println("Error addPostBlocked: ${t.message}")
             }
         }
     }
 
-    fun blockUser(email:String){
-        CoroutineScope(Dispatchers.Unconfined).launch {
+    fun blockUser(email:String) = viewModelScope.launch{
             var users = mutableListOf<String>()
             try {
                 if(!mPreferences.saveUsersBlocked.isNullOrEmpty()) users = fromJson(mPreferences.saveUsersBlocked)
                 users.add(email)
                 mPreferences.saveUsersBlocked = toJson(users)
-                mUserProvider.updateUsersBlocked(mPreferences.email, users)
-                removePostByUser(email)
-                withContext(Dispatchers.Main){
-                    _snackbar.value = "Usuario bloqueado."
-                }
+
+                updateUsersBlockedUseCase
+                    .invoke(mPreferences.email, users)
+                    .onEach {
+                        removePostByUser(email)
+                        withContext(Dispatchers.Main){
+                            _snackbar.value = "Usuario bloqueado."
+                        }
+                    }.catch {
+                        Timber.e("Error al bloquear usuario.")
+                    }.launchIn(viewModelScope)
             }catch (t:Throwable){
                 withContext(Dispatchers.Main){
                     _snackbar.value = "Error al bloquear usuario."
                 }
                 println("Error addUserBlocked: ${t.message}")
             }
-        }
+
     }
 
     private fun removePostByUser(email: String) {
