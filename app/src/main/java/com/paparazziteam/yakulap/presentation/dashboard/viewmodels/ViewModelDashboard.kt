@@ -28,6 +28,7 @@ import com.yakulab.domain.dashboard.TypeReported
 import com.yakulab.domain.dashboard.TypeReportedPost
 import com.yakulab.usecases.firebase.image.SaveAndDownloadUriUseCase
 import com.yakulab.usecases.firebase.login.GetEmailUseCase
+import com.yakulab.usecases.firebase.report.CreateReportUseCase
 import com.yakulab.usecases.firebase.user.SearchUserByEmailUseCase
 import com.yakulab.usecases.firebase.user.UpdatePostBlockedUseCase
 import com.yakulab.usecases.firebase.user.UpdateUsersBlockedUseCase
@@ -58,7 +59,7 @@ class ViewModelDashboard @Inject constructor(
     private val updatePostBlockedUseCase: UpdatePostBlockedUseCase,
     private val updateUsersBlockedUseCase: UpdateUsersBlockedUseCase,
     private val mCommentRepositoryImpl: CommentRepository,
-    private val mReportProvider: com.ahuaman.data.dashboard.providers.ReportProvider,
+    private val createReportUseCase: CreateReportUseCase,
     private val mPreferences: MyPreferences,
 ): ViewModel(){
 
@@ -147,8 +148,7 @@ class ViewModelDashboard @Inject constructor(
     }
 
 
-    fun reportPost(item: ChallengeCompleted, type: TypeReported, typeReportedPost: TypeReportedPost?= null){
-        CoroutineScope(Dispatchers.Unconfined).launch{
+    fun reportPost(item: ChallengeCompleted, type: TypeReported, typeReportedPost: TypeReportedPost?= null) = viewModelScope.launch{
             //Report Post Update
             var reportPost = Report(
                 idPostReported = item?.id,
@@ -163,44 +163,53 @@ class ViewModelDashboard @Inject constructor(
                 reportPost.typeReportedPost = typeReportedPost.value
             }
 
-            mReportProvider.create(reportPost)
-            withContext(Dispatchers.Main){
-                println("Notified: Publicación reportada.")
-                //_snackbar.value = "Publicación reportada."
-            }
-        }
+            createReportUseCase
+                .invoke(reportPost)
+                .onEach {
+                    withContext(Dispatchers.Main){
+                        Timber.d("Notified: Publicación reportada.")
+                        _snackbar.value = "Publicación reportada."
+                    }
+                }.catch {
+                    Timber.e("Error al reportar publicación.")
+                }.launchIn(viewModelScope)
     }
 
-    fun reportUser(type: TypeReported, userReported:String){
-        CoroutineScope(Dispatchers.Unconfined).launch{
-            //Report User Update
-            var reportUser = Report(
-                typeReport = type.value,
-                datetime = getTimestamp(),
-                datetimeUnixTime = getTimestampUnix(),
-                emailWhoReport = mPreferences.email,
-                firstNameWhoReport = mPreferences.firstName,
-                lastNameWhoReport = mPreferences.lastName,
-            )
+    fun reportUser(type: TypeReported, userReported:String) = viewModelScope.launch{
+        //Report User Update
+        val reportUser = Report(
+            typeReport = type.value,
+            datetime = getTimestamp(),
+            datetimeUnixTime = getTimestampUnix(),
+            emailWhoReport = mPreferences.email,
+            firstNameWhoReport = mPreferences.firstName,
+            lastNameWhoReport = mPreferences.lastName,
+        )
 
-            if (userReported == mPreferences.email) {
-                return@launch
-            }
-            if(!userReported.isNullOrEmpty()){
-                reportUser.userReported = userReported
-
-            mReportProvider.create(reportUser)
-            withContext(Dispatchers.Main){
-                _snackbar.value = "Usuario reportado."
-            }
+        if (userReported == mPreferences.email) {
+            return@launch
         }
-    }
+
+        if(userReported.isEmpty()) return@launch
+
+        reportUser.userReported = userReported
+
+        //Create Report in Firebase
+        createReportUseCase
+            .invoke(reportUser)
+            .onEach {
+                withContext(Dispatchers.Main){
+                    Timber.d("Notified: Usuario reportado.")
+                    _snackbar.value = "Usuario reportado."
+                }
+            }.catch {
+                Timber.e("Error al reportar usuario.")
+            }.launchIn(viewModelScope)
     }
 
     fun reportComment(item: Comment, type: TypeReported) = viewModelScope.launch{
-        CoroutineScope(Dispatchers.Unconfined).launch{
             //Report Post Update
-            var reportPost = Report(
+            val reportPost = Report(
                 idCommentReported = item?.id,
                 reportedComentario = item?.message,
                 idPhotoReported = item?.id_photo,
@@ -210,11 +219,16 @@ class ViewModelDashboard @Inject constructor(
                 lastNameWhoReport = mPreferences.lastName,
             )
 
-            mReportProvider.create(reportPost)
-            withContext(Dispatchers.Main){
-                _snackbar.value = "Comentario reportado."
-            }
-        }
+            createReportUseCase
+                .invoke(reportPost)
+                .onEach {
+                    withContext(Dispatchers.Main){
+                        Timber.d("Notified: Comentario reportado.")
+                        _snackbar.value = "Comentario reportado."
+                    }
+                }.catch {
+                    Timber.e("Error al reportar comentario.")
+                }.launchIn(viewModelScope)
     }
 
     fun addPostBlocked(idChallenge:String) = viewModelScope.launch{

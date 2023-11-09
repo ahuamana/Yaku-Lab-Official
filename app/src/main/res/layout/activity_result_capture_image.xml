@@ -1,17 +1,10 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.laboratorio.views.ResultCaptureImageActivity"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <data>
-            <variable
-                name="viewModel"
-                type="com.paparazziteam.yakulap.presentation.laboratorio.viewmodels.ViewModelResult" />
-    </data>
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".presentation.laboratorio.views.ResultCaptureImageActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -229,13 +222,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="30dp"
-                                android:orientation="horizontal"></LinearLayout>
+                                android:orientation="horizontal"/>
                         </LinearLayout>
                     </FrameLayout>
                 </ScrollView>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</layout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
