@@ -37,6 +37,22 @@
                     android:background="@color/colorSecondaryYaku"
                     tools:src="@drawable/img_example" />
 
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    app:cardBackgroundColor="@color/colorPrimaryYaku"
+                    app:cardCornerRadius="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_arrow_back_white" />
+                </com.google.android.material.card.MaterialCardView>
+
             </com.google.android.material.card.MaterialCardView>
 
 

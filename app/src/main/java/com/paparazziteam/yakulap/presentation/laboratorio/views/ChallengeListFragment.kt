@@ -14,6 +14,7 @@ import com.paparazziteam.yakulab.binding.helper.beGone
 import com.paparazziteam.yakulab.binding.helper.beVisible
 import com.paparazziteam.yakulab.binding.utils.toJson
 import com.paparazziteam.yakulap.databinding.ActivityChallengeParentBinding
+import com.paparazziteam.yakulap.navigation.NavigationRootImpl
 import com.paparazziteam.yakulap.presentation.laboratorio.adapters.ViewPagerAdapter
 import com.paparazziteam.yakulap.presentation.laboratorio.fragments.ListChallengeFragment
 import com.yakulab.domain.laboratory.DataChallenge
@@ -21,6 +22,7 @@ import com.paparazziteam.yakulap.presentation.laboratorio.viewmodels.ViewModelLa
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import viewBinding
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ChallengeListFragment : Fragment() {
@@ -38,6 +40,9 @@ class ChallengeListFragment : Fragment() {
 
     //Ui Shimmer Loading
     var mShimmerLayout: ShimmerFrameLayout?= null
+
+    @Inject
+    lateinit var navigationRootImpl: NavigationRootImpl
 
     private var listCategoriOne: MutableList<DataChallenge> = mutableListOf()
     private var listCategoriTwo: MutableList<DataChallenge> = mutableListOf()
@@ -61,6 +66,7 @@ class ChallengeListFragment : Fragment() {
         otherComponents()
         observers()
     }
+
 
     private fun otherComponents() {
         mTabLayout?.setupWithViewPager(mViewPager)

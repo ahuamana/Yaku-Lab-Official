@@ -26,6 +26,7 @@ import com.yakulab.domain.dashboard.Reaccion
 import com.yakulab.domain.dashboard.Report
 import com.yakulab.domain.dashboard.TypeReported
 import com.yakulab.domain.dashboard.TypeReportedPost
+import com.yakulab.usecases.firebase.image.SaveAndDownloadUriUseCase
 import com.yakulab.usecases.inaturalist.GetSpeciesByLocationUseCase
 import com.yakulab.usecases.inaturalist.SpeciesByLocationResult
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -50,12 +51,8 @@ class ViewModelDashboard @Inject constructor(
     private val mUserProvider: com.ahuaman.data.dashboard.providers.UserProvider,
     private val mLoginProvider: com.ahuaman.data.dashboard.providers.LoginProvider,
     private val mCommentRepositoryImpl: CommentRepository,
-    private val mImageProvider: com.ahuaman.data.dashboard.providers.ImageProvider,
-    private val mChallengeProvider: ChallengeRepository,
-    private val mActionProvider: com.ahuaman.data.dashboard.providers.ReaccionProvider,
     private val mReportProvider: com.ahuaman.data.dashboard.providers.ReportProvider,
     private val mPreferences: MyPreferences,
-    private val getSpeciesByLocationUseCase: GetSpeciesByLocationUseCase,
 ): ViewModel(){
 
     private var listChallenges = mutableListOf<ChallengeCompleted>()
@@ -138,59 +135,7 @@ class ViewModelDashboard @Inject constructor(
         }else mPreferences.saveUsersBlocked = ""
     }
 
-    fun uploadPhotoRemote(
-        molde: ChallengeCompleted,
-        fileImage: File?,
-        pointsToGive: Int,
-        isCompleted: Boolean,
-        idChallengeDocument: String
-    ){
-        var idChallengeCreated = mChallengeProvider.createDocument()?.id
-        molde.id = idChallengeCreated
 
-        if (fileImage != null) {
-            mImageProvider.save(fileImage)?.addOnCompleteListener {
-                if(it.isSuccessful){
-                    mImageProvider.getDownloadUri()?.addOnSuccessListener {
-                        Log.e("URL Upload", "url: $it")
-                        molde.url = it.toString()
-                        if(isCompleted) updatePhoto(molde,idChallengeDocument)
-                        else saveDataOnFirebase(molde,pointsToGive)
-                        
-                    }?.addOnFailureListener {
-                        println("Error imagen addOnFailureListener")
-                    }
-                }else{
-                   // dissmiss dialog
-                    println("Error imagen")
-                    _errorUpload.value = "La imagen no se pudo almacenar, inténtelo de nuevo!"
-                }
-            }
-        }else{
-            //dissmiss
-            _errorUpload.value = "La imagen se encuentra vácio, inténtelo de nuevo!"
-        }
-    }
-
-    private fun updatePhoto(
-        molde: ChallengeCompleted,
-        idChallengeDocument: String
-    ) {
-            mChallengeProvider.update(idChallengeDocument,molde.url)?.addOnCompleteListener { task->
-                if(task.isSuccessful){
-                    _completeUpload.value = true
-                }else{
-                    _errorUpload.value = "No se pudo actualizar la nueva imagen"
-                }
-            }
-    }
-
-    private fun saveDataOnFirebase(molde: ChallengeCompleted, pointsToGive: Int) {
-        mChallengeProvider.create(molde)?.addOnCompleteListener {
-            _completeUpload.value = true
-            updatePoints(pointsToGive)
-        }
-    }
 
     private fun updatePoints(pointsToGive: Int) {
         mUserProvider.updatePoints(mPreferences.email,mPreferences.points.plus(pointsToGive))?.
@@ -199,102 +144,6 @@ class ViewModelDashboard @Inject constructor(
         }
     }
 
-
-    fun showChallengesCompleted(){
-        _loading.value = true
-        CoroutineScope(Dispatchers.Unconfined).launch {
-            mListener = mChallengeProvider.getListChallengesOrderByTimeStamp()!!.addSnapshotListener { value, error ->
-                if(value?.isEmpty == true) {
-                    showListEmpty()
-                }else {
-                    //getItems
-                    value?.let {
-                        filterChallengesFromFirebase(it.documents)
-                        removePostsFromUsers()
-                        removePostsHidden()
-                    }
-                }
-
-            }
-        }
-    }
-
-    private fun removePostsFromUsers() {
-        var usersBlocked = mPreferences.saveUsersBlocked
-        if(!usersBlocked.isNullOrEmpty()){
-            var listUsersBlocked: MutableList<String> = fromJson(usersBlocked)
-            listUsersBlocked.forEach { userBlocked ->
-                    listChallenges.removeAll { it.author_email == userBlocked }
-            }
-        }
-    }
-
-    private fun removePostsHidden(){
-        var posts: MutableList<String>
-        if(!mPreferences.savePostsBlocked.isNullOrEmpty()){
-            try {
-                posts = fromJson(mPreferences.savePostsBlocked)
-                for(_post in posts){
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) removeAboveAndroid7ToMore(listChallenges, _post)
-                    else removePostOnAndroid5To7(listChallenges, _post)
-                }
-                //Notified Challenges completed
-                _loading.value = false
-                _postsCompleted.value = listChallenges
-            }catch (t:Throwable){
-                FirebaseCrashlytics.getInstance().recordException(t)
-                //Notified error filtering Hidden post
-                _loading.value = false
-                _challengesEmpty.value = mutableListOf()
-            }
-        }else{
-            _loading.value = false
-            _postsCompleted.value = listChallenges
-        }
-    }
-
-    private fun removePostOnAndroid5To7(
-        challenges: MutableList<ChallengeCompleted>,
-        _post: String) {
-        //Init removing
-        for(_challenge in challenges){
-            if(_challenge.id == _post) challenges.remove(_challenge)
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.N)
-    private fun removeAboveAndroid7ToMore(
-        challenges: MutableList<ChallengeCompleted>,
-        _post: String
-    ) {
-        challenges.removeIf{ it.id == _post }
-    }
-
-
-
-    private fun filterChallengesFromFirebase(documents: MutableList<DocumentSnapshot>) {
-        for (productsnaptshot in  documents) {
-            val challenge = productsnaptshot.toObject<ChallengeCompleted>()
-            if (challenge != null) {
-                listChallenges.add(challenge)
-            }
-        }
-        //fill Recycler view
-        val challengesUnique = listChallenges.distinctBy {
-            it.id
-        }
-        if(listChallenges.isNotEmpty())  listChallenges.clear()
-        listChallenges.addAll(challengesUnique)
-    }
-
-    private fun showListEmpty() {
-        Log.e("TAG","QUERY VACIO")
-        _postsCompleted.value = mutableListOf()
-    }
-
-    fun removeListener(){
-        mListener?.remove()
-    }
 
     fun getCommentsFromThread(idPhoto:String){
         mCommentRepositoryImpl.getCommentsByIdPhoto(idPhoto)?.addSnapshotListener { value, error ->
@@ -317,47 +166,6 @@ class ViewModelDashboard @Inject constructor(
         }
     }
 
-    fun updateLikeStatusFirebase(item: ChallengeCompleted){
-        mActionProvider.getUserLike(mPreferences.email, item.id)?.get()
-            ?.addOnSuccessListener {
-                if(it.isEmpty){
-                    println("Like is empty")
-                    createLike(item,true)
-                }else{
-                    //if already exist
-                    val status  = it.documents[0].get("status").toString().toBoolean()
-                    val idEmail = it.documents[0].get("id_email").toString()
-                    println("Update like: $status, $idEmail")
-                    updateLike(idEmail, status)
-                }
-            }
-    }
-
-    private fun updateLike(idEmail: String, status: Boolean) {
-        mActionProvider.updateStatus(idEmail, !status)?.addOnCompleteListener {
-            if(it.isSuccessful){
-                //likeAnimation(likeImg, R.raw.heart_love,!like)
-                //notified animation
-            }
-        }
-    }
-
-    private fun createLike(item: ChallengeCompleted, like: Boolean) {
-        val idEmail= "${item.id.toString()}_${mPreferences.email}"
-        var mAction = Reaccion()
-        mAction.id_email = idEmail
-        mAction.status = like
-        mAction.email = mPreferences.email
-        mAction.id = item.id
-        mAction.type = "Like"
-
-        mActionProvider.create(mAction)?.addOnCompleteListener {
-            if (it.isSuccessful) {
-                //likeAnimation(likeImg, R.raw.heart_love,!like)
-                //notified animation
-            }
-        }
-    }
 
     fun reportPost(item: ChallengeCompleted, type: TypeReported, typeReportedPost: TypeReportedPost?= null){
         CoroutineScope(Dispatchers.Unconfined).launch{
@@ -429,14 +237,6 @@ class ViewModelDashboard @Inject constructor(
         }
     }
 
-    fun searchUserByEmail(email:String){
-         CoroutineScope(Dispatchers.Unconfined).launch {
-             mUserProvider.searchUserByEmail(email).addOnCompleteListener {
-
-             }
-         }
-    }
-
     fun addPostBlocked(idChallenge:String){
         CoroutineScope(Dispatchers.Unconfined).launch {
             var posts = mutableListOf<String>()
@@ -488,48 +288,13 @@ class ViewModelDashboard @Inject constructor(
         }
     }
 
-    private fun removePostFromList(idChallenge:String){
+    private fun removePostFromList(idChallenge:String) {
         var index = listChallenges.indexOfFirst {
             it.id == idChallenge
         }
-        if(index<0) return
+        if (index < 0) return
         listChallenges.removeAt(index)
         _postsCompleted.value = listChallenges
-    }
-
-    fun getSpeciesByLocation(
-        lat : Double,
-        lng : Double,
-    ) = viewModelScope.launch(Dispatchers.IO) {
-
-        getSpeciesByLocationUseCase
-            .invoke(lat, lng)
-            .onStart {
-                withContext(Dispatchers.Main){
-                    _speciesByLocation.value = SpeciesByLocationResult.ShowLoading
-                }
-            }.onEach {
-                withContext(Dispatchers.Main){
-                    if (it.isNotEmpty()) {
-                        val listFiltered = handledSpeciesRemoveIfIdentificationsIsEmpty(it)
-                        _speciesByLocation.value = SpeciesByLocationResult.Success(listFiltered)
-                    } else _speciesByLocation.value = SpeciesByLocationResult.Empty
-                }
-            }.catch {
-                withContext(Dispatchers.Main){
-                    _speciesByLocation.value = SpeciesByLocationResult.Error(it.message?:"")
-                }
-            }.onCompletion {
-                withContext(Dispatchers.Main){
-                    _speciesByLocation.value = SpeciesByLocationResult.HideLoading
-                }
-            }.launchIn(viewModelScope)
-    }
-
-    fun handledSpeciesRemoveIfIdentificationsIsEmpty(list:List<ObservationEntity>): List<ObservationEntity>{
-        return list.filter {
-            it.identifications.isNotEmpty()
-        }
     }
 
 }

@@ -1,7 +1,10 @@
 package com.paparazziteam.yakulap.presentation.puntaje.viewmodels
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.drawable.Drawable
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,8 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewModelPuntaje @Inject constructor(
-    val preferences: MyPreferences,
-    @ApplicationContext val context: Context
+    val preferences: MyPreferences
 ):ViewModel() {
 
     private val _medal = MutableLiveData<Drawable>()
@@ -23,16 +25,16 @@ class ViewModelPuntaje @Inject constructor(
     private val _loading = MutableLiveData<Boolean>()
     val loading:LiveData<Boolean> = _loading
 
-    fun showMedal(points:Int = preferences.points){
+    fun showMedal(points:Int = preferences.points, resources: Resources){
         _loading.value = true
-        getMedalla(points)?.let { _medal.value = it  }
+        getMedalla(points, resources)?.let { _medal.value = it  }
         _loading.value = false
     }
 
-    fun getMedalla(points: Int):Drawable? = when {
-        points < 10 ->  context.getDrawable(R.drawable.bronze_medal)
-        points in 11..50 -> context.getDrawable(R.drawable.silver_medal)
-        points > 50 -> context.getDrawable(R.drawable.gold_medal)
-        else -> context.getDrawable(R.drawable.bronze_medal)
+    private fun getMedalla(points: Int, resources: Resources):Drawable? = when {
+        points < 10 -> ResourcesCompat.getDrawable(resources, R.drawable.bronze_medal,null)
+        points in 11..50 -> ResourcesCompat.getDrawable(resources,R.drawable.silver_medal, null)
+        points > 50 -> ResourcesCompat.getDrawable(resources,R.drawable.gold_medal, null)
+        else -> ResourcesCompat.getDrawable(resources,R.drawable.bronze_medal, null)
     }
 }

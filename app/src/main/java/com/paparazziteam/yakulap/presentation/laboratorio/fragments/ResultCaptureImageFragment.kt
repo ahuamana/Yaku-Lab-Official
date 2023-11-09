@@ -11,7 +11,9 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.paparazziteam.yakulab.binding.utils.fromHtml
 import com.paparazziteam.yakulap.databinding.FragmentResultCaptureImageBinding
+import com.paparazziteam.yakulap.navigation.NavigationRootImpl
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ResultCaptureImageFragment : Fragment() {
@@ -21,6 +23,8 @@ class ResultCaptureImageFragment : Fragment() {
     private val options: RequestOptions =
         RequestOptions().override(300,200).transform(CenterCrop(), RoundedCorners(10))
 
+    @Inject
+    lateinit var mNavigationRoot: NavigationRootImpl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +42,13 @@ class ResultCaptureImageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getExtras()
+        setupButtons()
+    }
+
+    private fun setupButtons() {
+        binding.cardBack.setOnClickListener {
+            mNavigationRoot.navigateChallengeCompleteToNavHome()
+        }
     }
 
     private fun getExtras() {

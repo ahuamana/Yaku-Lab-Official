@@ -55,11 +55,17 @@ class ListChallengeFragment : Fragment() {
         }
 
         otherComponents()
-
-
+        buttons()
 
         return view
     }
+
+    private fun buttons() {
+        binding.cardBack.setOnClickListener {
+            navigationRootImpl.onBack()
+        }
+    }
+
 
     private fun otherComponents() {
         var list =  fromJson< MutableList<DataChallenge>>(data?:"")
