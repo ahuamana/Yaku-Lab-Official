@@ -43,4 +43,7 @@ dependencies {
     //Dagger Hilt
     implementation (libs.hilt.android.android)
     kapt(libs.hilt.android.compiler)
+
+    //ar
+    implementation libs.arsceneview
 }

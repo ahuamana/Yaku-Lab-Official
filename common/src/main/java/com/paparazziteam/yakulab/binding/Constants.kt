@@ -17,6 +17,7 @@ object Constants {
     //BASE_URL_INATURALIST
     const val BASE_URL_INATURALIST = "https://api.inaturalist.org/v1/"
     const val BASE_URL_FIREBASE_IMAGES = "https://firebasestorage.googleapis.com/"
+    const val BASE_GITHUB_IO_URL = "https://ahuamana.github.io/"
 
     //PATH_OBSERVATIONS
     const val PATH_OBSERVATIONS = "observations"

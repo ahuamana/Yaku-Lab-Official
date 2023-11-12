@@ -3,7 +3,7 @@ package com.paparazziteam.yakulap.navigation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import com.ahuaman.feature_ar.MainARActivity
+import com.ahuaman.feature_ar.presentation.MainARActivity
 import com.paparazziteam.yakulab.binding.helper.navigator.Navigator
 import com.paparazziteam.yakulap.presentation.login.views.LoginActivity
 import javax.inject.Inject

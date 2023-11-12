@@ -1,5 +1,6 @@
 package com.yakulab.framework.network.di
 
+import com.paparazziteam.yakulab.binding.Constants.BASE_GITHUB_IO_URL
 import com.paparazziteam.yakulab.binding.Constants.BASE_URL_FIREBASE_IMAGES
 import com.paparazziteam.yakulab.binding.Constants.BASE_URL_INATURALIST
 import dagger.Module
@@ -36,6 +37,18 @@ object NetworkModule {
             .build()
     }
 
+    @RetrofitGithubIO
+    @Provides
+    @Singleton
+    fun provideGithubIORetrofit(gsonConverterFactory: GsonConverterFactory): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BASE_GITHUB_IO_URL)
+            .addConverterFactory(gsonConverterFactory)
+            .build()
+    }
+
+
+
     @Provides
     @Singleton
     fun provideGsonConverterFactory(): GsonConverterFactory {
@@ -50,3 +63,7 @@ annotation class RetrofitInaturalist
 @Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class RetrofitFirebase
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class RetrofitGithubIO

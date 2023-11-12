@@ -3,7 +3,7 @@
 
     <application>
         <activity
-            android:name=".MainARActivity"
+            android:name=".presentation.MainARActivity"
             android:exported="false"
             android:label="@string/title_activity_main_aractivity"
             android:theme="@style/Theme.Yakulap" />

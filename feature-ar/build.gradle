@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.kotlinKapt)
+    alias(libs.plugins.hiltPlugin)
 }
 
 android {
@@ -47,6 +49,7 @@ dependencies {
 
     //commom
     implementation project(":common")
+    implementation project(":usecases")
 
     implementation libs.core.ktx
     implementation libs.appcompat
@@ -68,4 +71,18 @@ dependencies {
 
     //AR
     implementation (libs.arsceneview)
+
+    //Navigation compose hilt
+    implementation(libs.hilt.navigation.compose)
+
+    //Dagger Hilt
+    implementation (libs.hilt.android.android)
+    kapt(libs.hilt.android.compiler)
+
+    //lifecycle
+    implementation(libs.lifecycle.viewmodel.compose) // viewModel
+    implementation(libs.lifecycle.runtime.compose) //collectAsStateWithLifecycle
+
+    //timber
+    implementation(libs.timber)
 }
