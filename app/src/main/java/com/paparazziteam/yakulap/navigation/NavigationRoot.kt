@@ -13,8 +13,9 @@ interface NavigationRoot {
     fun navigateToChallengeDetail()
     fun navigateToChallengeComplete(bunble: Bundle)
     fun navigateToCameraWhatsapp()
-
     fun navigateChallengeCompleteToNavHome()
+
+    fun navHomeToNavChallengeAR(bunble: Bundle)
 
     fun onBack()
 }

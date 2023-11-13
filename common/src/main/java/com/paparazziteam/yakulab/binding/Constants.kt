@@ -29,4 +29,5 @@ object Constants {
     //AR-MODEL
     const val AR_MODEL = "AR_MODEL"
     const val AR_SCALE_IN_UNIT = "AR_SCALE_IN_UNIT"
+    const val AR_SPECIE = "AR_SPECIE"
 }

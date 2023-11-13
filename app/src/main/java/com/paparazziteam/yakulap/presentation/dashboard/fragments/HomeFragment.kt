@@ -36,6 +36,7 @@ import com.yakulab.domain.laboratory.toDataChallengeNearbySpecies
 import com.paparazziteam.yakulap.navigation.NavigationRootImpl
 import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterSpeciesWithAR
 import com.paparazziteam.yakulap.presentation.dashboard.views.SlideImageFullScreenActivity
+import com.yakulab.domain.dashboard.toParcelable
 import com.yakulab.usecases.inaturalist.SpeciesByLocationResult
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -141,9 +142,8 @@ class HomeFragment : Fragment(), onClickThread {
 
         adapterSpeciesWithAR.onItemClickListener { itemSpecieAR, position ->
             val bundle = Bundle()
-            bundle.putString(Constants.AR_MODEL, itemSpecieAR.urlModel)
-            bundle.putFloat(Constants.AR_SCALE_IN_UNIT, itemSpecieAR.scaleInUnit)
-            navigatorModule.navigateToAR(requireContext(), false, bundle)
+            bundle.putParcelable(Constants.AR_SPECIE, itemSpecieAR.toParcelable())
+            navigationRoot.navHomeToNavChallengeAR(bundle)
         }
     }
 

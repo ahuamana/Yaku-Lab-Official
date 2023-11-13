@@ -1,20 +1,9 @@
 package com.ahuaman.feature_ar.presentation.composables
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,19 +15,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.ahuaman.feature_ar.utils.findActivity
+import com.ahuaman.feature_ar.utils.toFile
 import com.google.ar.core.Config
 import com.google.ar.core.Plane
 import com.paparazziteam.yakulap.common.R
 import io.github.sceneview.ar.ARScene
 import io.github.sceneview.ar.arcore.getUpdatedPlanes
-import io.github.sceneview.ar.node.ARCameraNode
 import io.github.sceneview.ar.node.AnchorNode
-import io.github.sceneview.loaders.ModelLoader
 import io.github.sceneview.math.Position
+import io.github.sceneview.model.model
 import io.github.sceneview.node.ModelNode
 import io.github.sceneview.rememberEngine
 import io.github.sceneview.rememberModelLoader
@@ -46,108 +32,17 @@ import io.github.sceneview.rememberNodes
 import io.github.sceneview.rememberRenderer
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
+import java.nio.Buffer
+import java.nio.ByteBuffer
 
 @Composable
-fun HomeARScreen(
-    arModel: String,
+fun ARComposableBuffer(
     scaleInUnitItem: Float,
     byteArray: ByteArray? = null
 ) {
-    Box(modifier = Modifier.fillMaxSize()) {
-        ARComposable(
-            arModel = arModel,
-            scaleInUnitItem = scaleInUnitItem,
 
-        )
-        TopBackButton()
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.BottomCenter
-        ) {
-            BottomTakeScreenShoot()
-        }
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TopBackButton(
-    onClickBack: () -> Unit = {}
-) {
     val context = LocalContext.current
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-    ) {
-        Card(
-            modifier = Modifier.padding(16.dp),
-            shape = RoundedCornerShape(16.dp),
-            onClick = {
-                //Close feature AR
-                findActivity(context)?.finish()
-            }) {
-            Box(
-                modifier = Modifier.padding(4.dp),
-                contentAlignment = Alignment.Center,
-            ) {
-                Icon(
-                    Icons.Default.ArrowBack, contentDescription = null
-                )
-            }
 
-        }
-
-        Card(
-            modifier = Modifier
-                .align(Alignment.CenterVertically)
-                .padding(16.dp),
-            shape = RoundedCornerShape(16.dp),
-            onClick = {
-                //Close feature AR
-                findActivity(context)?.finish()
-            }) {
-            Box(
-                modifier = Modifier.padding(4.dp),
-                contentAlignment = Alignment.Center,
-            ) {
-                Image(
-                    modifier = Modifier.size(24.dp),
-                    painter = painterResource(id = R.drawable.ic_logo_ya), contentDescription = null
-                )
-            }
-
-        }
-
-
-    }
-
-}
-
-
-@Preview
-@Composable
-fun ARComposablePreview() {
-    TopBackButton()
-}
-
-
-@Composable
-fun HomeARPreview() {
-    HomeARScreen(
-        arModel = kModelFile,
-        scaleInUnitItem = kScaleInUnit
-    )
-}
-
-
-private const val kModelFile = "https://ahuamana.github.io/models-ar/insect/ant.glb"
-private const val kScaleInUnit = 0.5f
-
-@Composable
-fun ARComposable(
-    arModel: String,
-    scaleInUnitItem: Float
-) {
     Box(
         modifier = Modifier.fillMaxSize(),
     ) {
@@ -163,7 +58,6 @@ fun ARComposable(
         val coroutineScope = rememberCoroutineScope()
 
         ARScene(
-            lifecycle = LocalLifecycleOwner.current.lifecycle,
             modifier = Modifier.fillMaxSize(),
             childNodes = childNodes,
             engine = engine,
@@ -193,22 +87,31 @@ fun ARComposable(
                         ).apply {
                             isEditable = true
                             coroutineScope.launch(coroutineExceptionHandler) {
-                                modelLoader.loadModelInstanceAsync(arModel){ modelInstance ->
-                                    modelInstance?.let {
+                                val instance =  byteArray?.let {
+                                  ByteBuffer.wrap(it)
+                                }
+
+                                val file = byteArray?.toFile(context)?.path?: ""
+
+
+                                val modelInstance = instance?.let { modelLoader.createModelInstance(instance) }
+
+                                modelLoader.loadModelInstanceAsync(file) {
+                                    modelInstance?.let { isntance->
+                                        ModelNode(
+                                            modelInstance = isntance,
+                                            // Scale to fit in a 0.5 meters cube
+                                            scaleToUnits = scaleInUnitItem,
+                                            centerOrigin = Position(0f, 0f, 0f)
+                                        )
+                                    }?.let { it1 ->
                                         addChildNode(
-                                            ModelNode(
-                                                modelInstance = it,
-                                                // Scale to fit in a 0.5 meters cube
-                                                scaleToUnits = scaleInUnitItem,
-                                                // Bottom origin instead of center so the
-                                                // model base is on floor
-                                                centerOrigin = Position(y = -0.5f)
-                                            ).apply {
-                                                isEditable = true
-                                            }
+                                            it1
                                         )
                                     }
                                 }
+
+
                                 planeRenderer = false
                                 isLoading = false
                             }
@@ -225,5 +128,5 @@ fun ARComposable(
             )
         }
     }
-}
 
+}

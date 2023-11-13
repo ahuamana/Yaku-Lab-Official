@@ -3,6 +3,7 @@ package com.ahuaman.feature_ar.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -34,6 +35,9 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ahuaman.feature_ar.presentation.AR.ARScreenViewModel
+import com.ahuaman.feature_ar.presentation.composables.HomeARScreen
+import com.ahuaman.feature_ar.presentation.composables.HomeSp
 import com.ahuaman.feature_ar.presentation.navigation.NavigationRoot
 import com.ahuaman.feature_ar.ui.theme.YakulapTheme
 import com.ahuaman.feature_ar.utils.findActivity
@@ -68,15 +72,9 @@ class MainARActivity : ComponentActivity() {
         setContent {
             YakulapTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                   NavigationRoot(
-                          arModel = arModel,
-                          scaleInUnitItem = scaleInUnitItem
-                     )
-                }
+                    //NavigationRoot(arModel = arModel, scaleInUnitItem = scaleInUnitItem)
+                   //HomeSp(viewModel,arModel = arModel, scaleInUnitItem = scaleInUnitItem)
+                   HomeARScreen(arModel = arModel, scaleInUnitItem = scaleInUnitItem)
             }
         }
     }

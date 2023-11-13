@@ -107,5 +107,6 @@
     <string name="menu_aula">Ranking</string>
     <string name="fragment_home_message_share">"\n        ¡Hey! Quiero compartir contigo YAKU LAB, una increíble plataforma educativa de ciencia y tecnología. 🚀🔬\n\n        📱 Descarga la app y únete a la aventura del aprendizaje gamificado:\n        👉 https://play.google.com/store/apps/details?id=%1$s\n\n        ¡Juntos, podemos hacer que el aprendizaje sea divertido e interactivo! 💡🎮\n        "</string>
     <string name="title_nearby_species_with_ar">Realidad aumentada</string>
+    <string name="take_an_image_with_your_camera">Captura la imagen utilizando la función de realidad aumentada en tu cámara</string>
 
 </resources>

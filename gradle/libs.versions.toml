@@ -15,6 +15,7 @@ hilt-android-compiler = "2.44"
 appcompat = "1.6.1"
 material = "1.10.0"
 timber = "5.0.1"
+glide-transformations = "4.3.0"
 
 #Compose
 
@@ -56,7 +57,8 @@ timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "tim
 lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle-viewmodel-compose" }
 lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle-runtime-compose" }
 hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
-
+#jp.wasabeef:glide-transformations:4.3.0
+glide-transformations = { module = "jp.wasabeef:glide-transformations", version.ref = "glide-transformations" }
 
 #kotlin corutines - play services
 kotlinx-coroutines-play-services = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-play-services", version.ref = "kotlinx-coroutines-play-services" }

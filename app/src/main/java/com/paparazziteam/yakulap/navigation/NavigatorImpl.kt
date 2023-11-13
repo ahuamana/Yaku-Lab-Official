@@ -16,12 +16,12 @@ class NavigatorImpl @Inject constructor() : Navigator {
         context.startActivity(intent)
     }
 
-    override fun navigateToAR(context: Context, isUnique: Boolean, bunble:Bundle?) {
+    override fun navigateToAR(context: Context, isUnique: Boolean, bundle:Bundle?) {
         val intent = Intent(context, MainARActivity::class.java).also {
             if(isUnique) it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
         }.also { intentt ->
-            bunble?.let {
-                intentt.putExtras(bunble)
+            bundle?.let {
+                intentt.putExtras(bundle)
             }
         }
 

@@ -49,6 +49,11 @@ class NavigationRootImpl @Inject constructor() : NavigationRoot {
         navController?.navigate(R.id.action_nav_challenge_complete_to_nav_home)
     }
 
+    override fun navHomeToNavChallengeAR(bunble: Bundle) {
+        navController?.navigate(R.id.action_nav_home_to_nav_challenge_ar,bunble)
+    }
+
+
     override fun onBack() {
         navController?.popBackStack()
     }
