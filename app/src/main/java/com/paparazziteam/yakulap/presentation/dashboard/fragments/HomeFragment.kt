@@ -1,5 +1,6 @@
 package com.paparazziteam.yakulap.presentation.dashboard.fragments
 
+
 import android.content.Intent
 import android.location.Location
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -14,6 +16,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.paparazziteam.yakulab.binding.Constants
 import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
 import com.paparazziteam.yakulab.binding.helper.beGone
@@ -142,11 +145,29 @@ class HomeFragment : Fragment(), onClickThread {
         }
 
         adapterSpeciesWithAR.onItemClickListener { itemSpecieAR, position ->
-            navigateToAR(itemSpecieAR)
+            showDialogAR(itemSpecieAR)
         }
     }
 
-    fun navigateToAR(itemSpecieAR: ItemSpecieAR){
+    private fun showDialogAR(itemSpecieAR: ItemSpecieAR){
+        AlertDialog
+            .Builder(requireContext())
+            .setTitle("Antes de ingresar a la experiencia de Realidad Aumentada (AR):\n")
+            .setMessage("- Se recomienda la supervisión de un adulto.\n" +
+                    "- Mantente consciente de tu entorno físico para evitar accidentes.\n" +
+                    "- Toca 'Continuar' para aceptar y entrar al módulo de AR.\n")
+            .setPositiveButton("Continuar") { dialog, which ->
+                navigateToAR(itemSpecieAR)
+            }.setNegativeButton("Cancelar") { dialog, which ->
+                Snackbar.make(requireView(),"Se cancelo la experiencia de AR", Snackbar.LENGTH_SHORT).show()
+                dialog.dismiss()
+            }.setCancelable(true)
+            .setOnDismissListener { dialog ->
+                dialog.dismiss()
+            }.show()
+    }
+
+    private fun navigateToAR(itemSpecieAR: ItemSpecieAR){
         val bundle = Bundle()
         bundle.putString(Constants.AR_MODEL, itemSpecieAR.urlModel)
         bundle.putFloat(Constants.AR_SCALE_IN_UNIT, itemSpecieAR.scaleInUnit)
