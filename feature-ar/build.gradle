@@ -85,4 +85,6 @@ dependencies {
 
     //timber
     implementation(libs.timber)
+
+    implementation "dev.shreyaspatil:capturable:1.0.3"
 }

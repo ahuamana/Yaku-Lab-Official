@@ -30,4 +30,10 @@ object Constants {
     const val AR_MODEL = "AR_MODEL"
     const val AR_SCALE_IN_UNIT = "AR_SCALE_IN_UNIT"
     const val AR_SPECIE = "AR_SPECIE"
+
+    //KEY_IMAGE
+    const val KEY_IMAGE = "KEY_IMAGE"
+    const val AR_SCREEN_SHOOT = "AR_SCREEN_SHOOT"
+    const val RESULT_CODE = 100
+
 }

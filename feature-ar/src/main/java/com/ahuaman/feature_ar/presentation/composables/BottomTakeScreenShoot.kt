@@ -30,7 +30,9 @@ import com.ahuaman.feature_ar.utils.findActivity
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BottomTakeScreenShoot() {
+fun BottomTakeScreenShoot(
+    onClickTakeScreenShoot: () -> Unit = {}
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center,
@@ -41,7 +43,7 @@ fun BottomTakeScreenShoot() {
             shape = RoundedCornerShape(50.dp),
             onClick = {
                 //Close feature AR
-
+                onClickTakeScreenShoot()
             }) {
             Box(
                 modifier = Modifier.padding(4.dp),

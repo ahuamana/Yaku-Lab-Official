@@ -1,5 +1,9 @@
 package com.ahuaman.feature_ar.presentation.composables
 
+import android.app.Activity
+import android.app.Activity.RESULT_OK
+import android.content.Intent
+import android.graphics.Bitmap
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,17 +27,26 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.view.drawToBitmap
+import com.ahuaman.feature_ar.utils.bitmap.ComposeScreenshotUtil
 import com.ahuaman.feature_ar.utils.findActivity
 import com.google.ar.core.Config
 import com.google.ar.core.Plane
+import com.paparazziteam.yakulab.binding.Constants
 import com.paparazziteam.yakulap.common.R
+import dev.shreyaspatil.capturable.Capturable
+import dev.shreyaspatil.capturable.controller.rememberCaptureController
 import io.github.sceneview.ar.ARScene
+import io.github.sceneview.ar.ARSceneView
 import io.github.sceneview.ar.arcore.getUpdatedPlanes
 import io.github.sceneview.ar.node.ARCameraNode
 import io.github.sceneview.ar.node.AnchorNode
@@ -46,6 +59,8 @@ import io.github.sceneview.rememberNodes
 import io.github.sceneview.rememberRenderer
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
+import kotlin.math.roundToInt
 
 @Composable
 fun HomeARScreen(
@@ -53,20 +68,56 @@ fun HomeARScreen(
     scaleInUnitItem: Float,
     byteArray: ByteArray? = null
 ) {
-    Box(modifier = Modifier.fillMaxSize()) {
-        ARComposable(
-            arModel = arModel,
-            scaleInUnitItem = scaleInUnitItem,
+    val context = LocalContext.current
+    val rootView = LocalView.current
+    val density = LocalDensity.current
+    val captureController = rememberCaptureController()
 
-        )
-        TopBackButton()
+    Capturable(
+        controller = captureController,
+        onCaptured = { bitmap, error ->
+            // This is captured bitmap of a content inside Capturable Composable.
+            if (bitmap != null) {
+                //convert to ImageBitmap to byte array
+                val stream = ByteArrayOutputStream()
+                bitmap.asAndroidBitmap().compress(Bitmap.CompressFormat.PNG, 100, stream)
+                val byteArrays = stream.toByteArray()
+                val intent = Intent()
+                intent.putExtra(Constants.AR_SCREEN_SHOOT, byteArrays)
+                findActivity(context)?.setResult(Activity.RESULT_OK, intent)
+                findActivity(context)?.finish()
+            }
+
+            if (error != null) {
+                // Error occurred. Handle it!
+            }
+        }
+    ) {
         Box(
             modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.BottomCenter
-        ) {
-            BottomTakeScreenShoot()
+
+            ) {
+            ARComposable(
+                arModel = arModel,
+                scaleInUnitItem = scaleInUnitItem,
+            )
+            TopBackButton {
+                findActivity(context)?.setResult(Activity.RESULT_CANCELED)
+                findActivity(context)?.finish()
+            }
+
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.BottomCenter
+            ) {
+                /*BottomTakeScreenShoot {
+                    captureController.capture()
+                }*/
+            }
+
         }
     }
+
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -83,8 +134,7 @@ fun TopBackButton(
             modifier = Modifier.padding(16.dp),
             shape = RoundedCornerShape(16.dp),
             onClick = {
-                //Close feature AR
-                findActivity(context)?.finish()
+                onClickBack()
             }) {
             Box(
                 modifier = Modifier.padding(4.dp),
@@ -148,6 +198,11 @@ fun ARComposable(
     arModel: String,
     scaleInUnitItem: Float
 ) {
+    val context = LocalContext.current
+    val rootView = LocalView.current
+
+    var arSceneView: ARSceneView? by remember { mutableStateOf(null) }
+
     Box(
         modifier = Modifier.fillMaxSize(),
     ) {
@@ -214,8 +269,17 @@ fun ARComposable(
                             }
                         }
                     }
+            },
+
+            onViewCreated = {
+                //pass the view to take screenshot
+                arSceneView = this
             }
         )
+
+
+
+
         if (isLoading) {
             CircularProgressIndicator(
                 modifier = Modifier
@@ -224,6 +288,10 @@ fun ARComposable(
                 color = colorResource(id = R.color.colorPrimaryYaku)
             )
         }
+
+
     }
 }
+
+
 

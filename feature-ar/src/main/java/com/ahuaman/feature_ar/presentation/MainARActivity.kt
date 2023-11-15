@@ -45,6 +45,7 @@ import com.google.ar.core.Config
 import com.google.ar.core.Plane
 import com.paparazziteam.yakulab.binding.Constants
 import dagger.hilt.android.AndroidEntryPoint
+import dev.shreyaspatil.capturable.controller.rememberCaptureController
 import io.github.sceneview.ar.ARScene
 import io.github.sceneview.ar.arcore.getUpdatedPlanes
 import io.github.sceneview.ar.node.AnchorNode
@@ -71,6 +72,8 @@ class MainARActivity : ComponentActivity() {
         Timber.d( "scaleInUnitItem: $scaleInUnitItem")
         setContent {
             YakulapTheme {
+
+
                 // A surface container using the 'background' color from the theme
                     //NavigationRoot(arModel = arModel, scaleInUnitItem = scaleInUnitItem)
                    //HomeSp(viewModel,arModel = arModel, scaleInUnitItem = scaleInUnitItem)
@@ -78,5 +81,7 @@ class MainARActivity : ComponentActivity() {
             }
         }
     }
+
+
 }
 

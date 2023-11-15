@@ -1,10 +1,16 @@
 package com.paparazziteam.yakulap.presentation.laboratorio.ar
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import com.paparazziteam.yakulab.binding.Constants
 import com.paparazziteam.yakulab.binding.Constants.AR_MODEL
 import com.paparazziteam.yakulab.binding.Constants.AR_SCALE_IN_UNIT
 import com.paparazziteam.yakulab.binding.Constants.AR_SPECIE
@@ -82,7 +88,30 @@ class ChallengeFragmentAR : Fragment() {
         val bundle = Bundle()
         bundle.putString(AR_MODEL, itemSpecieAR.urlModel)
         bundle.putFloat(AR_SCALE_IN_UNIT, itemSpecieAR.scaleInUnit)
-        navigatorModule.navigateToAR(requireContext(), isUnique = false, bundle = bundle)
+        navigatorModule.navigateToARWithBundleAndResultLauncher(requireContext(), isUnique = false, bundle = bundle, launcher = startForResultAR)
+    }
+
+    val startForResultAR = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            Timber.d("startForResult - resultCode OK: ${result.resultCode}")
+            val data: Intent? = result.data
+            val bitmap:ByteArray? = data?.getByteArrayExtra(Constants.AR_SCREEN_SHOOT)
+
+            Timber.d("startForResult - bitmap: $bitmap")
+
+            //ByteArray to Bitmap3
+            val bitmap3 = bitmap?.let {
+                android.graphics.BitmapFactory.decodeByteArray(it, 0, it.size)
+            }
+
+            //Set Bitmap to ImageView
+            binding.challengePhotoToComplete.setImageBitmap(bitmap3)
+
+        }else{
+            Timber.d("startForResult - resultCode ELSE: ${result.resultCode}")
+        }
     }
 
 }

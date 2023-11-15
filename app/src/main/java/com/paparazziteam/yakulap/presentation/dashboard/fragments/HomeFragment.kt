@@ -36,6 +36,7 @@ import com.yakulab.domain.laboratory.toDataChallengeNearbySpecies
 import com.paparazziteam.yakulap.navigation.NavigationRootImpl
 import com.paparazziteam.yakulap.presentation.dashboard.adapters.AdapterSpeciesWithAR
 import com.paparazziteam.yakulap.presentation.dashboard.views.SlideImageFullScreenActivity
+import com.yakulab.domain.dashboard.ItemSpecieAR
 import com.yakulab.domain.dashboard.toParcelable
 import com.yakulab.usecases.inaturalist.SpeciesByLocationResult
 import dagger.hilt.android.AndroidEntryPoint
@@ -141,10 +142,23 @@ class HomeFragment : Fragment(), onClickThread {
         }
 
         adapterSpeciesWithAR.onItemClickListener { itemSpecieAR, position ->
-            val bundle = Bundle()
-            bundle.putParcelable(Constants.AR_SPECIE, itemSpecieAR.toParcelable())
-            navigationRoot.navHomeToNavChallengeAR(bundle)
+            navigateToAR(itemSpecieAR)
         }
+    }
+
+    fun navigateToAR(itemSpecieAR: ItemSpecieAR){
+        val bundle = Bundle()
+        bundle.putString(Constants.AR_MODEL, itemSpecieAR.urlModel)
+        bundle.putFloat(Constants.AR_SCALE_IN_UNIT, itemSpecieAR.scaleInUnit)
+        navigatorModule.navigateToAR(requireContext(), isUnique = false, bundle = bundle)
+    }
+
+    fun navigateTochallengeWithAR(itemSpecieAR: ItemSpecieAR){
+        val bundle = Bundle()
+        bundle.putParcelable(Constants.AR_SPECIE, itemSpecieAR.toParcelable())
+
+
+        navigationRoot.navHomeToNavChallengeAR(bundle)
     }
 
     private fun setupGetLastLocation() {
@@ -158,11 +172,6 @@ class HomeFragment : Fragment(), onClickThread {
             adapter = adapterSpeciesNearby
         }
 
-        /*val spaceDecorationHorizontal = ItemSpaceDecorationHorizontal(30)
-        //add divider to recycler
-        binding.rvNearbySpecies.addItemDecoration(
-            spaceDecorationHorizontal
-        )*/
 
         adapterSpeciesNearby.onItemClickListener { observationEntity, position ->
             Timber.d( "onCreateView: ${observationEntity.identifications.first()?.taxon?.name}")
