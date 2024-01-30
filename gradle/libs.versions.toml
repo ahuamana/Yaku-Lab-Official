@@ -29,6 +29,7 @@ kotlinx-coroutines-play-services = "1.7.2"
 #AR
 arsceneview = "1.2.2"
 retrofit = "2.9.0"
+constraintlayout = "2.1.4"
 
 [libraries]
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
@@ -65,6 +66,7 @@ kotlinx-coroutines-play-services = { group = "org.jetbrains.kotlinx", name = "ko
 
 #AR
 arsceneview = { group = "io.github.sceneview", name = "arsceneview", version.ref = "arsceneview" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
 
 [plugins]
