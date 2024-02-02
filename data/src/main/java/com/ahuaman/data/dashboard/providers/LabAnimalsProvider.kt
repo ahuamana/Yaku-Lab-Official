@@ -5,18 +5,11 @@ import com.google.firebase.firestore.*
 import com.yakulab.domain.dashboard.TypeGroup
 import javax.inject.Inject
 
-class LabAnimalsProvider @Inject constructor() {
+class LabAnimalsProvider @Inject constructor(
+    private val firebaseFirestore: FirebaseFirestore
+) {
 
-    var mCollection: CollectionReference = FirebaseFirestore.getInstance().collection("ChallengesAnimales")
-
-    init {
-        val settings = FirebaseFirestoreSettings.Builder()
-            .setPersistenceEnabled(true)
-            .build()
-
-        FirebaseFirestore.getInstance().firestoreSettings = settings
-    }
-
+    val mCollection: CollectionReference = firebaseFirestore.collection("ChallengesAnimales")
 
     fun geDataProvider(type: String?): Task<DocumentSnapshot> {
         when(type){

@@ -7,6 +7,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
@@ -15,6 +16,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.paparazziteam.yakulab.binding.helper.analytics.FBaseAnalytics
 import com.paparazziteam.yakulab.binding.utils.hideKeyboardActivity
 import com.paparazziteam.yakulab.binding.utils.isValidEmail
 import com.paparazziteam.yakulab.binding.utils.setColorToStatusBar
@@ -22,14 +24,16 @@ import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityRegisterUserBinding
 import com.paparazziteam.yakulap.presentation.dashboard.views.DashboardActivity
 import com.yakulab.domain.login.User
-import com.paparazziteam.yakulap.presentation.login.viewmodels.ViewModelRegistroUsuario
+import com.paparazziteam.yakulap.presentation.login.viewmodels.ViewModelRegisterUser
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RegisterUserActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterUserBinding
-    val _viewModel = ViewModelRegistroUsuario.getInstance()
+
+    private val viewModelRegisterUser by viewModels<ViewModelRegisterUser>()
 
     var edtFullname: TextInputEditText? = null
     var edtLastname:TextInputEditText? = null
@@ -50,6 +54,9 @@ class RegisterUserActivity : AppCompatActivity() {
     var btnSignUp: MaterialButton? = null
 
     private lateinit var toolbar  : Toolbar
+
+    @Inject
+    lateinit var fBaseAnalytics: FBaseAnalytics
 
     //Sign up
     var userNew = User()
@@ -195,13 +202,13 @@ class RegisterUserActivity : AppCompatActivity() {
 
     private fun observers() {
 
-        _viewModel.showMessage().observe(this) { message ->
+        viewModelRegisterUser.showMessage().observe(this) { message ->
             if (message != null) {
                 _showMessageMainThread(message)
             }
         }
 
-        _viewModel.getUser().observe(this) { user ->
+        viewModelRegisterUser.getUser().observe(this) { user ->
             if (userNew.email.equals(user.email)) {
                 _saveOnFirebase(userNew)
             } else {
@@ -209,7 +216,7 @@ class RegisterUserActivity : AppCompatActivity() {
             }
         }
 
-        _viewModel.getIsLoading().observe(this) { isLoading ->
+        viewModelRegisterUser.getIsLoading().observe(this) { isLoading ->
             Log.e("ISLOADING", "ISLOADING:$isLoading")
             if (isLoading) {
                 binding.cortinaLayout.visibility = View.VISIBLE
@@ -218,7 +225,7 @@ class RegisterUserActivity : AppCompatActivity() {
             }
         }
 
-        _viewModel.getIsSavedFirebase().observe(this) { isSavedFirebase ->
+        viewModelRegisterUser.getIsSavedFirebase().observe(this) { isSavedFirebase ->
             if (isSavedFirebase) {
                 goToPrincipal()
             } else {
@@ -230,7 +237,7 @@ class RegisterUserActivity : AppCompatActivity() {
     }
 
     private fun _saveOnFirebase(user: User) {
-        _viewModel.saveFirebaseUser(user)
+        viewModelRegisterUser.saveFirebaseUser(user)
     }
 
     private fun goToPrincipal() {
@@ -257,19 +264,16 @@ class RegisterUserActivity : AppCompatActivity() {
 
     private fun signUp() {
         binding.signUp.setOnClickListener {
+            fBaseAnalytics.completeRegistrationEvent()
             userNew.apellidos = edtLastname?.text.toString().trim()
             userNew.email = edtEmail?.text.toString().trim()
             userNew.nombres = edtFullname?.text.toString().trim()
             userNew.alias = edtAlias?.text.toString().trim()
-            _viewModel.createUser(
+            viewModelRegisterUser.createUser(
                 userNew.email?:"",
                 edtPass!!.text.toString().trim()
             )
         }
     }
 
-    override fun onDestroy() {
-        ViewModelRegistroUsuario.destroyInstance()
-        super.onDestroy()
-    }
 }

@@ -35,8 +35,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    lateinit var greetingsNameHeader: MaterialTextView
-
     @Inject
     lateinit var preferences: MyPreferences
 
@@ -69,37 +67,6 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
     }
 
 
-    //TODO: IMPLEMENTAR PROFILE
-    /*private fun setupDrawerMenuLeft() {
-        println("Header setup")
-        headerLayout = navView.getHeaderView(0)
-        val menuSignOut: ConstraintLayout = headerLayout.findViewById(R.id.item_menu_signout)
-        val resourcesHelp: ConstraintLayout =
-            headerLayout.findViewById(R.id.item_menu_recursos_de_ayuda)
-        val challengesHome = headerLayout.findViewById<ConstraintLayout>(R.id.item_menu_home)
-
-        greetingsNameHeader = headerLayout.findViewById(R.id.greetings_name)
-
-        challengesHome.setOnClickListener {
-            drawer.closeDrawers()
-            navigationRoot.navigateToHome()
-        }
-
-        resourcesHelp.setOnClickListener {
-            bottomDialogFragment()
-        }
-
-        menuSignOut.setOnClickListener {
-            preferences.removeLoginData()
-            preferences.clearData()
-            startActivity(Intent(applicationContext, WelcomeActivity::class.java).apply {
-                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK) //Remove activities that have been created before
-            })
-        }
-
-    }*/
-
-
     private fun observers() {
         lifecycleScope.launch {
             viewModel.snackbar.observe(this@DashboardActivity) {
@@ -122,7 +89,7 @@ class DashboardActivity : BaseActivity<ActivityDashboardBinding>(ActivityDashboa
                     //Asignar Nombres y Primera letra del apellido del usuario
                     val names = replaceFirstCharInSequenceToUppercase(user.nombres ?: "")
                     val apellidos = user.apellidos?.substring(0, 1)
-                    greetingsNameHeader.text = "$names ${apellidos?.uppercase(Locale.getDefault())}."
+                    //greetingsNameHeader.text = "$names ${apellidos?.uppercase(Locale.getDefault())}."
                 }
             }
         }

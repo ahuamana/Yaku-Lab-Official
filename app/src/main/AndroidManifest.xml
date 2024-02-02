@@ -10,9 +10,12 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission
+        android:name="com.google.android.gms.permission.AD_ID"
+        tools:node="remove" />
 
     <application
         android:name=".root.MyApp"
@@ -23,7 +26,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Yakulap"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
+        <activity
+            android:name=".presentation.bienvenida.views.UserDataPolicyActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.laboratorio.views.ResultCaptureImageActivity"
             android:exported="true"
@@ -54,8 +61,6 @@
             android:name=".presentation.bienvenida.views.SplashActivity"
             android:exported="true"
             android:theme="@style/AppTheme.FullScreenPersonalize">
-
-            <!--  -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

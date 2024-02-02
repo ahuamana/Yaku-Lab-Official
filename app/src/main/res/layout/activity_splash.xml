@@ -30,15 +30,23 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="50dp">
 
-                <com.google.android.material.imageview.ShapeableImageView
-                    android:id="@+id/imglogo"
-                    android:layout_width="150dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_height="150dp"
-                    animation="@{viewmodel.animationLogo}"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    app:cardCornerRadius="90dp"
                     android:layout_gravity="center"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/yakulogo" />
+                    app:cardBackgroundColor="@color/colorPrimaryYaku"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/imglogo"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:layout_gravity="center"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/ic_yakulab_negativo_logo" />
+
+                </androidx.cardview.widget.CardView>
+
 
                 <ProgressBar
                     android:id="@+id/p_Bar2"
@@ -50,10 +58,10 @@
                     android:indeterminate="true"
                     android:indeterminateTint="@color/colorPrimaryYaku"
                     android:layout_marginEnd="50dp"
+                    android:progressDrawable="@drawable/rounded_corners_progress_bar"
                     android:max="00"
                     android:minHeight="25dp"
-                    android:progress="0"
-                    tools:ignore="MissingConstraints" />
+                    android:progress="0" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"

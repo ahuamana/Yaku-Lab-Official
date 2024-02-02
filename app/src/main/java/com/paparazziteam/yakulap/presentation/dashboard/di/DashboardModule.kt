@@ -41,6 +41,7 @@ object DashboardModule {
         return firestore.collection("Comment")
     }
 
+
     @Qualifier
     @Retention(AnnotationRetention.BINARY)
     annotation class CommentCollection
@@ -50,7 +51,7 @@ object DashboardModule {
     @Provides
     @Singleton
     fun provideChallengeProvider(
-        @DashboardModule.LaboratoryCollection collection:CollectionReference): ChallengeRepository {
+        @LaboratoryCollection collection:CollectionReference): ChallengeRepository {
         return ChallengeRepositoryImpl(collection)
     }
 
@@ -58,8 +59,10 @@ object DashboardModule {
     @Provides
     @Singleton
     fun provideCommentProvider(
-        @DashboardModule.CommentCollection collection:CollectionReference): CommentRepository {
+        @CommentCollection collection:CollectionReference): CommentRepository {
         return CommentRepositoryImpl(collection)
     }
+
+
 
 }

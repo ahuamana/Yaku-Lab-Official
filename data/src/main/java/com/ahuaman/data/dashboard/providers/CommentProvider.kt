@@ -7,9 +7,11 @@ import com.google.firebase.firestore.Query
 import com.yakulab.domain.dashboard.Comment
 import javax.inject.Inject
 
-class CommentProvider  @Inject constructor() {
+class CommentProvider  @Inject constructor(
+    private val firebaseFirestore: FirebaseFirestore
+) {
 
-    var mCollection: CollectionReference = FirebaseFirestore.getInstance().collection("Comment")
+    val mCollection: CollectionReference = firebaseFirestore.collection("Comment")
 
     fun create(comment: Comment): Task<Void?>? {
         val document = mCollection.document()

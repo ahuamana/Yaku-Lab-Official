@@ -6,9 +6,11 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.imageview.ShapeableImageView
 import com.paparazziteam.yakulap.common.R
 import id.zelory.compressor.Compressor
+import jp.wasabeef.glide.transformations.BlurTransformation
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
@@ -88,6 +90,16 @@ fun ShapeableImageView.load(url: String, placeholder: CircularProgressDrawable) 
     Glide.with(this)
         .load(url)
         .placeholder(placeholder)
+        .error(R.color.background_icon_color)
+        .into(this)
+}
+
+//loadWithBlur
+
+fun ShapeableImageView.loadWithBlur(url: String) {
+    Glide.with(this)
+        .load(url)
+        .apply(RequestOptions.bitmapTransform(BlurTransformation(25, 3)))
         .error(R.color.background_icon_color)
         .into(this)
 }

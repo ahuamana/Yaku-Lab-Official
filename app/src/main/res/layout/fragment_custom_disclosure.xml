@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".presentation.bienvenida.views.CustomDisclosureFragment">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        app:cardCornerRadius="20dp"
+        android:elevation="1dp"
+        app:cardElevation="1dp"
+        tools:cardBackgroundColor="@color/purple_200"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:text="@string/data_collection_disclosure_title"
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/uni_neue_bold"
+                android:layout_height="wrap_content"/>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDescription"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                tools:text="@string/data_collection_disclosure_message"
+                android:fontFamily="@font/uni_neue_regular"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:layout_marginTop="20dp"
+                android:layout_height="wrap_content"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="15dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_gravity="end"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCancel"
+                    android:layout_width="wrap_content"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    app:cornerRadius="60dp"
+                    android:visibility="gone"
+                    android:fontFamily="@font/uni_neue_regular"
+                    android:textColor="@color/colorPrimaryYaku"
+                    android:text="@string/cancel_button"
+                    app:strokeColor="@android:color/transparent"
+                    android:layout_height="wrap_content"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnAccept"
+                    android:layout_width="wrap_content"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    app:cornerRadius="60dp"
+                    android:fontFamily="@font/uni_neue_regular"
+                    android:textColor="@color/colorPrimaryYaku"
+                    android:text="@string/accept_button"
+                    app:strokeColor="@color/colorPrimaryYaku"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</LinearLayout>

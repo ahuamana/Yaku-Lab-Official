@@ -58,7 +58,7 @@ class PuntajeActivity : Fragment() {
     private fun initializeComponents() {
         Handler(Looper.getMainLooper()).postDelayed({
             //Do something after 2000mms
-            _viewModel.showMedal()
+            _viewModel.showMedal(resources = resources)
         }, 1000)
         binding.textViewPoints.text = mPreferences.points.toString()
     }

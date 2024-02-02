@@ -10,10 +10,14 @@ import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
+import com.paparazziteam.yakulab.binding.helper.analytics.FBaseAnalytics
 import com.paparazziteam.yakulab.binding.helper.application.MyPreferences
 import com.paparazziteam.yakulab.binding.utils.hideKeyboardActivity
 import com.paparazziteam.yakulab.binding.utils.isConnected
@@ -24,6 +28,7 @@ import com.paparazziteam.yakulap.databinding.ActivityLoginBinding
 import com.paparazziteam.yakulap.presentation.dashboard.views.DashboardActivity
 import com.paparazziteam.yakulap.presentation.login.viewmodels.ViewModelLogin
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -35,6 +40,9 @@ class LoginActivity : AppCompatActivity() {
 
     @Inject
     lateinit var mPreferences: MyPreferences
+
+    @Inject
+    lateinit var fBaseAnalytics: FBaseAnalytics
 
     lateinit var txtRegistroNuevo: MaterialTextView
     var btnLoginEmail: MaterialButton? = null
@@ -78,19 +86,12 @@ class LoginActivity : AppCompatActivity() {
             }
         }
 
-        //Login with email
-        viewModelLogin.getIsLoginEmail().observe(this) { isLoginEmail ->
-            println("isLoginEmail: $isLoginEmail")
-            if (isLoginEmail) {
-                //Log.e(TAG, "EMAIL ENVIADO: " + binding.email.text.toString().lowercase())
-                mPreferences.email = binding.email.text.toString().trim().lowercase()
-                startActivity(
-                    Intent(this, DashboardActivity::class.java)
-                        .putExtra("email", binding.email.text.toString().lowercase())
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
-                )
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED){
+                viewModelLogin.isLoginEmail.collect(::handleIsLoginEmail)
             }
         }
+
         viewModelLogin.getIsLoading().observe(this) { isLoading ->
             Log.e("ISLOADING", "ISLOADING:$isLoading")
             if (isLoading) {
@@ -101,8 +102,20 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    fun handleIsLoginEmail(isLoginEmail: Boolean) {
+        if (isLoginEmail) {
+            mPreferences.email = binding.email.text.toString().trim().lowercase()
+            startActivity(
+                Intent(this@LoginActivity, DashboardActivity::class.java)
+                    .putExtra("email", binding.email.text.toString().lowercase())
+                    .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            )
+        }
+    }
+
     private fun loginFirebase() {
         btnLoginEmail!!.setOnClickListener {
+            fBaseAnalytics.logLoginEvent()
             hideKeyboardActivity(this@LoginActivity)
             if (isConnected(applicationContext)) {
                 viewModelLogin.loginWithEmail(
@@ -173,6 +186,7 @@ class LoginActivity : AppCompatActivity() {
     private fun openNewRegistro() {
         txtRegistroNuevo.apply {
             setOnClickListener {
+                fBaseAnalytics.startRegistrationEvent()
                 startActivity(Intent(this@LoginActivity,RegisterUserActivity::class.java))
             }
         }

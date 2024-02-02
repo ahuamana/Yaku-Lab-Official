@@ -5,17 +5,11 @@ import com.google.firebase.firestore.*
 import com.yakulab.domain.dashboard.ChallengeCompleted
 import javax.inject.Inject
 
-class ChallengeProvider @Inject constructor() {
+class ChallengeProvider @Inject constructor(
+    private val firebaseFirestore: FirebaseFirestore
+) {
 
-    var mCollection: CollectionReference = FirebaseFirestore.getInstance().collection("LaboratorioDigital")
-
-    init {
-        val settings = FirebaseFirestoreSettings.Builder()
-            .setPersistenceEnabled(true)
-            .build()
-
-        FirebaseFirestore.getInstance().firestoreSettings = settings
-    }
+    val mCollection: CollectionReference = firebaseFirestore.collection("LaboratorioDigital")
 
     fun createDocument(): DocumentReference? {
         return mCollection.document()

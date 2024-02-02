@@ -12,6 +12,9 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url "https://jitpack.io" }
+        flatDir {
+            dirs 'libs'
+        }
     }
 }
 rootProject.name = "yakulap"
@@ -22,3 +25,5 @@ include ':data'
 include ':framework:network'
 include ':usecases'
 include ':feature-profile'
+include ':feature-splash'
+include ':feature-ar'

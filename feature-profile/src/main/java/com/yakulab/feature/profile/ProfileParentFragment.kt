@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.paparazziteam.yakulab.binding.helper.analytics.FBaseAnalytics
 import com.paparazziteam.yakulab.binding.helper.navigator.Navigator
 import com.yakulab.feature.profile.databinding.FragmentProfileParentBinding
 import com.yakulab.feature.profile.viewmodels.ProfileParentViewModel
@@ -36,6 +37,9 @@ class ProfileParentFragment : Fragment() {
     @Inject
     lateinit var navigator: Navigator
 
+    @Inject
+    lateinit var fBaseAnalytics: FBaseAnalytics
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,6 +59,7 @@ class ProfileParentFragment : Fragment() {
 
     private fun setupButtons() {
         binding.efabLogout.setOnClickListener {
+            fBaseAnalytics.logSignUpEvent()
             viewModel.logout()
             navigator.navigateToLogin(requireContext(), true)
         }
