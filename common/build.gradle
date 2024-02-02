@@ -10,7 +10,7 @@ android {
     compileSdk 34
 
     defaultConfig {
-        minSdk 22
+        minSdk 24
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
@@ -36,7 +36,7 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation libs.core.ktx
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
@@ -53,8 +53,8 @@ dependencies {
     implementation 'id.zelory:compressor:2.1.1'
 
     //Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.46.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.46.1")
+    implementation (libs.hilt.android.android)
+    kapt(libs.hilt.android.compiler)
 
     //json
     implementation ("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
@@ -64,4 +64,7 @@ dependencies {
 
     //lottie
     implementation "com.airbnb.android:lottie:6.0.0"
+
+    //glide transformation
+    implementation(libs.glide.transformations)
 }

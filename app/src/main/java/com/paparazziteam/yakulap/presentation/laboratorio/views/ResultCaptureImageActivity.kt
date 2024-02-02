@@ -19,15 +19,12 @@ import com.paparazziteam.yakulab.binding.utils.tintDrawable
 import com.paparazziteam.yakulap.R
 import com.paparazziteam.yakulap.databinding.ActivityResultCaptureImageBinding
 import com.paparazziteam.yakulap.presentation.dashboard.views.DashboardActivity
-import com.paparazziteam.yakulap.presentation.laboratorio.viewmodels.ViewModelResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ResultCaptureImageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityResultCaptureImageBinding
-
-    private val viewmodel:ViewModelResult by viewModels()
 
     private lateinit var myToolbar: Toolbar
     private lateinit var txtPoints: MaterialTextView

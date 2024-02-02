@@ -37,6 +37,22 @@
                     android:background="@color/colorSecondaryYaku"
                     tools:src="@drawable/img_example" />
 
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp"
+                    app:cardBackgroundColor="@color/colorPrimaryYaku"
+                    app:cardCornerRadius="15dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:padding="5dp"
+                        android:src="@drawable/ic_arrow_back_white" />
+                </com.google.android.material.card.MaterialCardView>
+
             </com.google.android.material.card.MaterialCardView>
 
 
@@ -125,13 +141,15 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/textViewImagenNosubida"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="30dp"
+                    android:fontFamily="@font/uni_neue_regular"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:elevation="1dp"
                     android:text="@string/imagen_no_subida"
                     android:textColor="#999"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/cardViewContainerPhotoToComplete"
                     app:layout_constraintEnd_toEndOf="@+id/cardViewContainerPhotoToComplete"
                     app:layout_constraintStart_toStartOf="@+id/cardViewContainerPhotoToComplete"

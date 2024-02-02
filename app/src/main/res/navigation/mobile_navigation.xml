@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_nav_home_to_nav_challenge_list"
             app:destination="@id/nav_challenge_list" />
+        <action
+            android:id="@+id/action_nav_home_to_nav_challenge_ar"
+            app:destination="@id/nav_challenge_ar" />
 
     </fragment>
 
@@ -60,5 +63,17 @@
         android:name="com.yakulab.feature.profile.ProfileParentFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile_parent" />
+
+    <fragment
+        android:id="@+id/nav_challenge_ar"
+        android:name="com.paparazziteam.yakulap.presentation.laboratorio.ar.ChallengeFragmentAR"
+        android:label=""
+        tools:layout="@layout/fragment_challenge_a_r" >
+        <action
+            android:id="@+id/action_nav_challenge_ar_to_nav_challenge_complete"
+            app:popUpTo="@id/nav_challenge_ar"
+            app:popUpToInclusive="true"
+            app:destination="@id/nav_challenge_complete" />
+    </fragment>
 
 </navigation>

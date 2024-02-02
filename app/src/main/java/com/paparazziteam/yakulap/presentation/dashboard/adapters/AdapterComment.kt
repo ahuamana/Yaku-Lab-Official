@@ -20,7 +20,10 @@ import com.ahuaman.data.dashboard.providers.UserProvider
 import javax.inject.Singleton
 
 @Singleton
-class AdapterComment(private val viewModel: ViewModelDashboard) : RecyclerView.Adapter<AdapterComment.ViewHolder>(){
+class AdapterComment(
+    private val viewModel: ViewModelDashboard,
+    private val userProvider: UserProvider
+    ) : RecyclerView.Adapter<AdapterComment.ViewHolder>(){
 
 
     val coments = mutableListOf<Comment>()
@@ -43,14 +46,14 @@ class AdapterComment(private val viewModel: ViewModelDashboard) : RecyclerView.A
         var txtTitle:MaterialTextView?= null
         var containMensaje:LinearLayout?= null
 
-        fun bind(item: Comment, _viewModel: ViewModelDashboard){
+        fun bind(item: Comment, _viewModel: ViewModelDashboard, userProvider: UserProvider){
             binding.apply {
                 messageText         =  txtMessage
                 txtTitle            = title
                 containMensaje      = containerMensaje
             }
             //Get Info comment User
-            getUserInfo(item)
+            getUserInfo(item, userProvider)
 
             //MoreOptionsComment
             moreOptionsComment(item)
@@ -70,16 +73,20 @@ class AdapterComment(private val viewModel: ViewModelDashboard) : RecyclerView.A
             fragment.show((itemView.context.getActivity() as FragmentActivity).supportFragmentManager,"bottomSheetMoreOptionsComment")
         }
 
-        private fun getUserInfo(item: Comment) {
+        private fun getUserInfo(item: Comment, userProvider: UserProvider) {
             messageText?.text = item.message
 
-            com.ahuaman.data.dashboard.providers.UserProvider().searchUserByEmail(item.email).addOnCompleteListener {
-                if(it.isSuccessful){
-                    val first = it.result.get("nombres").toString()
-                    val last = it.result.get("apellidos").toString()
+            userProvider.searchUserByEmail(item.email).addOnCompleteListener { task->
+                if(task.isSuccessful){
+                    println("Datos de usuario: ${task.result.data}")
+                    val first = task.result.get("nombres").toString()
+                    val last = task.result.get("apellidos").toString()
+                    val alias = task.result.get("alias").toString()
                     val fin = replaceFirstCharInSequenceToUppercase("$first $last")
-                    txtTitle?.text = fin
+                    txtTitle?.text = alias.replaceFirstChar { it.uppercase() }
                 }else Log.e("ERROR", "Error al traer los datos de Firebase")
+            }.addOnFailureListener {
+                Log.e("ERROR", "Error al traer los datos de Firebase + ${it.message}")
             }
         }
     }
@@ -90,7 +97,7 @@ class AdapterComment(private val viewModel: ViewModelDashboard) : RecyclerView.A
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(coments[position], viewModel)
+        holder.bind(coments[position], viewModel, userProvider)
     }
 
     override fun getItemCount(): Int  = coments.size

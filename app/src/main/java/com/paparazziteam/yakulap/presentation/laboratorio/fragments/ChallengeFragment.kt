@@ -160,6 +160,10 @@ class ChallengeFragment : Fragment(), OnOptionSelectedSourcePicker {
             view.isEnabled = false
             openOptionsPickerCamera()
         }
+
+        binding.cardBack.setOnClickListener {
+            mNavigationRoot.onBack()
+        }
     }
 
     private fun openOptionsPickerCamera(){

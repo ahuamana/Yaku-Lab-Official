@@ -1,76 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.bienvenida.views.WelcomeActivity">
 
-    <data>
-            <variable
-                name="model"
-                type="com.paparazziteam.yakulap.presentation.bienvenida.viewmodels.ViewModelWelcome" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".presentation.bienvenida.views.WelcomeActivity">
+        android:orientation="vertical"
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="3">
 
-            <RelativeLayout
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/view_pager_intro"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="3">
+                android:layout_height="match_parent"
+                android:overScrollMode="never" />
 
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/view_pager_intro"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:overScrollMode="never" />
-
-                <LinearLayout
-                    android:id="@+id/layoutDots"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:layout_alignParentBottom="true"
-                    android:orientation="horizontal"></LinearLayout>
-
-            </RelativeLayout>
-
-
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/layoutDots"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal"/>
+
+        </RelativeLayout>
 
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_iniciar_sesion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginBottom="30dp"
-                    android:background="@drawable/buttom_normal"
-                    android:elevation="4dp"
-                    android:onClick="@{(v)-> model.onClickStart()}"
-                    android:fontFamily="@font/product_sans_regular"
-                    android:orientation="vertical"
-                    android:text="@string/text_begining"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="16dp"
-                    app:backgroundTint="@color/colorPrimaryYaku" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
 
-            </RelativeLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_iniciar_sesion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/buttom_normal"
+                android:elevation="4dp"
+                android:fontFamily="@font/product_sans_regular"
+                android:orientation="vertical"
+                android:text="@string/text_begining"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:backgroundTint="@color/colorPrimaryYaku" />
 
 
-        </LinearLayout>
+        </RelativeLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

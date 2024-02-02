@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Yaku Lap</string>
-    <string name="app_powered_by">Powered by YAKU LAB</string>
+    <string name="app_powered_by">Powered by Yaku lab</string>
     <string name="app_version_code">Versión </string>
     <string name="app_welcome_message">Bienvenido a YAKU LAB</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -106,5 +106,13 @@
     <string name="menu_profile">Perfil</string>
     <string name="menu_aula">Ranking</string>
     <string name="fragment_home_message_share">"\n        ¡Hey! Quiero compartir contigo YAKU LAB, una increíble plataforma educativa de ciencia y tecnología. 🚀🔬\n\n        📱 Descarga la app y únete a la aventura del aprendizaje gamificado:\n        👉 https://play.google.com/store/apps/details?id=%1$s\n\n        ¡Juntos, podemos hacer que el aprendizaje sea divertido e interactivo! 💡🎮\n        "</string>
+    <string name="title_nearby_species_with_ar">Realidad aumentada</string>
+    <string name="take_an_image_with_your_camera">Captura la imagen utilizando la función de realidad aumentada en tu cámara</string>
+    <string name="data_collection_disclosure_message"><![CDATA[<p><html> <body> <p>Yaku Lab recopila ciertos tipos de datos para mejorar tu experiencia en la aplicaci&oacute;n. Aqu&iacute; est&aacute; lo que recopilamos:</p> <ul> <li><b>Informaci&oacute;n Personal:</b><br />  - Nombre: Se recopila para la funcionalidad de la aplicaci&oacute;n.<br />  - Direcci&oacute;n de Correo Electr&oacute;nico: Recopilada para mejorar los servicios de la aplicaci&oacute;n.</li> <li><b>Ubicaci&oacute;n:</b><br />  - Ubicaci&oacute;n Aproximada: Utilizada para proporcionar caracter&iacute;sticas basadas en la ubicaci&oacute;n.</li> <li><b>Fotos y Videos:</b><br />  - Fotos: Se recopilan para habilitar ciertas funciones de la aplicaci&oacute;n.</li> </ul> <p>Para obtener m&aacute;s informaci&oacute;n, por favor consulta nuestra pol&iacute;tica de privacidad.</p> </body> </html></p>]]></string>
+
+    <!-- Botones -->
+    <string name="accept_button">Aceptar</string>
+    <string name="cancel_button">Cancelar</string>
+    <string name="data_collection_disclosure_title">Recopilación de Datos</string>
 
 </resources>

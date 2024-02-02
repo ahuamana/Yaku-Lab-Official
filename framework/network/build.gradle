@@ -10,7 +10,7 @@ android {
     compileSdk 34
 
     defaultConfig {
-        minSdk 22
+        minSdk 24
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -35,7 +35,7 @@ dependencies {
     implementation( project(":common"))
     implementation( project(":domain"))
 
-    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation libs.core.ktx
     implementation 'androidx.appcompat:appcompat:1.6.1'
 
     //retrofit
@@ -43,6 +43,6 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
     //Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.46.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.46.1")
+    implementation (libs.hilt.android.android)
+    kapt(libs.hilt.android.compiler)
 }

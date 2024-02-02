@@ -10,13 +10,7 @@ import javax.inject.Inject
 class ChallengeRepositoryImpl @Inject constructor(
     @DashboardModule.LaboratoryCollection private val mCollection: CollectionReference
 ): ChallengeRepository {
-    /*var mCollection: CollectionReference = FirebaseFirestore.getInstance().collection("LaboratorioDigital")
-    init {
-        val settings = FirebaseFirestoreSettings.Builder()
-            .setPersistenceEnabled(true)
-            .build()
-        authFirestore.firestoreSettings = settings
-    }*/
+
     override fun create(sustantivo: ChallengeCompleted): Task<Void?>? {
         return mCollection.document(sustantivo.id?:"").set(sustantivo)
     }

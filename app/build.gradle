@@ -1,11 +1,12 @@
 plugins {
-    id 'com.android.application'
+    alias(libs.plugins.androidApplication)
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
     id 'kotlinx-serialization'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -14,10 +15,10 @@ android {
 
     defaultConfig {
         applicationId "com.yakulab.client"
-        minSdk 22
+        minSdk 24
         targetSdk 34
-        versionCode 24
-        versionName "2.4.4"
+        versionCode 29
+        versionName "2.5.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -61,12 +62,17 @@ dependencies {
     implementation( project(":usecases"))
     implementation( project(":data"))
     implementation( project(":feature-profile"))
+    implementation( project(":feature-ar"))
+    implementation( project(":feature-splash"))
     implementation ("com.google.android.gms:play-services-location:21.0.1")
+
+    //kotlin play services
+    implementation (libs.kotlinx.coroutines.play.services)
 
 
     def lottieVersion = "5.2.0"
 
-    implementation 'androidx.core:core-ktx:1.10.1'
+    implementation libs.core.ktx
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -126,8 +132,8 @@ dependencies {
     implementation 'id.zelory:compressor:2.1.1'
 
     //Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.46.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.46.1")
+    implementation (libs.hilt.android.android)
+    kapt(libs.hilt.android.compiler)
 
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

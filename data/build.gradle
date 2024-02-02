@@ -10,7 +10,7 @@ android {
     compileSdk 34
 
     defaultConfig {
-        minSdk 22
+        minSdk 24
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -36,16 +36,19 @@ dependencies {
     implementation( project(":domain"))
     implementation( project(":common"))
 
-    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation libs.core.ktx
     implementation 'androidx.appcompat:appcompat:1.6.1'
 
     //Dagger Hilt
-    implementation("com.google.dagger:hilt-android:2.46.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.46.1")
+    implementation (libs.hilt.android.android)
+    kapt(libs.hilt.android.compiler)
+
+    //Coroutines
+    implementation (libs.kotlinx.coroutines.play.services)
 
     //retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation libs.retrofit
+    implementation libs.converter.gson
 
     // Firebase
     //Firebase modules

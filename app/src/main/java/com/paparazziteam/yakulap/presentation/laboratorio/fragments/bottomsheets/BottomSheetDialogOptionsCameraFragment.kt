@@ -18,10 +18,6 @@ class BottomSheetDialogOptionsCameraFragment(
 
     private val binding by viewBinding { FragmentBottomSheetDialogOptionsCameraBinding.bind(it) }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

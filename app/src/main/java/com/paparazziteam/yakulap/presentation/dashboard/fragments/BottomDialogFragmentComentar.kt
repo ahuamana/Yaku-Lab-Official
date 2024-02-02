@@ -11,6 +11,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ahuaman.data.dashboard.providers.UserProvider
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -40,7 +41,11 @@ class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
     private var _binding: BottomSheetComentarBinding? = null
     private val binding get() = _binding!!
 
-    @Inject lateinit var mCommentRepository:CommentRepository
+    @Inject
+    lateinit var mCommentRepository:CommentRepository
+
+    @Inject
+    lateinit var userProvider: UserProvider
 
     private val _viewModel:ViewModelDashboard by activityViewModels()
 
@@ -75,7 +80,7 @@ class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding =BottomSheetComentarBinding.inflate(layoutInflater,container, false)
+        _binding = BottomSheetComentarBinding.inflate(layoutInflater,container, false)
         val view = binding.root
 
         binding.apply {
@@ -142,7 +147,7 @@ class BottomDialogFragmentComentar : BottomSheetDialogFragment() {
 
     private fun setupComponentes() {
         //SetUp Recycler Comments
-        mAdapterComment = AdapterComment(_viewModel)
+        mAdapterComment = AdapterComment(_viewModel, userProvider)
         mLinearLayoutManager = LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
         recyclerComments?.apply {
             layoutManager = mLinearLayoutManager
