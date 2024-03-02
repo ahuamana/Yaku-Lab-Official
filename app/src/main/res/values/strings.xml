@@ -115,4 +115,11 @@
     <string name="cancel_button">Cancelar</string>
     <string name="data_collection_disclosure_title">Recopilación de Datos</string>
 
+    <string name="accept_terms_and_conditions">Acepto los <b><font fgcolor='#0060AF'>términos y condiciones</font></b></string>
+    <!--tratamiento de datos personales-->
+    <string name="data_treatment_title">Acepto el <b><font fgcolor='#0060AF'>tratamiento de datos personales</font></b></string>
+
+    <string name="https_yaku_com_privacy_policy">https://doc-hosting.flycricket.io/politica-de-privacidad-de-yaku-lab/2d06d4ce-1445-4014-b4de-8c5089403d9b/privacy</string>
+    <string name="https_yaku_com_transparencia">https://doc-hosting.flycricket.io/yaku-lab-terminos-y-condiciones-de-uso/238e1aae-8605-4fa9-b25f-b2973bc6f7cb/terms</string>
+
 </resources>

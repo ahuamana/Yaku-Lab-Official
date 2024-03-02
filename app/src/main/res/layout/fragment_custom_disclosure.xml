@@ -47,6 +47,24 @@
                 android:layout_marginTop="20dp"
                 android:layout_height="wrap_content"/>
 
+            <!-- terminos y condiciones -->
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbTermsAndConditions"
+                android:layout_width="match_parent"
+                android:layout_marginEnd="10dp"
+                android:text="@string/accept_terms_and_conditions"
+                android:buttonTint="@color/colorPrimaryYaku"
+                android:layout_height="wrap_content"/>
+
+            <!-- tratamiento de datos personales -->
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/cbDataTreatment"
+                android:layout_width="match_parent"
+                android:layout_marginEnd="10dp"
+                android:text="@string/data_treatment_title"
+                android:buttonTint="@color/colorPrimaryYaku"
+                android:layout_height="wrap_content"/>
+
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="15dp"/>

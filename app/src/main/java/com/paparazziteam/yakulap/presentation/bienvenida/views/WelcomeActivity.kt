@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -106,10 +107,39 @@ class WelcomeActivity : AppCompatActivity() {
             customBinding.tvDescription.text = getString(R.string.data_collection_disclosure_message).fromHtml()
 
             customBinding.btnAccept.setOnClickListener {
-                viewModel.updateTutorialToNeverShowAgain()
-                dialog.dismiss()
+                if(customBinding.cbDataTreatment.isChecked && customBinding.cbTermsAndConditions.isChecked){
+                    viewModel.updateTutorialToNeverShowAgain()
+                    dialog.dismiss()
+                }
             }
+
+            customBinding.cbDataTreatment.setOnClickListener {
+                openLinkTreatmentData()
+            }
+
+            customBinding.cbTermsAndConditions.setOnClickListener {
+                openLinkTerms()
+            }
+
         }
+    }
+
+    fun openLinkTreatmentData(){
+        val url = buildString {
+            append(getString(R.string.https_yaku_com_privacy_policy))
+        }
+        val i = Intent(Intent.ACTION_VIEW)
+        i.data = url.toUri()
+        startActivity(i)
+    }
+
+    fun openLinkTerms(){
+        val url = buildString {
+            append(getString(R.string.https_yaku_com_transparencia))
+        }
+        val i = Intent(Intent.ACTION_VIEW)
+        i.data = url.toUri()
+        startActivity(i)
     }
 
     private fun instanceAdapters() {
